@@ -31,7 +31,7 @@ Two basic questions:
 Sensor
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
 .. image:: images/sensors.PNG
-   :scale: 50 %
+   :scale: 80 %
    :align: center
 Robots(or devices) use sensor to "feel" the outside world.
 
