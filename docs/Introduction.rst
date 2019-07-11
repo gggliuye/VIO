@@ -16,7 +16,7 @@ In a complete SLAM framework, the three threads should run together, but with di
 For an example, for ORBSLAM, Tracking thread will run for each input frame, Local Mapping will run when new keyframe is selected, and Global Mapping will be run when a loop is detected.
 
 
-.. image:: docs/images/3.jpg
+.. image:: https://github.com/gggliuye/VIO/blob/master/docs/images/3.jpg
 
 Usage
 ---------
