@@ -1,25 +1,6 @@
 Front End : Odometry
 ========================
 
-       .,,.
-     ,;;*;;;;,
-    .-'``;-');;.
-   /'  .-.  /*;;
- .'    \d    \;;               .;;;,
-/ o      `    \;    ,__.     ,;*;;;*;,
-\__, _.__,'   \_.-') __)--.;;;;;*;;;;,
- `""`;;;\       /-')_) __)  `\' ';;;;;;
-    ;*;;;        -') `)_)  |\ |  ;;;;*;
-    ;;;;|        `---`    O | | ;;*;;;
-    *;*;\|                 O  / ;;;;;*
-   ;;;;;/|    .-------\      / ;*;;;;;
-  ;;;*;/ \    |        '.   (`. ;;;*;;;
-  ;;;;;'. ;   |          )   \ | ;;;;;;
-  ,;*;;;;\/   |.        /   /` | ';;;*;
-   ;;;;;;/    |/       /   /__/   ';;;
-   '*jgs/     |       /    |      ;*;
-        `""""`        `""""`     ;
-
 Calibration Camera (IMU LIDAR)
 ---------------------------------
 
@@ -28,7 +9,8 @@ Camera
 
 Camera calibration is extremely important for SLAM system. Matlab and `OpenCV <https://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html>`_ image calibration tool boxes are the most used tools (they basicly use the same algorithm,  however different in realize method. For example, they use different non-linear optimization methods).
 
-
+.. math::
+    n_{\mathrm{offset}} = \sum_{k=0}^{N-1} s_k n_k
 
 IMU (Inertial measurement unit)
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
