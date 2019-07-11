@@ -16,8 +16,20 @@ And most feature descriptor algorithms are very expensive to calculate. Even the
 
 Direct Methods
 ------------------
-we can also use direct methods for tracking. Depends on the intensity of pixels.
-SVO LSD_SLAM
+we can also use direct methods for tracking. 
+Direct (and semi-direct) methods eliminate the need of costly feature extraction and robust matching techniques for motion esimation.
+As these algorithms operate directly on pixel intensities, which can result in subpixel precision at high frame-rate.
+And as a result of these patch match approaches, they are very robust to fast move.
+
+
+
+SVO (Fast Semi-Direct Monocular Visual Odometry)
+>>>>>>>>>>>>>
+SVO is designed for Drones(Micro Aerial Vehicles), a semmi-direct method. While the camera is localized under the drone, pointing downside. It can run very fast, 55 FPS on the onboard embedded computer. 
+
+However it is not robust for rotation. When test with AR situations, where exist a lot of rotation vertical, SVO system can easily failed. 
+
+
 
 Pose Calculation
 ---------------------
