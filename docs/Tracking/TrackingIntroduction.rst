@@ -16,6 +16,21 @@ This is to estimate the parameters of a lens and image sensor,
 which will be used to correct for lens distortion, measure the size of an object in world units, or determine the location of the camera in the scene.
 There are mainly two parts in camera calibration. Firstly, to project the 3D world to the camera sensor plane, secondly transform the image from the real world unit to pixel level. 
 
+.. math::
+   :nowrap:
+   
+   Z\begin{bmatrix} x\\y\\1\end{bmatrix}
+   =\begin{bmatrix}
+   f_{x} & 0 & 0\\0 & f_{y} & 0 \\ 0 & 0 & 1
+   \end{bmatrix}
+   \begin{bmatrix} X\\Y\\Z\end{bmatrix}
+   
+.. math::
+    \begin{bmatrix} x_{pixel}\\y_{pixel}\\1\end{bmatrix}
+    =\begin{bmatrix}
+       \delta_{x} & 0 & c_{x}\\0 & \delta_{y} & c_{y} \\ 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix} x\\y\\1\end{bmatrix}
 
 The distortion is represented as follows:
 
