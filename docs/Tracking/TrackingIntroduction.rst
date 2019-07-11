@@ -3,10 +3,21 @@ Front End : Odometry
 
 Calibration Camera (IMU LIDAR)
 ---------------------------------
+
+Camera
+>>>>>>>>>>>>>>>
 Camera calibration is extremely important for SLAM system. Matlab and Opencv image calibration tool boxes are the most used tools (they basicly use the same algorithm,  however different in realize method. For example, they use different non-linear optimization methods).
+
+IMU (Inertial measurement unit)
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Accelerometer(offer acceleration) + Gyroscope(offer angle velocity)
 
 The most important parameters for IMU are bias and white noise. They can be calibrated with Allan variance model.
 
+
+LIDAR
+>>>>>>>>>>>>>>>>>
+(to do)
 
 Pre-Processing
 --------------
@@ -33,7 +44,7 @@ And most feature descriptor algorithms are very expensive to calculate. Even the
 Direct Methods
 ------------------
 we can also use direct methods for tracking. Depends on the intensity of pixels.
-
+SVO LSD_SLAM
 
 Pose Calculation
 ---------------------
