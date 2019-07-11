@@ -17,6 +17,11 @@ For an example, for ORBSLAM, Tracking thread will run for each input frame, Loca
 
 
 .. image:: https://github.com/gggliuye/VIO/blob/master/docs/images/3.jpg
+   :height: 100px
+   :width: 200 px
+   :scale: 50 %
+   :alt: JOJO image import test
+   :align: center
 
 Usage
 ---------
