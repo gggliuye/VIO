@@ -100,7 +100,15 @@ Pre-Processing
 Before any further treatment, we need pretreat the image, to reduce some error or noise.
 For example:
 
+gamma correction
+>>>>>>>>>>>>>>>>>>>>>
+
+` Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc> `
+'_ Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc> _'
+
 * gamma correction(https://www.cambridgeincolour.com/tutorials/gamma-correction.htm) for lighting problems.
+
+
 * image blind deconvolution(https://nl.mathworks.com/help/images/ref/deconvblind.html) for image deblur, etc. 
 
 
