@@ -69,7 +69,7 @@ exclude_patterns = []
 pygments_style = None
 
 # -- Extansion --------------------------------------------------------------
-extensions.append('sphinx.ext.pngmath')
+#extensions.append('sphinx.ext.pngmath')
 
 
 # -- Options for HTML output -------------------------------------------------
