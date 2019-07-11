@@ -17,7 +17,7 @@ For an example, for ORBSLAM, Tracking thread will run for each input frame, Loca
 
 .. image:: images/3.jpg
    :height: 400px
-   :width: 200 px
+   :width: 250 px
    :scale: 50 %
    :alt: JOJO image import test
    :align: center
@@ -52,8 +52,12 @@ Receive images as a frequence, and generate videos (normally 30 FPS).
 A simple camera has no scale info, which is essential for computer vision.
 
 
-
-
+SLAM structure
+>>>>>>>>>>>>>>>>>>>>>
+* front end : Visual Odometry 
+* back end : Optimization
+* Loop Closing : Detection and Correction
+* Mapping : Make the map
 
 
 Usage
