@@ -102,9 +102,7 @@ For example:
 
 gamma correction
 >>>>>>>>>>>>>>>>>>>>>
-
-` Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc> `
-'_ Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc> _'
+`Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
 * gamma correction(https://www.cambridgeincolour.com/tutorials/gamma-correction.htm) for lighting problems.
 
