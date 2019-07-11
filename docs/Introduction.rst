@@ -27,10 +27,16 @@ What is it?
 ------------------
 
 Two basic questions:
-1) where am I?
-#) What is the environment around me?
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ * where am I?
+ * What is the environment around me?
 
+Sensor
+>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Robots(or devices) use sensor to "feel" the outside world.
 
+* inner sensor : IMU(acc, gyr), encoder, etc.
+* outter sensor : camera, lidar, trace, etc.
 
 
 Usage
