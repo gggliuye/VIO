@@ -8,11 +8,21 @@ Camera
 >>>>>>>>>>>>>>>
 Camera calibration is extremely important for SLAM system. Matlab and Opencv image calibration tool boxes are the most used tools (they basicly use the same algorithm,  however different in realize method. For example, they use different non-linear optimization methods).
 
+
 IMU (Inertial measurement unit)
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Accelerometer(offer acceleration) + Gyroscope(offer angle velocity)
 
 The most important parameters for IMU are bias and white noise. They can be calibrated with Allan variance model.
+Example can be seen https://github.com/gggliuye/VIO/blob/master/IMU/allan%20plot.ipynb.
+
+|pic1| and |pic2|
+
+.. |pic1| image:: images/allancurves.PNG
+   :width: 45%
+
+.. |pic2| image:: images/idealallan.PNG
+   :width: 45%
 
 
 LIDAR
