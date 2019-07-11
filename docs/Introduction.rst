@@ -23,6 +23,16 @@ For an example, for ORBSLAM, Tracking thread will run for each input frame, Loca
    :alt: JOJO image import test
    :align: center
 
+What is it?
+------------------
+
+Two basic questions:
+1) where am I?
+#) What is the environment around me?
+
+
+
+
 Usage
 ---------
 
