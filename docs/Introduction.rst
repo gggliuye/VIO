@@ -16,8 +16,6 @@ In a complete SLAM framework, the three threads should run together, but with di
 For an example, for ORBSLAM, Tracking thread will run for each input frame, Local Mapping will run when new keyframe is selected, and Global Mapping will be run when a loop is detected.
 
 .. image:: images/3.jpg
-   :height: 400px
-   :width: 250 px
    :scale: 50 %
    :alt: JOJO image import test
    :align: center
@@ -32,6 +30,9 @@ Two basic questions:
 
 Sensor
 >>>>>>>>>>>>>>>>>>>>>>>>>>>
+.. image:: images/sensors.PNG
+   :scale: 50 %
+   :align: center
 Robots(or devices) use sensor to "feel" the outside world.
 
 * inner sensor : IMU(acc, gyr), encoder, etc.
