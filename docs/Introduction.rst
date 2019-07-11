@@ -15,9 +15,9 @@ In most SLAM structure design, the whole system will be seperated into three thr
 In a complete SLAM framework, the three threads should run together, but with different frequences.
 For an example, for ORBSLAM, Tracking thread will run for each input frame, Local Mapping will run when new keyframe is selected, and Global Mapping will be run when a loop is detected.
 
-.. image:: images/3.jpg
-   :scale: 50 %
-   :alt: JOJO image import test
+.. image:: images/Slam.png
+   :scale: 100 %
+   :alt: image import test
    :align: center
 
 What is it?
