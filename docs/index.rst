@@ -12,7 +12,7 @@ Welcome to SLAM-AR's documentation!
 
    Introduction
    Tracking/TrackingIntroduction
-
+   Prepare
 
 Indices and tables
 ==================
@@ -21,5 +21,5 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-lalala
-========
+contact us
+============
