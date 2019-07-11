@@ -1,7 +1,11 @@
 Tracking introduction
 ========================
 
+Calibration Camera (IMU LIDAR)
+---------------------------------
+Camera calibration is extremely important for SLAM system. Matlab and Opencv image calibration tool boxes are the most used tools (they basicly use the same algorithm,  however different in realize method. For example, they use different non-linear optimization methods).
 
+The most important parameters for IMU are bias and white noise. They can be calibrated with Allan variance model.
 
 
 Pre-Processing
@@ -58,3 +62,5 @@ Multi-sensor Fusion
   
 
 * GPS / Blue Tooth : They can difinitly give us some information. The problem is how to use it.
+
+* LIDAR: e.g.VLOAM
