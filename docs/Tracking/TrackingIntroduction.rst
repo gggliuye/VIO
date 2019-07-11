@@ -12,9 +12,17 @@ Camera calibration is extremely important for SLAM system. Matlab and `OpenCV <h
 .. math::
     n_{\mathrm{offset}} = \sum_{k=0}^{N-1} s_k n_k
 
-This is to estimate the parameters of a lens and image sensor of an image or video camera,
+This is to estimate the parameters of a lens and image sensor,
 which will be used to correct for lens distortion, measure the size of an object in world units, or determine the location of the camera in the scene.
+There are mainly two parts in camera calibration. Firstly, to project the 3D world to the camera sensor plane, secondly transform the image from the real world unit to pixel level. 
 
+
+The distortion is represented as follows:
+
+.. math::
+    x_{distorted} = x(1 + k_{1}r^{2} + k_{2}r^{4} + k_{3}r^{6}  )
+    
+    x_{distorted} = x + ( 2p_{1}xy + p_{2}(r^{2}+2x^{2}) )
 
 
 IMU (Inertial measurement unit)
