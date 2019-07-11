@@ -11,8 +11,8 @@ Welcome to SLAM-AR's documentation!
    :caption: Contents:
 
    Introduction
-   Tracking/TrackingIntroduction
    Prepare
+   Tracking/TrackingIntroduction
 
 Indices and tables
 ==================
