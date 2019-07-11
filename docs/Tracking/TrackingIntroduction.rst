@@ -18,46 +18,32 @@ which will be used to correct for lens distortion, measure the size of an object
 There are mainly two parts in camera calibration. Firstly, to project the 3D world to the camera sensor plane, secondly transform the image from the real world unit to pixel level. 
 
 .. math::
-\begin{equation}
-Z\begin{bmatrix} x\\y\\1\end{bmatrix}
-=\begin{bmatrix}
+   :nowrap:
+   
+   Z\begin{bmatrix} x\\y\\1\end{bmatrix}
+   =\begin{bmatrix}
    f_{x} & 0 & 0\\0 & f_{y} & 0 \\ 0 & 0 & 1
-\end{bmatrix}
-\begin{bmatrix} X\\Y\\Z\end{bmatrix}
-,
-\begin{bmatrix} x_{pixel}\\y_{pixel}\\1\end{bmatrix}
-=\begin{bmatrix}
-   \delta_{x} & 0 & c_{x}\\0 & \delta_{y} & c_{y} \\ 0 & 0 & 1
-\end{bmatrix}
-\begin{bmatrix} x\\y\\1\end{bmatrix}
-\end{equation}
+   \end{bmatrix}
+   \begin{bmatrix} X\\Y\\Z\end{bmatrix}
+
+.. math::
+    \begin{bmatrix} x_{pixel}\\y_{pixel}\\1\end{bmatrix}
+    =\begin{bmatrix}
+       \delta_{x} & 0 & c_{x}\\0 & \delta_{y} & c_{y} \\ 0 & 0 & 1
+    \end{bmatrix}
+    \begin{bmatrix} x\\y\\1\end{bmatrix}
 
 which can be rewrite as follow, where $\kappa$ is the camera calibration matrix:
-.. math::
-\begin{equation}
-Z\begin{bmatrix} x_{pixel}\\y_{pixel}\\1\end{bmatrix}
-=\begin{bmatrix}
-   \delta_{x} & 0 & c_{x}\\0 & \delta_{y} & c_{y} \\ 0 & 0 & 1
-\end{bmatrix}
-\begin{bmatrix}
-   f_{x} & 0 & 0\\0 & f_{y} & 0 \\ 0 & 0 & 1
-\end{bmatrix}
-\begin{bmatrix} X\\Y\\Z\end{bmatrix}
-= \begin{bmatrix}
-   f_{x}\delta_{x}  & 0 & c_{x}\\0 & f_{y}\delta_{y}  & c_{y} \\ 0 & 0 & 1
-\end{bmatrix} \begin{bmatrix} X\\Y\\Z\end{bmatrix}
-= \kappa \begin{bmatrix} X\\Y\\Z\end{bmatrix}
-\end{equation}
+
 
 
 The distortion is represented as follows:
+
 .. math::
-\begin{equation}
-x_{distorted} = x(1 + k_{1}r^{2} + k_{2}r^{4} + k_{3}r^{6}  )
-\end{equation}
-\begin{equation}
-x_{distorted} = x + ( 2p_{1}xy + p_{2}(r^{2}+2x^{2}) )
-\end{equation}
+
+    x_{distorted} = x(1 + k_{1}r^{2} + k_{2}r^{4} + k_{3}r^{6}  )
+    
+    x_{distorted} = x + ( 2p_{1}xy + p_{2}(r^{2}+2x^{2}) )
 
 
 IMU (Inertial measurement unit)
