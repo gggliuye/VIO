@@ -54,10 +54,15 @@ A simple camera has no scale info, which is essential for computer vision.
 
 SLAM structure
 >>>>>>>>>>>>>>>>>>>>>
-* front end : Visual Odometry 
-* back end : Optimization
+* front end : Visual Odometry (use close frames to calculate poses, feature points based methods or direct methods)
+* back end : Optimization (Filter based methods, graph optimization methods)
 * Loop Closing : Detection and Correction
 * Mapping : Make the map
+
+Math description
+>>>>>>>>>>>>>>>>>>>>
+
+（to do）
 
 
 Usage
