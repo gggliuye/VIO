@@ -120,11 +120,15 @@ gamma correction
 >>>>>>>>>>>>>>>>>>>>>
 `Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
+Example of indoor scene:
+
 .. image:: images/bc_images.png
    :width: 100%
 
 .. image:: images/bc_hists.png
    :width: 100%
+
+Example of outdoor scene:
 
 .. image:: images/night_images.png
    :width: 100%
