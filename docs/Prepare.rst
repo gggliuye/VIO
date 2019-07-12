@@ -74,14 +74,15 @@ The distortion is represented as follows:
 
 IMU (Inertial measurement unit)
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-Accelerometer(offer acceleration) + Gyroscope(offer angle velocity)
+**Accelerometer(offer acceleration) + Gyroscope(offer angle velocity)**
 
+The most important parameters for IMU are **bias** and **white noise**.
 .. math::
     \omega_{measure} = \omega_{true} + bias_{\omega} + n_{noise}
 
-    \acc_{measure} = acc_{true} + bias_{acc} + n_{noise}
+    acc_{measure} = acc_{true} + bias_{acc} + n_{noise}
 
-The most important parameters for IMU are **bias** and **white noise**. They can be calibrated with Allan variance model.
+They can be calibrated with Allan variance model.
 Example can be seen  `Example  <https://github.com/gggliuye/VIO/blob/master/IMU/allan%20plot.ipynb>`_
 
 |pic1| and |pic2|
