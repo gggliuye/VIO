@@ -8,10 +8,14 @@ wiki(https://en.wikipedia.org/wiki/Group_theory)
 
 A group is a set, G, together with an operation • (called the group law of G) that combines any two elements a and b to form another element, denoted a • b or ab. To qualify as a group, the set and operation, (G, •), must satisfy four requirements known as the group axioms:
 
-** Closure **
+.. highlight:: 
+Closure 
+.. highlight::
 For all a, b in G, the result of the operation, a • b, is also in G.
 
-** Associativity **
+.. highlight::
+ Associativity 
+.. highlight::
 For all a, b and c in G, (a • b) • c = a • (b • c).
 
 ** Identity element **
