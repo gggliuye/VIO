@@ -77,6 +77,7 @@ IMU (Inertial measurement unit)
 **Accelerometer(offer acceleration) + Gyroscope(offer angle velocity)**
 
 The most important parameters for IMU are **bias** and **white noise**.
+
 .. math::
     \omega_{measure} = \omega_{true} + bias_{\omega} + n_{noise}
 
@@ -132,5 +133,6 @@ Environment Setting
 
 
 
-
+.. image:: images/envo.PNG
+   :width: 90%
 
