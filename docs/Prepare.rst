@@ -120,6 +120,18 @@ gamma correction
 >>>>>>>>>>>>>>>>>>>>>
 `Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
+.. image:: images/bc_images.png
+   :width: 100%
+
+.. image:: images/bc_hists.png
+   :width: 100%
+
+.. image:: images/night_images.png
+   :width: 100%
+
+.. image:: images/night_hists.png
+   :width: 100%
+
 
 Motion Blur
 >>>>>>>>>>>>>>>>>>>>>>
@@ -134,5 +146,5 @@ Environment Setting
 
 
 .. image:: images/envo.PNG
-   :width: 90%
+   :width: 100%
 
