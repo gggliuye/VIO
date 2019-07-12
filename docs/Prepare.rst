@@ -4,24 +4,21 @@ Pretreatments
 
 Lie group and Lie algebra
 -----------------------------------
-wiki(https://en.wikipedia.org/wiki/Group_theory)
+
+ `wiki page <https://en.wikipedia.org/wiki/Group_theory>`_
 
 A group is a set, G, together with an operation • (called the group law of G) that combines any two elements a and b to form another element, denoted a • b or ab. To qualify as a group, the set and operation, (G, •), must satisfy four requirements known as the group axioms:
-
-.. highlight:: 
-Closure 
-.. highlight::
+ 
+**Closure**
 For all a, b in G, the result of the operation, a • b, is also in G.
 
-.. highlight::
- Associativity 
-.. highlight::
+**Associativity**
 For all a, b and c in G, (a • b) • c = a • (b • c).
 
-** Identity element **
+**Identity element**
 There exists an element e in G such that, for every element a in G, the equation e • a = a • e = a holds. Such an element is unique (see below), and thus one speaks of the identity element.
 
-** Inverse element **
+**Inverse element**
 For each a in G, there exists an element b in G, commonly denoted a−1 (or −a, if the operation is denoted "+"), such that a • b = b • a = e, where e is the identity element.
 
 The result of an operation may depend on the order of the operands. In other words, the result of combining element a with element b need not yield the same result as combining element b with element a; the equation: a • b = b • a
@@ -83,7 +80,7 @@ IMU (Inertial measurement unit)
 Accelerometer(offer acceleration) + Gyroscope(offer angle velocity)
 
 The most important parameters for IMU are bias and white noise. They can be calibrated with Allan variance model.
-Example can be seen https://github.com/gggliuye/VIO/blob/master/IMU/allan%20plot.ipynb.
+Example can be seen  `Example  <https://github.com/gggliuye/VIO/blob/master/IMU/allan%20plot.ipynb>`_
 
 |pic1| and |pic2|
 
@@ -108,9 +105,9 @@ gamma correction
 >>>>>>>>>>>>>>>>>>>>>
 `Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
-* gamma correction(https://www.cambridgeincolour.com/tutorials/gamma-correction.htm) for lighting problems.
 
-
+Motion Blur
+>>>>>>>>>>>>>>>>>>>>>>
 * image blind deconvolution(https://nl.mathworks.com/help/images/ref/deconvblind.html) for image deblur, etc. 
 
 
