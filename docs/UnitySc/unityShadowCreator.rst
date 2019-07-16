@@ -9,6 +9,36 @@ AR Garden
 主要的实现方法是：定期服务器提供绝对位置，影创眼镜设备则负责追踪。
 我们第一阶段demo使用的是改良的ORBSLAM2框架作为云端定位的模型，设备的追踪则依靠影创提供了嵌入式VIO。之后通过算法，将两个系统的结果结合，最终得到我们想要的--实时的用户相对于世界坐标系的位姿（位姿：位置+姿态，它有六个自由度=3位移+3旋转）。
 
+本地追踪
+-------------
+本地追踪的最佳选择是VIO或者VISLAM技术。
+这里影创使用的是使用双目和较高精度的IMU结合的VIO追踪算法。
+
+云端定位
+-----------------------
+对于云端定位，我们想到了两种备选结构，一种是在SFM（structure from motion运动恢复结构）基础上的，另一种是在SLAM基础上的（也就是我们目前使用的）。
+
+背景
+>>>>>>>>>>>>
+
+* 在之前的交流中，我们发现商汤的云端定位是：使用手机（或者全景相机）拍摄照片流，进行离线建图，对于不同光照强度，则选择多采样的方式克服。
+* 在和中科大的交流中，他们也给出了我们许多使用SFM和MVS的很多离线建图的例子，为我们树立了范例。
+
+SFM和SLAM
+>>>>>>>>>>>>>>>
+
+SLAM和SFM的基本架构是一致的，尤其是**SLAM**和**Incremental SFM**。
+SLAM和SFM的区别主要在与他们的目的性不同--SLAM的重要要求是**实时性**，而SFM则是**离线**实现的。
+对每张图片SLAM的处理时间需要在百毫秒以内，而对于SFM而言，有的复杂建模甚至会要花费几周的时间计算。
+以这个根本原因，导致了SLAM和SFM的系统有很多的不同。
+
+* **图像**： SFM不要求实时性，所以大多会使用原始精度的图像，SLAM一般会缩放图片到适中的尺度，来减少处理图像的时间。
+* **特征点**：SFM大多使用SIFT特征点（不变性更好，但是计算量更大）。而SLAM为了加速处理多采用FAST角点，配合BRIEF描述子（尺度不变性有缺憾，但是计算迅速）。SLAM也有使用直接法（例，SSD）做匹配的，但是直接法只能处理相对位移很小的匹配，不适合我们的系统。
+* **匹配**： SFM中对匹配的点会做多次验证工作，而SLAM为了处理迅速会使用光流追踪，有的运用到了追踪的特性，会使用重投影地图点追踪。
+* **优化**： SFM会多次进行优化（BA bundle adjustment），尤其是全局优化。比如Incremental SFM中，没新注册几张新图片之后，都会进行全局优化（global BA）直至收敛。SLAM中的BA则做的更少，比如ORBSLAM2中，Tracking线程只优化位姿，Localmapping只在有新关键帧加入时局部优化一次，而全局优化只在检测到回环之后优化一次。
+* 另外还有很多不同，比如SLAM是对来连续视频流的处理，可以针对性简化一部分内容；SLAM和SFM都可以使用多传感器融合，但是方式可能会不同；SFM也有不同的分类，不同的SFM也会有不同的优劣之处。
+
+在这个demo中，我们使用的则是ORBSLAM2的系统，为了得到更好的结果，我们在它的基础上增加了离线全局优化的过程。
 
 系统坐标系
 ----------------
@@ -30,9 +60,9 @@ AR Garden
 所以有如下关系。
 
 .. math::
-    P_{local pose} = T_{local to camera}^{-1}
+    P_{Local Pose} = T_{Local To Camera}^{-1}
     
-    P_{global pose} = T_{global to camera}^{-1}
+    P_{Global Pose} = T_{Global To Camera}^{-1}
 
 位置融合
 --------------------
@@ -49,13 +79,15 @@ AR Garden
 由上图和分析，我们可以得到下面的表达式。
 
 .. math::
-    P_{real local pose} = P_{local pose} * T_{camera to head}
+    P_{Real Local Pose} = P_{Local Pose} * T_{Camera To Head}
 
-    T_{local to global} = P_{real local pose} * P_{global pose}^{-1}
+    T_{Local To Global} = P_{Real Local Pose} * P_{Global Pose}^{-1}
 
-    P_{Objective pose} = T_{local to global} * P_{local pose real time}
+    P_{Objective Pose} = T_{Local To Global} * P_{Local Pose Real Time}
 
 结合上面三式，我们可以得到。
 
 .. math::
-    P_{Objective pose} = P_{local pose} * T_{camera to head} * P_{global pose}^{-1} * P_{local pose real time}
+    P_{Objective Pose} = P_{Local Pose} * T_{Camera To Head} * P_{Global Pose}^{-1} * P_{Local Pose Real Time}
+    
+
