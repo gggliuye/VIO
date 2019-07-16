@@ -154,6 +154,14 @@ SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实�
 
 Deep Learning
 >>>>>>>>>>>>>>>>>>>
-* 我们测试了使用`GCNv2 <https://github.com/jiexiong2016/GCNv2_SLAM>`_提取特征点的SLAM定位，但是追踪的效果不理想。
+* 我们测试了使用 `GCNv2 <https://github.com/jiexiong2016/GCNv2_SLAM>`_ 提取特征点的SLAM定位，但是追踪的效果不理想。
 * Deep Learning需要GPU，但是我们的服务器暂时没有GPU提供。
+
+
+误差分析
+---------------------
+
+ORBSLAM2的定位误差
+>>>>>>>>>>>>>>>>>>>>>>
+
 
