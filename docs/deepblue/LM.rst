@@ -3,7 +3,9 @@ Levenberg-Marquardt Method
 
 
 .. math::
-    y = c * exp(a*x) + d * exp(b*x)
+    y = c \cdot e^{a \cdot x} + d \cdot e^{(b \cdot x}
     
-    Residual = \sum_{i} c * exp(a*x_{i}) + d * exp(b*x_{i}) - \overline{y_{i}} 
+    Residual = \sum_{i} (c \cdot e^{a \cdot x_{i}} + d \cdot e^{b \cdot x_{i}} - \overline{y_{i}} )
+
+    Jacobian = \begin{bmatrix} x_{i} \cdot c \cdot e^{a \cdot x_{i}}  & x_{i} \cdot d \cdot e^{b \cdot x_{i}} & e^{a \cdot x_{i} & e^{b \cdot x_{i}} \end{bmatrix}
 
