@@ -21,13 +21,37 @@ AR Garden
    :width: 80%
    :align: center
 
+原始结果
+----------------------------
+我们可以分别得到云端定位和本地追踪的两个原始坐标。
+一个是P（global pose），即云端定位的结果，是相机光心的位姿；以及P（local pose），即本地追踪的结果，是AR相机虚拟“头”的位姿。
+* 这里要注意我们直接从ORBSLAM和影创SDK VIO中得到的原始结果都是相机在对应参考系的坐标，他们是对应变换矩阵的逆。
+也就是：
+.. math::
+    P_{local pose} = T_{local to camera}^{-1}
+    
+    P_{global pose} = T_{global to camera}^{-1}
 
 位置融合
 --------------------
-* 这里要注意我们直接从ORBSLAM和影创SDK VIO中得到的原始结果都是相机在对应参考系的坐标，他们是对应变换矩阵的逆。
-* 我们的目的可以总结为：求两个坐标系（world和local）之间的相对位姿。
+
+* 我们的目的可以总结为：求两个坐标系（world和local）之间的相对位姿（下图中的黄色变换T transpose local to global）。
 * 值得一提的是，由于影创SDK是VIO系统，所以误差会不停的累积，这就导致上面需要求的相对位姿其实不是一个固定的值，而是会随着本地追踪的误差而改变的值。这就要求我们定期的更新这个相对坐标，以保证系统长时间有效。
+* 一旦求得了T（transpose local to global），在结合实时得到的P（local pose）我们就可以得到我们想要的用户“头”head，在世界坐标系中的位姿P（Objective pose）。
+* 另外，这里描述的所有位姿或者变换，除了P（local pose real time）以外都不要求实时性。
 
 .. image:: pic2.png
    :width: 80%
    :align: center
+
+由上图和分析，我们可以得到下面的表达式
+.. math::
+    P_{real local pose} = P_{local pose} * T_{camera to head}
+
+    T_{local to global} = P_{real local pose} * P_{global pose}^{-1}
+
+    P_{Objective pose} = T_{local to global} * P_{local pose real time}
+
+结合上面三式，我们有：
+.. math::
+    P_{Objective pose} = P_{local pose} * T_{camera to head} * P_{global pose}^{-1} * P_{local pose real time}
