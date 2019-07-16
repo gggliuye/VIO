@@ -27,8 +27,8 @@ AR Garden
 SFM和SLAM
 >>>>>>>>>>>>>>>
 
-SLAM和SFM的基本架构是一致的，尤其是**SLAM**和**Incremental SFM**。
-SLAM和SFM的区别主要在与他们的目的性不同--SLAM的重要要求是**实时性**，而SFM则是**离线**实现的。
+SLAM和SFM的基本架构是一致的，尤其是 **SLAM** 和 **Incremental SFM** 。
+SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是 **实时性** ，而SFM则是 **离线** 实现的。
 对每张图片SLAM的处理时间需要在百毫秒以内，而对于SFM而言，有的复杂建模甚至会要花费几周的时间计算。
 以这个根本原因，导致了SLAM和SFM的系统有很多的不同。
 
