@@ -13,6 +13,7 @@ Welcome to SLAM-AR's documentation!
    Introduction
    Prepare
    Tracking/TrackingIntroduction
+   UnitySc/unityShadowCreator
 
 Indices and tables
 ==================
