@@ -38,6 +38,11 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 * **优化**： SFM会多次进行优化（BA bundle adjustment），尤其是全局优化。比如Incremental SFM中，没新注册几张新图片之后，都会进行全局优化（global BA）直至收敛。SLAM中的BA则做的更少，比如ORBSLAM2中，Tracking线程只优化位姿，Localmapping只在有新关键帧加入时局部优化一次，而全局优化只在检测到回环之后优化一次。
 * 另外还有很多不同，比如SLAM是对来连续视频流的处理，可以针对性简化一部分内容；SLAM和SFM都可以使用多传感器融合，但是方式可能会不同；SFM也有不同的分类，不同的SFM也会有不同的优劣之处。
 
+|sfm_slam| here are images resulted from SFM(colmap) and SLAM(orbslam2)
+
+.. |sfm_slam| image:: sfm_slam.png
+   :align: center
+
 在这个demo中，我们使用的则是ORBSLAM2的系统，为了得到更好的结果，我们在它的基础上增加了离线全局优化的过程。
 
 系统坐标系
