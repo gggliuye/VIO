@@ -26,7 +26,8 @@ AR Garden
 我们可以分别得到云端定位和本地追踪的两个原始坐标。
 一个是P（global pose），即云端定位的结果，是相机光心的位姿；以及P（local pose），即本地追踪的结果，是AR相机虚拟“头”的位姿。
 * 这里要注意我们直接从ORBSLAM和影创SDK VIO中得到的原始结果都是相机在对应参考系的坐标，他们是对应变换矩阵的逆。
-也就是：
+所以有如下关系。
+
 .. math::
     P_{local pose} = T_{local to camera}^{-1}
     
@@ -44,7 +45,8 @@ AR Garden
    :width: 80%
    :align: center
 
-由上图和分析，我们可以得到下面的表达式
+由上图和分析，我们可以得到下面的表达式。
+
 .. math::
     P_{real local pose} = P_{local pose} * T_{camera to head}
 
@@ -52,6 +54,7 @@ AR Garden
 
     P_{Objective pose} = T_{local to global} * P_{local pose real time}
 
-结合上面三式，我们有：
+结合上面三式，我们可以得到。
+
 .. math::
     P_{Objective pose} = P_{local pose} * T_{camera to head} * P_{global pose}^{-1} * P_{local pose real time}
