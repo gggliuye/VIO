@@ -121,7 +121,7 @@ gamma correction
 `Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
 .. math::
-    I_{i}^{\gamma} = ( I_{i} / 255) ^(\gamma) * 255
+    I_{i}^{\gamma} = ( I_{i} / 255) ^{\gamma} * 255
 
 Example of indoor scene:
 
