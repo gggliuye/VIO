@@ -171,7 +171,7 @@ SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实�
 * 光强修正（使用gamma=0.5的Gamma Correction）
 
 .. math::
-    I_{i}^{\gamma} = ( I_{i} / 255) ^(\gamma) * 255
+    I_{i}^{\gamma} = ( I_{i} / 255) ^{\gamma} * 255
 
 .. image:: ../images/night_images.png
    :width: 100%
