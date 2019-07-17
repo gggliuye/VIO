@@ -151,6 +151,8 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 
 SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实时性的限制，所以我们对ORBSLAM2建图的结果进行了离线 **Global Bundle Adjustment** ,同时排除outlier。在进行全局优化之后，地图点的精度有了明显的提高，但是提高的程度仍然有限。
 
+
+
 我们也考虑在ORBSLAM2中加入 **Retrangulation** 的过程。我们分析认为Retrangulation可以消除系统中大部分的重复点和outlier，会使得系统精度有很大的提高。但是由于SLAM框架的限制，没有找到合适的方法加入。
 
 7.2 参数相关
@@ -171,9 +173,18 @@ SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实�
 * 我们测试了使用 `GCNv2 <https://github.com/jiexiong2016/GCNv2_SLAM>`_ 提取特征点的SLAM定位，但是追踪的效果不理想。
 * Deep Learning需要GPU，但是我们的服务器暂时没有GPU提供。
 
-7.5 未来修正
+7.5 服务器接口
 >>>>>>>>>>>>>>>>>>>
-现在定位还只是简单的套用之前ORBSLAM源代码的框架，可以考虑修改重定位的思路。
+目前我们设定了三种接口，动态、静态、Map型。
+
+* **动态** 接口，将会返回指向系统的动态指针，通过指针操作。
+
+.. highlight:: c
+
+extern "C" void* Internal_InitOrbslam(const char *pathVoc, const char* pathSetting, bool readmap);
+extern "C" void Internal_DestroyOrbsalm(ORB_SLAM2::System* obj);
+extern "C" float* Internal_TrackMonocular(ORB_SLAM2::System* obj,
+	unsigned char* inputImage, float timeFrame, int bufferLength);
 
 
 8. 误差分析
