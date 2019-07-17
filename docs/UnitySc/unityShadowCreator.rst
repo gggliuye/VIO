@@ -187,6 +187,26 @@ extern "C" void Internal_DestroyOrbsalm(ORB_SLAM2::System* obj);
 
 extern "C" float* Internal_TrackMonocular(ORB_SLAM2::System* obj,unsigned char* inputImage, float timeFrame, int bufferLength);
 
+* **静态** 接口，将会调用唯一的一个静态对象（用作测试算法时使用）。
+
+.. highlight:: c
+      :linenos:
+extern "C" int Internal_InitOrbslamStatic(bool readmap);
+
+extern "C" int Internal_DestroyOrbsalmStatic();
+
+extern "C" float* Internal_TrackMonocular_static(ORB_SLAM2::System* obj, unsigned char* inputImage, float timeFrame, int bufferLength);
+
+* **Map** 接口，将会根据ID，创建或者销毁对象类，同时可以用ID指定做运算的对象。
+
+.. highlight:: c
+      :linenos:
+extern "C" int Internal_InitOrbslamWithID(const char *pathVoc, const char* pathSetting, bool readmap);
+
+extern "C" int Internal_DestroyOrbslamWithID(int idx);
+
+extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputImage, float timeFrame, int bufferLength);
+
 
 8. 误差分析
 ---------------------
