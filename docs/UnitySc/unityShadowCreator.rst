@@ -164,10 +164,21 @@ SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实�
 7.3 其他处理
 >>>>>>>>>>>>>>>>>>
 * 运动模糊（todo）
+
 .. image:: blur.PNG
    :align: center
+   
 * 光强修正（使用gamma=0.5的Gamma Correction）
 
+.. math::
+    I_{i}^{\gamma} = ( I_{i} / 255) ^(\gamma) * 255
+
+.. image:: ../images/night_images.png
+   :width: 100%
+
+.. image:: ../images/night_hists.png
+   :width: 100%
+   
 7.4 Deep Learning
 >>>>>>>>>>>>>>>>>>>
 * 我们测试了使用 `GCNv2 <https://github.com/jiexiong2016/GCNv2_SLAM>`_ 提取特征点的SLAM定位，但是追踪的效果不理想。
