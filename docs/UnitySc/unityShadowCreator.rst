@@ -182,9 +182,10 @@ SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实�
 .. highlight:: c
 
 extern "C" void* Internal_InitOrbslam(const char *pathVoc, const char* pathSetting, bool readmap);
+
 extern "C" void Internal_DestroyOrbsalm(ORB_SLAM2::System* obj);
-extern "C" float* Internal_TrackMonocular(ORB_SLAM2::System* obj,
-	unsigned char* inputImage, float timeFrame, int bufferLength);
+
+extern "C" float* Internal_TrackMonocular(ORB_SLAM2::System* obj,unsigned char* inputImage, float timeFrame, int bufferLength);
 
 
 8. 误差分析
