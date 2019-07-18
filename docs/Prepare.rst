@@ -144,10 +144,13 @@ Motion Blur
 >>>>>>>>>>>>>>>>>>>>>>
 
 
+We can express an image by its singular value decomposition (SVD). 
+
+
 From [blurred image detection]_ , Suppose we have an image I, which is convoluted with a Point Spread Function (PSF) H as following:
 
 .. math::
-    I * H = \sum_{i=1}^{n} \lambda_{i} ( **u_{i} v_{i}^{T}**) * H
+    I * H = \sum_{i=1}^{n} \lambda_{i} ( \mathbf{ u_{i} v_{i}^{T} } ) * H
 
 .. [blurred image detection] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
