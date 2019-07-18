@@ -149,15 +149,18 @@ There are several types of cameras: global shutter cameras, rolling shutter came
 
 .. image:: images/cameracompare.png
     :width: 80%
+    :align: center
     
 **Rolling shutter** cameras will generally cause jerry effect, to reduce the effect, we can model the motion of the camera, and find the correct synchronization of pixels, for an example in Spline Fusion [#]_ . 
 
-**Event cameras** are used more and more now adays, they are used to measure not the intensity of a ray, but rather detect the change of received light intensity. They are more robust to fast move, light condition, those cameras are mostly used in Drones now. And there emerges many SLAM algorithms based on event cameras. For example, an example video can be seen 'here <https://www.youtube.com/watch?v=F3OFzsaPtvI>'_ .
+**Event cameras** are used more and more now adays, they are used to measure not the intensity of a ray, but rather detect the change of received light intensity. They are more robust to fast move, light condition, those cameras are mostly used in Drones now. And there emerges many SLAM algorithms based on event cameras. For example " Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization [#]_ ", an example video can be seen `here <https://www.youtube.com/watch?v=F3OFzsaPtvI>`_ .  
 
 For our cases, most phone cameras and AR glasses cameras are **Global shutter cameras** . For global shutter cameras, the most signification problem is image blur, which are mostly two types : **Defocus Blur** and **Motion Blur** .
 
 
 .. [#] Lovegrove S, Patron-Perez A, Sibley G. Spline Fusion: A continuous-time representation for visual-inertial fusion with application to rolling shutter cameras[C]//BMVC. 2013, 2(5): 8.
+
+.. [#] Rebecq H, Horstschaefer T, Scaramuzza D. Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization[C]//BMVC. 2017.
 
 Point Spread Function (PSF)
 >>>>>>>>>>>>>>>>>>>>>>
