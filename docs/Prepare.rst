@@ -157,10 +157,15 @@ There are several types of cameras: global shutter cameras, rolling shutter came
 
 For our cases, most phone cameras and AR glasses cameras are **Global shutter cameras** . For global shutter cameras, the most signification problem is image blur, which are mostly two types : **Defocus Blur** and **Motion Blur** .
 
+**Defocus Blur** is also called out-of-focus blur, as its name indicates, it references the blurry cause from "incorrect" focus. As it can also produce great image effect `Bokeh <https://en.wikipedia.org/wiki/Bokeh>`_ , it is also used in photography. There are also several work to do with it, but it is not our main issue. Our devices will automaticlly use the correct focus at most time.
+
+**Motion Blur** is our main issue, it is produced by global shutter camera, as all the pixels are taken at the same time period (exprosure time), however fast movement will cause some pixels to spread in an area. Either camera motion or object motion can cause a motion blur. For our case, AR application, camera motion is our main concern. The moving objects should not be used to localization, the blurry of their pixels are helpful to us, on the contrary.
 
 .. [#] Lovegrove S, Patron-Perez A, Sibley G. Spline Fusion: A continuous-time representation for visual-inertial fusion with application to rolling shutter cameras[C]//BMVC. 2013, 2(5): 8.
 
 .. [#] Rebecq H, Horstschaefer T, Scaramuzza D. Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization[C]//BMVC. 2017.
+
+
 
 Point Spread Function (PSF)
 >>>>>>>>>>>>>>>>>>>>>>
