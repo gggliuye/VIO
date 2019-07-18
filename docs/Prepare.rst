@@ -110,14 +110,11 @@ LIDAR
 >>>>>>>>>>>>>>>>>
 (to do)
 
-Pre-Processing
---------------
 
-Before any further treatment, we need pretreat the image, to reduce some error or noise.
-For example:
 
 gamma correction
->>>>>>>>>>>>>>>>>>>>>
+-----------------------
+
 `Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
 .. math::
@@ -140,8 +137,8 @@ Example of outdoor scene:
    :width: 100%
 
 
-Motion Blur
->>>>>>>>>>>>>>>>>>>>>>
+Image Blurry
+------------------
 
 
 We can express an image by its singular value decomposition (SVD) :
