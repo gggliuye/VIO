@@ -140,6 +140,21 @@ Example of outdoor scene:
 Image Blurry
 ------------------
 
+There are several types of cameras: global shutter cameras, rolling shutter cameras, event cameras, etc. The following image shows the different effect of global shutter camera and rolling shutter camera camera_compares_.
+
+.. _camera_compares: https://www.diyphotography.net/this-video-helps-you-understand-the-rolling-shutter-effect/
+
+.. image:: images/camera compare.png
+
+Rolling shutter cameras are 
+
+
+Point Spread Function (PSF)
+>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
 
 We can express an image by its singular value decomposition (SVD) :
   
@@ -151,7 +166,7 @@ where U,V are orthogonal matrices and \Lambda is a diagonal matrix that is compo
 .. math::
     I = \sum_{i=1}^{n} \lambda_{i} ( \mathbf{ u_{i} v_{i}^{T} } )
 
-Suppose we have an image I, which is convoluted with a Point Spread Function (PSF) H as following [1]_ :
+Suppose we have an image I, which is convoluted with a Point Spread Function (PSF) H as following [#]_ :
 
 .. math::
     I * H = \sum_{i=1}^{n} \lambda_{i} ( \mathbf{ u_{i} v_{i}^{T} } ) * H
@@ -167,7 +182,7 @@ So a measure of degree of burry is proposed based on the weights of the first fe
 
 .. _blind-deconvolution: https://nl.mathworks.com/help/images/ref/deconvblind.html
 
-.. [1] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
+.. [#] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
 Environment Setting
 ----------------------
