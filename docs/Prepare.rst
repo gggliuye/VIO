@@ -149,17 +149,26 @@ We can express an image by its singular value decomposition (SVD) :
 .. math::
     I = U \Lambda V^{T}
 
-where U,V are orthogonal matrices and \Lambda is a diagonal matrix that is compose of multiple singular values arranged in decreasing order.
+where U,V are orthogonal matrices and \Lambda is a diagonal matrix that is compose of multiple singular values arranged in decreasing order. We can further use these eigen values (elements of Lambda) to decomprose the image into multiple rank 1 matrices :
 
-From [1]_ , Suppose we have an image I, which is convoluted with a Point Spread Function (PSF) H as following:
+.. math::
+    I = \sum_{i=1}^{n} \lambda_{i} ( \mathbf{ u_{i} v_{i}^{T} } )
 
+Suppose we have an image I, which is convoluted with a Point Spread Function (PSF) H as following [1]_ :
 
 .. math::
     I * H = \sum_{i=1}^{n} \lambda_{i} ( \mathbf{ u_{i} v_{i}^{T} } ) * H
 
+where the convolution operator tends to increase the scale-space of the eigen-images and accordingly causes a loss of high frequence details. Those small singular values that match to small scale space eigen-images correspond to larger scale-space eigen-images after convultion. As a result, the image details are weakened and those large scale-sapce eigen-images get higher weights. 
+So a measure of degree of burry is proposed based on the weights of the first few most significant eigen-images :
+
+.. math::
+    \beta_{1} = \frac{\sum_{i=1}^{k}\lambda_{i} } {\sum_{i=1}^{n}\lambda_{i}}
 
 
-* image blind deconvolution(https://nl.mathworks.com/help/images/ref/deconvblind.html) for image deblur, etc. 
+* image blind-deconvolution_  for image deblur, etc. 
+
+.. _blind-deconvolution: https://nl.mathworks.com/help/images/ref/deconvblind.html
 
 .. [1] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
