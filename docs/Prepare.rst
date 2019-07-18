@@ -197,11 +197,3 @@ So a measure of degree of burry is proposed based on the weights of the first fe
 
 .. [#] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
-Environment Setting
-----------------------
-
-
-
-.. image:: images/envo.PNG
-   :width: 100%
-
