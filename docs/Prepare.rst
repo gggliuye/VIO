@@ -147,7 +147,9 @@ Motion Blur
 We can express an image by its singular value decomposition (SVD) :
   
 .. math::
-    I = U \LAMBDA V^{T}
+    I = U \Lambda V^{T}
+
+where U,V are orthogonal matrices and \Lambda is a diagonal matrix that is compose of multiple singular values arranged in decreasing order.
 
 From [1]_ , Suppose we have an image I, which is convoluted with a Point Spread Function (PSF) H as following:
 
