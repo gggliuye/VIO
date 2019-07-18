@@ -140,14 +140,16 @@ Example of outdoor scene:
 Image Blurry
 ------------------
 
-There are several types of cameras: global shutter cameras, rolling shutter cameras, event cameras, etc. The following image shows the different effect of global shutter camera and rolling shutter camera camera_compares_.
+There are several types of cameras: global shutter cameras, rolling shutter cameras, event cameras, etc. The following image shows the different effect of global shutter camera and rolling shutter camera (from camera_compares_ ).
 
 .. _camera_compares: https://www.diyphotography.net/this-video-helps-you-understand-the-rolling-shutter-effect/
 
-.. image:: images/camera compare.png
+.. image:: images/cameracompare.png
 
-Rolling shutter cameras are 
+Rolling shutter cameras will generally cause jerry effect, to reduce the effect, we can model the motion of the camera, and find the correct synchronization of pixels, for an example in Spline Fusion [#]_ . 
 
+
+.. [#] Lovegrove S, Patron-Perez A, Sibley G. Spline Fusion: A continuous-time representation for visual-inertial fusion with application to rolling shutter cameras[C]//BMVC. 2013, 2(5): 8.
 
 Point Spread Function (PSF)
 >>>>>>>>>>>>>>>>>>>>>>
