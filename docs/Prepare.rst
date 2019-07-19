@@ -181,7 +181,13 @@ The most simple method to measure burry degree is the **laplacian** , which is a
        0 & 1 & 0\\1 & - 4 & 1 \\ 0 & 1 & 0
     \end{bmatrix}
 
+.. image:: images/laplacian.PNG
+   :align: center
+
 Having the 2nd derivative of the image, we can calcualte the variance of this 2nd derivative. The blurred image usually has little rapid intensity changes (less edges), which means it will produce a lower variance. As a result, by assigning a threshold we can judge whether an image is blurred or not.
+
+.. image:: images/laplacianThreshold.png
+   :align: center
 
 Singular feature
 >>>>>>>>>>>>>>>>>>>>>>>>>>
