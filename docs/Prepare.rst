@@ -230,6 +230,16 @@ We also test our classification, by predict through our dataset. Below we should
 
 In summary, for our data set, We should choose k = 10 and the corresponding beta threshould should be about 0.6.
 
+Alpha Channel
+>>>>>>>>>>>>>>>>>
+Alpha channel modeling has been successfully applied on image deblurring and super resolution. With this technique, the image processing task can be much simplified since the edge contrast on alpha channel is normalized to a 0 to 1 transition, instead of arbitrary values in the color space [#]_ .
+
+
+
+.. [#] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
+
+.. [#] Dai S, Wu Y. Motion from blur[C]//2008 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2008: 1-8.
+
 Image Deblur
 >>>>>>>>>>>>>>>>>>>>>
 
@@ -237,6 +247,4 @@ Image Deblur
 * image blind-deconvolution_  for image deblur, etc. 
 
 .. _blind-deconvolution: https://nl.mathworks.com/help/images/ref/deconvblind.html
-
-.. [#] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
