@@ -199,16 +199,18 @@ So a measure of degree of burry is proposed based on the weights of the first fe
 .. math::
     \beta_{1} = \frac{\sum_{i=1}^{k}\lambda_{i} } {\sum_{i=1}^{n}\lambda_{i}}
 
-
-
 .. image:: images/beta1compare.png
+    :align: center
+
+Its values of two example images are shown above, as the x axis is k (the number of eigen values taken), and the y value represents the beta values. We should two images (with the right one, an enlarged version). From these images we can clearly see that the blurred image do has a larger beta values, especially when k is small.
+
+
+.. image:: images/numberEvalues.png
     :align: center
     
 .. image:: images/betathresholdchoose.png
     :align: center
     
-.. image:: images/numberEvalues.png
-    :align: center
 
 * image blind-deconvolution_  for image deblur, etc. 
 
