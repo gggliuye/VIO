@@ -194,13 +194,15 @@ where the convolution operator tends to increase the scale-space of the eigen-im
 Blurry Degree
 >>>>>>>>>>>>>>>>>>>>>>>>>>
 
-So a measure of degree of burry is proposed based on the weights of the first few most significant eigen-images :
+Our problem can be seen as a classification problem : input an image, we should tell whether it is blurred or it is non blur.
+
+As a result of the upper analysis, a measure of degree of burry can be proposed based on the weights of the first few most significant eigen-images :
 
 .. math::
     \beta_{1} = \frac{\sum_{i=1}^{k}\lambda_{i} } {\sum_{i=1}^{n}\lambda_{i}}
 
 
-|pic3| and |pic4|
+                  |pic3| |pic4|
 
 .. |pic3| image:: images/pro-10.png
    :width: 30%
@@ -214,12 +216,21 @@ Beta burry degree values of these two example images are shown below, as the x a
 .. image:: images/beta1compare.png
     :align: center
 
+To better choose the k value (number of eigen values taken in beta calculation), we tested though our dataset for different k choose, and compare the means of beta of the two classes (blur and non blur). And the output the distance between the two classes. We found that the lower k will produce larger difference.
+
 .. image:: images/numberEvalues.png
     :align: center
-    
+
+We also test our classification, by predict through our dataset. Below we should the precisions of different beta threshold choosen.
+
 .. image:: images/betathresholdchoose.png
     :align: center
-    
+
+In summary, for our data set, We should choose k = 10 and the corresponding beta threshould should be about 0.6.
+
+Image Deblur
+>>>>>>>>>>>>>>>>>>>>>
+
 
 * image blind-deconvolution_  for image deblur, etc. 
 
