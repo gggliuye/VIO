@@ -24,6 +24,11 @@ For each a in G, there exists an element b in G, commonly denoted a−1 (or −a
 The result of an operation may depend on the order of the operands. In other words, the result of combining element a with element b need not yield the same result as combining element b with element a; the equation: a • b = b • a
 
 
+**Why group theory** (my personal thought)
+The reason of introducing Group Theory, I thinks is to make the normalize the operation of the camera pose (especially the rotation part). As euler angles have many defaults, we introduced **quaternion** to represent rotation. However, its expression is not will defined before. Its adding operator, its substraction, identity unit, and the inverse operation are not normalized. And when we try to do complicate work with not well defined thing, we will definitly produce a lot of errors. As a result, we need a tool - **Group Theory** to help us, which will define these operators, the number domain and lots of other useful thing. In a word, normalize all the operation.
+
+
+
 Calibration Camera (IMU LIDAR)
 ---------------------------------
 
