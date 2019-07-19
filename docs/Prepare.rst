@@ -172,7 +172,19 @@ Point Spread Function (PSF)
 
 
 
+Laplacian
+>>>>>>>>>>>>>>>>>>>
+The most simple method to measure burry degree is the **laplacian** , which is a differential operator given by the divergence of the gradient of a function on Euclidean space (in a word: 2nd derivative of an image). In computer vision, it is usually simplified by an matrix convolution operator: 
 
+.. math::
+    kernel = \begin{bmatrix}
+       0 & 1 & 0\\1 & - 4 & 1 \\ 0 & 1 & 0
+    \end{bmatrix}
+
+Having the 2nd derivative of the image, we can calcualte the variance of this 2nd derivative. The blurred image usually has little rapid intensity changes (less edges), which means it will produce a lower variance. As a result, by assigning a threshold we can judge whether an image is blurred or not.
+
+Singular feature
+>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 We can express an image by its singular value decomposition (SVD) :
   
@@ -191,23 +203,14 @@ Suppose we have an image I, which is convoluted with a Point Spread Function (PS
 
 where the convolution operator tends to increase the scale-space of the eigen-images and accordingly causes a loss of high frequence details. Those small singular values that match to small scale space eigen-images correspond to larger scale-space eigen-images after convultion. As a result, the image details are weakened and those large scale-sapce eigen-images get higher weights. 
 
-Blurry Degree
->>>>>>>>>>>>>>>>>>>>>>>>>>
-
 Our problem can be seen as a classification problem : input an image, we should tell whether it is blurred or it is non blur.
-
 As a result of the upper analysis, a measure of degree of burry can be proposed based on the weights of the first few most significant eigen-images :
 
 .. math::
     \beta_{1} = \frac{\sum_{i=1}^{k}\lambda_{i} } {\sum_{i=1}^{n}\lambda_{i}}
 
-|pic3| |pic4|
-
-.. |pic3| image:: images/pro-10.png
-   :width: 45%
-
-.. |pic4| image:: images/pro-105.png
-   :width: 45%
+.. image:: images/blurNonblur.PNG
+   :align: center
 
 To analysis the this beta value, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image) 
 Beta burry degree values of these two example images are shown below, as the x axis is k (the number of eigen values taken), and the y value represents the beta values. We should two images (with the right one, an enlarged version). From these images we can clearly see that the blurred image do has a larger beta values, especially when k is small.
