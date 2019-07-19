@@ -163,9 +163,10 @@ For our cases, most phone cameras and AR glasses cameras are **Global shutter ca
 
 
 .. image:: images/blurNonblur.PNG
+   :width: 80%
    :align: center
 
-To analysis the motion blurry and the algorithms made to solve it, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image) 
+**Data set** ： To analysis the motion blurry and the algorithms made to solve it, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image) 
 
 .. [#] Lovegrove S, Patron-Perez A, Sibley G. Spline Fusion: A continuous-time representation for visual-inertial fusion with application to rolling shutter cameras[C]//BMVC. 2013, 2(5): 8.
 
@@ -176,6 +177,18 @@ To analysis the motion blurry and the algorithms made to solve it, we made our o
 Point Spread Function (PSF)
 >>>>>>>>>>>>>>>>>>>>>>
 
+Point Spread Function (PSF) describes the response of an imaging system to a point source or point object. A more general term for the PSF is a system's impulse response, the PSF being the impulse response of a focused optical system. 
+
+.. math::
+    Image(Object_{1} + Object_{2}) = Image(Object_{1}) + Image(Object_{2})
+
+
+It operators like an convoluton operator, and the blur of an image can be represented by an PSF operation of an image.
+
+.. math::
+    T(x_{0}, y_{0}) = \int \int O(u,v)PSF(x_{i}/M-u, y_{i}/M -v )du dv 
+
+The PSF functions have a lot of type, different PSF will produce different image effect. But we will not discuss here, more theory can be seen in `wiki <https://en.wikipedia.org/wiki/Point_spread_function>`_ . 
 
 
 Laplacian
