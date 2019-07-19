@@ -161,6 +161,12 @@ For our cases, most phone cameras and AR glasses cameras are **Global shutter ca
 
 **Motion Blur** is our main issue, it is produced by global shutter camera, as all the pixels are taken at the same time period (exprosure time), however fast movement will cause some pixels to spread in an area. Either camera motion or object motion can cause a motion blur. For our case, AR application, camera motion is our main concern. The moving objects should not be used to localization, the blurry of their pixels are helpful to us, on the contrary.
 
+
+.. image:: images/blurNonblur.PNG
+   :align: center
+
+To analysis the motion blurry and the algorithms made to solve it, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image) 
+
 .. [#] Lovegrove S, Patron-Perez A, Sibley G. Spline Fusion: A continuous-time representation for visual-inertial fusion with application to rolling shutter cameras[C]//BMVC. 2013, 2(5): 8.
 
 .. [#] Rebecq H, Horstschaefer T, Scaramuzza D. Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization[C]//BMVC. 2017.
@@ -181,6 +187,8 @@ The most simple method to measure burry degree is the **laplacian** , which is a
        0 & 1 & 0\\1 & - 4 & 1 \\ 0 & 1 & 0
     \end{bmatrix}
 
+An example can be seen below, the laplacian produces the sudden change of image pixels.
+
 .. image:: images/laplacian.PNG
    :align: center
 
@@ -188,6 +196,8 @@ Having the 2nd derivative of the image, we can calcualte the variance of this 2n
 
 .. image:: images/laplacianThreshold.png
    :align: center
+
+We tried the laplacian variance threshold to classify blur and non blur images. The best performance is got when the threshold is set as 11, and the result precision is 77.8%. 
 
 Singular feature
 >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -215,10 +225,6 @@ As a result of the upper analysis, a measure of degree of burry can be proposed 
 .. math::
     \beta_{1} = \frac{\sum_{i=1}^{k}\lambda_{i} } {\sum_{i=1}^{n}\lambda_{i}}
 
-.. image:: images/blurNonblur.PNG
-   :align: center
-
-To analysis the this beta value, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image) 
 Beta burry degree values of these two example images are shown below, as the x axis is k (the number of eigen values taken), and the y value represents the beta values. We should two images (with the right one, an enlarged version). From these images we can clearly see that the blurred image do has a larger beta values, especially when k is small.
 
 .. image:: images/beta1compare.png
