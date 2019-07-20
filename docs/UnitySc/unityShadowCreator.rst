@@ -222,7 +222,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 8. 误差分析
 ---------------------
 
-在实际测试的时候，经常有人问我： **一开始看得好好的，为什么一转头误差就这么大呢？**， 我们在这里统一解释一下原因：
+在实际测试的时候，我们很遇到这样的疑问： **一开始看得好好的，为什么一转头误差就这么大呢？**， 我们在这里分析一下原因：
 
 
 .. image:: error_localization.png
