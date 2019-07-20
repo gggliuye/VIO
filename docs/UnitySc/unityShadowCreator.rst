@@ -222,8 +222,8 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 8. 误差分析
 ---------------------
 
-8.1 ORBSLAM2的定位误差
->>>>>>>>>>>>>>>>>>>>>>
+在实际测试的时候，经常有人问我： **一开始看得好好的，为什么一转头误差就这么大呢？**， 我们在这里统一解释一下原因：
+
 
 .. image:: error_localization.png
    :align: center
@@ -239,6 +239,23 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 * 而相机视野背后的物体更是有了更大的误差(图中“error”）
 
 **解决思路**  ： 增加定位使用图片的 **分辨率** ，减少 **运动模糊** 。增加SLAM定位的系统准确性，增加地图点的精度。
+
+8.1 ORBSLAM2的定位误差
+>>>>>>>>>>>>>>>>>>>>>>
+
+云端定位系统的误差可以分为下面几项：
+
+* 相机分辨率的原因（相机分辨率可能不高，导致会有几个像素的误差，但是一旦距离远了，这几个像素的误差就会造成很严重的错位）。
+* 相机不停运动---图像的运动模糊， 图像的运动模糊进一步放大了像素的误差（具体可以看上面的运动模糊章节）。
+* 系统本身的缺陷，由于SLAM系统为了追求实时性，本身就舍弃了一部分精度（具体分析可以看前面的 `SLAM和SFM的对比 <https://vio.readthedocs.io/en/latest/UnitySc/unityShadowCreator.html#sfmslam>`_ ），这也会导致误差。
+
+
+**解决思路** ：
+
+* 使用更高分辨率的相机。
+* 运动模糊去模糊的算法代价过高，但是我们可以检测系统的模糊，并舍弃模糊图像 （详情见 `Image Blurry <https://vio.readthedocs.io/en/latest/Prepare.html#image-blurry>`_）。
+* 系统架构的重新设计。
+
 
 8.2 Unity
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>
