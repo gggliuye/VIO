@@ -168,6 +168,12 @@ SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实�
 .. image:: blur.PNG
    :align: center
    
+经过细致的相关文献调研，我们发现修正模糊图像的代价过大，处理时间会严重影响系统的效率，进而影响精度。所以我们决定舍弃模糊图像的处理，为此我们提出了运动模糊检测算法 （详情见 `Image Blurry <https://vio.readthedocs.io/en/latest/Prepare.html#image-blurry>`_）。 并且，在加入筛除模糊图像的算法加入后，系统的稳定性得到了很大程度的提高。
+
+在上述调研中我们研究了两种算法：Laplacian Variance 检测模糊， Eigen Feature 检测模糊。
+Eigen feature的检测准确率可以达到超过90%，但是由于其中涉及到SVD的计算，运算量的代价大。Laplacian方法检测的结果准确率达到77.8%，由于仅仅涉及了一个卷积运算，运算代价很小，同时准确率也能够满足我们的要求，所以，在我们的系统中，我们使用Laplacian Variance 检测模糊。
+   
+   
 * 光强修正（使用gamma=0.5的Gamma Correction）
 
 .. math::
@@ -252,8 +258,8 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 
 **解决思路** ：
 
-* 使用更高分辨率的相机。
-* 运动模糊去模糊的算法代价过高，但是我们可以检测系统的模糊，并舍弃模糊图像 （详情见 `Image Blurry <https://vio.readthedocs.io/en/latest/Prepare.html#image-blurry>`_）。
+* 使用更高分辨率的相机。 -> 安卓部分遇到困难
+* 运动模糊去模糊的算法代价过高，但是我们可以检测系统的模糊，并舍弃模糊图像。 -> 已经实现，系统稳定性得到提高
 * 系统架构的重新设计。
 
 
@@ -270,6 +276,12 @@ Unity的模型摆放存在误差。
 
 * VIO的累积误差
 * 影创与ZEDmini尺度不统一误差
+
+经过多次测试，逐渐优化其他部分之后，我们发现这一部分的误差成为了主导。（单次重定位的精度很高，但是一旦开始移动->影创跟踪算法接手，真实和虚拟之间就开始产生不协调）。
+而且由于影创SDK的黑盒子特性，导致我们很难分析统一。
+目前的思路是，使用高精扫描仪获取无限接近ground truth的高精模型标准，再分别将云端定位和影创的尺度与这个标准统一。
+
+
 * 影创相机参数标定误差。如下图所示，相同的图片，如果设定的定位标定参数不一样（这里只考虑了焦距），那么定位的结果也会不一样。
 .. image:: calibration.png
    :align: center
