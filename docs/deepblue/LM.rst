@@ -37,24 +37,12 @@ The main thread in ROS node is **process** it calls two essential functions **re
 mean value integration (in estimator_node -> predict()):
 
 .. math::
-    p_{k+1}  = p_{k} + v_{k} \delta t + \frac{1}{2} a_{k} (\delta t)^{2}
-
-
-Grid table:
-
-+------------+------------+-----------+ 
-| Header 1   | Header 2   | Header 3  | 
-+============+============+===========+ 
-| body row 1 | column 2   | column 3  | 
-+------------+------------+-----------+ 
-| body row 2 | Cells may span columns.| 
-+------------+------------+-----------+ 
-| body row 3 | Cells may  | - Cells   | 
-+------------+ span rows. | - contain | 
-| body row 4 |            | - blocks. | 
-+------------+------------+-----------+
-
-
+    p_{k+1}  = p_{k} + v_{k} \delta t + \frac{1}{2} \bar{a}_{k} (\delta t)^{2}
+    
+    v_{k+1} = v_{k} + \bar{a}_{k} \delta t 
+    
+    q_{k+1} = q_{k} \bigotimes \begin{bmatrix} 1 \\  \frac{1}{2} * \bar{\omiga} * \delta t \end{bmatrix}
+    
 
 
 
