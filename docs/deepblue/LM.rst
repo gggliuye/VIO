@@ -32,8 +32,12 @@ The main thread in ROS node is **process** it calls two essential functions **re
      
           -> add to process query 
           
-          -> predict the current state (position, quaternion and velocity) by intergration
+          -> predict the current state (position, quaternion and velocity) by intergration (mean value)
 
+mean value integration (in estimator_node -> predict()):
+
+.. math::
+    p_{k+1}  = p_{k} + v_{k} \delta t + \frac{1}{2} a_{k} (\delta t)^{2}
 
 
 Grid table:
