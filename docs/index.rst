@@ -12,6 +12,7 @@ Welcome to SLAM-AR's documentation!
 
    Introduction
    Prepare
+   SFM
    Tracking/TrackingIntroduction
    UnitySc/unityShadowCreator
    deepblue/LM
