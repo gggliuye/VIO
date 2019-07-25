@@ -41,10 +41,11 @@ mean value integration (in estimator_node -> predict()):
     
     v_{k+1} = v_{k} + \bar{a}_{k} \delta t 
     
-    q_{k+1} = q_{k} \bigotimes \begin{bmatrix} 1 \\  \frac{1}{2} * \bar{\omiga} * \delta t \end{bmatrix}
+    q_{k+1} = q_{k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}
     
+    \bar{\omega} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro} 
 
-
+    \bar{a} = \frac{1}{2} ( q_{k}(a_{imu,k} - b_{acc}) + q_{k+1}(a_{imu,k+1} - b_{acc}) ) - g_{k}
 
 Levenberg-Marquardt Method
 -----------------------
