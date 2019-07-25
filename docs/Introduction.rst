@@ -1,28 +1,25 @@
-3D registraion
-=================================
-
-SfM(structure from motion)
-------------------------------
-
-
-SLAM( Simultaneous Localization and Mapping)
-------------------------------------
-
-
-Marker Based mehtods
-----------------------------
-
-
-
 Introduction of SLAM
 ===================================
 
 `Link of the Site <https://vio.readthedocs.io/en/latest/index.html>`_
 
 
+SfM(structure from motion)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Marker Based mehtods
+~~~~~~~~~~~~~~~~~~~~
+
+SLAM
+-----------------------------
+
 SLAM **Simultaneous Localization and Mapping** is a complex system.
 
 In most SLAM structure design, the whole system will be seperated into three threads : Tracking, Local Mapping, and Global Mapping.
+
+.. image:: images/pipeline.png
+   :align: center
 
 In a complete SLAM framework, the three threads should run together, but with different frequences.
 For an example, for ORBSLAM, Tracking thread will run for each input frame, Local Mapping will run when new keyframe is selected, and Global Mapping will be run when a loop is detected.
