@@ -10,18 +10,18 @@ In **naive-lib.cpp** all the intereface plugin functions are defined. In the and
 The main node in VINS android is : **Estimator_node**. Where many fronter functions are defined : functions to run data set test, functions to run in real time. In the init() function , it starts three threads : **process**, **loop_detection**, **pose_graph**.
 The main thread in ROS node is **process** it calls two essential functions **receive_IMU** and **receive_img**, they will call **img_callback**, **imu_callback**, and **feature_callback** respectively. And it is also responsible for loop deteciton and loop closure.
 
-Process
-~~~~~~~~~~~~~~~~~~~~~~~~~
+call from other
+~~~~~~~~~~~~~~~~~~~~~~~
 
-**receive_img**  (called in java plugins)
+**receive_img**  (called in java plugins, used to show image in android application)
 
      -> img_callback : call this fcn when receive image
      
           -> proprecessing : gestion of frequence / error rejcetion judgements
           
-          -> prcess the image (seperate the process of stereo camera and mono camera)
+          -> process the image (seperate the process of stereo camera and mono camera)
           
-          -> calculate feature points ( **FeatureTracker** )-> call feature_callback
+          -> calculate feature points ( **FeatureTracker** )-> call feature_callback (push the feature to buffer) 
           
           -> draw track messages to image (tracked points in green, not tracked points in red, etc)
           
@@ -35,7 +35,7 @@ Process
      
           -> add to process query 
           
-          -> predict the current state (position, quaternion and velocity) by intergration (mean value)
+          -> predict the current state (position, quaternion and velocity) by intergration (mean value). 
 
 Details of mean value integration (in estimator_node -> predict()), where all the values are vectors:
 
@@ -52,8 +52,19 @@ Details of mean value integration (in estimator_node -> predict()), where all th
 .. math::
     \bar{a} = \frac{1}{2} ( q_{k}(a_{imu,k} - b_{acc}) + q_{k+1}(a_{imu,k+1} - b_{acc}) ) - g_{k}
 
+
+**Queation** : these results are never used, it is real necessary??
+
+Process
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* call sendIMU -> estimator.processIMU
+* call estimator. processImage
+
 **loop closure**
-there are also loop closure process in this thread, and also in process_loop_detection thread. Is is redundant??
+there are also loop closure process in this thread.
+
+**Queation** we also have loop closure in process_loop_detection thread. Is is redundant??
 
 
 process_loop_detection
@@ -73,4 +84,17 @@ process_pose_graph
 * if we have loop in the query (optimize_posegraph_buf, as we may add loop in process_loop_detection thread).
 * do optimize4DoFLoopPoseGraph (cerse solver, 4DOF as VINS has set the gravity direction to be vertical)
 * update infomation for visualization
-   
+  
+  
+VINS estimator
+----------------------------
+estimator.processIMU
+estimator.processImage
+estimator.retrive_data_vector
+
+
+
+
+
+
+
