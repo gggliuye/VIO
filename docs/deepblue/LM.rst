@@ -40,11 +40,11 @@ Process
 Details of mean value integration (in estimator_node -> predict()), where all the values are vectors:
 
 .. math::
-    \begin{pmatrix}
+    \begin{cases}
     p_{k+1}  = p_{k} + v_{k} \delta t + \frac{1}{2} \bar{a}_{k} (\delta t)^{2}   \\
     v_{k+1} = v_{k} + \bar{a}_{k} \delta t   \\
     q_{k+1} = q_{k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}  
-    \end{pmatrix}
+    \end{cases}
 
 .. math::
     \bar{\omega} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro} 
