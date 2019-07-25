@@ -14,13 +14,25 @@ receive_img
      -> img_callback : call this fcn when receive image
      
           -> proprecessing : gestion of frequence / error rejcetion judgements
+          
           -> prcess the image (seperate the process of stereo camera and mono camera)
-          -> calculate feature points -> call feature_callback
+          
+          -> calculate feature points ( **FeatureTracker** )-> call feature_callback
+          
           -> draw track messages to image (tracked points in green, not tracked points in red, etc)
           
-     -> draw_mainui : call DrawResult class, to draw AR rendering(drawAR) or draw trajectory with map points(Reprojection)
+     -> draw_mainui : call **DrawResult** class, to draw AR rendering(drawAR) or draw trajectory with map points(Reprojection)
      
      -> add more debug infomation to shown image
+
+receive_IMU
+
+     -> imu_callback :
+     
+          -> add to query 
+          
+          -> predict bu intergration
+
 
 
 Grid table:
