@@ -1,4 +1,4 @@
-Main Method 3D registraion
+3D registraion
 =================================
 
 SfM(structure from motion)
