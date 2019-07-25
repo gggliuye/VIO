@@ -6,7 +6,7 @@ Basicly, SfM uses the same technique as SLAM system : feature point extraction, 
 At the same time SfM and SLAM have many differences, mostly in their pipeline (SLAM uses a realtime pipeline, however SfM has three main types: incremental, global and hierarchical) and some algorithm details (which can be seen : ` SLAM vs SFM <https://vio.readthedocs.io/en/latest/UnitySc/unityShadowCreator.html#sfmslam>`_ )
 
 
-Here is SFM result build with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
+Here is SFM result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
 
 .. image:: images/sfm/1.png
    :scale: 80 %
@@ -17,7 +17,7 @@ Here is SFM result build with `colmap <https://colmap.github.io/>`_ , with image
 MVS(Multiple View Stereovision)
 --------------------------------
 
-Here is the MVS fusion result build with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
+Here is the MVS fusion result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
 
    
 .. image:: images/sfm/7.png
