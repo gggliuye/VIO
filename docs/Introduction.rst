@@ -1,14 +1,26 @@
+Main Method 3D registraion
+=================================
+
+SfM(structure from motion)
+------------------------------
+
+
+SLAM( Simultaneous Localization and Mapping)
+------------------------------------
+
+
+Marker Based mehtods
+----------------------------
+
 
 
 Introduction of SLAM
 ===================================
 
-`Link <https://vio.readthedocs.io/en/latest/index.html>`_
-
-** Simultaneous Localization and Mapping **
+`Link of the Site <https://vio.readthedocs.io/en/latest/index.html>`_
 
 
-SLAM is a complex system.
+SLAM **Simultaneous Localization and Mapping** is a complex system.
 
 In most SLAM structure design, the whole system will be seperated into three threads : Tracking, Local Mapping, and Global Mapping.
 
