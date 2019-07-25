@@ -1,15 +1,16 @@
 VINS code analysis
 =========================
 
-Analysis the structure and the details of `VINS <https://github.com/HKUST-Aerial-Robotics/VINS-Mono>`_ code. Take the android implement as example.
+Analysis the structure and the details of `VINS <https://github.com/HKUST-Aerial-Robotics/VINS-Mono>`_ code. Take the android implement as example. As the original code is based on ROS(robot opeartion system), changes are made to create virtual ROS message, and manual call the ros callback functions. It has two main threads: **vins_estimator** and **loop_fusion**.
 
 Main Node
 ----------------------------
 In **naive-lib.cpp** all the intereface plugin functions are defined.
 
-The main node in VINS android is : **Estimator_node**. Where many fronter functions are defined : functions to run data set test, functions to run in real time. Mainly, we have two functions **receive_IMU** and **receive_img**, they will call **img_callback**, **imu_callback**, and **feature_callback** respectively.
+The main node in VINS android is : **Estimator_node**. Where many fronter functions are defined : functions to run data set test, functions to run in real time. In the init() function , it starts three threads : **process**, **loop_detection**, **pose_graph**.
+The main thread in ROS node is **process** it calls two essential functions **receive_IMU** and **receive_img**, they will call **img_callback**, **imu_callback**, and **feature_callback** respectively. And it is also responsible for loop deteciton and loop closure.
 
-receive_img 
+**receive_img**  (called in java plugins)
 
      -> img_callback : call this fcn when receive image
      
@@ -25,13 +26,13 @@ receive_img
      
      -> add more debug infomation to shown image
 
-receive_IMU
+**receive_IMU** (called in **Phone Sensor**)
 
      -> imu_callback :
      
-          -> add to query 
+          -> add to process query 
           
-          -> predict bu intergration
+          -> predict the current state (position, quaternion and velocity) by intergration
 
 
 
