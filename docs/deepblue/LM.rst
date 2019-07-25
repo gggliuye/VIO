@@ -10,13 +10,13 @@ In **naive-lib.cpp** all the intereface plugin functions are defined.
 The main node in VINS android is : **Estimator_node**. Where many fronter functions are defined : functions to run data set test, functions to run in real time. Mainly, we have two functions **receive_IMU** and **receive_img**, they will call **img_callback**, **imu_callback**, and **feature_callback** respectively.
 
 receive_img 
-    -> img_callback : call this fcn when receive image.
-         -> proprecessing : gestion of frequence / error rejcetion judgements
-         -> prcess the image (seperate the process of stereo camera and mono camera)
-         -> calculate feature points -> call feature_callback
-         -> draw track messages to image (tracked points in green, not tracked points in red, etc)
-    -> draw_mainui : call DrawResult class, to draw AR rendering(drawAR) or draw trajectory with map points(Reprojection).
-    -> add more debug infomation to shown image.
+     -> img_callback : call this fcn when receive image
+          -> proprecessing : gestion of frequence / error rejcetion judgements
+          -> prcess the image (seperate the process of stereo camera and mono camera)
+          -> calculate feature points -> call feature_callback
+          -> draw track messages to image (tracked points in green, not tracked points in red, etc)
+     -> draw_mainui : call DrawResult class, to draw AR rendering(drawAR) or draw trajectory with map points(Reprojection)
+     -> add more debug infomation to shown image
 
 
 Grid table:
