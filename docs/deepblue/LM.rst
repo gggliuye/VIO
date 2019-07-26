@@ -113,19 +113,23 @@ A **IntegrationBase** class is made for pre-intergration and intergration manage
 .. math::
     \bar{a}^{w} = \frac{1}{2} ( \gamma_{k}(a_{k}^{b} - b_{acc}) + \gamma_{k+1}(a_{k+1}^{b} - b_{acc}) )
     
-* Jacobian update: (it is optinal, normally set true) three matrix are calculated before to fasten.
+* **Jacobian update** : (it is optinal, normally set true) three matrix are calculated before to fasten. Noise is seen as gaussian. And the F matrix(15*15) and the error term propagation matrix V (15*18) are calculated. (remember to normalize quaternion). In the end, two 15*15 matrix : Jacobian and Covariance are calculated.
 
 .. math::
-    [R_{\omega}]_{x} = [ \bar{\omega} ]_{x} , 
-    [R_{\tilde{a}_{k}}]_{x} = [a_{k}^{b} - b_{acc}]_{x},
-    [R_{\tilde{a}_{k+1}}]_{x} = [a_{k+1}^{b} - b_{acc}]_{x}
+    [R_{\omega}]_{X} = [ \bar{\omega} ]_{X} , 
+    [R_{\tilde{a}_{k}}]_{X} = [a_{k}^{b} - b_{acc}]_{X},
+    [R_{\tilde{a}_{k+1}}]_{X} = [a_{k+1}^{b} - b_{acc}]_{X}
     
+.. math::
+    Jacobian_{k+1} = F_{k+1} * Jacobian_{k}
+
+.. math::
+    Covariance_{k+1} = F_{k+1} * Covariance_{k} * F_{k+1}^{T} + V_{k+1} * Noise * V_{k+1}^{T}
     
-    
+* **evaluate** : calcuates the residual (15*1 vector)
 
 
-
-* also have checkJacobian : to check the calculation of jacobian of the system; and also offer an option of eulerIntegration (however it is less precise than mid point integration).
+* also have checkJacobian : to check the calculation of jacobian of the system;  offer an option of eulerIntegration (however it is less precise than mid point integration); and compare the results of mid point integration and euler integration.
 
 
 
