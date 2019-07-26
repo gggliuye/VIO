@@ -112,6 +112,18 @@ A **IntegrationBase** class is made for pre-intergration and intergration manage
 
 .. math::
     \bar{a}^{w} = \frac{1}{2} ( \gamma_{k}(a_{k}^{b} - b_{acc}) + \gamma_{k+1}(a_{k+1}^{b} - b_{acc}) )
+    
+* Jacobian update: (it is optinal, normally set true) three matrix are calculated before to fasten.
+
+.. math::
+    [R_{\omega}]_{x} = [ \bar{\omega} ]_{x} , 
+    [R_{\tilde{a}_{k}}]_{x} = [a_{k}^{b} - b_{acc}]_{x},
+    [R_{\tilde{a}_{k+1}}]_{x} = [a_{k+1}^{b} - b_{acc}]_{x}
+    
+    
+    
+
+
 
 * also have checkJacobian : to check the calculation of jacobian of the system; and also offer an option of eulerIntegration (however it is less precise than mid point integration).
 
