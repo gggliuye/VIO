@@ -98,7 +98,8 @@ processIMU
 
 A **IntegrationBase** class is made for pre-intergration management and calculation.
 
-**IntegrationBase**:
+**IntegrationBase**
+:::::::::::::::::::::::
 
 * push back a new measurment : timestamp, gyrocope measure, and accelerometer measure. Add them to the buffer and **propagate** the system.
 * midPointIntegration : basic it is the same expression as above, about we are doing integration for the **error term of preintegration** here (as a result, n gravity term here). (in the VINS source code, they note p, v, and q, however I found it being misleading, so I note them as alpha , beta and gamma as in [#]_ ).
@@ -135,7 +136,8 @@ A **IntegrationBase** class is made for pre-intergration management and calculat
 * also have checkJacobian : to check the calculation of jacobian of the system;  offer an option of eulerIntegration (however it is less precise than mid point integration); and compare the results of mid point integration and euler integration.
 
 
-**Integration** :
+**Integration** 
+:::::::::::::::::::
 
 In the final part of processIMU, the integration terms of the real world **physics variables** are calculated as below, where j indicates ith window, k indicates kth imu data (between two received image). 
 
@@ -157,15 +159,22 @@ In the final part of processIMU, the integration terms of the real world **physi
 processImage
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Pipeline
+:::::::::::::::::::
+
+
 * **addFeatureCheckParallax** check the image simliarity, to choose whether **marginalize** the oldest image in the window(to make space for the new coming , and the current image is treated as new keyframe) or the last image in the window (if the recent images are similar).
 * create new image frame, and create the image pre-integration base.
 * option : ( ESTIMATE_EXTRINSIC == 2 ) calibrate the extrinsic parameters.
 * (solver_flag == INITIAL) -> fill the slide window and try to initialize **initialStructure**.
 * (solver_flag == NON_LINEAR) -> initialize success, manage the slide window.
 
+Important functions
+::::::::::::::::::::::
+
 **initialStructure()**
 
-* for each image frames: 
+* check IMU state. where Delta V is the result of preintegration between two frames in integration base, Delta t is the time interval between frames.
 
 .. math::
     \bar{g} = \frac{1}{Size_{window}} \sum_{window} \frac{\Delta v} {\Delta t}
@@ -175,6 +184,13 @@ processImage
     
 .. math::
     Var = \sqrt{ \frac{1}{Size_{window}} \sum_{window} (\Delta g)^{T} (\Delta g)  }
+
+if Var < 0.25 : "IMU excitation not enouth!"
+
+* initialize a sfm features vector by **FeatureManager** .
+* check the relative pose, if not enough features or parallax, ask to move the device.
+* **GlobalSFM** construct.
+* if global sfm succeed, solve PnP for all frames.
 
 **solveOdometry()**
 
