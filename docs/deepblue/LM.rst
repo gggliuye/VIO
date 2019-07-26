@@ -401,7 +401,7 @@ It is derivated from ceres::CostFunction. The **Evaluate** function is redefined
     \Delta x_{q} = 2 \bar{q}^{-1} \otimes q
 
 .. math::
-    if: \Delta q.w < 0 \rightarrow \Delta q = - \Delta q
+    if: \Delta x_{q}.w < 0 \rightarrow \Delta x_{q} = - \Delta x_{q}
 
 
 **sum**
