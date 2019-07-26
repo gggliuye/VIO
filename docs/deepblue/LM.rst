@@ -280,10 +280,16 @@ Marginalization
 
 ResidualBlockInfo
 ~~~~~~~~~~~~~~~~~
-Evaluate : evaluate the cerse loss evaluate.
+Evaluate : evaluate the ceres loss evaluate.
+In ceres the evaluate result is a three-deminsion vector , where r is the squared norm. And the loss function is a costume defined function.
 
 .. math::
-    r = \lVert \mathbf{r} \rVert_{2} 
+    rho = \begin{bmatrix} \rho(r) \\ \rho ' (r) \\ \rho '' (r) \end{bmatrix}
+
+.. math::
+    r = \lVert \mathbf{r} \rVert^{2} 
+
+And VINS uses an factor alpha to control its jacobian.
 
 .. math::
     \alpha = 1 - \sqrt{  1 + 2  r \frac{rho_{2}}{rho_{1}} }
