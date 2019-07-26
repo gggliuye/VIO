@@ -385,10 +385,12 @@ MarginalizationFactor
 It is derivated from ceres::CostFunction. The **Evaluate** function is redefined here.
 
 **point position**
+
 .. math::
     \Delta x = p - \bar{p}
     
 **camera pose**
+
 .. math::
     \Delta x = \Delta x_{p} + \Delta x_{q}
 
@@ -401,6 +403,7 @@ It is derivated from ceres::CostFunction. The **Evaluate** function is redefined
 
 
 **sum**
+
 .. math::
     \sum{r_{l}} = \sum {J_{l} * \Delta x}
 
