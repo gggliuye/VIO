@@ -91,6 +91,8 @@ VINS estimator
 
 Method called above in "top node" : estimator.processIMU, estimator.processImage, estimator.retrive_data_vector .  Its basic idea is to manage a **slide window** , make imu preintegration and imu observation, also marginalization, etc.
 
+**SolveFlag**
+
 processIMU
 ~~~~~~~~~~~~~~~~~~~
 
@@ -135,8 +137,7 @@ A **IntegrationBase** class is made for pre-intergration management and calculat
 
 **Integration** :
 
-In the final part of processIMU, the integration term is calculated as below.
-where j: ith window, k: kth imu data (between two received image)
+In the final part of processIMU, the integration terms of the real world **physics variables** are calculated as below, where j indicates ith window, k indicates kth imu data (between two received image). 
 
 .. math::
     \bar{a}_{j,k+1}^{w} = \frac{1}{2}(Q_{j,k} (a_{j,k}^{b} - b_{acc,j})  + Q_{j,k+1} (a_{j,k+1}^{b} - b_{acc,j}) ) - g^{w}
@@ -155,6 +156,19 @@ where j: ith window, k: kth imu data (between two received image)
 
 processImage
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+* **addFeatureCheckParallax** check the image simliarity, to choose whether **marginalize** the oldest image in the window(to make space for the new coming , and the current image is treated as new keyframe) or the last image in the window (if the recent images are similar).
+* create new image frame, and create the image pre-integration base.
+* option : ( ESTIMATE_EXTRINSIC == 2 ) calibrate the extrinsic parameters.
+* (solver_flag == INITIAL) -> fill the slide window and try to initialize **initialStructure**.
+* (solver_flag == NON_LINEAR) -> initialize success, manage the slide window.
+
+**initialStructure()**
+
+**solveOdometry()**
+
+**slideWindow()**
+
 
 
 .. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
