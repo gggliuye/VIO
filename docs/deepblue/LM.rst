@@ -91,8 +91,6 @@ VINS estimator
 
 Method called above in "top node" : estimator.processIMU, estimator.processImage, estimator.retrive_data_vector .  Its basic idea is to manage a **slide window** , make imu preintegration and imu observation, also marginalization, etc.
 
-**SolveFlag**
-
 processIMU
 ~~~~~~~~~~~~~~~~~~~
 
@@ -159,9 +157,7 @@ In the final part of processIMU, the integration terms of the real world **physi
 processImage
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Pipeline
-:::::::::::::::::::
-
+**Pipeline**:
 
 * **addFeatureCheckParallax** check the image simliarity, to choose whether **marginalize** the oldest image in the window(to make space for the new coming , and the current image is treated as new keyframe) or the last image in the window (if the recent images are similar).
 * create new image frame, and create the image pre-integration base.
@@ -169,10 +165,9 @@ Pipeline
 * (solver_flag == INITIAL) -> fill the slide window and try to initialize **initialStructure**.
 * (solver_flag == NON_LINEAR) -> initialize success, manage the slide window.
 
-Important functions
-::::::::::::::::::::::
 
-**initialStructure()**
+initialStructure
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * check IMU state. where Delta V is the result of preintegration between two frames in integration base, Delta t is the time interval between frames.
 
@@ -191,19 +186,51 @@ if Var < 0.25 : "IMU excitation not enouth!"
 * check the relative pose, if not enough features or parallax, ask to move the device.
 * **GlobalSFM** construct.
 * if global sfm succeed, solve PnP for all frames.
+* solve odometry and manage slide window
 * visualInitialAlign.   VisualIMUAlignment
 
-**solveOdometry()**
+solveOdometry
+~~~~~~~~~~~~~~~~~~~~
 
 * f_manager.triangulate
 * optimization()
 
-**slideWindow()**
+slideWindow
+~~~~~~~~~~~~~~~~~~~~~
 
 * slideWindowOld : (solver_flag == NON_LINEAR ? true : false) f_manager.removeBackShiftDepth,  f_manager.removeBack
 * slideWindowNew : f_manager.removeFront
 
+optimization
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+use ceres to optimize : CauchyLoss
+
+* add pose local parameter block (of the slide window)
+* add current frame pose block
+* add residual of imu preintegrations (of the slide window) 
+* add feature residual  (ESTIMATE_TD option)
+* marginalization_info->addResidualBlockInfo of the upper resiudal
+
+linear_solver_type set to ceres::DENSE_SCHUR, trust_region_strategy_type set to ceres::DOGLEG.
+
+Slide window marginalization.
+
+* marginalization_info->preMarginalize();
+* marginalization_info->marginalize();
+
+
+
+MarginalizationInfo
+---------------------
+
+
+
+Feature Manager
+---------------------
+* list<FeaturePerId> feature
+* vector<FeaturePerFrame> feature_per_frame
 
 .. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
 
