@@ -98,13 +98,13 @@ A **IntegrationBase** class is made for pre-intergration and intergration manage
 
 **IntegrationBase**:
 * push back a new measurment : timestamp, gyrocope measure, and accelerometer measure. Add them to the buffer and **propagate** the system.
-* midPointIntegration : basic it is the same expression as above, about we are doing integration for the **error term of preintegration** here (as a result, n gravity term here). (in the VINS source code, they note p, v, and q, however I found it being misleading, so I note them as alpha , beta and gamma).
+* midPointIntegration : basic it is the same expression as above, about we are doing integration for the **error term of preintegration** here (as a result, n gravity term here). (in the VINS source code, they note p, v, and q, however I found it being misleading, so I note them as alpha , beta and gamma as in [#]_ ).
 
 .. math::
     \begin{cases}
-    \delta \alpha_{k+1}  = \delta \alpha_{k} + \delta \beta_{k} \delta t + \frac{1}{2} \bar{a}^{w} (\delta t)^{2}   \\
-    \delta \beta_{k+1} = \delta \beta_{k} + \bar{a}^{w} \delta t   \\
-    \delta \gamma_{k+1} = \delta \gamma_{k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}  
+    \alpha_{k+1}  = \alpha_{k} + \beta_{k} \delta t + \frac{1}{2} \bar{a}^{w} (\delta t)^{2}   \\
+    \beta_{k+1} = \beta_{k} + \bar{a}^{w} \delta t   \\
+    \gamma_{k+1} = \gamma_{k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}  
     \end{cases}
 
 .. math::
@@ -117,4 +117,4 @@ A **IntegrationBase** class is made for pre-intergration and intergration manage
 
 
 
-
+.. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
