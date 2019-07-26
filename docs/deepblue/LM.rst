@@ -1,4 +1,4 @@
-VINS code analysis
+VINS code
 =========================
 
 Analysis the structure and the details of `VINS <https://github.com/HKUST-Aerial-Robotics/VINS-Mono>`_ code. Take the android implement as example. As the original code is based on ROS(robot opeartion system), changes are made to create virtual ROS message, and manual call the ros callback functions. It has two main threads: **vins_estimator** and **loop_fusion**.
@@ -89,14 +89,15 @@ process_pose_graph
 VINS estimator
 ----------------------------
 
-Method called above in "top node" : estimator.processIMU, estimator.processImage, estimator.retrive_data_vector .
+Method called above in "top node" : estimator.processIMU, estimator.processImage, estimator.retrive_data_vector .  Its basic idea is to manage a **slide window** , make imu preintegration and imu observation, also marginalization, etc.
 
 processIMU
 ~~~~~~~~~~~~~~~~~~~
 
-A **IntegrationBase** class is made for pre-intergration and intergration management and calculation.
+A **IntegrationBase** class is made for pre-intergration management and calculation.
 
 **IntegrationBase**:
+
 * push back a new measurment : timestamp, gyrocope measure, and accelerometer measure. Add them to the buffer and **propagate** the system.
 * midPointIntegration : basic it is the same expression as above, about we are doing integration for the **error term of preintegration** here (as a result, n gravity term here). (in the VINS source code, they note p, v, and q, however I found it being misleading, so I note them as alpha , beta and gamma as in [#]_ ).
 
@@ -132,5 +133,24 @@ A **IntegrationBase** class is made for pre-intergration and intergration manage
 * also have checkJacobian : to check the calculation of jacobian of the system;  offer an option of eulerIntegration (however it is less precise than mid point integration); and compare the results of mid point integration and euler integration.
 
 
+**Integration** :
+
+In the final part of processIMU, the integration term is calculated as below.
+where j: ith window, k: kth imu data (between two received image)
+
+.. math::
+    \bar{a}_{j,k+1}^{w} = \frac{1}{2}(Q_{j,k} (a_{j,k}^{b} - b_{acc,j})  + Q_{j,k+1} (a_{j,k+1}^{b} - b_{acc,j}) ) - g^{w}
+
+.. math::
+    \bar{\omega}_{j,k+1} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro,j} 
+    
+.. math::
+    Q_{j,k+1} = Q_{j,k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}
+    
+.. math::
+    P_{j,k+1} = P_{j,k} + V_{j,k} \delta t + \frac{1}{2} \bar{a}_{j,k+1}^{w} (\delta t)^{2}
+
+.. math::
+    V_{j,k+1} = V_{j,k} + \bar{a}_{j,k+1}^{w} \delta t
 
 .. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
