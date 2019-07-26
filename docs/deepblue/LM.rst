@@ -303,9 +303,13 @@ And VINS uses an factor alpha to control its jacobian.
 
 MarginalizationInfo
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+* std::unordered_map<long, int> parameter_block_size; //global size
+* std::unordered_map<long, int> parameter_block_idx; //local size
+
 **preMarginalize** : retrive ResidualBlockInfo->cost_function->parameter_blocks
 
-**marginalize**: from `viki page <https://en.wikipedia.org/wiki/Marginal_distribution>`_ we can learn about marginalize.
+**marginalize**: from `viki page <https://en.wikipedia.org/wiki/Marginal_distribution>`_  and `CSDN <https://blog.csdn.net/heyijia0327/article/details/52822104>`_ we can learn about marginalize.
 When a key frame is delete from the slide window, we should not directly delete all its parameters, as it will lead to infomation lose. The solution is to use marginalzation algorithm, in which way to keep part of the old infomation to the current state, while delete these old variables. 
 
 we can rewrite the system state as :
@@ -327,6 +331,35 @@ Then we can rewrite the function to the form:
     \begin{bmatrix} \delta x_{old} \\ \delta x_{recent}  \end{bmatrix} 
     = \begin{bmatrix} b_{old} \\ b_{recent} - \Lambda_{b}^{T}\Lambda_{a}^{-1}b_{old} \end{bmatrix} 
 
+In VINS source code,  A and b are defined as follow:
+
+.. math:: 
+    A = \Lambda_{c} - \Lambda_{b}^{T}\Lambda_{a}^{-1}\Lambda_{b}
+
+.. math::
+    b = b_{recent} - \Lambda_{b}^{T}\Lambda_{a}^{-1}b_{old}
+    
+And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. And set the small values of these eigenvalues (by selecting the elements larger than eps=1e-8) set them to be zero. 
+
+.. math::
+    \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix}
+    
+.. math::
+    \vec{1/s} = \begin{bmatrix} 1/\lambda_{1} & 1/\lambda_{2} & ... & 1/\lambda_{n} \end{bmatrix}
+
+.. math::
+    \vec{\sqrt(s)} \leftarrow \begin{bmatrix} \sqrt{\lambda_{1}} & \sqrt{\lambda_{2}} & ... & \sqrt{\lambda_{n}} \end{bmatrix}
+
+.. math::
+    V = \begin{bmatrix} \vec{v}_{1} & \vec{v}_{2} & ... & \vec{v}_{n} \end{bmatrix}
+
+Them linearized jacobian and linearized residual are defined :
+
+.. math::
+    J_{l} = Diag[\vec{\sqrt(s)}] V^{T}
+    r_{l} = Diag[\vec{\sqrt(1/s)}] V^{T} b
+
+.. math::
 
 
 MarginalizationFactor
