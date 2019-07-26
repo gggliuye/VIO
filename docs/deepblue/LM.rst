@@ -382,6 +382,30 @@ This is similar to filter based image processing methods, such as in fourier tra
 
 MarginalizationFactor
 ~~~~~~~~~~~~~~~~~~~~~~~
+It is derivated from ceres::CostFunction. The **Evaluate** function is redefined here.
+
+**point position**
+.. math::
+    \Delta x = p - \bar{p}
+    
+**camera pose**
+.. math::
+    \Delta x = \Delta x_{p} + \Delta x_{q}
+
+.. math::
+    \Delta x_{p} = p - \bar{p}
+    
+.. math::
+    \Delta x_{q} = 2 \bar{q}^{-1} \otimes q
+    if: \Delta q.w < 0 \rightarrow \Delta q = - \Delta q
+
+
+**sum**
+.. math::
+    \sum{r_{l}} = \sum {J_{l} * \Delta x}
+
+**update jacobian**
+set the elements related to the old frame to be zeros. And set the rest elements by the linearized jacobian (as calculated above in MarginalizationInfo).
 
 
 Feature Manager
