@@ -138,12 +138,6 @@ A **IntegrationBase** class is made for pre-intergration management and calculat
 :::::::::::::::::::
 
 In the final part of processIMU, the integration terms of the real world **physics variables** are calculated as below, where j indicates ith window, k indicates kth imu data (between two received image). 
-
-.. math::
-    \bar{a}_{j,k+1}^{w} = \frac{1}{2}(Q_{j,k} (a_{j,k}^{b} - b_{acc,j})  + Q_{j,k+1} (a_{j,k+1}^{b} - b_{acc,j}) ) - g^{w}
-
-.. math::
-    \bar{\omega}_{j,k+1} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro,j} 
     
 .. math::
     \begin{cases}
@@ -151,7 +145,12 @@ In the final part of processIMU, the integration terms of the real world **physi
     V_{j,k+1} = V_{j,k} + \bar{a}_{j,k+1}^{w} \delta t  \\
     Q_{j,k+1} = Q_{j,k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}
     \end{cases}
+    
+.. math::
+    \bar{a}_{j,k+1}^{w} = \frac{1}{2}(Q_{j,k} (a_{j,k}^{b} - b_{acc,j})  + Q_{j,k+1} (a_{j,k+1}^{b} - b_{acc,j}) ) - g^{w}
 
+.. math::
+    \bar{\omega}_{j,k+1} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro,j} 
 
 
 processImage
