@@ -410,6 +410,7 @@ It is derivated from ceres::CostFunction. The **Evaluate** function is redefined
     \sum{r_{l}} = \sum {J_{l} * \Delta x}
 
 **update jacobian**
+
 set the elements related to the old frame to be zeros. And set the rest elements by the linearized jacobian (as calculated above in MarginalizationInfo).
 
 
