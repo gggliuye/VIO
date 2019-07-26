@@ -338,8 +338,24 @@ In VINS source code,  A and b are defined as follow:
 
 .. math::
     b = b_{recent} - \Lambda_{b}^{T}\Lambda_{a}^{-1}b_{old}
-    
-And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. And set the negative values of these eigenvalues (by selecting the elements smaller than eps=1e-8) set them to be zero. 
+
+In our non linear optimization we have :
+
+.. math::
+    J^{T}J \delta x = - J^{T}b   \Rightarrow  A \delta x = - J^{T}b \Rightarrow A = J^{T}J
+
+**SVD**：We can express an matrix by its singular value decomposition (SVD) :
+  
+.. math::
+    A = U \Lambda V^{T}
+
+where U,V are orthogonal matrices and \Lambda is a diagonal matrix that is compose of multiple singular values arranged in decreasing order. We can further use these eigen values (elements of Lambda) to decomprose the image into multiple rank 1 matrices :
+
+.. math::
+    A = \sum_{i=1}^{n} \lambda_{i} ( \mathbf{ u_{i} v_{i}^{T} } )
+
+We can calculate the Jacobian by SVD, and also make it positive defined at the same time.
+And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. And set the negative values of these eigenvalues (by selecting the elements smaller than eps=1e-8) set them to be zero. This is to choose the positive eigen values to make jacobian **positive defined** .
 
 .. math::
     \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix} (only keep positive elements)
@@ -353,7 +369,6 @@ And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. An
 .. math::
     V = \begin{bmatrix} \vec{v}_{1} & \vec{v}_{2} & ... & \vec{v}_{n} \end{bmatrix}
 
-This is to choose the positive eigen values to make jacobian **positive defined** .
 Then linearized jacobian and linearized residual are defined :
 
 .. math::
@@ -361,6 +376,8 @@ Then linearized jacobian and linearized residual are defined :
 
 .. math::
     r_{l} = Diag[1/\sqrt{\vec{s}}] V^{T} b
+
+This is similar to our pretreatment in image processing, such as in fourier transform filter or as we have seen before in `Image blury <https://vio.readthedocs.io/en/latest/Prepare.html#singular-feature>`_ . We can say,that it will keep most of the original infomation. 
 
 
 MarginalizationFactor
