@@ -165,6 +165,17 @@ processImage
 
 **initialStructure()**
 
+* for each image frames: 
+
+.. math::
+    \bar{g} = \frac{1}{Size_{window}} \sum_{window} \frac{\Delta v} {\Delta t}
+
+.. math::
+    \Delta g = \frac{\Delta v}{\Delta t} - \bar{g}
+    
+.. math::
+    Var = \sqrt{ \frac{1}{Size_{window}} \sum_{window} (\Delta g)^{T} (\Delta g)  }
+
 **solveOdometry()**
 
 **slideWindow()**
