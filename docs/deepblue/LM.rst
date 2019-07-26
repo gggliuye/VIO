@@ -125,7 +125,7 @@ A **IntegrationBase** class is made for pre-intergration management and calculat
 .. math::
     R_{k} \leftarrow q_{k} , R_{k+1} \leftarrow q_{k+1}
     
-Jacobian is (noted as F):
+Jacobian is (noted as F), F here is actual (I+F) in the original article:
 
 .. math::
     \begin{bmatrix}
