@@ -41,8 +41,8 @@ Details of mean value integration (in estimator_node -> predict()), where all th
 
 .. math::
     \begin{cases}
-    p_{k+1}  = p_{k} + v_{k} \delta t + \frac{1}{2} \bar{a}_{k} (\delta t)^{2}   \\
-    v_{k+1} = v_{k} + \bar{a}_{k} \delta t   \\
+    p_{k+1}  = p_{k} + v_{k} \delta t + \frac{1}{2} \bar{a}^{w} (\delta t)^{2}   \\
+    v_{k+1} = v_{k} + \bar{a}^{w} \delta t   \\
     q_{k+1} = q_{k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}  
     \end{cases}
 
@@ -50,7 +50,7 @@ Details of mean value integration (in estimator_node -> predict()), where all th
     \bar{\omega} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro} 
 
 .. math::
-    \bar{a} = \frac{1}{2} ( q_{k}(a_{imu,k} - b_{acc}) + q_{k+1}(a_{imu,k+1} - b_{acc}) ) - g_{k}
+    \bar{a}^{w} = \frac{1}{2} ( q_{k}(a_{k}^{b} - b_{acc}) + q_{k+1}(a_{k+1}^{b} - b_{acc}) ) - g_{k}
 
 
 **Queation** : these results are never used, it is real necessary??
@@ -88,12 +88,32 @@ process_pose_graph
   
 VINS estimator
 ----------------------------
-estimator.processIMU
-estimator.processImage
-estimator.retrive_data_vector
 
+Method called above in "top node" : estimator.processIMU, estimator.processImage, estimator.retrive_data_vector .
 
+processIMU
+~~~~~~~~~~~~~~~~~~~
 
+A **IntegrationBase** class is made for pre-intergration and intergration management and calculation.
+
+**IntegrationBase**:
+* push back a new measurment : timestamp, gyrocope measure, and accelerometer measure. Add them to the buffer and **propagate** the system.
+* midPointIntegration : basic it is the same expression as above, about we are doing integration for the **error term of preintegration** here (as a result, n gravity term here). (in the VINS source code, they note p, v, and q, however I found it being misleading, so I note them as alpha , beta and gamma).
+
+.. math::
+    \begin{cases}
+    \delta \alpha_{k+1}  = \delta \alpha_{k} + \delta \beta_{k} \delta t + \frac{1}{2} \bar{a}^{w} (\delta t)^{2}   \\
+    \delta \beta_{k+1} = \delta \beta_{k} + \bar{a}^{w} \delta t   \\
+    \delta \gamma_{k+1} = \delta \gamma_{k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}  
+    \end{cases}
+
+.. math::
+    \bar{\omega} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro} 
+
+.. math::
+    \bar{a}^{w} = \frac{1}{2} ( \gamma_{k}(a_{k}^{b} - b_{acc}) + \gamma_{k+1}(a_{k+1}^{b} - b_{acc}) )
+
+* also have checkJacobian : to check the calculation of jacobian of the system; and also offer an option of eulerIntegration (however it is less precise than mid point integration).
 
 
 
