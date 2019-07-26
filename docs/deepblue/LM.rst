@@ -221,8 +221,10 @@ Slide window marginalization.
 
 
 
-MarginalizationInfo
+Marginalization
 ---------------------
+
+ResidualBlockInfo, ThreadsStruct, MarginalizationInfo, MarginalizationFactor
 
 
 
