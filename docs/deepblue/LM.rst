@@ -358,7 +358,7 @@ We can calculate the Jacobian by SVD, and also make it positive defined at the s
 And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. And set the negative values of these eigenvalues (by selecting the elements smaller than eps=1e-8) set them to be zero. This is to choose the positive eigen values to make jacobian **positive defined** .
 
 .. math::
-    \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix} (only keep positive elements)
+    \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix}
     
 .. math::
     1/\vec{s} = \begin{bmatrix} 1/\lambda_{1} & 1/\lambda_{2} & ... & 1/\lambda_{n} \end{bmatrix}
@@ -377,7 +377,7 @@ Then linearized jacobian and linearized residual are defined :
 .. math::
     r_{l} = Diag[1/\sqrt{\vec{s}}] V^{T} b
 
-This is similar to our pretreatment in image processing, such as in fourier transform filter or as we have seen before in `Image blury <https://vio.readthedocs.io/en/latest/Prepare.html#singular-feature>`_ . We can say,that it will keep most of the original infomation. 
+This is similar to filter based image processing methods, such as in fourier transform filter or as we have seen before in `Image blury <https://vio.readthedocs.io/en/latest/Prepare.html#singular-feature>`_ . We can say,that it will keep most of the original infomation. 
 
 
 MarginalizationFactor
