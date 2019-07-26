@@ -286,13 +286,13 @@ Evaluate : evaluate the cerse loss evaluate.
     r = \lVert \mathbf{r} \rVert_{2} 
 
 .. math::
-    \alpha = 1 - \sqrt{  1 + 2  r \ frac{rho_{2}{{rho_{1}} }
+    \alpha = 1 - \sqrt{  1 + 2  r \ frac{rho_{2}}{rho_{1}} }
 
 .. math::
     r_{scaled} =  \frac{ \sqrt{rho_{1}} }{1- \alpha}
 
 .. math::
-    \mathbf{J} \leftarrow = \sqrt{rho_{1}} (\mathbf{J} - \frac{\alpha}{r} \mathbf{r} (\mathbf{r}^{T} \mathbf{J})
+    \mathbf{J} \leftarrow \sqrt{rho_{1}} (\mathbf{J} - \frac{\alpha}{r} \mathbf{r} (\mathbf{r}^{T} \mathbf{J})
 
 
 ThreadsStruct, 
