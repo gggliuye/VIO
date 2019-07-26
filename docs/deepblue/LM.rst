@@ -191,10 +191,17 @@ if Var < 0.25 : "IMU excitation not enouth!"
 * check the relative pose, if not enough features or parallax, ask to move the device.
 * **GlobalSFM** construct.
 * if global sfm succeed, solve PnP for all frames.
+* visualInitialAlign.   VisualIMUAlignment
 
 **solveOdometry()**
 
+* f_manager.triangulate
+* optimization()
+
 **slideWindow()**
+
+* slideWindowOld : (solver_flag == NON_LINEAR ? true : false) f_manager.removeBackShiftDepth,  f_manager.removeBack
+* slideWindowNew : f_manager.removeFront
 
 
 
