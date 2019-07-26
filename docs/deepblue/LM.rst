@@ -160,7 +160,7 @@ The noise term matrix is (noted as V):
     \begin{bmatrix}
     \frac{1}{4} R_{k}  (\delta t)^{2} & g_{12} & \frac{1}{4} R_{k+1}  (\delta t)^{2} \delta t & g_{14} & 0_{3 \times 3} & 0_{3 \times 3} \\
     0_{3 \times 3} & \frac{1}{2} I_{3 \times 3} \delta t & 0_{3 \times 3} & \frac{1}{2} I_{3 \times 3} \delta t & 0_{3 \times 3} & 0_{3 \times 3} \\
-    \frac{1}{2} R_{k} \delta t & g_{32} & \frac{1}{2} R_{k+1} \delta t & g_{34} 0_{3 \times 3} & 0_{3 \times 3} \\
+    \frac{1}{2} R_{k} \delta t & g_{32} & \frac{1}{2} R_{k+1} \delta t & g_{34} & 0_{3 \times 3} & 0_{3 \times 3} \\
     0_{3 \times 3} & 0_{3 \times 3} & 0_{3 \times 3} & 0_{3 \times 3} & I_{3 \times 3} \delta t & 0_{3 \times 3} & \\
     0_{3 \times 3} & 0_{3 \times 3} & 0_{3 \times 3} & 0_{3 \times 3} & 0_{3 \times 3} & I_{3 \times 3} \delta t
     \end{bmatrix}
@@ -174,7 +174,7 @@ The noise term matrix is (noted as V):
 This is a iteration process, as we can see below, as a result, the Jacobian is the acculumation of F.
 
 .. math::
-    \delta x_{k+1} = F_{k+1} \delta x_{k} = F_{k+1} F_{k} ... F_{1} \delta x_{0}
+    \delta x_{k+1} = F_{k+1} \delta x_{k} = F_{k+1} F_{k} ... F_{1} \delta x_{0} = J_{k+1} \delta x_{0}
 
 .. math::
     Jacobian_{k+1} = F_{k+1} * Jacobian_{k}
