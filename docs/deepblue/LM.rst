@@ -353,13 +353,14 @@ And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. An
 .. math::
     V = \begin{bmatrix} \vec{v}_{1} & \vec{v}_{2} & ... & \vec{v}_{n} \end{bmatrix}
 
-Them linearized jacobian and linearized residual are defined :
+This is to choose the positive eigen values to make jacobian positive defined.
+Then linearized jacobian and linearized residual are defined :
 
 .. math::
     J_{l} = Diag[\sqrt{\vec{s}}] V^{T}
-    r_{l} = Diag[1/\sqrt{\vec{s}}] V^{T} b
 
 .. math::
+    r_{l} = Diag[1/\sqrt{\vec{s}}] V^{T} b
 
 
 MarginalizationFactor
