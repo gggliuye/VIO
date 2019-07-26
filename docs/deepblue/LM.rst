@@ -145,12 +145,17 @@ where j: ith window, k: kth imu data (between two received image)
     \bar{\omega}_{j,k+1} = \frac{1}{2} (\omega_{k+1} + \omega_{k}) - b_{gyro,j} 
     
 .. math::
-    Q_{j,k+1} = Q_{j,k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}
-    
-.. math::
+    \begin{cases}
     P_{j,k+1} = P_{j,k} + V_{j,k} \delta t + \frac{1}{2} \bar{a}_{j,k+1}^{w} (\delta t)^{2}
-
-.. math::
     V_{j,k+1} = V_{j,k} + \bar{a}_{j,k+1}^{w} \delta t
+    Q_{j,k+1} = Q_{j,k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}
+    \end{cases}
+
+
+
+processImage
+~~~~~~~~~~~~~~~~~~~~~~~
+
 
 .. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
+
