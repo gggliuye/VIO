@@ -118,9 +118,32 @@ A **IntegrationBase** class is made for pre-intergration management and calculat
 * **Jacobian update** : (it is optinal, normally set true) three matrix are calculated before to fasten. Noise is seen as gaussian. And the F matrix(15*15) and the error term propagation matrix V (15*18) are calculated. (remember to normalize quaternion). In the end, two 15*15 matrix : Jacobian and Covariance are calculated.
 
 .. math::
-    [R_{\omega}]_{X} = [ \bar{\omega} ]_{X} , 
+    [R_{\omega}]_{\times} = [ \bar{\omega} ]_{X} , 
     [R_{\tilde{a}_{k}}]_{X} = [a_{k}^{b} - b_{acc}]_{X},
     [R_{\tilde{a}_{k+1}}]_{X} = [a_{k+1}^{b} - b_{acc}]_{X}
+    
+    R_{k} <- q_{k} , R_{k+1} <- q_{k+1}
+    
+.. math::
+    \begin{bmatrix}
+    I_{3 \times 3} & f_{12} & I_{3 \times 3} /delta t  & f_{14} & f_{15} \\
+    0_{3 \times 3} & I -[R_{\omega}]_{X} \delta t & 0_{3 \times 3} & 0_{3 \times 3} & -I_{3 \times 3} /delta t \\
+    0_{3 \times 3} & f_{32} & I_{3 \times 3} & f_{34} & f_{35} \\
+    \end{bmatrix}
+    
+.. math::
+    f_{12} = - \frac{1}{4} R_{k} [R_{\tilde{a}_{k}}]_{X} (\delta t)^{2} - \frac{1}{4} R_{k+1} [R_{\tilde{a}_{k+1}}]_{X} (I - [R_{\omega}]_{X} \delta t) (\delta t)^{2}
+    
+    f_{14} = - \frac{1}{4} ( R_{k} + R_{k+1} ) (\delta t)^{2}
+    
+    f_{15} = - \frac{1}{4} R_{k+1} [R_{\tilde{a}_{k+1}}]_{X}  (\delta t)^{2} (- \delta t)
+    
+    f_{32} = - \frac{1}{2} R_{k} [R_{\tilde{a}_{k}}]_{X} \delta t - \frac{1}{2} R_{k+1} [R_{\tilde{a}_{k+1}}]_{X} (I - [R_{\omega}]_{X} \delta t) \delta t
+    
+    f_{34} = - \frac{1}{2}( R_{k} - R_{k+1} )\delta t
+    
+    f_{35} = 
+    
     
 .. math::
     Jacobian_{k+1} = F_{k+1} * Jacobian_{k}
