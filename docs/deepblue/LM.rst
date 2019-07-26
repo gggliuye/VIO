@@ -342,7 +342,7 @@ In VINS source code,  A and b are defined as follow:
 And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. And set the negative values of these eigenvalues (by selecting the elements smaller than eps=1e-8) set them to be zero. 
 
 .. math::
-    \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix}
+    \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix} (only keep positive elements)
     
 .. math::
     1/\vec{s} = \begin{bmatrix} 1/\lambda_{1} & 1/\lambda_{2} & ... & 1/\lambda_{n} \end{bmatrix}
@@ -353,7 +353,7 @@ And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. An
 .. math::
     V = \begin{bmatrix} \vec{v}_{1} & \vec{v}_{2} & ... & \vec{v}_{n} \end{bmatrix}
 
-This is to choose the positive eigen values to make jacobian positive defined.
+This is to choose the positive eigen values to make jacobian **positive defined** .
 Then linearized jacobian and linearized residual are defined :
 
 .. math::
