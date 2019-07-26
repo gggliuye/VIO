@@ -292,7 +292,7 @@ Evaluate : evaluate the cerse loss evaluate.
     r_{scaled} =  \frac{ \sqrt{rho_{1}} }{1- \alpha}
 
 .. math::
-    \mathbf{J} \leftarrow \sqrt{rho_{1}} (\mathbf{J} - \frac{\alpha}{r} \mathbf{r} (\mathbf{r}^{T} \mathbf{J}))
+    \mathbf{J}_{i} \leftarrow \sqrt{rho_{1}} (\mathbf{J}_{i} - \frac{\alpha}{r} \mathbf{r} (\mathbf{r}^{T} \mathbf{J}_{i}))
 
 
 ThreadsStruct, 
