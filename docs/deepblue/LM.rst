@@ -146,8 +146,8 @@ where j: ith window, k: kth imu data (between two received image)
     
 .. math::
     \begin{cases}
-    P_{j,k+1} = P_{j,k} + V_{j,k} \delta t + \frac{1}{2} \bar{a}_{j,k+1}^{w} (\delta t)^{2}
-    V_{j,k+1} = V_{j,k} + \bar{a}_{j,k+1}^{w} \delta t
+    P_{j,k+1} = P_{j,k} + V_{j,k} \delta t + \frac{1}{2} \bar{a}_{j,k+1}^{w} (\delta t)^{2}  \\
+    V_{j,k+1} = V_{j,k} + \bar{a}_{j,k+1}^{w} \delta t  \\
     Q_{j,k+1} = Q_{j,k} \otimes \begin{bmatrix} 1 \\  \frac{1}{2}  \bar{\omega}  \delta t \end{bmatrix}
     \end{cases}
 
