@@ -399,6 +399,8 @@ It is derivated from ceres::CostFunction. The **Evaluate** function is redefined
     
 .. math::
     \Delta x_{q} = 2 \bar{q}^{-1} \otimes q
+
+.. math::
     if: \Delta q.w < 0 \rightarrow \Delta q = - \Delta q
 
 
