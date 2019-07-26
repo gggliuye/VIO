@@ -1,7 +1,7 @@
 VINS code
 =========================
 
-Analysis the structure and the details of `VINS <https://github.com/HKUST-Aerial-Robotics/VINS-Mono>`_ code. Take the android implement as example. As the original code is based on ROS(robot opeartion system), changes are made to create virtual ROS message, and manual call the ros callback functions. It has two main threads: **vins_estimator** and **loop_fusion**.
+Analysis the structure and the details of `VINS <https://github.com/HKUST-Aerial-Robotics/VINS-Mono>`_ code [#]_ . Take the android implement as example. As the original code is based on ROS(robot opeartion system), changes are made to create virtual ROS message, and manual call the ros callback functions. It has two main threads: **vins_estimator** and **loop_fusion**.
 
 Top Node
 ----------------------------
@@ -280,11 +280,11 @@ Marginalization
 
 ResidualBlockInfo
 ~~~~~~~~~~~~~~~~~
-Evaluate : evaluate the ceres loss evaluate.
+**Evaluate** : evaluate the ceres loss evaluate.
 In ceres the evaluate result is a three-deminsion vector , where r is the squared norm. And the loss function is a costume defined function.
 
 .. math::
-    rho = \begin{bmatrix} \rho(r) \\ \rho ' (r) \\ \rho '' (r) \end{bmatrix}
+    rho = \begin{bmatrix} \rho(r) & \rho ' (r) & \rho '' (r) \end{bmatrix}
 
 .. math::
     r = \lVert \mathbf{r} \rVert^{2} 
@@ -301,12 +301,36 @@ And VINS uses an factor alpha to control its jacobian.
     \mathbf{J}_{i} \leftarrow \sqrt{rho_{1}} (\mathbf{J}_{i} - \frac{\alpha}{r} \mathbf{r} (\mathbf{r}^{T} \mathbf{J}_{i}))
 
 
-ThreadsStruct, 
+MarginalizationInfo
+~~~~~~~~~~~~~~~~~~~~~~~
+**preMarginalize** : retrive ResidualBlockInfo->cost_function->parameter_blocks
 
-MarginalizationInfo, 
+**marginalize**: from `viki page <https://en.wikipedia.org/wiki/Marginal_distribution>`_ we can learn about marginalize.
+When a key frame is delete from the slide window, we should not directly delete all its parameters, as it will lead to infomation lose. The solution is to use marginalzation algorithm, in which way to keep part of the old infomation to the current state, while delete these old variables. 
+
+we can rewrite the system state as :
+
+.. math::
+    \delta x = \begin{bmatrix} \delta x_{old} & \delta x_{recent}  \end{bmatrix} 
+
+As the result the system function can be rewrite as : 
+
+.. math::
+    \begin{bmatrix} \Lambda_{a} &  \Lambda_{b} \\  \Lambda_{b}^{T} &  \Lambda_{c} \end{bmatrix}
+    \begin{bmatrix} \delta x_{old} \\ \delta x_{recent}  \end{bmatrix} 
+    = \begin{bmatrix} b_{old} \\ b_{recent}  \end{bmatrix} 
+
+Then we can rewrite the function to the form:
+
+.. math:: 
+     \begin{bmatrix} \Lambda_{a} &  \Lambda_{b} \\  0 &  \Lambda_{c} - \Lambda_{b}^{T}\Lambda_{a}^{-1}\Lambda_{b} \end{bmatrix}
+    \begin{bmatrix} \delta x_{old} \\ \delta x_{recent}  \end{bmatrix} 
+    = \begin{bmatrix} b_{old} \\ b_{recent} - \Lambda_{b}^{T}\Lambda_{a}^{-1}b_{old} \end{bmatrix} 
+
+
 
 MarginalizationFactor
-
+~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Feature Manager
@@ -314,5 +338,7 @@ Feature Manager
 * list<FeaturePerId> feature
 * vector<FeaturePerFrame> feature_per_frame
 
+
+.. [#] Qin T, Li P, Shen S. Vins-mono: A robust and versatile monocular visual-inertial state estimator[J]. IEEE Transactions on Robotics, 2018, 34(4): 1004-1020.
 .. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
 
