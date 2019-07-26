@@ -345,10 +345,10 @@ And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. An
     \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix}
     
 .. math::
-    \vec{1/s} = \begin{bmatrix} 1/\lambda_{1} & 1/\lambda_{2} & ... & 1/\lambda_{n} \end{bmatrix}
+    1/\vec{s} = \begin{bmatrix} 1/\lambda_{1} & 1/\lambda_{2} & ... & 1/\lambda_{n} \end{bmatrix}
 
 .. math::
-    \vec{\sqrt(s)} \leftarrow \begin{bmatrix} \sqrt{\lambda_{1}} & \sqrt{\lambda_{2}} & ... & \sqrt{\lambda_{n}} \end{bmatrix}
+    \sqrt{\vec{s}} = \begin{bmatrix} \sqrt{\lambda_{1}} & \sqrt{\lambda_{2}} & ... & \sqrt{\lambda_{n}} \end{bmatrix}
 
 .. math::
     V = \begin{bmatrix} \vec{v}_{1} & \vec{v}_{2} & ... & \vec{v}_{n} \end{bmatrix}
@@ -356,8 +356,8 @@ And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. An
 Them linearized jacobian and linearized residual are defined :
 
 .. math::
-    J_{l} = Diag[\vec{\sqrt(s)}] V^{T}
-    r_{l} = Diag[\vec{\sqrt(1/s)}] V^{T} b
+    J_{l} = Diag[\sqrt{\vec{s}}] V^{T}
+    r_{l} = Diag[1/\sqrt{\vec{s}}] V^{T} b
 
 .. math::
 
