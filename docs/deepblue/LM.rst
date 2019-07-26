@@ -339,7 +339,7 @@ In VINS source code,  A and b are defined as follow:
 .. math::
     b = b_{recent} - \Lambda_{b}^{T}\Lambda_{a}^{-1}b_{old}
     
-And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. And set the small values of these eigenvalues (by selecting the elements larger than eps=1e-8) set them to be zero. 
+And Eigen::SelfAdjointEigenSolver is used to calculate the eigen values of A. And set the negative values of these eigenvalues (by selecting the elements smaller than eps=1e-8) set them to be zero. 
 
 .. math::
     \vec{s} = \begin{bmatrix} \lambda_{1} & \lambda_{2} & ... & \lambda_{n} \end{bmatrix}
