@@ -47,7 +47,7 @@ The system jacobian can be written as :
 .. math::
     J^{T}
     = \begin{bmatrix}
-    (\frac{\partial r_{1,1}}{\partial \xi_{1}})^{T} & (\frac{\partial r_{1,2}}{\partial \xi_{1}})^{T} 0 & 0 & 0 & 0 & 0 \\
+    (\frac{\partial r_{1,1}}{\partial \xi_{1}})^{T} & (\frac{\partial r_{1,2}}{\partial \xi_{1}})^{T} & 0 & 0 & 0 & 0 & 0 \\
     0 & 0 & (\frac{\partial r_{2,1}}{\partial \xi_{2}})^{T} & (\frac{\partial r_{2,2}}{\partial \xi_{2}})^{T} & (\frac{\partial r_{2,3}}{\partial \xi_{2}})^{T} & 0 & 0  \\
     0 & 0 & 0 & 0 & 0 & (\frac{\partial r_{3,2}}{\partial \xi_{3}})^{T} & (\frac{\partial r_{3,3}}{\partial \xi_{3}})^{T} \\
     (\frac{\partial r_{1,1}}{\partial L_{1}})^{T} & 0 & (\frac{\partial r_{2,1}}{\partial L_{1}})^{T} & 0 & 0 & 0 & 0 \\
@@ -75,17 +75,22 @@ With the expression of the non linear problem :
 .. math::
     \Lambda = J^{T} 
      \begin{bmatrix}
-    \frac{\partial r_{1,1}}{\partial \xi_{1}}\Sigma_{1,1} & 0 & 0 & \frac{\partial r_{1,1}}{\partial L_{1}}\Sigma_{1,1} & 0 & 0 \\
-    \frac{\partial r_{1,2}}{\partial \xi_{1}}\Sigma_{1,2}  & 0 & 0 & 0 & \frac{\partial r_{1,2}}{\partial L_{2}}\Sigma_{1,2} & 0 \\
-    0 & \frac{\partial r_{2,1}}{\partial \xi_{2}}\Sigma_{2,1} & 0 & \frac{\partial r_{2,1}}{\partial L_{1}}\Sigma_{2,1} & 0 & 0 \\
-    0 & \frac{\partial r_{2,2}}{\partial \xi_{2}}\Sigma_{2,2} & 0 & 0 & \frac{\partial r_{2,2}}{\partial L_{2}}\Sigma_{2,2} & 0 \\
-    0 & \frac{\partial r_{2,3}}{\partial \xi_{2}}\Sigma_{2,3} & 0 & 0 & 0 & \frac{\partial r_{2,3}}{\partial L_{3}}\Sigma_{2,3} \\
-    0 & 0 & \frac{\partial r_{3,2}}{\partial \xi_{3}}\Sigma_{3,2} & 0 & \frac{\partial r_{3,2}}{\partial L_{2}}\Sigma_{3,2} & 0 \\
-    0 & 0 & \frac{\partial r_{3,3}}{\partial \xi_{3}}\Sigma_{3,3} & 0 & 0 & \frac{\partial r_{3,3}}{\partial L_{3}}\Sigma_{3,3}     
+    \Sigma_{1,1}^{-1}\frac{\partial r_{1,1}}{\partial \xi_{1}} & 0 & 0 & \Sigma_{1,1}^{-1}\frac{\partial r_{1,1}}{\partial L_{1}} & 0 & 0 \\
+    \Sigma_{1,2}^{-1}\frac{\partial r_{1,2}}{\partial \xi_{1}}  & 0 & 0 & 0 & \Sigma_{1,2}^{-1}\frac{\partial r_{1,2}}{\partial L_{2}} & 0 \\
+    0 & \Sigma_{2,1}^{-1}\frac{\partial r_{2,1}}{\partial \xi_{2}} & 0 & \Sigma_{2,1}^{-1}\frac{\partial r_{2,1}}{\partial L_{1}} & 0 & 0 \\
+    0 & \Sigma_{2,2}^{-1}\frac{\partial r_{2,2}}{\partial \xi_{2}} & 0 & 0 & \Sigma_{2,2}^{-1}\frac{\partial r_{2,2}}{\partial L_{2}} & 0 \\
+    0 & \Sigma_{2,3}^{-1}\frac{\partial r_{2,3}}{\partial \xi_{2}} & 0 & 0 & 0 & \Sigma_{2,3}^{-1}\frac{\partial r_{2,3}}{\partial L_{3}} \\
+    0 & 0 & \Sigma_{3,2}^{-1}\frac{\partial r_{3,2}}{\partial \xi_{3}} & 0 & \Sigma_{3,2}^{-1}\frac{\partial r_{3,2}}{\partial L_{2}} & 0 \\
+    0 & 0 & \Sigma_{3,3}^{-1}\frac{\partial r_{3,3}}{\partial \xi_{3}} & 0 & 0 & \Sigma_{3,3}^{-1}\frac{\partial r_{3,3}}{\partial L_{3}}     
     \end{bmatrix}
 
 .. math:: 
+    \Lambda = 
+    \begin{bmatrix}
     
+    
+    
+    \end{bmatrix}
 
 
 
