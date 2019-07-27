@@ -8,14 +8,60 @@ VIO deep blue
 
 **1.1 the information matrix of the upper system** :
 
+In our system, the state variable x can be written as :
+
+.. math::
+    \mathbf{x} = \begin{bmatrix}  \xi_{1} & \xi_{2} & \xi_{3} & L_{1} & L_{2} & L_{3}   \end{bmatrix}
+
 As a result, we have seven elements in the reprojection error term:
 
 .. math:: 
-    r_{1,1} = r(\xi_{1}, L_{1}) & r_{1,2} = r(\xi_{1}, L_{2})
+    r_{1,1} = r(\xi_{1}, L_{1}) 
     
-    r_{2,1} = r(\xi_{2}, L_{1}) & r_{2,2} = r(\xi_{2}, L_{2}) & r_{2,3} = r(\xi_{2}, L_{3})
+    r_{1,2} = r(\xi_{1}, L_{2})
     
-    r_{3,1} = r(\xi_{3}, L_{1}) & r_{3,2} = r(\xi_{3}, L_{2})
+    r_{2,1} = r(\xi_{2}, L_{1}) 
+    
+    r_{2,2} = r(\xi_{2}, L_{2})
+    
+    r_{2,3} = r(\xi_{2}, L_{3})
+    
+    r_{3,2} = r(\xi_{3}, L_{2}) 
+    
+    r_{3,3} = r(\xi_{3}, L_{3})
+
+The other terms are zeros. In summary we have:
 
 .. math::
-    \mathbf{r}
+    \mathbf{r} = \sum_{i=1}^{3}\sum_{k=1}^{3} r_{i,k}
+    
+The system jacobian can be written as :
+    
+.. math::
+    J = \frac{\partial \mathbf{r}}{\partial x}
+    
+    J = \begin{bmatrix}
+    \frac{\partial r_{1,1}}{\partial \xi_{1}} & 0 & 0 & \frac{\partial r_{1,1}}{\partial L_{1}} & 0 & 0 \\
+    \frac{\partial r_{1,2}}{\partial \xi_{1}} & 0 & 0 & 0 & \frac{\partial r_{1,2}}{\partial L_{2}} & 0 \\
+    0 & \frac{\partial r_{2,1}}{\partial \xi_{2}} & 0 & \frac{\partial r_{2,1}}{\partial L_{1}} & 0 & 0 \\
+    0 & \frac{\partial r_{2,2}}{\partial \xi_{2}} & 0 & 0 & \frac{\partial r_{2,2}}{\partial L_{2}} & 0 \\
+    0 & \frac{\partial r_{2,3}}{\partial \xi_{2}} & 0 & 0 & 0 & \frac{\partial r_{2,3}}{\partial L_{3}} \\
+    0 & 0 & \frac{\partial r_{3,2}}{\partial \xi_{3}} & 0 & \frac{\partial r_{3,2}}{\partial L_{2}} & 0 \\
+    0 & 0 & \frac{\partial r_{3,3}}{\partial \xi_{3}} & 0 & 0 & \frac{\partial r_{3,3}}{\partial L_{3}}     
+    \end{bmatrix}
+    
+The corresponding covariance matirx is :
+
+.. math::
+    \mathbf{\Sigma} = Diag(
+    \begin{bmatrix} \Sigma_{1,1} & \Sigma_{1,2} & \Sigma_{2,1} & \Sigma_{2,2} & \Sigma_{2,3} & \Sigma_{3,2} & \Sigma_{3,3}        \end{bmatrix}
+    )
+    
+.. math::
+    \mathbf{\Sigma}^{-1} = Diag(
+    \begin{bmatrix} \Sigma_{1,1}^{-1} & \Sigma_{1,2}^{-1} & \Sigma_{2,1}^{-1} & \Sigma_{2,2}^{-1} & \Sigma_{2,3}^{-1} & \Sigma_{3,2}^{-1} & \Sigma_{3,3}^{-1}        \end{bmatrix}
+    )
+
+    
+    
+    
