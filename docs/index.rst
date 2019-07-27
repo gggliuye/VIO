@@ -16,6 +16,7 @@ Welcome to SLAM-AR's documentation!
    Tracking/TrackingIntroduction
    UnitySc/unityShadowCreator
    deepblue/LM
+   deepblue/VIO
 
 Indices and tables
 ==================
