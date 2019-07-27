@@ -144,5 +144,26 @@ We can simply delete the elements related with xi_1
 .. math::
     \Lambda_{6,6} = (\frac{\partial r_{2,3}}{\partial L_{3}})^{T}\Sigma_{2,3}^{-1}\frac{\partial r_{2,3}}{\partial L_{3}} + (\frac{\partial r_{3,3}}{\partial L_{3}})^{T}\Sigma_{3,3}^{-1}\frac{\partial r_{3,3}}{\partial L_{3}}
 
+**Queation 2**
+
+We defined the jacobian matrix of camera i and point j to be : 
+
+.. math::
+    J_{i,j} = \begin{bmatrix} J_{Ti} & J_{Pj}  \end{bmatrix}
+
+As a result, the Hessian matrix can be calculated as :
+
+.. math::
+    H_{i,j} = J_{i,j}^{T} J_{i,j}
+    
+.. math::
+    H_{i,j} = \begin{bmatrix} J_{Ti}^{T} \\ J_{Pj}^{T}  \end{bmatrix} 
+              \begin{bmatrix} J_{Ti} & J_{Pj}  \end{bmatrix}
+            = \begin{bmatrix} J_{Ti}^{T}J_{Ti} & J_{Ti}^{T}J_{Pj} \\
+               J_{Pj}^{T}J_{Ti} & J_{Pj}^{T}J_{Pj}\end{bmatrix}
+
+We can take a sum of all the Jacobian part to get our final result.
+Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions).
+
 
 
