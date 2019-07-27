@@ -114,7 +114,9 @@ With the expression of the non linear problem :
     \Lambda_{6,6} = (\frac{\partial r_{2,3}}{\partial L_{3}})^{T}\Sigma_{2,3}^{-1}\frac{\partial r_{2,3}}{\partial L_{3}} + (\frac{\partial r_{3,3}}{\partial L_{3}})^{T}\Sigma_{3,3}^{-1}\frac{\partial r_{3,3}}{\partial L_{3}}
 
 
-**1.2 marginalize xi_1**
+**1.2 marginalize xi_1** :
+
+We can simply delete the elements related with xi_1
 
 
 .. math:: 
