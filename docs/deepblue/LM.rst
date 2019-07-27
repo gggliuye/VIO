@@ -347,7 +347,7 @@ In our non linear optimization we have :
 **SVD**：We can express an matrix by its singular value decomposition (SVD) :
   
 .. math::
-    A = U \Lambda V^{T}
+    A = U \Lambda V^{T} = (U \sqrt{\Lambda}) ( \sqrt{\Lambda} V^{T})
 
 where U,V are orthogonal matrices and \Lambda is a diagonal matrix that is compose of multiple singular values arranged in decreasing order. We can further use these eigen values (elements of Lambda) to decomprose the image into multiple rank 1 matrices :
 
