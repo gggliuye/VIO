@@ -12,5 +12,10 @@ As a result, we have seven elements in the reprojection error term:
 
 .. math:: 
     r_{1,1} = r(\xi_{1}, L_{1}) & r_{1,2} = r(\xi_{1}, L_{2})
+    
     r_{2,1} = r(\xi_{2}, L_{1}) & r_{2,2} = r(\xi_{2}, L_{2}) & r_{2,3} = r(\xi_{2}, L_{3})
+    
     r_{3,1} = r(\xi_{3}, L_{1}) & r_{3,2} = r(\xi_{3}, L_{2})
+
+.. math::
+    \mathbf{r}
