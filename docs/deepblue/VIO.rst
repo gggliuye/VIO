@@ -1,4 +1,4 @@
-Homework week 5
+VIO deep blue
 -------------------------
 
 **Question 1**: At a certain time, the cameras and landmarks seen of a SLAM system can be seen as the image below. xi is the camera pose, L represents the observed landmark. When a landmark k was seen by ith camera in the world frame, the reprojection error is noted as r(xi_i, L_k)
