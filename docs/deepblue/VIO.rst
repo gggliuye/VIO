@@ -4,6 +4,7 @@ VIO deep blue
 **Question 1**: At a certain time, the cameras and landmarks seen of a SLAM system can be seen as the image below. xi is the camera pose, L represents the observed landmark. When a landmark k was seen by ith camera in the world frame, the reprojection error is noted as r(xi_i, L_k)
 
 .. image:: images/week4_1.PNG
+   :width: 60%
    :align: center
 
 **1.1 the information matrix of the upper system** :
@@ -42,6 +43,17 @@ The system jacobian can be written as :
     0 & 0 & \frac{\partial r_{3,2}}{\partial \xi_{3}} & 0 & \frac{\partial r_{3,2}}{\partial L_{2}} & 0 \\
     0 & 0 & \frac{\partial r_{3,3}}{\partial \xi_{3}} & 0 & 0 & \frac{\partial r_{3,3}}{\partial L_{3}}     
     \end{bmatrix}
+
+.. math::
+    J^{T}
+    = \begin{bmatrix}
+    (\frac{\partial r_{1,1}}{\partial \xi_{1}})^{T} & (\frac{\partial r_{1,2}}{\partial \xi_{1}})^{T} 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & (\frac{\partial r_{2,1}}{\partial \xi_{2}})^{T} & (\frac{\partial r_{2,2}}{\partial \xi_{2}})^{T} & (\frac{\partial r_{2,3}}{\partial \xi_{2}})^{T} & 0 & 0  \\
+    0 & 0 & 0 & 0 & 0 & (\frac{\partial r_{3,2}}{\partial \xi_{3}})^{T} & (\frac{\partial r_{3,3}}{\partial \xi_{3}})^{T} \\
+    (\frac{\partial r_{1,1}}{\partial L_{1}})^{T} & 0 & (\frac{\partial r_{2,1}}{\partial L_{1}})^{T} & 0 & 0 & 0 & 0 \\
+    0 & (\frac{\partial r_{1,2}}{\partial L_{2}})^{T} & 0 & (\frac{\partial r_{2,2}}{\partial L_{2}})^{T} & 0 & (\frac{\partial r_{3,2}}{\partial L_{2}})^{T} & 0 \\
+    0 & 0 & 0 & 0 & (\frac{\partial r_{2,3}}{\partial L_{3}})^{T} & 0 & (\frac{\partial r_{3,3}}{\partial L_{3}})^{T}     
+    \end{bmatrix}
     
 The corresponding covariance matirx is :
 
@@ -55,8 +67,27 @@ The corresponding covariance matirx is :
     \begin{bmatrix} \Sigma_{1,1}^{-1} & \Sigma_{1,2}^{-1} & \Sigma_{2,1}^{-1} & \Sigma_{2,2}^{-1} & \Sigma_{2,3}^{-1} & \Sigma_{3,2}^{-1} & \Sigma_{3,3}^{-1}        \end{bmatrix}
     )
 
-As a result : 
+With the expression of the non linear problem : 
 
 .. math::
-    \Lambda = J^{T}\Sigma^{-1} J 
+    \Lambda = J^{T}\Sigma^{-1} J
+
+.. math::
+    \Lambda = J^{T} 
+     \begin{bmatrix}
+    \frac{\partial r_{1,1}}{\partial \xi_{1}}\Sigma_{1,1} & 0 & 0 & \frac{\partial r_{1,1}}{\partial L_{1}}\Sigma_{1,1} & 0 & 0 \\
+    \frac{\partial r_{1,2}}{\partial \xi_{1}}\Sigma_{1,2}  & 0 & 0 & 0 & \frac{\partial r_{1,2}}{\partial L_{2}}\Sigma_{1,2} & 0 \\
+    0 & \frac{\partial r_{2,1}}{\partial \xi_{2}}\Sigma_{2,1} & 0 & \frac{\partial r_{2,1}}{\partial L_{1}}\Sigma_{2,1} & 0 & 0 \\
+    0 & \frac{\partial r_{2,2}}{\partial \xi_{2}}\Sigma_{2,2} & 0 & 0 & \frac{\partial r_{2,2}}{\partial L_{2}}\Sigma_{2,2} & 0 \\
+    0 & \frac{\partial r_{2,3}}{\partial \xi_{2}}\Sigma_{2,3} & 0 & 0 & 0 & \frac{\partial r_{2,3}}{\partial L_{3}}\Sigma_{2,3} \\
+    0 & 0 & \frac{\partial r_{3,2}}{\partial \xi_{3}}\Sigma_{3,2} & 0 & \frac{\partial r_{3,2}}{\partial L_{2}}\Sigma_{3,2} & 0 \\
+    0 & 0 & \frac{\partial r_{3,3}}{\partial \xi_{3}}\Sigma_{3,3} & 0 & 0 & \frac{\partial r_{3,3}}{\partial L_{3}}\Sigma_{3,3}     
+    \end{bmatrix}
+
+.. math:: 
     
+
+
+
+
+
