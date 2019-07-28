@@ -179,4 +179,8 @@ Then we can re-range the order of state variables (camera poses at the beginning
    :align: center
 
 
-If we calculate the eigen values of this matrix, we found the last seven eigen values to be almost zero.
+If we calculate the eigen values of this matrix, we found the last seven eigen values to be almost zero. This system should have multiply solutions. And we need 7 more constrains to have a singal solution.
+
+* scale : 1 
+* original reference frame : 6 
+
