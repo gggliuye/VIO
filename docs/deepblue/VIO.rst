@@ -146,6 +146,13 @@ We can simply delete the elements related with xi_1
 
 **Queation 2**
 
+Simulated 10 camera poses and 20 landmarks.
+
+.. image:: images/sim.png
+   :width: 40%
+   :align: center
+
+
 We defined the jacobian matrix of camera i and point j to be : 
 
 .. math::
@@ -165,5 +172,7 @@ As a result, the Hessian matrix can be calculated as :
 We can take a sum of all the Jacobian part to get our final result.
 Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions).
 
-
+.. image:: images/hessian.png
+   :width: 40%
+   :align: center
 
