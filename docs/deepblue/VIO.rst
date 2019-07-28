@@ -146,10 +146,10 @@ We can simply delete the elements related with xi_1
 
 **Queation 2**
 
-Simulated 10 camera poses and 20 landmarks.
+Simulation with 10 camera poses and 20 landmarks.
 
 .. image:: images/sim.png
-   :width: 40%
+   :width: 60%
    :align: center
 
 
@@ -158,21 +158,25 @@ We defined the jacobian matrix of camera i and point j to be :
 .. math::
     J_{i,j} = \begin{bmatrix} J_{Ti} & J_{Pj}  \end{bmatrix}
 
-As a result, the Hessian matrix can be calculated as :
+As a result, the Hessian matrix can be calculated as follows, and we take Sigma to be ones.
 
 .. math::
-    H_{i,j} = J_{i,j}^{T} J_{i,j}
+    H = \sum_{i} \sum_{j} H_{i,j} = \sum_{i} \sum_{j} J_{i,j}^{T} \Sigma  J_{i,j}
     
 .. math::
-    H_{i,j} = \begin{bmatrix} J_{Ti}^{T} \\ J_{Pj}^{T}  \end{bmatrix} 
+    H_{i,j} = J_{i,j}^{T} J_{i,j}
+            = \begin{bmatrix} J_{Ti}^{T} \\ J_{Pj}^{T}  \end{bmatrix} 
               \begin{bmatrix} J_{Ti} & J_{Pj}  \end{bmatrix}
             = \begin{bmatrix} J_{Ti}^{T}J_{Ti} & J_{Ti}^{T}J_{Pj} \\
                J_{Pj}^{T}J_{Ti} & J_{Pj}^{T}J_{Pj}\end{bmatrix}
 
 We can take a sum of all the Jacobian part to get our final result.
-Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions).
+Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions). The result Hessian matirx has 120 * 120 elements.
+
 
 .. image:: images/hessian.png
-   :width: 40%
+   :width: 60%
    :align: center
 
+
+If we calculate the eigen values of this matrix, we found the last seven eigen values to be almost zero.
