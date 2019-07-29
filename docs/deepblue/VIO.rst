@@ -120,12 +120,12 @@ With the expression of the non linear problem :
 
 .. math::
    \Lambda = \begin{bmatrix}[c|ccccc]
-   \Lambda_{1,1} & 0 & 0 & \Lmabda_{1,4} &  \Lmabda_{1,5} & 0 \\ \hline
-    0 & \Lambda_{2,2} & 0 &  \Lmabda_{2,4} &  \Lmabda_{2,5} &  \Lmabda_{2,6} \\
-    0 & 0 & \Lambda_{3,3} & 0 &  \Lmabda_{3,5} &  \Lmabda_{3,6} \\
-    \Lmabda_{4,1} &  \Lmabda_{4,2} & 0 & \Lambda_{4,4} & 0 & 0  \\
-     \Lmabda_{5,1} &  \Lmabda_{5,2} &  \Lmabda_{5,3} & 0 & \Lambda_{5,5} & 0 \\
-    0 &  \Lmabda_{6,2} &  \Lmabda_{6,3} & 0 & 0 & \Lambda_{6,6}
+   \Lambda_{1,1} & 0 & 0 & \Lambda_{1,4} &  \Lambda_{1,5} & 0 \\ \hline
+    0 & \Lambda_{2,2} & 0 &  \Lambda_{2,4} &  \Lambda_{2,5} &  \Lambda_{2,6} \\
+    0 & 0 & \Lambda_{3,3} & 0 &  \Lambda_{3,5} &  \Lambda_{3,6} \\
+    \Lambda_{4,1} &  \Lambda_{4,2} & 0 & \Lambda_{4,4} & 0 & 0  \\
+     \Lambda_{5,1} &  \Lambda_{5,2} &  \Lambda_{5,3} & 0 & \Lambda_{5,5} & 0 \\
+    0 &  \Lambda_{6,2} &  \Lambda_{6,3} & 0 & 0 & \Lambda_{6,6}
     \end{bmatrix}
     = \begin{bmatrix} \mathbf{\Lambda_{mm}} & \mathbf{\Lambda_{mr}} \\
         \mathbf{\Lambda_{rm}} & \mathbf{\Lambda_{rr}}  \end{bmatrix}
