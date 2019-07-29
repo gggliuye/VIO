@@ -157,13 +157,24 @@ The objective is to minimize the reprojection error:
 .. math::
     argmin\lVert \mathbf{e} \lVert_{2}^{2} = argmin \frac{1}{2} \sum_{i=1}^{n} \lVert \mathbf{u}_{i} - \frac{1}{s_{i}} \mathbf{K} exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}   \lVert_{2}^{2}
 
-.. math::
-    J_{\P} = \frac{\partial \mathbf{e}}{\partial \mathbf{P}} = \frac{\partial \mathbf{e}}{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}  \frac{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}{\partial \mathbf{P}}
+* for the Landmark points :
 
 .. math::
-    \mathbf{P}' = exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i} 
+    J_{\mathbf{P}} = \frac{\partial \mathbf{e}}{\partial \mathbf{P}} = \frac{\partial \mathbf{e}}{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}  \frac{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}{\partial \mathbf{P}}
+
+We note:
+
+.. math::
+    \mathbf{P}' = exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i} = \mathbf{R}\mathbf{P} + \mathbf{t}
                 = \begin{bmatrix} X' & Y' & Z'  \end{bmatrix} ^{T}
-                
+
+We can easily get:
+
+.. math::
+    \frac{\partial \mathbf{P'}} {\partial \mathbf{P}} = \mathbf{R}
+
+For the other term:
+
 .. math::
     s\mathbf{e} = \begin{bmatrix} su \\ sv \\ s  \end{bmatrix} - 
                 \begin{bmatrix} f_{x} & 0 & c_{x}\\
@@ -174,6 +185,27 @@ The objective is to minimize the reprojection error:
                                    sv - f_{y} Y' - c_{y} Z' \\ 
                                    s - Z'  \end{bmatrix}
 
+.. math::
+    \mathbf{e} =  \begin{bmatrix} u - f_{x} X' / Z' - c_{x} \\
+                                   v - f_{y} Y' /Z'- c_{y} \end{bmatrix}
+
+To minimize error, we have s = Z' from the third equation, and the error will left two terms, the derivative should be :
+
+.. math::
+    \frac{\mathbf{e}}{\mathbf{P'}} 
+    = \begin{bmatrix} \frac{e_{1}}{X'} & \frac{e_{1}}{Y'} & \frac{e_{1}}{Z'}  \\
+         \frac{e_{2}}{X'} & \frac{e_{2}}{Y'} & \frac{e_{2}}{Z'}  \end{bmatrix}
+    = \begin{bmatrix} - f_{x}/Z' & 0 & f_{x}X'/Z'^{2}  \\
+         0 & - f_{y}/Z' & f_{y}Y'/Z'^{2}  \end{bmatrix}
+
+Finally, the jacobian of landmark points is:
+
+.. math::
+    J_{\mathbf{P}} = \begin{bmatrix} - f_{x}/Z' & 0 & f_{x}X'/Z'^{2}  \\
+         0 & - f_{y}/Z' & f_{y}Y'/Z'^{2}  \end{bmatrix}  \mathbf{R}
+
+
+* for camera poses:
 
 .. math::
     J_{\xi} = \frac{\partial e}{\partial \mathbf{\xi}}
