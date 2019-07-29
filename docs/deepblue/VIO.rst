@@ -155,8 +155,28 @@ Simulation with 10 camera poses and 20 landmarks. Data shown in the following im
 The objective is to minimize the reprojection error:
 
 .. math::
-    \mathbf{\xi}^{*} = argmin \frac{1}{2} \sum_{i=1}^{n} \lVert \mathbf{u}_{i} - frac{1}{s_{i}} \mathbf{\Kappa} exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}   \lVert_{2}^{2}
+    argmin\lVert \mathbf{e} \lVert_{2}^{2} = argmin \frac{1}{2} \sum_{i=1}^{n} \lVert \mathbf{u}_{i} - \frac{1}{s_{i}} \mathbf{K} exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}   \lVert_{2}^{2}
 
+.. math::
+    J_{\P} = \frac{\partial \mathbf{e}}{\partial \mathbf{P}} = \frac{\partial \mathbf{e}}{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}  \frac{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}{\partial \mathbf{P}}
+
+.. math::
+    \mathbf{P}' = exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i} 
+                = \begin{bmatrix} X' & Y' & Z'  \end{bmatrix} ^{T}
+                
+.. math::
+    s\mathbf{e} = \begin{bmatrix} su \\ sv \\ s  \end{bmatrix} - 
+                \begin{bmatrix} f_{x} & 0 & c_{x}\\
+                                0 & f_{y} & c_{y} \\
+                                0 & & 1   \end{bmatrix} ^{T}
+                \begin{bmatrix} X' \\ Y' \\ Z'  \end{bmatrix}
+                =  \begin{bmatrix} su - f_{x} X' - c_{x} Z' \\
+                                   sv - f_{y} Y' - c_{y} Z' \\ 
+                                   s - Z'  \end{bmatrix}
+
+
+.. math::
+    J_{\xi} = \frac{\partial e}{\partial \mathbf{\xi}}
 
 We defined the jacobian matrix of camera i and point j to be : 
 
