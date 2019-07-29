@@ -285,11 +285,11 @@ As a result, the Hessian matrix can be calculated as follows, and we take Sigma 
 We can take a sum of all the Jacobian part to get our final result.
 Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions). The result Hessian matirx has 120 * 120 elements.
 
-
 .. image:: images/hessian.png
    :width: 60%
    :align: center
 
+As it shown, there is no corelation between different cameras nor between different landmarks.
 
 If we calculate the eigen values of this matrix, we found the last seven eigen values to be almost zero. This system should have multiply solutions. And we need 7 more constrains to make it a singal solution problem.
 
