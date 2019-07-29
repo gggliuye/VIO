@@ -240,9 +240,9 @@ Finally get the camera pose term jacobian:
         \begin{bmatrix} - f_{x}/Z' & 0 & f_{x}X'/Z'^{2} & f_{x}X'Y'/Z'^{2} & - f_{x} - f_{x}X'^{2}/Z'^{2} & f_{x}Y'/Z' \\
          0 & - f_{y}/Z' & f_{y}Y'/Z'^{2} & f_{y} + f_{y}Y'^{2}/Z'^{2} & -f_{y}X'Y'/Z'^{2} &  -f_{y}X'/Z'  \end{bmatrix} 
 
+The negative operator will be canceled out, as the Hessian matrix is basicly the 'square' of Jacobian matirx.
 
-
-**1.4**
+**1.4 Hessian**
 
 We defined the jacobian matrix of camera i and point j to be : 
 
@@ -270,7 +270,7 @@ Then we can re-range the order of state variables (camera poses at the beginning
    :align: center
 
 
-If we calculate the eigen values of this matrix, we found the last seven eigen values to be almost zero. This system should have multiply solutions. And we need 7 more constrains to have a singal solution.
+If we calculate the eigen values of this matrix, we found the last seven eigen values to be almost zero. This system should have multiply solutions. And we need 7 more constrains to make it a singal solution problem.
 
 * scale : 1 
 * original reference frame : 6 
