@@ -133,11 +133,13 @@ With the expression of the non linear problem :
         \mathbf{\Lambda_{rm}} & \mathbf{\Lambda_{rr}}  
        \end{bmatrix}
 
+By the schur complement:
 
 .. math::
     \Lambda_{p} = \Lambda_{rr} - \Lambda_{rm}\Lambda_{mm}^{-1} \Lambda_{mr}
         
-        
+We shuold have:
+
 .. math::
     \Lambda_{p}= \Lambda_{rr} - \begin{bmatrix}
     0 & 0 & 0 & 0 & 0 \\
@@ -155,6 +157,17 @@ With the expression of the non linear problem :
     \Lambda_{5,2} & \Lambda_{5,3} & -\Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{5,5} - \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
     \Lambda_{6,2} & \Lambda_{6,3} & 0 & 0 & \Lambda_{6,6} \\
     \end{bmatrix}
+
+The corresponding state variable vector is :
+
+.. math::
+    \mathbf{x} = \begin{bmatrix}  \xi_{2} & \xi_{3} & L_{1} & L_{2} & L_{3}   \end{bmatrix}
+
+As a result, the magrinalization of the first camera pose, introduces the correlationship between the Landmark 1 and the Landmark 2.
+
+.. image:: images/week4_2.png
+   :width: 40%
+   :align: center
 
 
 **Queation 2**
