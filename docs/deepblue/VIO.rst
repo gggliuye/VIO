@@ -1,7 +1,10 @@
 VIO deep blue
 -------------------------
 
-**Question 1**: At a certain time, the cameras and landmarks seen of a SLAM system can be seen as the image below. xi is the camera pose, L represents the observed landmark. When a landmark k was seen by ith camera in the world frame, the reprojection error is noted as r(xi_i, L_k)
+**Question 1**: 
+~~~~~~~~~~~~~~~~~
+
+At a certain time, the cameras and landmarks seen of a SLAM system can be seen as the image below. xi is the camera pose, L represents the observed landmark. When a landmark k was seen by ith camera in the world frame, the reprojection error is noted as r(xi_i, L_k)
 
 .. image:: images/week4_1.PNG
    :width: 40%
@@ -145,8 +148,9 @@ We can simply delete the elements related with xi_1
     \Lambda_{6,6} = (\frac{\partial r_{2,3}}{\partial L_{3}})^{T}\Sigma_{2,3}^{-1}\frac{\partial r_{2,3}}{\partial L_{3}} + (\frac{\partial r_{3,3}}{\partial L_{3}})^{T}\Sigma_{3,3}^{-1}\frac{\partial r_{3,3}}{\partial L_{3}}
 
 **Queation 2**
+~~~~~~~~~~~~~~~~~~~~~
 
-Simulation with 10 camera poses and 20 landmarks. Data shown in the following image (with the first the frame as the reference):
+**1.1** Simulation with 10 camera poses and 20 landmarks. Data shown in the following image (with the first the frame as the reference):
 
 .. image:: images/sim.png
    :width: 60%
@@ -157,7 +161,7 @@ The objective is to minimize the reprojection error:
 .. math::
     argmin\lVert \mathbf{e} \lVert_{2}^{2} = argmin \frac{1}{2} \sum_{i=1}^{n} \lVert \mathbf{u}_{i} - \frac{1}{s_{i}} \mathbf{K} exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}   \lVert_{2}^{2}
 
-* for the Landmark points :
+**1.2 for the Landmark points** :
 
 .. math::
     J_{\mathbf{P}} = \frac{\partial \mathbf{e}}{\partial \mathbf{P}} = \frac{\partial \mathbf{e}}{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}  \frac{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}{\partial \mathbf{P}}
@@ -185,14 +189,14 @@ For the other term:
                                    sv - f_{y} Y' - c_{y} Z' \\ 
                                    s - Z'  \end{bmatrix}
 
+To minimize error, we have s = Z' from the third equation. The error will left two terms, the derivative should be 2 times 3.
+
 .. math::
     \mathbf{e} =  \begin{bmatrix} u - f_{x} X' / Z' - c_{x} \\
                                    v - f_{y} Y' /Z'- c_{y} \end{bmatrix}
 
-To minimize error, we have s = Z' from the third equation, and the error will left two terms, the derivative should be :
-
 .. math::
-    \frac{\mathbf{e}}{\mathbf{P'}} 
+    \frac{\partial \mathbf{e}}{\partial \mathbf{P'}} 
     = \begin{bmatrix} \frac{e_{1}}{X'} & \frac{e_{1}}{Y'} & \frac{e_{1}}{Z'}  \\
          \frac{e_{2}}{X'} & \frac{e_{2}}{Y'} & \frac{e_{2}}{Z'}  \end{bmatrix}
     = \begin{bmatrix} - f_{x}/Z' & 0 & f_{x}X'/Z'^{2}  \\
@@ -205,10 +209,18 @@ Finally, the jacobian of landmark points is:
          0 & - f_{y}/Z' & f_{y}Y'/Z'^{2}  \end{bmatrix}  \mathbf{R}
 
 
-* for camera poses:
+**1.3 for camera poses**:
 
 .. math::
-    J_{\xi} = \frac{\partial e}{\partial \mathbf{\xi}}
+    J_{\mathbf{\xi}} = \frac{\partial \mathbf{e}}{\partial \mathbf{\xi}} = \frac{\partial \mathbf{e}}{\partial \mathbf{P'}} \frac{\partial \mathbf{P'}}{\partial \mathbf{\xi}}
+
+Use the left disturbance model:
+
+.. math::
+    \frac{\partial \mathbf{P'}}{\partial \mathbf{\xi}} = \lim_{\delta \xi \rightarrow 0}\frac{ exp([\delta \xi]_{X} )\mathbf{P'} -
+\mathbf{P'} }{\delta \xi } 
+
+**1.4**
 
 We defined the jacobian matrix of camera i and point j to be : 
 
