@@ -285,7 +285,7 @@ As a result, the Hessian matrix can be calculated as follows, and we take Sigma 
 We can take a sum of all the Jacobian part to get our final result.
 Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions). The result Hessian matirx has 120 * 120 elements.
 
-.. image:: images/hessian.png
+.. image:: images/hessian_1.png
    :align: center
 
 As it shown, there is no corelation between different cameras nor between different landmarks.
