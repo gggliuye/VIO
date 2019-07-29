@@ -283,7 +283,7 @@ As a result, the Hessian matrix can be calculated as follows, and we take Sigma 
                J_{Pj}^{T}J_{Ti} & J_{Pj}^{T}J_{Pj}\end{bmatrix}
 
 We can take a sum of all the Jacobian part to get our final result.
-Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions). The result Hessian matirx has 120 * 120 elements.
+Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions). The result Hessian matirx has 120 * 120 elements. We show the log values of the Hessian in the follwoing image:
 
 .. image:: images/hessian_1.png
    :align: center
@@ -294,4 +294,15 @@ If we calculate the eigen values of this matrix, we found the last seven eigen v
 
 * scale : 1 
 * original reference frame : 6 
+
+**1.5 Marginalization**
+
+We test to marginalize the first camera pose, and recalculate the Hessian matrix:
+
+.. image:: images/hessian_m.png
+   :align: center
+
+As we can see, if we marginalize one camera pose, all the landmarks seen by this frame will gain corelationship, as the infomation in the first camera is left to these landmarks (in the top right part the image). The hessian has been changed to a dense matrix from a sparse one.
+
+
 
