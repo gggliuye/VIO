@@ -221,9 +221,10 @@ Use the left disturbance model:
     = \lim_{\delta \xi \rightarrow 0}\frac{ exp( [\delta \xi]_{X} ) \mathbf{P'} - \mathbf{P'} }{\delta \xi } 
 
 .. math::
-    = \lim_{\delta \xi \rightarrow 0}\frac{ exp( [\delta \xi]_{X} ) \mathbf{P'} - \mathbf{P'} }{\delta \xi } 
     = \lim_{\delta \xi \rightarrow 0}\frac{ (\mathbf{I} + [\delta \xi]_{X} )\mathbf{P'} - \mathbf{P'} }{\delta \xi } 
     = \lim_{\delta \xi \rightarrow 0}\frac{ [\delta \xi]_{X} exp([\xi]_{X} )\mathbf{P} }{\delta \xi } 
+    = \lim_{\delta \xi \rightarrow 0}\frac{ - [exp([\xi]_{X} )]_{X} \delta \xi }{\delta \xi } \mathbf{P}
+    = - [exp([\xi]_{X} )]_{X} \mathbf{P}
 
 **1.4**
 
