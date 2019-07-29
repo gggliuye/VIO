@@ -146,11 +146,16 @@ We can simply delete the elements related with xi_1
 
 **Queation 2**
 
-Simulation with 10 camera poses and 20 landmarks.
+Simulation with 10 camera poses and 20 landmarks. Data shown in the following image (with the first the frame as the reference):
 
 .. image:: images/sim.png
    :width: 60%
    :align: center
+
+The objective is to minimize the reprojection error:
+
+.. math::
+    \mathbf{\xi}^{*} = argmin \frac{1}{2} \sum_{i=1}^{n} \lVert \mathbf{u}_{i} - frac{1}{s_{i}} \mathbf{\Kappa} exp(\mathbf{\xi}^{^}) \mathbf{P}_{i}   \lVert_{2}^{2}
 
 
 We defined the jacobian matrix of camera i and point j to be : 
@@ -161,7 +166,7 @@ We defined the jacobian matrix of camera i and point j to be :
 As a result, the Hessian matrix can be calculated as follows, and we take Sigma to be ones.
 
 .. math::
-    H = \sum_{i} \sum_{j} H_{i,j} = \sum_{i} \sum_{j} J_{i,j}^{T} \Sigma  J_{i,j}
+    H = \sum_{i} \sum_{j} H_{i,j} = \sum_{i} \sum_{j} J_{i,j}^{T} \Sigma_{i,j}  J_{i,j}
     
 .. math::
     H_{i,j} = J_{i,j}^{T} J_{i,j}
