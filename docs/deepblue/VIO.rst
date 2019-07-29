@@ -219,12 +219,28 @@ Use the left disturbance model:
 .. math::
     \frac{\partial \mathbf{P'}} {\partial \mathbf{\xi}} 
     = \lim_{\delta \xi \rightarrow 0}\frac{ exp( [\delta \xi]_{X} ) \mathbf{P'} - \mathbf{P'} }{\delta \xi } 
+    = \lim_{\delta \xi \rightarrow 0}\frac{ (\mathbf{I} + [\delta \xi]_{X} )\mathbf{P'} - \mathbf{P'} }{\delta \xi } 
 
 .. math::
-    = \lim_{\delta \xi \rightarrow 0}\frac{ (\mathbf{I} + [\delta \xi]_{X} )\mathbf{P'} - \mathbf{P'} }{\delta \xi } 
     = \lim_{\delta \xi \rightarrow 0}\frac{ [\delta \xi]_{X} exp([\xi]_{X} )\mathbf{P} }{\delta \xi } 
     = \lim_{\delta \xi \rightarrow 0}\frac{ - [exp([\xi]_{X} )]_{X} \delta \xi }{\delta \xi } \mathbf{P}
     = - [exp([\xi]_{X} )]_{X} \mathbf{P}
+
+Or if we try to keep P' as variables:
+
+.. math::
+    = \lim_{\delta \xi \rightarrow 0}\frac{ [\delta \xi]_{X} \mathbf{P'} }{\delta \xi } 
+    = \lim_{\delta \xi \rightarrow 0}\frac{ - [\mathbf{P'}]_{X} \delta \xi }{\delta \xi }
+    = - [\mathbf{P'}]_{X}
+
+Finally get the camera pose term jacobian:
+
+.. math::
+    J_{\mathbf{\xi}} = 
+        \begin{bmatrix} - f_{x}/Z' & 0 & f_{x}X'/Z'^{2} & f_{x}X'Y'/Z'^{2} & - f_{x} - f_{x}X'^{2}/Z'^{2} & f_{x}Y'/Z' \\
+         0 & - f_{y}/Z' & f_{y}Y'/Z'^{2} & f_{y} + f_{y}Y'^{2}/Z'^{2} & -f_{y}X'Y'/Z'^{2} &  -f_{y}X'/Z'  \end{bmatrix} 
+
+
 
 **1.4**
 
