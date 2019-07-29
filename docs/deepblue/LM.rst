@@ -413,11 +413,21 @@ It is derivated from ceres::CostFunction. The **Evaluate** function is redefined
 
 set the elements related to the old frame to be zeros. And set the rest elements by the linearized jacobian (as calculated above in MarginalizationInfo).
 
-
 Feature Manager
 ---------------------
 * list<FeaturePerId> feature
 * vector<FeaturePerFrame> feature_per_frame
+
+Global SfM
+-----------------------
+
+
+triangulate point
+~~~~~~~~~~~~~~~~
+
+Given two corresponding points image pixel positions and corresponding camera poses, result in its 3d position. (notice: the image pixel poistion is the homo-pose in camera reference, which is [x/z, y/z] )
+
+
 
 
 .. [#] Qin T, Li P, Shen S. Vins-mono: A robust and versatile monocular visual-inertial state estimator[J]. IEEE Transactions on Robotics, 2018, 34(4): 1004-1020.
