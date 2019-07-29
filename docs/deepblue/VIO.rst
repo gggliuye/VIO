@@ -220,6 +220,10 @@ Use the left disturbance model:
     \frac{\partial \mathbf{P'}}{\partial \mathbf{\xi}} = \lim_{\delta \xi \rightarrow 0}\frac{ exp([\delta \xi]_{X} )\mathbf{P'} -
 \mathbf{P'} }{\delta \xi } 
 
+.. math::
+    = \lim_{\delta \xi \rightarrow 0}\frac{ (\mathbf{I} + [\delta \xi]_{X} )\mathbf{P'} - \mathbf{P'} }{\delta \xi } 
+    = \lim_{\delta \xi \rightarrow 0}\frac{ [\delta \xi]_{X} exp([\xi]_{X} )\mathbf{P} }{\delta \xi } 
+
 **1.4**
 
 We defined the jacobian matrix of camera i and point j to be : 
