@@ -155,7 +155,7 @@ Simulation with 10 camera poses and 20 landmarks. Data shown in the following im
 The objective is to minimize the reprojection error:
 
 .. math::
-    \mathbf{\xi}^{*} = argmin \frac{1}{2} \sum_{i=1}^{n} \lVert \mathbf{u}_{i} - frac{1}{s_{i}} \mathbf{\Kappa} exp(\mathbf{\xi}^{^}) \mathbf{P}_{i}   \lVert_{2}^{2}
+    \mathbf{\xi}^{*} = argmin \frac{1}{2} \sum_{i=1}^{n} \lVert \mathbf{u}_{i} - frac{1}{s_{i}} \mathbf{\Kappa} exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}   \lVert_{2}^{2}
 
 
 We defined the jacobian matrix of camera i and point j to be : 
