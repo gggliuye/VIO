@@ -119,7 +119,7 @@ With the expression of the non linear problem :
 **1.2 marginalize xi_1** :
 
 .. math::
-   \Lambda = \begin{array}{c|ccccc}
+   \Lambda = \begin{bmatrix}{c|ccccc}
    \Lambda_{1,1} & 0 & 0 & \Lambda_{1,4} &  \Lambda_{1,5} & 0 \\ \hline
     0 & \Lambda_{2,2} & 0 &  \Lambda_{2,4} &  \Lambda_{2,5} &  \Lambda_{2,6} \\
     0 & 0 & \Lambda_{3,3} & 0 &  \Lambda_{3,5} &  \Lambda_{3,6} \\
@@ -128,10 +128,23 @@ With the expression of the non linear problem :
     0 &  \Lambda_{6,2} &  \Lambda_{6,3} & 0 & 0 & \Lambda_{6,6}
     \end{bmatrix}
     = \begin{bmatrix} \mathbf{\Lambda_{mm}} & \mathbf{\Lambda_{mr}} \\
-        \mathbf{\Lambda_{rm}} & \mathbf{\Lambda_{rr}}  \end{array}
+        \mathbf{\Lambda_{rm}} & \mathbf{\Lambda_{rr}}  \end{bmatrix}
+
+.. math::
+    \left[
+    \begin{array}{cccc|c}
+   1 & 0 & 3 & -1 & 0 \\
+   0 & 1 & 1 & -1 & 0 \\
+   0 & 0 & 0 & 0 & 0 \\
+   \end{array}
+   \right]
+
 
 .. math::
     \Lambda_{p} = \Lambda_{rr} - \Lambda_{rm}\Lambda_{mm}^{-1} \Lambda_{mr}
+
+
+
 
 **Queation 2**
 ~~~~~~~~~~~~~~~~~~~~~
