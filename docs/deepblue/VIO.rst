@@ -127,11 +127,11 @@ With the expression of the non linear problem :
     \Lambda_{4,1} &  \Lambda_{4,2} & 0 & \Lambda_{4,4} & 0 & 0  \\
      \Lambda_{5,1} &  \Lambda_{5,2} &  \Lambda_{5,3} & 0 & \Lambda_{5,5} & 0 \\
     0 &  \Lambda_{6,2} &  \Lambda_{6,3} & 0 & 0 & \Lambda_{6,6}
-    \end{bmatrix}
-    = \begin{bmatrix} \mathbf{\Lambda_{mm}} & \mathbf{\Lambda_{mr}} \\
-        \mathbf{\Lambda_{rm}} & \mathbf{\Lambda_{rr}}  
    \end{array}
    \right]
+    = \begin{bmatrix} \mathbf{\Lambda_{mm}} & \mathbf{\Lambda_{mr}} \\
+        \mathbf{\Lambda_{rm}} & \mathbf{\Lambda_{rr}}  
+       \end{bmatrix}
 
 
 .. math::
