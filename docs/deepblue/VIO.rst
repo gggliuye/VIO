@@ -119,7 +119,7 @@ With the expression of the non linear problem :
 **1.2 marginalize xi_1** :
 
 .. math::
-   \Lambda = \begin{bmatrix}[c|ccccc]
+   \Lambda = \begin{bmatrix}{c|ccccc}
    \Lambda_{1,1} & 0 & 0 & \Lambda_{1,4} &  \Lambda_{1,5} & 0 \\ \hline
     0 & \Lambda_{2,2} & 0 &  \Lambda_{2,4} &  \Lambda_{2,5} &  \Lambda_{2,6} \\
     0 & 0 & \Lambda_{3,3} & 0 &  \Lambda_{3,5} &  \Lambda_{3,6} \\
