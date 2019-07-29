@@ -302,7 +302,18 @@ We test to marginalize the first camera pose, and recalculate the Hessian matrix
 .. image:: images/hessian_m.png
    :align: center
 
-As we can see, if we marginalize one camera pose, all the landmarks seen by this frame will gain corelationship, as the infomation in the first camera is left to these landmarks (in the top right part the image). The hessian has been changed to a dense matrix from a sparse one.
+As we can see, if we marginalize one camera pose, all the landmarks seen by this frame will gain corelationship, as the infomation in the first camera is left to these landmarks (in the top right part the image). The hessian has been changed to a dense matrix from a sparse one. And the zero space remain 7.
+
+**1.6 add new observation**
+
+Then we explanded the matrix, and add a new observation frame, get the new Hessian matrix.
+
+.. image:: images/hessian_new.png
+   :align: center
+
+The result zero space remains 7.
 
 
+.. [#] Dong-Si T C, Mourikis A I. Consistency analysis for sliding-window visual odometry[C]//2012 IEEE International Conference on Robotics and Automation. IEEE, 2012: 5202-5209.
 
+.. [#] Jauffret C. Observability and Fisher information matrix in nonlinear regression[J]. IEEE Transactions on Aerospace and Electronic Systems, 2007, 43(2): 756-759.
