@@ -164,7 +164,7 @@ The objective is to minimize the reprojection error:
 **1.2 for the Landmark points** :
 
 .. math::
-    J_{\mathbf{P}} = \frac{\partial \mathbf{e}}{\partial \mathbf{P}} = \frac{\partial \mathbf{e}}{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}  \frac{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}_{i}}{\partial \mathbf{P}}
+    J_{\mathbf{P}} = \frac{\partial \mathbf{e}}{\partial \mathbf{P}} = \frac{\partial \mathbf{e}}{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}}  \frac{\partial exp([\mathbf{\xi}]_{X}) \mathbf{P}}{\partial \mathbf{P}}
 
 We note:
 
@@ -217,10 +217,11 @@ Finally, the jacobian of landmark points is:
 Use the left disturbance model:
 
 .. math::
-    \frac{\partial \mathbf{P'}}{\partial \mathbf{\xi}} = \lim_{\delta \xi \rightarrow 0}\frac{ exp([\delta \xi]_{X} )\mathbf{P'} -
-\mathbf{P'} }{\delta \xi } 
+    \frac{\partial \mathbf{P'}} {\partial \mathbf{\xi}} 
+    = \lim_{\delta \xi \rightarrow 0}\frac{ exp( [\delta \xi]_{X} ) \mathbf{P'} - \mathbf{P'} }{\delta \xi } 
 
 .. math::
+    = \lim_{\delta \xi \rightarrow 0}\frac{ exp( [\delta \xi]_{X} ) \mathbf{P'} - \mathbf{P'} }{\delta \xi } 
     = \lim_{\delta \xi \rightarrow 0}\frac{ (\mathbf{I} + [\delta \xi]_{X} )\mathbf{P'} - \mathbf{P'} }{\delta \xi } 
     = \lim_{\delta \xi \rightarrow 0}\frac{ [\delta \xi]_{X} exp([\xi]_{X} )\mathbf{P} }{\delta \xi } 
 
