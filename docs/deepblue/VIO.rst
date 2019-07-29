@@ -286,7 +286,7 @@ We can take a sum of all the Jacobian part to get our final result.
 Then we can re-range the order of state variables (camera poses at the beginning, following we set the points positions). The result Hessian matirx has 120 * 120 elements.
 
 .. image:: images/hessian.png
-   :width: 60%
+   :width: 80%
    :align: center
 
 As it shown, there is no corelation between different cameras nor between different landmarks.
