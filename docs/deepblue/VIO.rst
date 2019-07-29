@@ -136,8 +136,25 @@ With the expression of the non linear problem :
 
 .. math::
     \Lambda_{p} = \Lambda_{rr} - \Lambda_{rm}\Lambda_{mm}^{-1} \Lambda_{mr}
-         = \Lambda_{rr} - 
-
+        
+        
+.. math::
+    \Lambda_{p}= \Lambda_{rr} - \begin{bmatrix}
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    0 & 0 & \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    0 & 0 & 0 & 0 & 0 \\
+    \end{bmatrix}
+         
+.. math::
+    \Lambda_{p}= \begin{bmatrix}
+    \Lambda_{2,2} & 0 & \Lambda_{2,4} & \Lambda_{2,5} & \Lambda_{2,6} \\
+    0 & \Lambda_{3,3} & 0 & \Lambda_{3,5} & \Lambda_{3,6} \\
+    \Lambda_{4,2} & 0 & \Lambda_{4,4} - \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & -\Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    \Lambda_{5,2} & \Lambda_{5,3} & -\Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{5,5} - \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    \Lambda_{6,2} & \Lambda_{6,3} & 0 & 0 & \Lambda_{6,6} \\
+    \end{bmatrix}
 
 
 **Queation 2**
