@@ -425,7 +425,7 @@ Global SfM
 triangulate point
 ~~~~~~~~~~~~~~~~
 
-Given two corresponding points image pixel positions and corresponding camera poses, result in its 3d position. (notice: the image pixel poistion is the homo-pose in camera reference, which is [x/z, y/z] )
+Given two corresponding points image pixel positions and corresponding camera poses, result in its 3d position. (notice: the image pixel poistion is the homo-pose in camera reference, which is [x/z, y/z] ). VINS uses DLT method to solve the problem as in `Triangulation`_ .
 
 
 
