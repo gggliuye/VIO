@@ -425,8 +425,21 @@ Global SfM
 triangulate point
 ~~~~~~~~~~~~~~~~
 
-Given two corresponding points image pixel positions and corresponding camera poses, result in its 3d position. (notice: the image pixel poistion is the homo-pose in camera reference, which is [x/z, y/z] ). VINS uses DLT method to solve the problem as in `SFM`_ .
+Given two corresponding points image pixel positions and corresponding camera poses, result in its 3d position. (notice: the image pixel poistion is the homo-pose in camera reference, which is [x/z, y/z] ). VINS uses DLT method to solve the problem as explained in section triangulation in chapter SFM.
 
+solveFrameByPnP
+~~~~~~~~~~~~~~~~~
+
+use opencv sove pnp method to solve pose (none RANSAC).
+
+
+triangulateTwoFrames
+~~~~~~~~~~~~~~~~~~~~~~~
+triangulate all the correspoding points between two frames, and set these 3d values to a vector of **SFM Feature**.
+
+construct
+~~~~~~~~~~~~
+Main process of this class. Use global struction from motion method to initialize the map.
 
 
 
