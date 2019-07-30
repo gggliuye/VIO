@@ -29,6 +29,35 @@ For an example, for ORBSLAM, Tracking thread will run for each input frame, Loca
    :alt: image import test
    :align: center
 
+Probability problem
+--------------------------
+SLAM is actully a probability problem, given a series of control "u", sensor observation "o", over a discrete time step "t" to compute an estimate of the state "x". (for SLAM, given image and other sensors, to estimate camera pose "p" and the map "m"). 
+Also, the system has noise, which will be modeled as Gaussian distribution in most cases. If using the probabilistic model, we can write the observation model to be :
+
+.. math::
+    P(\mathbf{o}_{t+1} \| \mathbf{x}_{t+1}, \mathbf{u}_{t})  
+
+And our objective is to estimate the state given obeservation and contrl:
+
+.. math::
+    P( \mathbf{x}_{t+1} \| \mathbf{u}_{t} , \mathbf{o}_{t+1} )
+
+Normally, we do not have any control in a SLAM system, we can ignore "u" here. Then, applying Bayes' rule:
+
+.. math::
+    P( \mathbf{x}_{t+1} \| \mathbf{o}_{t+1} ) = \frac{P(\mathbf{o}_{t+1} \|  \mathbf{x}_{t+1} ) P(\mathbf{x}_{t+1}) }{P(\mathbf{o}_{t+1})}
+
+Ignoring the down mark "t+1":
+
+
+.. math::
+    P( \mathbf{x} \| \mathbf{o} ) = \frac{P(\mathbf{o} \|  \mathbf{x} ) P(\mathbf{x}) }{P(\mathbf{o})}
+
+Using **MAP** (Maximum a posteriori estimation) the best estimation of the system become:
+
+\bar{\mathbf{x}} = arg \max _{x}  P( \mathbf{x} \| \mathbf{o} ) 
+
+
 What is it?
 ------------------
 
