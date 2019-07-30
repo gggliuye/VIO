@@ -487,7 +487,9 @@ We have their poses (:math:`q_{b_{i}}, q_{b_{i+1}}`) from Global SfM process, th
 
 .. math::
     q_{b_{i},b_{i+1}} = q_{b_{i}}^{-1} \otimes q_{b_{i+1}}
-    
+
+To calibration the gyroscope, we try to minimize the following cost function:
+
 .. math::
     \min_{\delta b_{gyro}} \sum_{k} \| q_{i+1}^{-1} \otimes q_{i} \otimes  \gamma_{b_{k+1}}^{b_{k}}  \|^{2} 
 
@@ -509,11 +511,18 @@ As the :math:`\delta b_{gyro}` part is very small, we can rewrite the function a
 For a quaternion, its "w" term is always one, so we delete this part from the function, only consider the vector part in the following part, as a result the upper problem becomes:
 
 .. math::
-    \min_{\delta b_{gyro}} \sum_{k} \| 2(\hat{\gamma}_{b_{k+1}}^{b_{k}})^{-1} \otimes  q_{b_{i},b_{i+1}}  -  J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \|^{2}
+    \min_{\delta b_{gyro}} \sum_{k} \| 2(\hat{\gamma}_{b_{k+1}}^{b_{k}})^{-1} \otimes  q_{b_{i},b_{i+1}}  -  J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \|^{2} = \min_{\delta b_{gyro}} \sum_{k} \| b - A\delta b_{gyrp_{k}} \|^{2}
 
+The problem can be rewrite as :
 
-After the gyroscope bias calibration, repropagation step will be done to update all IMU preintegration terms.
+.. math::
+     \sum_{k} b^{T}b = \sum_{k} A^{T}A (b_{gyrp_{k}})^{2}
 
+Then **LDLT** (Robust Cholesky decomposition of a matrix with pivoting) will be used to solve.
+Then :math:`\delta b_{gyro}` will be added to the original bias to update.
+After the gyroscope bias updated, repropagation step will be done to update all IMU preintegration terms.
+
+**Queation** shouldn't we take the sqrt of the LDLT result??
 
 .. [#] Qin T, Li P, Shen S. Vins-mono: A robust and versatile monocular visual-inertial state estimator[J]. IEEE Transactions on Robotics, 2018, 34(4): 1004-1020.
 .. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
