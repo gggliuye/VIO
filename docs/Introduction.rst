@@ -35,27 +35,28 @@ SLAM is actully a probability problem, given a series of control "u", sensor obs
 Also, the system has noise, which will be modeled as Gaussian distribution in most cases. If using the probabilistic model, we can write the observation model to be :
 
 .. math::
-    P(\mathbf{o}_{t+1} \| \mathbf{x}_{t+1}, \mathbf{u}_{t})  
+    P(\mathbf{o}_{t+1} \mid \mathbf{x}_{t+1}, \mathbf{u}_{t})  
 
 And our objective is to estimate the state given obeservation and contrl:
 
 .. math::
-    P( \mathbf{x}_{t+1} \| \mathbf{u}_{t} , \mathbf{o}_{t+1} )
+    P( \mathbf{x}_{t+1} \mid \mathbf{u}_{t} , \mathbf{o}_{t+1} )
 
 Normally, we do not have any control in a SLAM system, we can ignore "u" here. Then, applying Bayes' rule:
 
 .. math::
-    P( \mathbf{x}_{t+1} \| \mathbf{o}_{t+1} ) = \frac{P(\mathbf{o}_{t+1} \|  \mathbf{x}_{t+1} ) P(\mathbf{x}_{t+1}) }{P(\mathbf{o}_{t+1})}
+    P( \mathbf{x}_{t+1} \mid \mathbf{o}_{t+1} ) = \frac{P(\mathbf{o}_{t+1} \mid  \mathbf{x}_{t+1} ) P(\mathbf{x}_{t+1}) }{P(\mathbf{o}_{t+1})}
 
 Ignoring the down mark "t+1":
 
 
 .. math::
-    P( \mathbf{x} \| \mathbf{o} ) = \frac{P(\mathbf{o} \|  \mathbf{x} ) P(\mathbf{x}) }{P(\mathbf{o})}
+    P( \mathbf{x} \mid \mathbf{o} ) = \frac{P(\mathbf{o} \mid  \mathbf{x} ) P(\mathbf{x}) }{P(\mathbf{o})}
 
 Using **MAP** (Maximum a posteriori estimation) the best estimation of the system become:
 
-\bar{\mathbf{x}} = arg \max _{x}  P( \mathbf{x} \| \mathbf{o} ) 
+.. math::
+    \bar{\mathbf{x}} = arg \max _{x}  P( \mathbf{x} \mid \mathbf{o} ) 
 
 
 What is it?
