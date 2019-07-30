@@ -52,7 +52,7 @@ Normally, we do not have any control in a SLAM system, we can ignore "u" here. K
     \sum_{i=1}^{t+1} P( \mathbf{x}_{t+1} \mid \mathbf{o}_{i} ) =
     \sum_{i=1}^{t+1}\frac{P(\mathbf{o}_{i} \mid  \mathbf{x}_{t+1} ) P(\mathbf{x}_{t+1}) }{P(\mathbf{o}_{i})}
 
-Ignoring the down mark "1:t+1":
+Ignoring the down mark "t":
 
 .. math::
     P( \mathbf{x} \mid \mathbf{o} ) = \frac{P(\mathbf{o} \mid  \mathbf{x} ) P(\mathbf{x}) }{P(\mathbf{o})}
@@ -68,13 +68,13 @@ As the system state can be divide into two parts : map "m" and camera pose "p".
 Another modelization of the system can be seen in `wiki <https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping#Problem_definition>`_ by alternating updates of the two beliefs in a form of EM algorithm (Expectation–maximization algorithm).
 
 .. math::
-    P( \mathbf{x}_{t+1} \mid \mathbf{u}_{t} , \mathbf{o}_{t+1} ) = P( \mathbf{p}_{t+1}, \mathbf{m}_{t+1} \mid \mathbf{u}_{t} , \mathbf{o}_{t+1} )
+    P( \mathbf{x}_{t+1} \mid \mathbf{u}_{1:t} , \mathbf{o}_{1:t+1} ) = P( \mathbf{p}_{t+1}, \mathbf{m}_{t+1} \mid \mathbf{u}_{1:t} , \mathbf{o}_{1:t+1} )
 
 .. math::
-    P(\mathbf{p}_{t+1} \mid \mathbf{m}_{t+1} \mathbf{u}_{t} , \mathbf{o}_{t+1} ) = \sum_{m_{t-1}} P(\mathbf{o}_{t})
+    P(\mathbf{p}_{t} \mid \mathbf{m}_{t} , \mathbf{u}_{1:t} , \mathbf{o}_{1:t} ) = \sum_{m_{t-1}} P(\mathbf{o}_{t} \mid \mathbf{p}_{t},\mathbf{m}_{t}, \mathbf{u}_{1:t}) \sum_{p_{t-1}} P(\mathbf{p}_{t} \mid \mathbf{p}_{t-1}) P(\mathbf{p}_{t-1} \ mid \mathbf{m}_{t}, \mathbf{o}_{1:t-1}, \mathbf{u}_{1:t}) / Z
     
 .. math::
-    P(\mathbf{m}_{t+1} \mid \mathbf{p}_{t+1} \mathbf{u}_{t} , \mathbf{o}_{t+1} )
+    P(\mathbf{m}_{t} \mid \mathbf{p}_{t} \mathbf{u}_{1:t} , \mathbf{o}_{1:t} ) = \sum_{p_{t}} \sum_{m_{t}} P(\mathbf{m}_{t} \mid \mathbf{p}_{t}, \mathbf{m}_{t-1}, \mathbf{o}_{t}, \mathbf{u}_{1:t}) P(\mathbf{m}_{t-1} ,\mathbf{p}_{t} \mid \mathbf{o}_{1:t-1}, \mathbf{m}_{t-1}, \mathbf{u}_{1:t})
 
 
 
