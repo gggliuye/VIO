@@ -3,6 +3,7 @@ Introduction of SLAM
 
 `Link of the Site <https://vio.readthedocs.io/en/latest/index.html>`_
 
+`Chinese link <https://vio.readthedocs.io/zh_CN/latest/index.html>`_
 
 SfM(structure from motion)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
