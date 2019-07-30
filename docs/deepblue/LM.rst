@@ -524,6 +524,21 @@ After the gyroscope bias updated, repropagation step will be done to update all 
 
 **Queation** shouldn't we take the sqrt of the LDLT result??
 
+TangentBasis
+~~~~~~~~~~~~~~~~~~~
+
+The result b and c vector is shown below:
+
+.. image:: images/tangentbasis.png
+   :align: center
+
+RefineGravity
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+Reference
+---------------------
+
 .. [#] Qin T, Li P, Shen S. Vins-mono: A robust and versatile monocular visual-inertial state estimator[J]. IEEE Transactions on Robotics, 2018, 34(4): 1004-1020.
 .. [#] Sola J. Quaternion kinematics for the error-state Kalman filter[J]. arXiv preprint arXiv:1711.02508, 2017.
 
