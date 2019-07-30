@@ -516,7 +516,7 @@ For a quaternion, its "w" term is always one, so we delete this part from the fu
 The problem can be rewrite as :
 
 .. math::
-     \sum_{k} b^{T}b = \sum_{k} A^{T}A (b_{gyrp_{k}})^{2}
+     (\sum_{k} b^{T}b) = (\sum_{k} A^{T}A) (b_{gyrp_{k}})^{2}
 
 Then **LDLT** (Robust Cholesky decomposition of a matrix with pivoting) will be used to solve.
 Then :math:`\delta b_{gyro}` will be added to the original bias to update.
