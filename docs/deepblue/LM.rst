@@ -492,12 +492,20 @@ We have their poses (:math:`q_{b_{i}}, q_{b_{i+1}}`) from Global SfM process, th
     \min_{\delta b_{gyro}} \sum_{k} \| q_{i+1}^{-1} \otimes q_{i} \otimes  \gamma_{b_{k+1}}^{b_{k}}  \|^{2} 
 
 .. math::
-    \min_{\delta b_{gyro}} \sum_{k} \| (\gamma_{b_{k+1}}^{b_{k}})^{-1} q_{b_{i},b_{i+1}}  \|^{2}
+    \min_{\delta b_{gyro}} \sum_{k} \| (\gamma_{b_{k+1}}^{b_{k}})^{-1} \otimes  q_{b_{i},b_{i+1}}  \|^{2}
 
 .. math::
-    \min_{\delta b_{gyro}} \sum_{k} \| (\hat{\gamma}_{b_{k+1}}^{b_{k}} \otimes \begin{bmatrix}  1 \\  \frac{1}{2} J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \end{bmatrix} )^{-1} q_{b_{i},b_{i+1}}  \|^{2}
+    \min_{\delta b_{gyro}} \sum_{k} \| (\hat{\gamma}_{b_{k+1}}^{b_{k}} \otimes \begin{bmatrix}  1 \\  \frac{1}{2} J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \end{bmatrix} )^{-1} \otimes  q_{b_{i},b_{i+1}}  \|^{2}
 
+As the :math:`\delta b_{gyro}` part is very small, we can rewrite the function as :
 
+.. math::
+    \min_{\delta b_{gyro}} \sum_{k} \| \begin{bmatrix}  1 \\  - \frac{1}{2} J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \end{bmatrix} (\hat{\gamma}_{b_{k+1}}^{b_{k}})^{-1} \otimes  q_{b_{i},b_{i+1}}  \|^{2}
+
+For a quaternion, its "w" term is always one, so we delete this part from the function, only consider the vector part in the following part, as a result the upper problem becomes:
+
+.. math::
+    \min_{\delta b_{gyro}} \sum_{k} \| (\hat{\gamma}_{b_{k+1}}^{b_{k}})^{-1} \otimes  q_{b_{i},b_{i+1}}  - \frac{1}{2} J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \|^{2}
 
 
 After the gyroscope bias calibration, repropagation step will be done to update all IMU preintegration terms.
