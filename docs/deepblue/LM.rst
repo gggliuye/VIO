@@ -469,13 +469,13 @@ IMU calibration process is done here by visual and IMU alignment.
 The first order approximation of :math:`\alpha, \beta, \gamma` with respect to biases can be write as:
 
 .. math::
-    \alpha_{b_{k+1}}^{b_{k}} \approx \hat{\alpha_{b_{k+1}}^{b_{k}}} + J_{b_{acc}}^{\alpha} \delta b_{acc_{k}} + J_{b_{gyro}}^{\alpha}\delta b_{gyrp_{k}}
+    \alpha_{b_{k+1}}^{b_{k}} \approx \hat{\alpha}_{b_{k+1}}^{b_{k}} + J_{b_{acc}}^{\alpha} \delta b_{acc_{k}} + J_{b_{gyro}}^{\alpha}\delta b_{gyrp_{k}}
     
 .. math::
-    \beta_{b_{k+1}}^{b_{k}} \approx \hat{\beta_{b_{k+1}}^{b_{k}}} + J_{b_{acc}}^{\beta} \delta b_{acc_{k}} + J_{b_{gyro}}^{\beta}\delta b_{gyrp_{k}}
+    \beta_{b_{k+1}}^{b_{k}} \approx \hat{\beta}_{b_{k+1}}^{b_{k}} + J_{b_{acc}}^{\beta} \delta b_{acc_{k}} + J_{b_{gyro}}^{\beta}\delta b_{gyrp_{k}}
     
 .. math::
-    \gamma_{b_{k+1}}^{b_{k}} \approx \hat{\gamma_{b_{k+1}}^{b_{k}}} \otimes 
+    \gamma_{b_{k+1}}^{b_{k}} \approx \hat{\gamma}_{b_{k+1}}^{b_{k}} \otimes 
              \begin{bmatrix}  1 \\  \frac{1}{2} J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \end{bmatrix}
 
 
@@ -486,9 +486,19 @@ The preintegration between these two frames can be got from upper steps (:math:`
 We have their poses (:math:`q_{b_{i}}, q_{b_{i+1}}`) from Global SfM process, their relative pose is:
 
 .. math::
-    q_{b_{i},b_{i+1}} = q_{b_{i}} \otimes q_{b_{i+1}}
+    q_{b_{i},b_{i+1}} = q_{b_{i}}^{-1} \otimes q_{b_{i+1}}
     
 .. math::
+    \min_{\delta b_{gyro}} \sum_{k} \| q_{i+1}^{-1} \otimes q_{i} \otimes  \gamma_{b_{k+1}}^{b_{k}}  \|^{2} 
+
+.. math::
+    \min_{\delta b_{gyro}} \sum_{k} \| (\gamma_{b_{k+1}}^{b_{k}})^{-1} q_{b_{i},b_{i+1}}  \|^{2}
+
+.. math::
+    \min_{\delta b_{gyro}} \sum_{k} \| (\hat{\gamma}_{b_{k+1}}^{b_{k}} \otimes \begin{bmatrix}  1 \\  \frac{1}{2} J_{b_{gyro}}^{\gamma} \delta b_{gyrp_{k}} \end{bmatrix} )^{-1} q_{b_{i},b_{i+1}}  \|^{2}
+
+
+
 
 After the gyroscope bias calibration, repropagation step will be done to update all IMU preintegration terms.
 
