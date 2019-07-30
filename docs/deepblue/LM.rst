@@ -421,6 +421,7 @@ Feature Manager
 Global SfM
 -----------------------
 
+This is a simplified Global SfM method, reduced lots of algorithm details (outlier rejection, retriangulation, multiply global BA, etc). However, it works well for a real time SLAM application, and we can try multiply times to initialize. 
 
 triangulate point
 ~~~~~~~~~~~~~~~~
@@ -429,17 +430,35 @@ Given two corresponding points image pixel positions and corresponding camera po
 
 solveFrameByPnP
 ~~~~~~~~~~~~~~~~~
-
-use opencv sove pnp method to solve pose (none RANSAC).
+In the **SFM Feature** class, saved all the observation of this point. Retrieve these observation, find the processing frame id to collect 3d and 2d infomation.
+Then use opencv sove pnp method to solve pose (none RANSAC).
 
 
 triangulateTwoFrames
 ~~~~~~~~~~~~~~~~~~~~~~~
-triangulate all the correspoding points between two frames, and set these 3d values to a vector of **SFM Feature**.
+Use **SFM Feature** to collect matching infomation. Triangulate all the correspoding points between two frames, and set these 3d values to a vector of SFM Feature (by **overwriting**).
 
 construct
 ~~~~~~~~~~~~
-Main process of this class. Use global struction from motion method to initialize the map.
+Main process of this class. Use global struction from motion method to initialize the map. ("l" is actually "l+1" in the source code, to simplify keep "l")
+
+**init**:
+
+* Create array to save all camera poses (boost::shared_array for armeabi-v7a ndk to not getting any error).
+* Initialize two camera view: the lth and the last. Set the lth camera pose as identity, and set the last pose by giving relative transform(current frame to lth frame) as input.
+
+**triangulate points and solve PnP for frames** :
+
+* Triangulate lth frame with the current frame.
+* Solve PnP lth to (current-1) frames, and triangulate each of them with the current frame.
+* Triangulate all other frames with the 1st frame.
+* Solve PnP for the 1st frame to (l-1)th frame, and triangulate each of them with the lth frame.
+* Triangulate all other points (by the first and the last observation)
+* if any of the upper PnP failed, return false (initialization failed)
+
+**Global BA**:
+
+* Fully BA : fail -> initialization failed; success -> assign quaternion and translation.
 
 
 
