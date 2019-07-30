@@ -557,12 +557,23 @@ LinearAlignment
 As a result, therefor the state variable should be :
 
 .. math::
-    Dof = 3 \times N_{frames} + 3_{gravity direction} + 1_{scale}
+    Dof = 3 \times N_{Frames} + 3_{Gravity Direction} + 1_{Scale}
 
 .. math::
     \mathcal{X}_{I} = \begin{bmatrix} \mathbf{v}_{b_{0}}^{b_{0}} & \mathbf{v}_{b_{1}}^{b_{1}} & ... & \mathbf{v}_{b_{n}}^{b_{n}} & \mathbf{g}^{c_{0}} & s \end{bmatrix}
 
 where :math:`\mathbf{v}_{b_{i}}^{b_{i}}` is the velocity in body frame while taking the ith image,  :math:`{g}^{c_{0}}` is the gravity direction, and s the scale factor to metric units.
+
+We can rewrite the system function (in preintegration section), adding the scale factor:
+
+.. math::
+    \alpha_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( s (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) - v_{b_{k}}^{w} \Delta t_{k} + \frac{1}{2} g^{w} \Delta t_{k}^{2} ) 
+
+.. math::
+    \beta_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( v_{b_{k+1}}^{w} - v_{b_{k}}^{w} + g^{w} \Delta t_{k} ) 
+    
+.. math::
+    \Longrightarrow  \beta_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( R_{b_{k+1}}^{w} v_{b_{k+1}}^{b_{k+1}} - R_{b_{k+1}}^{w} v_{b_{k}}^{b_{k}} + g^{w} \Delta t_{k} ) 
 
 
 
