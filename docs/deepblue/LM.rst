@@ -3,6 +3,7 @@ VINS code
 
 Analysis the structure and the details of `VINS <https://github.com/HKUST-Aerial-Robotics/VINS-Mono>`_ code [#]_ . Take the android implement as example. As the original code is based on ROS(robot opeartion system), changes are made to create virtual ROS message, and manual call the ros callback functions. It has two main threads: **vins_estimator** and **loop_fusion**.
 
+
 Top Node
 ----------------------------
 In **naive-lib.cpp** all the intereface plugin functions are defined. In the android version code, there are lots of management of memory(mutex), query and buffer, and lots of global variables. It is the result of the absent of ROS, we need to take great consideration of these parts. 
@@ -90,6 +91,21 @@ VINS estimator
 ----------------------------
 
 Method called above in "top node" : estimator.processIMU, estimator.processImage, estimator.retrive_data_vector .  Its basic idea is to manage a **slide window** , make imu preintegration and imu observation, also marginalization, etc.
+
+preintegration
+~~~~~~~~~~~~~~~~~~
+
+The system preintegation and the system state function can be write as :
+
+.. math::
+    R_{w}^{b_{k}}p_{b_{k+1}}^{w} = R_{w}^{b_{k}} ( p_{b_{k}}^{w} + v_{b_{k}}^{w} \Delta t_{k} - \frac{1}{2} g^{w} \Delta t_{k}^{2} ) + \alpha_{b_{k+1}}^{b_{k}}
+
+.. math::
+    R_{w}^{b_{k}}v_{b_{k+1}}^{w} = R_{w}^{b_{k}} ( v_{b_{k}}^{w} - g^{w} \Delta t_{k} ) + \beta_{b_{k+1}}^{b_{k}}
+    
+.. math::
+    q_{w}^{b_{k}} \otimes q_{b_{k+1}}^{w} = \gamma _{b_{k+1}}^{b_{k}}
+
 
 processIMU
 ~~~~~~~~~~~~~~~~~~~
@@ -526,15 +542,36 @@ After the gyroscope bias updated, repropagation step will be done to update all 
 
 TangentBasis
 ~~~~~~~~~~~~~~~~~~~
-
+VINS will set the gravity direction to be the z axis, this function will be used to calculate the other two axises.
 The result b and c vector is shown below:
 
 .. image:: images/tangentbasis.png
    :align: center
 
-RefineGravity
+
+
+LinearAlignment
 ~~~~~~~~~~~~~~~~~~~~~~
 
+**Velocity, Gravity Vector and Metric Scale Initialization** (The gravity scale we be traited as a pre-defined value)
+As a result, therefor the state variable should be :
+
+.. math::
+    Dof = 3 \times N_{frames} + 3_{gravity direction} + 1_{scale}
+
+.. math::
+    \mathcal{X}_{I} = \begin{bmatrix} \mathbf{v}_{b_{0}}^{b_{0}} & \mathbf{v}_{b_{1}}^{b_{1}} & ... & \mathbf{v}_{b_{n}}^{b_{n}} & \mathbf{g}^{c_{0}} & s \end{bmatrix}
+
+where :math:`\mathbf{v}_{b_{i}}^{b_{i}}` is the velocity in body frame while taking the ith image,  :math:`{g}^{c_{0}}` is the gravity direction, and s the scale factor to metric units.
+
+
+
+RefineGravity
+~~~~~~~~~~~~~~~~~~~~~
+
+The gravity direction will be set as z axis using "TangentBasis" function. 
+
+The gravity refinement will be done four times.
 
 Reference
 ---------------------
