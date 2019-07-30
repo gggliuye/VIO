@@ -60,7 +60,7 @@ Ignoring the down mark "t":
 Using **MAP** (Maximum a posteriori estimation) the best estimation of the system become:
 
 .. math::
-    \bar{\mathbf{x}} = arg \max _{x}  P( \mathbf{x} \mid \mathbf{o} ) 
+    \bar{\mathbf{x}_{MAP}} = arg \max _{x}  P( \mathbf{x} \mid \mathbf{o} ) 
 
 EM
 ~~~~~~~~~~~~~~~~~~~~
@@ -71,10 +71,33 @@ Another modelization of the system can be seen in `wiki <https://en.wikipedia.or
     P( \mathbf{x}_{t+1} \mid \mathbf{u}_{1:t} , \mathbf{o}_{1:t+1} ) = P( \mathbf{p}_{t+1}, \mathbf{m}_{t+1} \mid \mathbf{u}_{1:t} , \mathbf{o}_{1:t+1} )
 
 .. math::
-    P(\mathbf{p}_{t} \mid \mathbf{m}_{t} , \mathbf{u}_{1:t} , \mathbf{o}_{1:t} ) = \sum_{m_{t-1}} P(\mathbf{o}_{t} \mid \mathbf{p}_{t},\mathbf{m}_{t}, \mathbf{u}_{1:t}) \sum_{p_{t-1}} P(\mathbf{p}_{t} \mid \mathbf{p}_{t-1}) P(\mathbf{p}_{t-1} \ mid \mathbf{m}_{t}, \mathbf{o}_{1:t-1}, \mathbf{u}_{1:t}) / Z
+    P(\mathbf{p}_{t} \mid \mathbf{m}_{t} , \mathbf{u}_{1:t} , \mathbf{o}_{1:t} ) = \sum_{m_{t-1}} P(\mathbf{o}_{t} \mid \mathbf{p}_{t},\mathbf{m}_{t}, \mathbf{u}_{1:t}) \sum_{p_{t-1}} P(\mathbf{p}_{t} \mid \mathbf{p}_{t-1}) P(\mathbf{p}_{t-1} \mid \mathbf{m}_{t}, \mathbf{o}_{1:t-1}, \mathbf{u}_{1:t}) / Z
     
 .. math::
     P(\mathbf{m}_{t} \mid \mathbf{p}_{t} \mathbf{u}_{1:t} , \mathbf{o}_{1:t} ) = \sum_{p_{t}} \sum_{m_{t}} P(\mathbf{m}_{t} \mid \mathbf{p}_{t}, \mathbf{m}_{t-1}, \mathbf{o}_{t}, \mathbf{u}_{1:t}) P(\mathbf{m}_{t-1} ,\mathbf{p}_{t} \mid \mathbf{o}_{1:t-1}, \mathbf{m}_{t-1}, \mathbf{u}_{1:t})
+
+Optimization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. math::
+    \bar{\mathbf{x}_{MAP}} = arg \max _{x}  \frac{P(\mathbf{o} \mid  \mathbf{x} ) P(\mathbf{x}) }{P(\mathbf{o})}
+                     = arg \max _{x}  P(\mathbf{o} \mid  \mathbf{x} ) P(\mathbf{x}) 
+
+Take a minus Log of the function (for better process Gaussian distribution):
+
+.. math::
+    \bar{\mathbf{x}_{MAP}} = arg \min _{x} [ - \sum_{t} \log P( \mathbf{o}_{t} \mid \mathbf{x}) - \log P(\mathbf{x})]
+
+Assume the observation obey to Gaussian distrubution :
+
+.. math::
+    P(\mathbf{o}_{t} \mid \mathbf{x}) = \mathcal{N} (\mu_{t}, \Sigma_{t}) , P(\mathbf{x}) = \mathcal{N} (\mu_{x}, \Sigma_{x})
+
+.. math::
+    \bar{\mathbf{x}_{MAP}} = arg \min _{x} \sum_{t} \| \mathbf{o}_{t} - \mu_{t} \|_{\Sigma_{t}}^{2} + \| \mathbf{x} - \mu_{x}  \|_{\Sigma_{x}}^{2} 
+
+Which is non-linear least squares problem. 
+
 
 
 
