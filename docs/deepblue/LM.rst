@@ -423,6 +423,8 @@ Global SfM
 
 This is a simplified Global SfM method, reduced lots of algorithm details (outlier rejection, retriangulation, multiply global BA, etc). However, it works well for a real time SLAM application, and we can try multiply times to initialize. 
 
+Notice that, in Estimator::initialStructure(), the system will solve PnP again, after this Global SfM process. (why not do this step here**?**)
+
 triangulate point
 ~~~~~~~~~~~~~~~~
 
