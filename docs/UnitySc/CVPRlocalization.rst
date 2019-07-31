@@ -15,6 +15,23 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 1st EHTZ
 --------------------
 
+They use a **Hierarchical Localization** algorithm, using monolihic CNN to simultaneously(sharing of computations) predict **local features** and **global descriptors** for localization. 
+
+1. Global descriptor is used to retrieves candidate images.
+2. Local features are used to esimate an accurate 6-DoF pose.
+
+The robustness of localization is maximized while retaining tractable computational requirements.
+
+HF-Net
+~~~~~~~~~~~~
+It is composed of a single encoder (a **MobileNet** bakcbone: optimized for mobile inference) and three heads predicting : 
+
+1. keypoint detection scores
+2. dense local descriptors
+3. a global image-wide descriptor.
+
+The global descriptor is predicted by NetVLAD layer on top of the last feature map of Moblie Net.     
+
 1st CAS
 ------------------------
 **EN:** From China Academy of Sciences.
