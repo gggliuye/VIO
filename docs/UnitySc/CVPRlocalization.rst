@@ -1,10 +1,8 @@
 CVPR
 ===================
 
-` Visual Localization <https://www.visuallocalization.net/workshop/cvpr/2019/>`_ 
-
 **EN：**
-The objective of this competition is localization in different environment changes (winter/spring, rain/snow/sunday, day/night, etc). The core of these algorithms is their robustness against these environment change. The main warpon is "Deep learning", for example EHTZ use its own HF-net [#]_ to extract features, and CAS uses `Deeplabv3 <https://github.com/rishizek/tensorflow-deeplab-v3>`_ (an open source deep learning architecture ) to extract semantic feature as a criterion for outlier rejection [#]_.
+The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ is localization in different environment changes (winter/spring, rain/snow/sunday, day/night, etc). The core of these algorithms is their robustness against these environment change. The main warpon is "Deep learning", for example EHTZ use its own HF-net [#]_ to extract features, and CAS uses `Deeplabv3 <https://github.com/rishizek/tensorflow-deeplab-v3>`_ (an open source deep learning architecture ) to extract semantic feature as a criterion for outlier rejection [#]_.
 
 
 **CH：**
@@ -12,6 +10,7 @@ The objective of this competition is localization in different environment chang
 
 .. image:: bannerCVPR.png
    :align: center
+   :title: image from CVPR main page
 
 1st EHTZ
 --------------------
@@ -36,6 +35,9 @@ contribute
 **personal view**: lack of originality. 
 
 
+
+Reference
+-----------------
 
 .. [#] Sarlin P E, Cadena C, Siegwart R, et al. From coarse to fine: Robust hierarchical localization at large scale[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019: 12716-12725.
 
