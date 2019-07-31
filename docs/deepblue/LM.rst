@@ -687,18 +687,20 @@ where [ :math:`\bar{X}_{c_{j}} , \bar{Y}_{c_{j}} , \bar{Z}_{c_{j}}`] is a unit v
 .. math::
     \hat{p}_{i} = R_{b}^{c} (R_{w}^{b_{j}} (R_{b_{i}}^{w} ( R_{c}^{b} \frac{1}{\lambda} \pi_{c}^{-1} \begin{bmatrix} u_{c_{i}} \\ v_{c_{i}}  \end{bmatrix} + p_{c}^{b} ) + p_{b_{i}}^{w} ) + p_{w}^{b_{j}} ) + p_{b}^{c}
 
-Which is a chaine of transform : ith camera :math:`\rightarrow` ith body :math:`\rightarrow` world :math:`\rightarrow` jth body :math:`\rightarrow` jth camera. 
-
+Which is a chaine of transform : ith camera :math:`\rightarrow` ith body :math:`\rightarrow` world :math:`\rightarrow` jth body :math:`\rightarrow` jth camera (VINS system use the inverse depth rather than 3d pose as variable, so lambda appears here as the inverse of depth).
 Vector in red in the upper image can be expressed as : 
 
 .. math::
     \mathbf{d} = p_{j} - p_{i} = p_{j} - \frac{ \hat{p}_{i} } { \| \hat{p}_{i} \|}
 
 
-Finally, the residual can be write as :
+Finally, the residual can be write as (the square sum of the residual is actually the length of d):
 
 .. math::
     \mathbf{r} = \begin{bmatrix} \mathbf{b} \cdot \mathbf{d} \\ \mathbf{c} \cdot \mathbf{d}  \end{bmatrix}
+
+
+
 
 Reference
 ---------------------
