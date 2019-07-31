@@ -588,19 +588,19 @@ We can rewrite the system function of **two images** in slide window (in preinte
 Rerange the upper functions into the form below:
 
 .. math::
-    \begin{cases}
     \alpha_{b_{k+1}}^{b_{k}} = - \Delta t_{k}v_{b_{k}}^{b_{k}} + 0 *v_{b_{k+1}}^{b_{k+1}} + \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} g^{w} + R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) s 
+    
+.. math::
     \beta_{b_{k+1}}^{b_{k}} = - v_{b_{k}}^{b_{k}} + R_{w}^{b_{k}}R_{b_{k+1}}^{w} v_{b_{k+1}}^{b_{k+1} + R_{w}^{b_{k}} \Delta t_{k}g^{w} + 0*s 
-    \end{cases}
 
 As a result the system can be rewrite as:
 
 .. math::
-    \begin{bmarix} \alpha_{b_{k+1}}^{b_{k}} \\ \beta_{b_{k+1}}^{b_{k}}  \end{bmatrix}
-    = \begin{bmatrix}    - \Delta t_{k} \mathbf{I} & \mathbf{o} &  \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} & R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) \\
+    \begin{bmarix} \alpha_{b_{k+1}}^{b_{k}} \\ \beta_{b_{k+1}}^{b_{k}}  \end{bmatrix} =
+    \begin{bmatrix}    - \Delta t_{k} \mathbf{I} & \mathbf{0} &  \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} & R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) \\
     -\mathbf{I} &  R_{w}^{b_{k}}R_{b_{k+1}}^{w}  & R_{w}^{b_{k}} \Delta t_{k} & \mathbf{0}
     \end{bmatrix}
-    \begin{bmatrix}v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  g^{w} \\ s  \end{bmatrix}
+    \begin{bmatrix} v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  g^{w} \\ s  \end{bmatrix}
     
 .. math::
     z_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} 
