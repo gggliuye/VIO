@@ -560,7 +560,7 @@ The result b and c vector is shown below:
 LinearAlignment
 ~~~~~~~~~~~~~~~~~~~~~~
 
-**Velocity, Gravity Vector and Metric Scale Initialization** (The gravity scale we be traited as a pre-defined value)
+**Velocity, Gravity Vector and Metric Scale Initialization** (The gravity scale will not be traited as a pre-defined value in this process)
 As a result, therefor the state variable should be :
 
 .. math::
@@ -569,7 +569,7 @@ As a result, therefor the state variable should be :
 .. math::
     \mathcal{X}_{I} = \begin{bmatrix} \mathbf{v}_{b_{0}}^{b_{0}} & \mathbf{v}_{b_{1}}^{b_{1}} & ... & \mathbf{v}_{b_{n}}^{b_{n}} & \mathbf{g}^{c_{0}} & s \end{bmatrix}
 
-where :math:`\mathbf{v}_{b_{i}}^{b_{i}}` is the velocity in body frame while taking the ith image,  :math:`{g}^{c_{0}}` is the gravity direction, and s the scale factor to metric units.
+where :math:`\mathbf{v}_{b_{i}}^{b_{i}}` is the velocity in body frame while taking the ith image,  :math:`{g}^{c_{0}}` is the gravity vector, and s the scale factor to metric units.
 
 We can rewrite the system function of **two images** in slide window (in preintegration section), adding the scale factor:
 
@@ -588,18 +588,22 @@ We can rewrite the system function of **two images** in slide window (in preinte
 Rerange the upper functions into the form below:
 
 .. math::
+    \begin{cases}
     \alpha_{b_{k+1}}^{b_{k}} = - \Delta t_{k}v_{b_{k}}^{b_{k}} + 0 *v_{b_{k+1}}^{b_{k+1}} + \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} g^{w} + R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) s 
-    
-.. math::
-    \beta_{b_{k+1}}^{b_{k}} = - v_{b_{k}}^{b_{k}} + R_{w}^{b_{k}}R_{b_{k+1}}^{w} v_{b_{k+1}}^{b_{k+1} + R_{w}^{b_{k}} \Delta t_{k}g^{w} + 0*s 
+    \beta_{b_{k+1}}^{b_{k}} = - v_{b_{k}}^{b_{k}} + R_{w}^{b_{k}} R_{b_{k+1}}^{w} v_{b_{k+1}}^{b_{k+1}} + R_{w}^{b_{k}} \Delta t_{k}g^{w} + 0*s 
+    \end{cases}
 
 As a result the system can be rewrite as:
 
 .. math::
     \begin{bmarix} \alpha_{b_{k+1}}^{b_{k}} \\ \beta_{b_{k+1}}^{b_{k}}  \end{bmatrix} =
+    
+.. math::
     \begin{bmatrix}    - \Delta t_{k} \mathbf{I} & \mathbf{0} &  \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} & R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) \\
-    -\mathbf{I} &  R_{w}^{b_{k}}R_{b_{k+1}}^{w}  & R_{w}^{b_{k}} \Delta t_{k} & \mathbf{0}
+    -\mathbf{I} &  R_{w}^{b_{k}} R_{b_{k+1}}^{w}  & R_{w}^{b_{k}} \Delta t_{k} & \mathbf{0}
     \end{bmatrix}
+    
+.. math::
     \begin{bmatrix} v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  g^{w} \\ s  \end{bmatrix}
     
 .. math::
