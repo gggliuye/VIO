@@ -685,9 +685,20 @@ The camera model can be seen as a ray casting from the camera optical center, so
 where [ :math:`\bar{X}_{c_{j}} , \bar{Y}_{c_{j}} , \bar{Z}_{c_{j}}`] is a unit vector in the jth camera frame (:math:`\pi^{-1}` realize this operation using camera intrinsic parameters).
 
 .. math::
-    p_{i} = R_{b}^{c} (R_{w}^{b_{j}} (R_{b_{i}}^{w} ( R_{c}^{b} \frac{1}{\lambda} \pi_{c}^{-1} \begin{bmatrix} u_{c_{i}} \\ v_{c_{i}}  \end{bmatrix} + p_{c}^{b} ) + p_{b_{i}}^{w} ) + p_{w}^{b_{j}} ) + p_{b}^{c}
+    \hat{p}_{i} = R_{b}^{c} (R_{w}^{b_{j}} (R_{b_{i}}^{w} ( R_{c}^{b} \frac{1}{\lambda} \pi_{c}^{-1} \begin{bmatrix} u_{c_{i}} \\ v_{c_{i}}  \end{bmatrix} + p_{c}^{b} ) + p_{b_{i}}^{w} ) + p_{w}^{b_{j}} ) + p_{b}^{c}
 
 Which is a chaine of transform : ith camera :math:`\rightarrow` ith body :math:`\rightarrow` world :math:`\rightarrow` jth body :math:`\rightarrow` jth camera. 
+
+Vector in red in the upper image can be expressed as : 
+
+.. math::
+    \mathbf{d} = p_{j} - p_{i} = p_{j} - \frac{ \hat{p}_{i} } { \| \hat{p}_{i} \|}
+
+
+Finally, the residual can be write as :
+
+.. math::
+    \mathbf{r} = \begin{bmatrix} \mathbf{b} \cdot \mathbf{d} \\ \mathbf{c} \cdot \mathbf{d}  \end{bmatrix}
 
 Reference
 ---------------------
