@@ -15,10 +15,10 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 1st EHTZ
 --------------------
 
-2nd CAS
+1st CAS
 ------------------------
-China Academy of Sciences.
-
+From China Academy of Sciences.
+The following image shows the system pipeline.
 
 .. image:: CAS.png
    :align: center
