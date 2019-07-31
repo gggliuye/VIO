@@ -532,13 +532,20 @@ For a quaternion, its "w" term is always one, so we delete this part from the fu
 The problem can be rewrite as :
 
 .. math::
-     (\sum_{k} b^{T}b) = (\sum_{k} A^{T}A) (b_{gyrp_{k}})^{2}
+     b_{gyro}  = arg \min_{b_{gyro}} \sum_{k} \| b_{k}-  A_{k} b_{gyrp_{k}}\|^{2}
+
+Reorder the problem, and times :math:`A_{k}^{T}` in both sides (as :math:`A^{T}A` is a positive definite matrix, make it for LDLT solver).
+
+.. math::
+     \sum_{k} b = (\sum_{k} A) (b_{gyrp_{k}})
+
+.. math::
+     (\sum_{k} A^{T}b) = (\sum_{k} A^{T}A) (b_{gyrp_{k}})
 
 Then **LDLT** (Robust Cholesky decomposition of a matrix with pivoting) will be used to solve.
 Then :math:`\delta b_{gyro}` will be added to the original bias to update.
 After the gyroscope bias updated, repropagation step will be done to update all IMU preintegration terms.
 
-**Queation** shouldn't we take the sqrt of the LDLT result??
 
 TangentBasis
 ~~~~~~~~~~~~~~~~~~~
@@ -564,16 +571,55 @@ As a result, therefor the state variable should be :
 
 where :math:`\mathbf{v}_{b_{i}}^{b_{i}}` is the velocity in body frame while taking the ith image,  :math:`{g}^{c_{0}}` is the gravity direction, and s the scale factor to metric units.
 
-We can rewrite the system function (in preintegration section), adding the scale factor:
+We can rewrite the system function of **two images** in slide window (in preintegration section), adding the scale factor:
 
 .. math::
     \alpha_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( s (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) - v_{b_{k}}^{w} \Delta t_{k} + \frac{1}{2} g^{w} \Delta t_{k}^{2} ) 
+    
+.. math::
+    \Longrightarrow  \alpha_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( s (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) - R_{b_{k}}^{w}v_{b_{k}}^{b_{k}} \Delta t_{k} + \frac{1}{2} g^{w} \Delta t_{k}^{2} ) 
 
 .. math::
     \beta_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( v_{b_{k+1}}^{w} - v_{b_{k}}^{w} + g^{w} \Delta t_{k} ) 
     
 .. math::
-    \Longrightarrow  \beta_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( R_{b_{k+1}}^{w} v_{b_{k+1}}^{b_{k+1}} - R_{b_{k+1}}^{w} v_{b_{k}}^{b_{k}} + g^{w} \Delta t_{k} ) 
+    \Longrightarrow  \beta_{b_{k+1}}^{b_{k}} = R_{w}^{b_{k}} ( R_{b_{k+1}}^{w} v_{b_{k+1}}^{b_{k+1}} - R_{b_{k}}^{w} v_{b_{k}}^{b_{k}} + g^{w} \Delta t_{k} ) 
+
+Rerange the upper functions into the form below:
+
+.. math::
+    \begin{cases}
+    \alpha_{b_{k+1}}^{b_{k}} = - \Delta t_{k}v_{b_{k}}^{b_{k}} + 0 *v_{b_{k+1}}^{b_{k+1}} + \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} g^{w} + R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) s 
+    \beta_{b_{k+1}}^{b_{k}} = - v_{b_{k}}^{b_{k}} + R_{w}^{b_{k}}R_{b_{k+1}}^{w} v_{b_{k+1}}^{b_{k+1} + R_{w}^{b_{k}} \Delta t_{k}g^{w} + 0*s 
+    \end{cases}
+
+As a result the system can be rewrite as:
+
+.. math::
+    \begin{bmarix} \alpha_{b_{k+1}}^{b_{k}} \\ \beta_{b_{k+1}}^{b_{k}}  \end{bmatrix}
+    = \begin{bmatrix}    - \Delta t_{k} \mathbf{I} & \mathbf{o} &  \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} & R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) \\
+    -\mathbf{I} &  R_{w}^{b_{k}}R_{b_{k+1}}^{w}  & R_{w}^{b_{k}} \Delta t_{k} & \mathbf{0}
+    \end{bmatrix}
+    \begin{bmatrix}v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  g^{w} \\ s  \end{bmatrix}
+    
+.. math::
+    z_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} 
+
+The problem becomes :
+
+.. math::
+    \mathcal{X}_{I} = arg \min_{ \mathcal{X}_{I} } \sum_{k}  \|  z_{b_{k+1}}^{b_{k}} - \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} \|^{2}
+
+where :math:`z_{b_{k+1}}^{b_{k}}` can be obtained from preintegration.
+
+.. math::
+    z_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I}
+    
+.. math::
+    (\mathbf{H}_{b_{k+1}}^{b_{k}})^{T} z_{b_{k+1}}^{b_{k}} = (\mathbf{H}_{b_{k+1}}^{b_{k}})^{T} \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I}
+
+We can use **IDIT** to solve it (Same as before, times the transpose of H in both sides, to make a positive definite matrix).
+After this linear alignment , gravity will be refined.
 
 
 
