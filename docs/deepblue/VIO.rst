@@ -155,10 +155,10 @@ We shuold have:
          
 .. math::
     \Lambda_{p}= \begin{bmatrix}
-    \Lambda_{2,2} & 0 & \Lambda_{2,4} & \Lambda_{2,5} & \Lambda_{2,6} \\
-    0 & \Lambda_{3,3} & 0 & \Lambda_{3,5} & \Lambda_{3,6} \\
-    \Lambda_{4,2} & 0 & \Lambda_{4,4} - \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & -\Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
-    \Lambda_{5,2} & \Lambda_{5,3} & -\Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{5,5} - \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    \Lambda_{2,2}-\Lambda_{2,1}\Lambda_{1,1}^{-1}\Lambda_{1,2} & \Lambda_{2,3} & \Lambda_{2,4}-\Lambda_{2,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{2,5}-\Lambda_{2,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & \Lambda_{2,6} \\
+    \Lambda_{3,2} & \Lambda_{3,3} & 0 & \Lambda_{3,5} & \Lambda_{3,6} \\
+    \Lambda_{4,2}-\Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,2} & 0 & \Lambda_{4,4} - \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & -\Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    \Lambda_{5,2}-\Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,2} & \Lambda_{5,3} & -\Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{5,5} - \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
     \Lambda_{6,2} & \Lambda_{6,3} & 0 & 0 & \Lambda_{6,6} \\
     \end{bmatrix}
 
