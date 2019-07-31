@@ -18,9 +18,9 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 1st CAS
 ------------------------
 **EN:** From China Academy of Sciences.
-The following image shows the system pipeline. They used Colmap [#]_ for offline SfM reconstruction, DeeplabV3 [#]_ to offer semantic segmentation, and NetVLAD [#]_ to offer image match. (to be honst, what was your work?)
+The following image shows the system pipeline. They used Colmap [#]_ for offline SfM reconstruction, DeeplabV3 [#]_ to offer semantic segmentation, and NetVLAD [#]_ to offer image match. 
 
-**CH:** 下图是整个系统的流程图解析，SfM离线建图的部分使用了Colmap，语义分割使用了Deeplabv3，图像匹配使用了NetVLAD。总的来说，只有排除外点的想法具有原创性。
+**CH:** 下图是整个系统的流程图解析，SfM离线建图的部分使用了Colmap，语义分割使用了Deeplabv3，图像匹配使用了NetVLAD。总的来说，排除外点的想法具有原创性。
 
 .. image:: CAS.png
    :align: center
