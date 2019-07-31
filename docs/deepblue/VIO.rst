@@ -169,6 +169,16 @@ The corresponding state variable vector is :
 
 As a result, the magrinalization of the first camera pose, introduces the correlationship between the Landmark 1 and the Landmark 2.
 
+.. math::
+   \Lambda_{p} =  \left[
+    \begin{array}
+    \Lambda'_{1,1} & \Lambda'_{1,2} & \Lambda'_{1,3} & \Lambda'_{1,4} &  \Lambda'_{1,5}\\ 
+    \Lambda'_{2,1} & \Lambda'_{2,2} & 0 &  \Lambda'_{2,4} &  \Lambda'_{2,5} \\
+    \Lambda'_{3,1} & 0 & \Lambda'_{3,3} & \Lambda'_{3,4} &  \Lambda'_{3,5} \\
+    \Lambda'_{4,1} &  \Lambda'_{4,2} & \Lambda'_{4,3} & \Lambda'_{4,4} & 0 \\
+    \Lambda'_{5,1} &  \Lambda'_{5,2} & 0 & 0 & \Lambda_{5,5}    \end{array}
+   \right]
+
 .. image:: images/week4_2.png
    :width: 40%
    :align: center
