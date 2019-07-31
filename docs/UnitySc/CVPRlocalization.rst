@@ -1,4 +1,4 @@
-CVPR
+CVPR Visual Localization
 ===================
 
 **EN：**
@@ -10,7 +10,7 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 
 .. image:: bannerCVPR.png
    :align: center
-   :title: image from CVPR main page
+   :alt: image from CVPR main page
 
 1st EHTZ
 --------------------
