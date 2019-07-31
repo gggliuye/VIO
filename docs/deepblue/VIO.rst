@@ -174,7 +174,7 @@ As a result, the magrinalization of the first camera pose, introduces the correl
     \begin{bmatrix}
     \Lambda'_{1,1} & \Lambda'_{1,2} & \Lambda'_{1,3} & \Lambda'_{1,4} &  \Lambda'_{1,5}\\ 
     \Lambda'_{2,1} & \Lambda'_{2,2} & 0 &  \Lambda'_{2,4} &  \Lambda'_{2,5} \\
-    \Lambda'_{3,1} & 0 & \Lambda'_{3,3} & \Lambda'_{3,4} &  \Lambda'_{3,5} \\
+    \Lambda'_{3,1} & 0 & \Lambda'_{3,3} & \Lambda'_{3,4} &  0 \\
     \Lambda'_{4,1} &  \Lambda'_{4,2} & \Lambda'_{4,3} & \Lambda'_{4,4} & 0 \\
     \Lambda'_{5,1} &  \Lambda'_{5,2} & 0 & 0 & \Lambda_{5,5}    \end{bmatrix}
 
