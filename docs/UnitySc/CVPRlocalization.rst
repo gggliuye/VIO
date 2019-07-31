@@ -1,3 +1,8 @@
+CVPR
+===================
+` Visual Localization <https://www.visuallocalization.net/workshop/cvpr/2019/>`_ 
+
+
 1st EHTZ
 --------------------
 
