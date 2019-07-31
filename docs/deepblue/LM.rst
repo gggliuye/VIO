@@ -637,7 +637,7 @@ After this linear alignment , gravity will be refined.
 RefineGravity
 ~~~~~~~~~~~~~~~~~~~~~
 The gravity vector obatined from the previous linear initialization step can be refined by constraining the magnitude.
-As a result the gravity will remain 2 degree of freedom. Therefore the gravity will be reparameterized with twi variables on its tangent space (by TangentBasis function).
+As a result the gravity will remain 2 degree of freedom. Therefore the gravity will be re-parameterized with two variables on its tangent space (by TangentBasis function).
 
 .. math::
     \bar{\mathbf{g}} = g \hat{\mathbf{g}} + w_{b} \mathbf{b} + w_{c} \mathbf{c} 
@@ -660,8 +660,9 @@ The system function should be rewrite as :
     \end{bmatrix}
     \begin{bmatrix} v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  w_{b} \\ w_{c} \\ s  \end{bmatrix}
 
+Use the IDLT as the same before to solve it. Then update the new gravity re-parameterizition.
 
-The gravity refinement will be done four iterations (not as the article said : until gravity converges).
+This process will be done four iterations (not as the article said : until gravity converges).
 
 Reference
 ---------------------
