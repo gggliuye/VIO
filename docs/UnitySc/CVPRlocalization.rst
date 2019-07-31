@@ -19,6 +19,11 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 ------------------------
 China Academy of Sciences.
 
+
+.. image:: CAS.png
+   :align: center
+
+
 contribute
 ~~~~~~~~~~~~~~~~
 
