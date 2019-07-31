@@ -627,6 +627,8 @@ After this linear alignment , gravity will be refined.
 
 RefineGravity
 ~~~~~~~~~~~~~~~~~~~~~
+The gravity vector obatined from the previous linear initialization step can be refined by constraining the magnitude.
+
 
 The gravity direction will be set as z axis using "TangentBasis" function. 
 
