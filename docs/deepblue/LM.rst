@@ -597,15 +597,11 @@ Rerange the upper functions into the form below:
 As a result the system can be rewrite as:
 
 .. math::
-    \begin{bmarix} \alpha_{b_{k+1}}^{b_{k}} \\ 
+    \begin{bmatrix} \alpha_{b_{k+1}}^{b_{k}} \\ 
     \beta_{b_{k+1}}^{b_{k}}  \end{bmatrix} =
-    
-.. math::
     \begin{bmatrix}    - \Delta t_{k} \mathbf{I} & \mathbf{0} &  \frac{1}{2} R_{w}^{b_{k}} \Delta t_{k}^{2} & R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) \\
     -\mathbf{I} &  R_{w}^{b_{k}} R_{b_{k+1}}^{w}  & R_{w}^{b_{k}} \Delta t_{k} & \mathbf{0}
     \end{bmatrix}
-    
-.. math::
     \begin{bmatrix} v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  g^{w} \\ s  \end{bmatrix}
     
 .. math::
