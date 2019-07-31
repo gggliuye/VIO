@@ -33,7 +33,7 @@ contribute
 * 一个新的定位模式框架：使用语义信息提供新的排除外点的标准。
 * 不需要一些额外信息（比如相机的高度和重力方向）。
 
-
+**personal view**: lack of originality. 
 
 
 
