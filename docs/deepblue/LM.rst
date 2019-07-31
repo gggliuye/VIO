@@ -666,6 +666,29 @@ Use the IDLT as the same before to solve it. Then update the new gravity re-para
 
 This process will be done four iterations (not as the article said : until gravity converges).
 
+Factors
+---------------------
+In factors,  we have the residual calculations and corresponding jacobian calculations.
+
+Projection Factor
+~~~~~~~~~~~~~~~~~~~~
+Projection factor corresponding to reprojection error which can also be called as visual measurement residual.
+Considering a feature first seen in the ith frame, and analysis the residual for the feature observation in the jth frame.
+The camera model can be seen as a ray casting from the camera optical center, so the 3d matched point vector (to the jth camera center) and the 2d feature vector should be in the same direction. As a result, the residual is evaluated within the tangant plane.
+
+.. image:: images/visualresidual.png
+   :align: center
+
+.. math::
+    p_{j} = \pi_{c}^{-1} \begin{bmatrix} u_{c_{j}} \\ v_{c_{j}}  \end{bmatrix} = \begin{bmatrix} \bar{X}_{c_{j}} \\ \bar{Y}_{c_{j}} \\ \bar{Z}_{c_{j}}  \end{bmatrix}
+
+where [ :math:`\bar{X}_{c_{j}} , \bar{Y}_{c_{j}} , \bar{Z}_{c_{j}}`] is a unit vector in the jth camera frame (:math:`\pi^{-1}` realize this operation using camera intrinsic parameters).
+
+.. math::
+    p_{i} = R_{b}^{c} (R_{w}^{b_{j}} (R_{b_{i}}^{w} ( R_{c}^{b} \frac{1}{\lambda} \pi_{c}^{-1} \begin{bmatrix} u_{c_{i}} \\ v_{c_{i}}  \end{bmatrix} + p_{c}^{b} ) + p_{b_{i}}^{w} ) + p_{w}^{b_{j}} ) + p_{b}^{c}
+
+Which is a chaine of transform : ith camera :math:`\rightarrow` ith body :math:`\rightarrow` world :math:`\rightarrow` jth body :math:`\rightarrow` jth camera. 
+
 Reference
 ---------------------
 
