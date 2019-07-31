@@ -56,6 +56,8 @@ Details of mean value integration (in estimator_node -> predict()), where all th
 
 **Queation** : these results are never used, it is real necessary??
 
+**Answer** : This is used as output between two camera frames, to achieve IMU-rate performance. This high-frequence state estimates can be utilized as state feedback for closed loop closure.
+
 Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
