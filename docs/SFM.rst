@@ -42,11 +42,13 @@ The depths of this point in two views are unknown, however we know that x and X 
 The upper function can be write as :
 
 .. math::
-    \begin{cases}
     x(p^{3T}\mathbf{X}) - (p^{1T}\mathbf{X}) = 0 
+
+.. math::
     y(p^{3T}\mathbf{X}) - (p^{2T}\mathbf{X}) = 0 
+
+.. math::
     x(p^{2T}\mathbf{X}) - y(p^{1T}\mathbf{X}) = 0
-    \end{cases}
 
 We can find that the thrid function is redundant (as it can be derivated from the first two functions).
 If we have two points, we can rewrite the problem to be a linear optimization problem:
