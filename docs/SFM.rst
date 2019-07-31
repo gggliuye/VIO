@@ -3,7 +3,7 @@ SFM
 
 SfM (structure from motion), is an other useful tool for localization and mapping. 
 Basicly, SfM uses the same technique as SLAM system : feature point extraction, matching algorithms, multiple view geometry, and non linear optimization(bundle adjustment). 
-At the same time SfM and SLAM have many differences, mostly in their pipeline (SLAM uses a realtime pipeline, however SfM has three main types: incremental, global and hierarchical) and some algorithm details (which can be seen  ` SLAMvsSFM <https://vio.readthedocs.io/en/latest/UnitySc/unityShadowCreator.html#sfmslam>`_ )
+At the same time SfM and SLAM have many differences, mostly in their pipeline (SLAM uses a realtime pipeline, however SfM has three main types: incremental, global and hierarchical) and some algorithm details.
 
 
 Here is SFM result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
@@ -42,9 +42,11 @@ The depths of this point in two views are unknown, however we know that x and X 
 The upper function can be write as :
 
 .. math::
-    x(p^{3T}\mathbf{X}) - (p^{1T}\mathbf{X}) = 0
-    y(p^{3T}\mathbf{X}) - (p^{2T}\mathbf{X}) = 0
+    \begin{cases}
+    x(p^{3T}\mathbf{X}) - (p^{1T}\mathbf{X}) = 0 
+    y(p^{3T}\mathbf{X}) - (p^{2T}\mathbf{X}) = 0 
     x(p^{2T}\mathbf{X}) - y(p^{1T}\mathbf{X}) = 0
+    \end{cases}
 
 We can find that the thrid function is redundant (as it can be derivated from the first two functions).
 If we have two points, we can rewrite the problem to be a linear optimization problem:
