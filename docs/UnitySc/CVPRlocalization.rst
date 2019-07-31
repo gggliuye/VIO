@@ -18,7 +18,7 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 1st CAS
 ------------------------
 From China Academy of Sciences.
-The following image shows the system pipeline.
+The following image shows the system pipeline. They used Colmap [#]_ for offline SfM reconstruction, DeeplabV3 [#]_ to offer semantic segmentation, and NetVLAD [#]_ to offer image match. (to be honst, what did you do?)
 
 .. image:: CAS.png
    :align: center
@@ -47,3 +47,9 @@ Reference
 .. [#] Sarlin P E, Cadena C, Siegwart R, et al. From coarse to fine: Robust hierarchical localization at large scale[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019: 12716-12725.
 
 .. [#] Shi T, Shen S, Gao X, et al. Visual Localization Using Sparse Semantic 3D Map[J]. arXiv preprint arXiv:1904.03803, 2019.
+
+.. [#] Schonberger J L, Frahm J M. Structure-from-motion revisited[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2016: 4104-4113.
+
+.. [#] Chen L C, Papandreou G, Kokkinos I, et al. Deeplab: Semantic image segmentation with deep convolutional nets, atrous convolution, and fully connected crfs[J]. IEEE transactions on pattern analysis and machine intelligence, 2017, 40(4): 834-848.
+
+.. [#] Arandjelovic R, Gronat P, Torii A, et al. NetVLAD: CNN architecture for weakly supervised place recognition[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2016: 5297-5307.
