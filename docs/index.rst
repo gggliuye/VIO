@@ -15,6 +15,7 @@ Welcome to SLAM-AR's documentation!
    SFM
    Tracking/TrackingIntroduction
    UnitySc/unityShadowCreator
+   UnitySc/CVPRlocalization
    deepblue/LM
    deepblue/VIO
 
