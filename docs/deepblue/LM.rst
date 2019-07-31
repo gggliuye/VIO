@@ -605,14 +605,23 @@ As a result the system can be rewrite as:
     \begin{bmatrix} v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  g^{w} \\ s  \end{bmatrix}
     
 .. math::
-    z_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} 
+    \hat{z}_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} 
+
+Turn the upper z into our relative preintegration in the body frame:
+
+.. math::
+    \hat{z}_{b_{k+1}}^{b_{k}} = 
+    \begin{bmatrix} \hat{\alpha}_{b_{k+1}}^{b_{k}} - p_{c}^{b} + R_{w}^{b_{k}}R_{b_{k+1}}^{w}p_{c}^{b} \\ 
+    \hat{\beta}_{b_{k+1}}^{b_{k}}  \end{bmatrix} 
+    = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} 
+
 
 The problem becomes :
 
 .. math::
-    \mathcal{X}_{I} = arg \min_{ \mathcal{X}_{I} } \sum_{k}  \|  z_{b_{k+1}}^{b_{k}} - \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} \|^{2}
+    \mathcal{X}_{I} = arg \min_{ \mathcal{X}_{I} } \sum_{k}  \|  \hat{z}_{b_{k+1}}^{b_{k}} - \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I} \|^{2}
 
-where :math:`z_{b_{k+1}}^{b_{k}}` can be obtained from preintegration.
+where :math:`\hat{z}_{b_{k+1}}^{b_{k}}` can be obtained from preintegration.
 
 .. math::
     z_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I}
@@ -628,11 +637,12 @@ After this linear alignment , gravity will be refined.
 RefineGravity
 ~~~~~~~~~~~~~~~~~~~~~
 The gravity vector obatined from the previous linear initialization step can be refined by constraining the magnitude.
+As a result the gravity will remain 2 degree of freedom. Therefore the gravity will be reparameterized with twi variables on its tangent space (by TangentBasis function).
 
+.. math::
+    \bar{\mathbf{g}} = g \hat{\mathbf{g}} + w_{b} \mathbf{b} + w_{c} \mathbf{c} 
 
-The gravity direction will be set as z axis using "TangentBasis" function. 
-
-The gravity refinement will be done four times.
+The gravity refinement will be done four iterations (not as the article said : until gravity converges).
 
 Reference
 ---------------------
