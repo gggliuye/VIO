@@ -146,10 +146,10 @@ We shuold have:
 
 .. math::
     \Lambda_{p}= \Lambda_{rr} - \begin{bmatrix}
+    \Lambda_{2,1}\Lambda_{1,1}^{-1}\Lambda_{1,2} & 0 & \Lambda_{2,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{2,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
     0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & 0 & 0 & 0 \\
-    0 & 0 & \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
-    0 & 0 & \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,2} & 0 & \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{4,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
+    \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,2} & 0 & \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,4} & \Lambda_{5,1}\Lambda_{1,1}^{-1}\Lambda_{1,5} & 0 \\
     0 & 0 & 0 & 0 & 0 \\
     \end{bmatrix}
          
