@@ -624,10 +624,10 @@ The problem becomes :
 where :math:`\hat{z}_{b_{k+1}}^{b_{k}}` can be obtained from preintegration.
 
 .. math::
-    z_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I}
+    \hat{z}_{b_{k+1}}^{b_{k}} = \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I}
     
 .. math::
-    (\mathbf{H}_{b_{k+1}}^{b_{k}})^{T} z_{b_{k+1}}^{b_{k}} = (\mathbf{H}_{b_{k+1}}^{b_{k}})^{T} \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I}
+    (\mathbf{H}_{b_{k+1}}^{b_{k}})^{T} \hat{z}_{b_{k+1}}^{b_{k}} = (\mathbf{H}_{b_{k+1}}^{b_{k}})^{T} \mathbf{H}_{b_{k+1}}^{b_{k}} \mathcal{X}_{I}
 
 We can use **IDIT** to solve it (Same as before, times the transpose of H in both sides, to make a positive definite matrix).
 After this linear alignment , gravity will be refined.
@@ -641,6 +641,25 @@ As a result the gravity will remain 2 degree of freedom. Therefore the gravity w
 
 .. math::
     \bar{\mathbf{g}} = g \hat{\mathbf{g}} + w_{b} \mathbf{b} + w_{c} \mathbf{c} 
+
+This new gravity form will be substituted into the upper linear alignment process. The new state will be:
+
+.. math::
+    Dof = 3 \times N_{Frames} + 1_{w_{b}} + 1_{w_{c}} + 1_{Scale}
+
+.. math::
+    \mathcal{X}_{I} = \begin{bmatrix} \mathbf{v}_{b_{0}}^{b_{0}} & \mathbf{v}_{b_{1}}^{b_{1}} & ... & \mathbf{v}_{b_{n}}^{b_{n}} & w_{b} & w_{c} & s \end{bmatrix}
+
+The system function should be rewrite as :
+
+.. math::
+    \begin{bmatrix} \hat{\alpha}_{b_{k+1}}^{b_{k}} - p_{c}^{b} + R_{w}^{b_{k}}R_{b_{k+1}}^{w}p_{c}^{b} - \frac{1}{2} R_{w}^{b_{k}} g_{0} \Delta t_{k}^{2}\\ 
+    \hat{\beta}_{b_{k+1}}^{b_{k}} - R_{w}^{b_{k}} g_{0} \Delta t_{k} \end{bmatrix} = 
+    \begin{bmatrix}    - \Delta t_{k} \mathbf{I} & \mathbf{0} &  \frac{1}{2} R_{w}^{b_{k}} \mathbf{b} \Delta t_{k}^{2} &  \frac{1}{2} R_{w}^{b_{k}} \mathbf{c} \Delta t_{k}^{2} & R_{w}^{b_{k}} (p_{b_{k+1}}^{w} - p_{b_{k}}^{w}) \\
+    -\mathbf{I} &  R_{w}^{b_{k}} R_{b_{k+1}}^{w}  & R_{w}^{b_{k}}\mathbf{b} \Delta t_{k} & R_{w}^{b_{k}} \mathbf{c} \Delta t_{k} & \mathbf{0}
+    \end{bmatrix}
+    \begin{bmatrix} v_{b_{k}}^{b_{k}} \\ v_{b_{k+1}}^{b_{k+1}} \\  w_{b} \\ w_{c} \\ s  \end{bmatrix}
+
 
 The gravity refinement will be done four iterations (not as the article said : until gravity converges).
 
