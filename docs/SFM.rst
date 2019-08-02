@@ -3,7 +3,13 @@ SFM
 
 SfM (structure from motion), is an other useful tool for localization and mapping. 
 Basicly, SfM uses the same technique as SLAM system : feature point extraction, matching algorithms, multiple view geometry, and non linear optimization(bundle adjustment). 
-At the same time SfM and SLAM have many differences, mostly in their pipeline (SLAM uses a realtime pipeline, however SfM has three main types: incremental, global and hierarchical) and some algorithm details.
+At the same time SfM and SLAM have many differences, mostly in their pipeline (SLAM uses a realtime pipeline, however SfM has three main types: **incremental** , **global**  and **hierarchical** ) and some algorithm details.
+
+* Incremental SfM has the most close structure to SLAM. It is fast and robust. 
+* Global SfM is a process, try to initialize all camera posese, and triangulation, then do global bundle adjustment directly.
+It is more accurate, however takes longer to calculate. And its result dependents heavily on the initialization.
+* Hierachical SfM is the between of the upper two methods. It initialize multiply submaps optimization each of them, then take then together.
+
 
 
 Here is SFM result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
@@ -14,23 +20,10 @@ Here is SFM result built with `colmap <https://colmap.github.io/>`_ , with image
 
 
 
-
-
-
-MVS(Multiple View Stereovision)
---------------------------------
-
-Here is the MVS fusion result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
-
-   
-.. image:: images/sfm/7.png
-   :scale: 80 %
-   :align: center
-
-
-
 Triangulation
 --------------------
+
+Triangulation is mainly two view geometry, to generate depth with stereocopy view. In **Colmap** , only two view triangulation is used. So we describe triangulation details here.
 
 Suppose we have two observations from two camera view :
 
@@ -91,4 +84,46 @@ where U and V are orthogonal, and S is diagonal matrix. Then,
 
 The diagonal elements of STS are ordered decreasingly σ1^2, σ2^2, σ3^2, ...
 Thus, to find an eigenvector corresponding to the smallest eigenvalue we should select the last column of V.
+
+
+Colmap
+-------------------------
+
+In my opinion, Colmap is the best open source SFM tools. It offers userfriendly interface, various algorithm options, uniform output structures, and reliable results. Many applications are built based on it. We will introduce some of the basic idea of Colmap, and its pipeline.
+
+Database format
+~~~~~~~~~~~~~~~~~~~~~
+All the data is saved into a **database.db** file.
+
+* cameras : recording different camera models and all the image associated to it.
+* keypoints : float32 values of the (u,v) pixel poisiton + scale factor + orientation (SIFT concentions) + afflinity + affline shape.
+* descriptors : uint 8 binary blobs (only offer 128 bits descriptors).
+* matches : pair ids + F,E,H blobs
+
+For **Sparse Reconstruction** the data can be saved as "txt" or "bin" files. 
+
+* cameras : cameras' intrinsic parameters
+* images : two lines for each image, 1) image Id + quaternion + position + camera Id + name, 2) set of feature points X + Y + point3d Id.
+* points :  X + Y + Z + R + G + B + error + set of image id and point2d id.
+
+Pipeline
+~~~~~~~~~~~~~~~~~~
+* feature extraction
+* feature matching
+* sparse reconstruction (incremental SfM)
+* dense reconstruction (undistort, stereo, Fusion)
+* Possion / Delaunay reconstruction.
+
+
+MVS(Multiple View Stereovision)
+--------------------------------
+
+Its objective is to build a denser map, using multiply view geometry. Made for dense reconstrcution from images only, which will not be helpful for our localization propose.
+
+Here is the MVS fusion result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
+
+   
+.. image:: images/sfm/7.png
+   :scale: 80 %
+   :align: center
 
