@@ -1,5 +1,9 @@
-CVPR Visual Localization
+Visual Localization
 ===================
+
+
+CVPR
+----------------------
 
 **EN:**
 The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ is localization in different environment changes (winter/spring, rain/snow/sunday, day/night, etc). The core of these algorithms is their robustness against these environment change. The main warpon is "Deep learning", for example EHTZ use its own HF-net [#]_ to extract features, and CAS uses `Deeplabv3 <https://github.com/rishizek/tensorflow-deeplab-v3>`_ (an open source deep learning architecture ) to extract semantic feature as a criterion for outlier rejection [#]_.
@@ -13,7 +17,7 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
    :alt: image from CVPR main page
 
 1st EHTZ
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 They use a **Hierarchical Localization** algorithm, using monolihic CNN to simultaneously(sharing of computations) predict **local features** and **global descriptors** for localization. 
 
@@ -22,8 +26,8 @@ They use a **Hierarchical Localization** algorithm, using monolihic CNN to simul
 
 The robustness of localization is maximized while retaining tractable computational requirements.
 
-HF-Net
-~~~~~~~~~~~~
+**HF-Net**
+
 It is composed of a single encoder (a **MobileNet** bakcbone: optimized for mobile inference) and three heads predicting : 
 
 1. keypoint detection scores
@@ -33,7 +37,7 @@ It is composed of a single encoder (a **MobileNet** bakcbone: optimized for mobi
 The global descriptor is predicted by NetVLAD layer on top of the last feature map of Moblie Net.     
 
 1st CAS
-------------------------
+~~~~~~~~~~~~~~~~~~~~
 **EN:** From China Academy of Sciences.
 The following image shows the system pipeline. They used Colmap [#]_ for offline SfM reconstruction, DeeplabV3 [#]_ to offer semantic segmentation, and NetVLAD [#]_ to offer image match. 
 
@@ -43,8 +47,7 @@ The following image shows the system pipeline. They used Colmap [#]_ for offline
    :align: center
 
 
-contribute
-~~~~~~~~~~~~~~~~
+**Contribute：**
 
 **EN：**
 
@@ -57,6 +60,21 @@ contribute
 * 不需要一些额外信息（比如相机的高度和重力方向）。
 
 **personal view**: lack of originality. 
+
+
+Ours
+----------------------
+They all used Colmap pipeline as basic, and used deep learning mehtod to upate the features(add semantic labels / deep learning extraction method). As a result, we choose to go with the same direction : start from colmap structure, and use deep learning to help updating.
+
+Colmap
+~~~~~~~~~~~~~~~~~~~~~~~
+Colmap offers tool to enable second development. However, I think it is better to use its results only to make it a seperated system. 
+
+1. Decode Colmap's result
+2. For new input image, use the same feature extraction method to extract features. 
+3. Match with image database.
+4. solve pose for the input image.
+
 
 
 
