@@ -41,25 +41,43 @@ VI系统的 **残差** residual包含了IMU项和视觉项，分别使用和普�
    
 如上图所示，Fixation gauge方式的结果会在 **M** 和 **C** 的交界处，Free gauge方式的结果会落在 **M** 上（具体位置会收到Start初值影响）。根据前面的分析，Prior gauge方式的结果则会落在另外两种方式之间，具体位置由叠加的先验信息矩阵决定。
 
+Prior Gauge的处理
+~~~~~~~~~~~~~~~~~~~~~
+
 
 协方差处理
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-从上图中可以发现，其实几种方法得到的协方差矩阵其实是不统一的，没办法直接做比较。所以作者对Free Gauge的协方差结果做了如下的变换。
+从上图中可以发现，其实几种方法得到的协方差矩阵其实是不统一的，没办法直接做比较。
+从直接的协方差矩阵结果可以看出：
 
-.. image:: images/manifordTransform.PNG
+* Free gauge的协方差平均的“分布”在所有的变量上。
+* 由于增加了约束，Fixation gauge的第一个位姿的协方差为零（由于它被固定了），之后位姿的协方差会不停的增加（由于误差是会不停累加的，很符合物理现实）。
+
+所以作者对Free Gauge的协方差结果做了如下的变换。
+
+.. image:: images/manifordTranform.PNG
    :width: 50%
    :align: center
 
 1. 将Free Gauge的结果 :math:`\theta` 和 :math:`\Delta \theta` 在 **M** 流型上线性平移到与 **C** 相交的位置。
-2. 在这个位置，对:math:`\theta` 和 :math:`\Delta \theta` 在 **C** 的切平面上分解，并取出切方向的分量。
+2. 在这个位置，对 :math:`\theta` 和 :math:`\Delta \theta` 在 **C** 的切平面上分解，并取出切方向的分量。
 3. 计算新的对应的协方差矩阵，由同时线性平移的 :math:`\Delta \theta` 求出（具体表达式详见原文章）。
 
 .. image:: images/transformed.PNG
    :width: 100%
    :align: center
-   
+
+线性平移变换之后的Free gauge的协方差矩阵和Fixation gauge的协方差矩阵结果基本是一致的。对于作者的模拟数据集，差距的为
+0.11%，而EuRoC的结果差距为0.02%。可以认为，两个系统的协方差是一致的。
+
+
+实验结果
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 .. image:: images/eurocResult.PNG
+   :width: 70%
    :align: center
 
 .. [#] Zhang Z, Gallego G, Scaramuzza D. On the comparison of gauge freedom handling in optimization-based visual-inertial state estimation[J]. IEEE Robotics and Automation Letters, 2018, 3(3): 2710-2717.
