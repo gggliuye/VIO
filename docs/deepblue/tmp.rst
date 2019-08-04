@@ -27,16 +27,39 @@ Prior方式的处理相当于另外两种的平均。和Fixation方式一样，�
 2. computational cost. 运算时间，通过模拟50次优化，分别衡量总时间、迭代次数、每次迭代的时间。
 3. estimated covariance. 结果的方差。由于他们在分形空间中不统一，作者采取了线性转换的形式将他们在高维的参数空间中统一，之后分析。
 
+VI系统的 **残差** residual包含了IMU项和视觉项，分别使用和普遍VIO相同的模型模拟：视觉使用重投影模型、IMU使用预测和测量的差。
+
+**模拟数据** 使用了平面点和随机点的组合，另外初始位置也加入一定的扰动，使用 B splines 模拟IMU数据。另外也使用了EuRoC的 **真实数据** 进行了比较。
 
 问题阐述
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 在VISLAM中，由于缺少了整体的平移和yaw角度的观测，系统是有多组解的（没有唯一解）。那么多解可以描述为：**参数空间中的流型（~特殊的高维几何）** ，在这个流型 **M** 上的所有点都是系统的解。为了得到唯一解，可以选择在空间中增加约束，约束会通过另一个高维几何体 **C** 的形式体现，而约束之后的解一定会落在 **M** 和 **C** 的交集（参数空间的几何上的交界处）上。
 
 .. image:: images/maniford.PNG
+   :width: 50%
    :align: center
    
 如上图所示，Fixation gauge方式的结果会在 **M** 和 **C** 的交界处，Free gauge方式的结果会落在 **M** 上（具体位置会收到Start初值影响）。根据前面的分析，Prior gauge方式的结果则会落在另外两种方式之间，具体位置由叠加的先验信息矩阵决定。
 
 
+协方差处理
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+从上图中可以发现，其实几种方法得到的协方差矩阵其实是不统一的，没办法直接做比较。所以作者对Free Gauge的协方差结果做了如下的变换。
+
+.. image:: images/manifordTransform.PNG
+   :width: 50%
+   :align: center
+
+1. 将Free Gauge的结果 :math:`\theta` 和 :math:`\Delta \theta` 在 **M** 流型上线性平移到与 **C** 相交的位置。
+2. 在这个位置，对:math:`\theta` 和 :math:`\Delta \theta` 在 **C** 的切平面上分解，并取出切方向的分量。
+3. 计算新的对应的协方差矩阵，由同时线性平移的 :math:`\Delta \theta` 求出（具体表达式详见原文章）。
+
+.. image:: images/transformed.PNG
+   :width: 100%
+   :align: center
+   
+.. image:: images/eurocResult.PNG
+   :align: center
 
 .. [#] Zhang Z, Gallego G, Scaramuzza D. On the comparison of gauge freedom handling in optimization-based visual-inertial state estimation[J]. IEEE Robotics and Automation Letters, 2018, 3(3): 2710-2717.
