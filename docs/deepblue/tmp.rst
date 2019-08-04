@@ -43,12 +43,27 @@ VI系统的 **残差** residual包含了IMU项和视觉项，分别使用和普�
 
 Prior Gauge的处理
 ~~~~~~~~~~~~~~~~~~~~~
+作者分析了不同的Prior先验信息矩阵对系统的影响，用 :math:`\sigma` 来衡量信息矩阵。发现了 
+
+* 当 :math:`\sigma` 较小的时候对系统会由不同程度的影响。
+* 当 :math:`\sigma` 过大的时候，系统的会很布稳定，这是由于先验误差的影响过大，优化的几乎忽视其他残差项的影响，导致系统一片混沌。
+* 当 :math:`\sigma` 较大的时候，系统的收敛状态稳定。
+
+* 其实我觉得这是由于 :math:`\sigma` 相比与其他项的信息已经足够大了，导致这一项几乎是固定顶，当前的系统已经和Fixation Gauge的情况非常非常接近了。作者之后的模拟结果也证明了这一点，使用了较大 :math:`\sigma` 的结果和Fixation gauge的结果几乎没有区别。 **我觉得应该取相对小一些的 :math:`\sigma` 分析，才更有分析的价值** 。
+
+误差和运算cost结果
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. image:: images/eurocResult.PNG
+   :width: 70%
+   :align: center
 
 
 协方差处理
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-从上图中可以发现，其实几种方法得到的协方差矩阵其实是不统一的，没办法直接做比较。
+从上面的参数空间图中可以发现，其实几种方法得到的协方差矩阵其实是不统一的，没办法直接做比较。
 从直接的协方差矩阵结果可以看出：
 
 * Free gauge的协方差平均的“分布”在所有的变量上。
@@ -57,7 +72,7 @@ Prior Gauge的处理
 所以作者对Free Gauge的协方差结果做了如下的变换。
 
 .. image:: images/manifordTranform.PNG
-   :width: 50%
+   :width: 70%
    :align: center
 
 1. 将Free Gauge的结果 :math:`\theta` 和 :math:`\Delta \theta` 在 **M** 流型上线性平移到与 **C** 相交的位置。
@@ -69,15 +84,8 @@ Prior Gauge的处理
    :align: center
 
 线性平移变换之后的Free gauge的协方差矩阵和Fixation gauge的协方差矩阵结果基本是一致的。对于作者的模拟数据集，差距的为
-0.11%，而EuRoC的结果差距为0.02%。可以认为，两个系统的协方差是一致的。
+0.11%，而EuRoC的结果差距为0.02%。可以认为两个系统的协方差是一致的。
 
 
-实验结果
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-.. image:: images/eurocResult.PNG
-   :width: 70%
-   :align: center
 
 .. [#] Zhang Z, Gallego G, Scaramuzza D. On the comparison of gauge freedom handling in optimization-based visual-inertial state estimation[J]. IEEE Robotics and Automation Letters, 2018, 3(3): 2710-2717.
