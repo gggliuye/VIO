@@ -18,6 +18,7 @@ Welcome to SLAM-AR's documentation!
    UnitySc/CVPRlocalization
    deepblue/LM
    deepblue/VIO
+   deepblue/tmp
 
 Indices and tables
 ==================
