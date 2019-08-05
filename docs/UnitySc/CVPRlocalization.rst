@@ -83,10 +83,9 @@ Colmap offers tool to enable second development. However, I think it is better t
        | 640   |    480  |   0.55   |  ~3000    |
        +-------+---------+----------+-----------+ 
 
+3. **Match with image database.** Possible choice: BOW, Exhaustive, Deep learning. Or **Match with map**.
 
-
-3. Match with image database.
-4. solve pose for the input image.
+4. **solve pose** for the input image. PnP + RANSAC.
 
 
 
