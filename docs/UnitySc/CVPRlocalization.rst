@@ -19,7 +19,7 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 1st EHTZ
 ~~~~~~~~~~~~~~~~~~~~
 
-They use a **Hierarchical Localization** algorithm, using monolihic CNN to simultaneously(sharing of computations) predict **local features** and **global descriptors** for localization.  `github page <https://github.com/ethz-asl/hfnet>`_  `paper <https://arxiv.org/abs/1812.03506>`_
+They use a **Hierarchical Localization** algorithm, using monolihic CNN to simultaneously(sharing of computations) predict **local features** and **global descriptors** for localization.  `github page <https://github.com/ethz-asl/hfnet>`_  and  `paper <https://arxiv.org/abs/1812.03506>`_
 
 1. Global descriptor is used to retrieves candidate images.
 2. Local features are used to esimate an accurate 6-DoF pose.
@@ -39,7 +39,7 @@ The global descriptor is predicted by NetVLAD layer on top of the last feature m
 1st CAS
 ~~~~~~~~~~~~~~~~~~~~
 **EN:** From China Academy of Sciences.
-The following image shows the system pipeline. They used Colmap [#]_ for offline SfM reconstruction, DeeplabV3 [#]_ to offer semantic segmentation, and NetVLAD [#]_ to offer image match. 
+The following image shows the system pipeline. They used Colmap [#]_ for offline SfM reconstruction, DeeplabV3 [#]_ to offer semantic segmentation, and NetVLAD [#]_ to offer image match.  `paper page <https://arxiv.org/abs/1904.03803>`_ 
 
 **CH:** 下图是整个系统的流程图解析，SfM离线建图的部分使用了Colmap，语义分割使用了Deeplabv3，图像匹配使用了NetVLAD。总的来说，排除外点的想法具有原创性。
 
