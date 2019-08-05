@@ -73,13 +73,15 @@ Colmap offers tool to enable second development. However, I think it is better t
 1. **Decode Colmap's result.** Using SQL database C++ support, and also support python read gestion.
 2. For new input image, **use the same feature extraction method to extract features.** Using **SIFT** feature extraction as used in original colmap. Time consuming for CPU(i5), and number of points extracted(number of points are not a well-defined general parameter, but we used it here only to compare):
 
-========  ========  ======     ========
-  width    height    time(s)    #points
-========  ========  ======     ========
-  3648      2736     16.72      ~12500
-  1280       960      2.31      ~10000
-  640        480      0.55      ~3000
-========  ========  ======     ========
++-------+---------+----------+-----------+ 
+| width |  height |  time(s) |  #points  |
++=======+=========+==========+===========+ 
+| 3648  |   2736  |  16.72   |  ~12500   |
++-------+---------+----------+-----------+ 
+| 1280  |    960  |   2.31   |  ~10000   |
++-------+---------+----------+-----------+ 
+| 640   |    480  |   0.55   |  ~3000    |
++-------+---------+----------+-----------+ 
 
 3. Match with image database.
 4. solve pose for the input image.
