@@ -19,7 +19,7 @@ The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ 
 1st EHTZ
 ~~~~~~~~~~~~~~~~~~~~
 
-They use a **Hierarchical Localization** algorithm, using monolihic CNN to simultaneously(sharing of computations) predict **local features** and **global descriptors** for localization. 
+They use a **Hierarchical Localization** algorithm, using monolihic CNN to simultaneously(sharing of computations) predict **local features** and **global descriptors** for localization.  `github page <https://github.com/ethz-asl/hfnet>`_  `paper <https://arxiv.org/abs/1812.03506>`_
 
 1. Global descriptor is used to retrieves candidate images.
 2. Local features are used to esimate an accurate 6-DoF pose.
