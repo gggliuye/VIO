@@ -169,6 +169,7 @@ VLAD : vector of locally aggregated descriptors. It can be seen as a simplificat
 
 NetVLAD
 -------------------------
+I found most of the top ranked methods in CVPR use NetVLAD method.
 
 It is a **CNN** architecture trainable in an **end-to-end** manner, trainning in a **weakly supervised ranking loss** , for place recognition [5]_ . `github page <https://github.com/Relja/netvlad>`_
 
@@ -185,7 +186,7 @@ While, NetVLAD performs **end-to-end** learning, providing great boost in perfor
 NetVLAD
 ~~~~~~~~~~~~~~~~~~~~~~~
 The author proposed to mimic VLAD in a CNN framework and designed a trainable generalized VLAD layer : NetVLAD.
-
+The main requirement is that the layer's operation is **differentiable**.
 
 
 Ours
