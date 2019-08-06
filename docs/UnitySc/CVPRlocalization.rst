@@ -158,6 +158,7 @@ VLAD : vector of locally aggregated descriptors. It can be seen as a simplificat
 .. math::
     1 \leqslant i \leqslant k,  1 \leqslant j \leqslant D, i \in \mathbb{Z},  j \in \mathbb{Z}
 
+* The vector  v is subsequently :math:`L_{2}`-normalized.
 * This characterizes the distribution of the vectors with respect to the center.
 
 
