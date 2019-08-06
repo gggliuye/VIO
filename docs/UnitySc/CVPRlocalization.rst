@@ -183,11 +183,22 @@ Most CNN image retrival pipelines are based on :
 
 While, NetVLAD performs **end-to-end** learning, providing great boost in performance.
 
-NetVLAD
+VLAD Layer
 ~~~~~~~~~~~~~~~~~~~~~~~
 The author proposed to mimic VLAD in a CNN framework and designed a trainable generalized VLAD layer : NetVLAD.
 The main requirement is that the layer's operation is **differentiable**.
+The main discontinuities of the VLAD method is its membership fucntion :math:`a_{i}(x_{n})` as we defined above. The auther then replace it with soft assigement of descriptor to multiple clusters :
 
+.. math::
+    \bar{a}_{i}(\mathbf{x}_{n}) = \frac{ e^{-\alpha \| \mathbf{x}_{n} - c_{i} \|^{2}} } { \sum_{i'}  e^{-\alpha \| \mathbf{x}_{n} - c_{i'} \|^{2}} }
+
+* This assigns the weight of descriptor :math:`x_{n}` to cluster :math:`c_{i}` proportional to their proximity, but relative to proximities to other cluster centers.
+* For large :math:`\alpha` this setup is close to the original VLAD.
+
+As a result, the VLAD results in :
+
+.. math::
+    v_{i,j} = \sum_{n=1}^{N} \frac{ e^{-\alpha \| \mathbf{x}_{n} - c_{i} \|^{2}} } { \sum_{i'}  e^{-\alpha \| \mathbf{x}_{n} - c_{i'} \|^{2}} } (x_{n,j} - c_{i,j})
 
 Ours
 ----------------------
