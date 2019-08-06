@@ -206,6 +206,12 @@ As a result, the NetVLAD Layer results in :
 
 The main contribution is : **the system can learn the parameters used in NetVLAD**, and **it can be combined with any other methods**.
 
+Training
+~~~~~~~~~~~~~~~~~~
+
+The author further explained its Database generator, its score evaluator, a weakly supervised triple ranking loss. But we will not discuss them here at the momoent.
+
+
 Ours
 ----------------------
 **In developping**
