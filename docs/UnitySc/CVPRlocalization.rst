@@ -153,13 +153,35 @@ VLAD : vector of locally aggregated descriptors. It can be seen as a simplificat
 * Accumulate for each visual word :math:`c_{i}` , the differences :math:`x-c_{i}` of the vector x assigend to :math:`c_{i}`. With d-dimensional local descriptor, k visual words :
 
 .. math::
-    v_{i,j} = \sum_{x s.t. NN(x)=c_{i}} x_{j} - c_{i,j}
-    
+    v_{i,j} = \sum_{x, s.t. NN(x)=c_{i}} x_{j} - c_{i,j}
+
 .. math::
-    1 \leqslant i \leqslant k,  1 \leqslant j \leqslant D, i \in \mathbb{Z},  j \in \mathbb{Z}
+    1 \leqslant i \leqslant k,  1 \leqslant j \leqslant d, i \in \mathbb{Z},  j \in \mathbb{Z}
+
+* Or if we note :math:`a_{i}(x_{n})` the **membership** of the descriptor :math:`x_{n}` to i-th visual word. We can rewrite the function [5]_ :
+
+.. math::
+    v_{i,j} = \sum_{n=1}^{N} a_{i}(x_{n}) (x_{n,j} - c_{i,j})
 
 * The vector  v is subsequently :math:`L_{2}`-normalized.
 * This characterizes the distribution of the vectors with respect to the center.
+* In other word, VLAD stores the sum of residuals (difference vector between the descriptor and its corresponding cluster center) for each visual word [5]_ .
+
+NetVLAD
+-------------------------
+
+It is a **CNN** architecture trainable in an **end-to-end** manner, trainning in a **weakly supervised ranking loss** , for place recognition [5]_ . `github page <https://github.com/Relja/netvlad>`_
+
+Deep architecture
+~~~~~~~~~~~~~~~~~~~~~
+
+Most CNN image retrival pipelines are based on :
+
+1. Extracting local descriptors.
+2. Pooling in an orderless manner.
+
+While, NetVLAD performs **end-to-end** learning, providing great boost in performance.
+
 
 
 
