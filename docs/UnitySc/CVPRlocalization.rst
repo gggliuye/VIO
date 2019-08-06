@@ -163,7 +163,7 @@ VLAD : vector of locally aggregated descriptors. It can be seen as a simplificat
 .. math::
     v_{i,j} = \sum_{n=1}^{N} a_{i}(x_{n}) (x_{n,j} - c_{i,j})
 
-* The vector  v is subsequently :math:`L_{2}`-normalized.
+* The vector v is subsequently column-wise :math:`L_{2}`-normalized into a vector.
 * This characterizes the distribution of the vectors with respect to the center.
 * In other word, VLAD stores the sum of residuals (difference vector between the descriptor and its corresponding cluster center) for each visual word [5]_ .
 
