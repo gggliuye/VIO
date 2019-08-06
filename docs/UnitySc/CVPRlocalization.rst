@@ -122,8 +122,8 @@ As a result, the **Fisher vector** (also name as Fisher score in `wiki <https://
 
 As we know the expression of gaussian distribution, we can analyticly solve the vector. 
 
-* If the dimension of X is D, then each gaussian model should has (2D+1) parameters.
-Suppose we have k gaussian models, the total number of parameters is k(2D+1), as we also know the :math:`\pi_{k}` are normalized. As a result, the Fisher vector has **k(2D+1) - 1** elements.
+* If the dimension of X is D, then each gaussian model should has (2D+1) parameters. Suppose we have k gaussian models, the total number of parameters is k(2D+1), as we also know the :math:`\pi_{k}` are normalized. As a result, the Fisher vector has **k(2D+1) - 1** elements.
+
 * The similarity of two Fisher vectors can be evulated by Fisher kernel , where **I** is the corresponding infomation matrix:
 
 .. math::
