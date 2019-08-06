@@ -108,11 +108,37 @@ For **Sparse Reconstruction** the data can be saved as "txt" or "bin" files.
 
 Pipeline
 ~~~~~~~~~~~~~~~~~~
-* feature extraction
+* feature extraction -> SIFT
 * feature matching
 * sparse reconstruction (incremental SfM)
 * dense reconstruction (undistort, stereo, Fusion)
 * Possion / Delaunay reconstruction.
+
+Feature Matching
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Exhaustive Matching**:
+
+Every image is matched against every other image, while the block size determines how many images are loaded from disk into memory at the same time.
+
+**Sequential Matching**:
+
+Used for sequential order input images,  e.g., by a video camera. Consecutively captured images are matched against each other.
+Will not work for unordered images sets.
+
+**Vocabulary Tree Matching**:
+
+Used to large dataset (several thousands), bag of visual words.
+
+**Spatial Matching**:
+
+This matching mode matches every image against its spatial nearest neighbors(can be set manually, or by default using GPS).
+
+**Transitive Matching**: 
+
+This matching mode uses the transitive relations of already existing feature matches to produce a more complete matching graph. If an image A matches to an image B and B matches to C, then this matcher attempts to match A to C directly.
+
+**Custom Matching**
 
 
 MVS(Multiple View Stereovision)
