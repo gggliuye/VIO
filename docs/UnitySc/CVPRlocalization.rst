@@ -84,7 +84,7 @@ We introduce here the basic popeline of DBOW [8]_ . `github <https://github.com/
 * Using k means/medians clustering with tf-idf weight to build a retrival data set.
 * For a new process image, for all its features find the closest word in the vocabulary (normally use binary Hamming distance for fast process). With the words, encode the image to t-dim vector (t = number of words in the vocabulary). 
 
-**PROBLEMS**
+**DRAWBACKS**
 
 * It requires large dimension for large scale problem.
 * NN nearest neighbor search is not efficient
@@ -107,7 +107,7 @@ where :math:`\pi_{k}` are normalization parameters ,
 .. math::
     \sum_{k=1}^{K} \pi_{k} = 1 , 0 \leqslant \pi_{k} \leqslant 1
 
-In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi_{k}, \mu_{k}, \Sigma_{k} \rbrace = \theta`  . We can treat the problem as a classification problem : find the best :math:`\theta` that maximum the probabity that a given input x is correct classified: 
+In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi_{k}, \mu_{k}, \Sigma_{k} \rbrace = \theta`  . We can treat the problem as a optimization problem : maximumal the sample's likelihood with respect to the parameters  :math:`\theta` of this distribution: 
 
 .. math::
     \hat{\theta} = arg \max_{\theta} \prod_{k=1}^{K} p(x_{k} | \theta)
@@ -121,7 +121,7 @@ In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi
 As a result, the **Fisher vector** (also name as Fisher score in `wiki <https://en.wikipedia.org/wiki/Fisher_kernel>`_ ) can be expressed as :
 
 .. math::
-    \begin{bmatrix} \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \pi_{k} } &
+    \mathbf{U}_{X} = \begin{bmatrix} \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \pi_{k} } &
     \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \mu_{k} }  &
     \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \Sigma_{k} }    \end{bmatrix}
 
@@ -146,7 +146,19 @@ As we know the expression of gaussian distribution, we can analyticly solve the 
 
 VLAD
 ~~~~~~~~~~~~~~~
+VLAD : vector of locally aggregated descriptors. It can be seen as a simplification of the Fisher kernel [6]_ . 
 
+* Learn a codebook(~vocabulary) :math:`\mathcal{C}= \lbrace c_{1}, ...,c_{k} \rbrace` of k visual words with k-means.
+* Each local descriptor x is associated to its nearest visual word :math:`c_{i} = NN(x)`
+* Accumulate for each visual word :math:`c_{i}` , the differences :math:`x-c_{i}` of the vector x assigend to :math:`c_{i}`. With d-dimensional local descriptor, k visual words :
+
+.. math::
+    v_{i,j} = \sum_{x s.t. NN(x)=c_{i}} x_{j} - c_{i,j}
+    
+.. math::
+    1 \leqslant i \leqslant k,  1 \leqslant j \leqslant D, i \in \mathbb{Z},  j \in \mathbb{Z}
+
+* This characterizes the distribution of the vectors with respect to the center.
 
 
 
