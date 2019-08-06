@@ -194,11 +194,17 @@ The main discontinuities of the VLAD method is its membership fucntion :math:`a_
 
 * This assigns the weight of descriptor :math:`x_{n}` to cluster :math:`c_{i}` proportional to their proximity, but relative to proximities to other cluster centers.
 * For large :math:`\alpha` this setup is close to the original VLAD.
-
-As a result, the VLAD results in :
+* Expanding the squares results in :
 
 .. math::
-    v_{i,j} = \sum_{n=1}^{N} \frac{ e^{-\alpha \| \mathbf{x}_{n} - c_{i} \|^{2}} } { \sum_{i'}  e^{-\alpha \| \mathbf{x}_{n} - c_{i'} \|^{2}} } (x_{n,j} - c_{i,j})
+    \bar{a}_{i}(\mathbf{x}_{n}) = \frac{ e^{\mathbf{w}_{i}^{T}\mathbf{x}_{n} + b_{i} } } { \sum_{i'}  e^{\mathbf{w}_{i'}^{T}\mathbf{x}_{n} + b_{i'}} }
+
+As a result, the NetVLAD Layer results in :
+
+.. math::
+    v_{i,j} = \sum_{n=1}^{N} \frac{ e^{\mathbf{w}_{i}^{T}\mathbf{x}_{n} + b_{i} } } { \sum_{i'}  e^{\mathbf{w}_{i'}^{T}\mathbf{x}_{n} + b_{i'}} } (x_{n,j} - c_{i,j})
+
+
 
 Ours
 ----------------------
