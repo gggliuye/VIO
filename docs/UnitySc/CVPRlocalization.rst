@@ -84,6 +84,14 @@ We introduce here the basic popeline of DBOW [8]_ . `github <https://github.com/
 * Using k means/medians clustering with tf-idf weight to build a retrival data set.
 * For a new process image, for all its features find the closest word in the vocabulary (normally use binary Hamming distance for fast process). With the words, encode the image to t-dim vector (t = number of words in the vocabulary). 
 
+**PROBLEMS**
+
+* It requires large dimension for large scale problem.
+* NN nearest neighbor search is not efficient
+* Hash method can be used to accelerate, however it lacks accuracy.
+
+
+
 Fisher vector
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -115,7 +123,7 @@ As a result, the **Fisher vector** (also name as Fisher score in `wiki <https://
 .. math::
     \begin{bmatrix} \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \pi_{k} } &
     \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \mu_{k} }  &
-    \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \Sigma_{k} }    \end{bmatrix} _{k}
+    \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \Sigma_{k} }    \end{bmatrix}
 
 .. math::
     \mathbf{U}_{X} =  \nabla_{\theta} \log (p(x_{k} | \theta))
@@ -124,6 +132,8 @@ As we know the expression of gaussian distribution, we can analyticly solve the 
 
 * If the dimension of X is D, then each gaussian model should has (2D+1) parameters. Suppose we have k gaussian models, the total number of parameters is k(2D+1), as we also know the :math:`\pi_{k}` are normalized. As a result, the Fisher vector has **k(2D+1) - 1** elements.
 
+* Or kD dimensional when considering only the components associated with either the means of the variances of the GMM.
+
 * The similarity of two Fisher vectors can be evulated by Fisher kernel , where **I** is the corresponding infomation matrix:
 
 .. math::
@@ -131,8 +141,12 @@ As we know the expression of gaussian distribution, we can analyticly solve the 
 
 * Fisher vector gives the **direction** in paramete space, into which the learnt distrubution should be modified to better fit the observed data.
 
+* In comparison with BOW/BOF representation, **fewer visual words are required by this more sophisticated representation** .
+
+
 VLAD
 ~~~~~~~~~~~~~~~
+
 
 
 
