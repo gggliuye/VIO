@@ -204,7 +204,7 @@ As a result, the NetVLAD Layer results in :
 .. math::
     v_{i,j} = \sum_{n=1}^{N} \frac{ e^{\mathbf{w}_{i}^{T}\mathbf{x}_{n} + b_{i} } } { \sum_{i'}  e^{\mathbf{w}_{i'}^{T}\mathbf{x}_{n} + b_{i'}} } (x_{n,j} - c_{i,j})
 
-
+The main contribution is : **the system can learn the parameters used in NetVLAD**, and **it can be combined with any other methods**.
 
 Ours
 ----------------------
