@@ -99,7 +99,7 @@ where :math:`\pi_{k}` are normalization parameters ,
 .. math::
     \sum_{k=1}^{K} \pi_{k} = 1 , 0 \leqslant \pi_{k} \leqslant 1
 
-In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi_{k}, \mu_{k}, \Sigma_{k} \rbrace = \theta`  . We can treat the problem as a classification problem : find the best :math:`\theta` that maximum the probabity that a given input x is correct classified (to its most closest image in the data base): 
+In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi_{k}, \mu_{k}, \Sigma_{k} \rbrace = \theta`  . We can treat the problem as a classification problem : find the best :math:`\theta` that maximum the probabity that a given input x is correct classified: 
 
 .. math::
     \hat{\theta} = arg \max_{\theta} \prod_{k=1}^{K} p(x_{k} | \theta)
@@ -109,8 +109,27 @@ In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi
     
 .. math::
     \hat{\theta} = arg \max_{\theta} \mathcal{L}(\mathbf{x} | \theta)
-    
 
+As a result, the **Fisher vector** (also name as Fisher score in `wiki <https://en.wikipedia.org/wiki/Fisher_kernel>`_ ) can be expressed as :
+
+.. math::
+    \begin{bmatrix} \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \pi_{k} } &
+    \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \mu_{k} }  &
+    \frac{\partial \mathcal{L}(\mathbf{x} | \theta)} {\partial \Sigma_{k} }    \end{bmatrix} _{k}
+
+.. math::
+    \mathbf{U}_{X} =  \nabla_{\theta} \log (p(x_{k} | \theta))
+
+As we know the expression of gaussian distribution, we can analyticly solve the vector. 
+
+* If the dimension of X is D, then each gaussian model should has (2D+1) parameters.
+Suppose we have k gaussian models, the total number of parameters is k(2D+1), as we also know the :math:`\pi_{k}` are normalized. As a result, the Fisher vector has **k(2D+1) - 1** elements.
+* The similarity of two Fisher vectors can be evulated by Fisher kernel , where **I** is the corresponding infomation matrix:
+
+.. math::
+    \mathcal{K}(\mathbf{x}_{i}, \mathbf{x}_{j}) = \mathbf{U}_{\mathbf{x}_{i}}^{T} \mathbf{I} \mathbf{U}_{\mathbf{x}_{j}}
+
+* Fisher vector gives the **direction** in paramete space, into which the learnt distrubution should be modified to better fit the observed data.
 
 VLAD
 ~~~~~~~~~~~~~~~
