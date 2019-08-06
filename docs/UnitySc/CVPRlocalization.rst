@@ -165,6 +165,8 @@ VLAD : vector of locally aggregated descriptors. It can be seen as a simplificat
 
 Ours
 ----------------------
+**In developping**
+
 They all used Colmap pipeline as basic, and used deep learning mehtod to upate the features(add semantic labels / deep learning extraction method). As a result, we choose to go with the same direction : start from colmap structure, and use deep learning to help updating.
 
 Colmap
