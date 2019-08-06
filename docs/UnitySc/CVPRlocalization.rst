@@ -61,6 +61,12 @@ The following image shows the system pipeline. They used Colmap [3]_ for offline
 
 **personal view**: lack of originality. 
 
+D2-Net
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`github page <https://github.com/mihaidusmanu/d2-net>`_  `paper in arXiv <https://arxiv.org/abs/1905.03561>`_  `project page <https://dsmn.ml/publications/d2-net.html>`_ . 
+
+
 Traditional methods
 -------------------------
 The place recognition problem has been traditional cast as an **instance retrieval task** , where the query image location is estimated using locations of the most similar images obtained by querying a large tagged database. Each database image is represented using local invariant features such as SIFT that are aggregated into a single vector representation for the entire image such as bag-of-visual-words [8]_ , VLAD [6]_ , or Fisher vector [7]_. [5]_
@@ -204,7 +210,15 @@ As a result, the NetVLAD Layer results in :
 .. math::
     v_{i,j} = \sum_{n=1}^{N} \frac{ e^{\mathbf{w}_{i}^{T}\mathbf{x}_{n} + b_{i} } } { \sum_{i'}  e^{\mathbf{w}_{i'}^{T}\mathbf{x}_{n} + b_{i'}} } (x_{n,j} - c_{i,j})
 
+The upper function can be further implemented into serval layers :
+
+.. image:: NetVLAD.PNG
+   :align: center
+   :alt: image from the original paper
+
 The main contribution is : **the system can learn the parameters used in NetVLAD**, and **it can be combined with any other methods**.
+
+
 
 Training
 ~~~~~~~~~~~~~~~~~~
