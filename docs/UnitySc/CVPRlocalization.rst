@@ -78,7 +78,7 @@ We introduce here the basic popeline of DBOW [8]_ . `github <https://github.com/
    :align: center
    :alt: image from the original paper
 
-* collect image database offline to build a **vocabulary tree**. It includes two parts : **Inverse index** and **Direct index** , Each word has a table of inverse indexs, recording its weights. Each tree layer has a table of direct index, recording the words the current image owns in this layer.
+* Collect image database offline to build a **vocabulary tree**. It includes two parts : **Inverse index** and **Direct index** , Each word has a table of inverse indexs, recording its weights. Each tree layer has a table of direct index, recording the words the current image owns in this layer.
 * Inverse index is used to fast visit each weight of each word.
 * Direct index is used to fast record feature of each image.
 * Using k means/medians clustering with tf-idf weight to build a retrival data set.
@@ -86,6 +86,25 @@ We introduce here the basic popeline of DBOW [8]_ . `github <https://github.com/
 
 Fisher vector
 ~~~~~~~~~~~~~~~~~~~~~
+
+Fisher vector is developed from GMM(Gaussian `mixture models <https://en.wikipedia.org/wiki/Mixture_model>`_ ). Which can be used to measure the similarity of two objects.
+
+GMM is a mixture of multiple gaussian models ( :math:`\mathcal{N}( x | \mu_{k}, \Sigam_{k})` ) :
+
+.. math::
+    p(x) = \sum_{k=1}^{K} \pi_{k} \mathcal{N}( x | \mu_{k}, \Sigam_{k})
+
+where :math:`\pi_{k}` are normalization parameters , 
+
+.. math::
+    \sum_{k=1}^{K} \pi_{k} = 1 , 0 \leqslant \pi_{k} \leqslant 1
+
+In summary, we note all the parameters to be :math:`\theta` , :math:` \lbrace \pi_{k}, \mu_{k}, \Sigma_{k} \rbrace = \theta` . We can treat the problem as a classification problem : find the best :math:`\theta` that maximum the probabity that a given input x is correct classified (to its most closest image in the data base): 
+
+.. math::
+    \hat{\theat} = arg \max_{\theta} \prod_{k=1}^{K} p(x_{k} | \theta)
+    
+
 
 VLAD
 ~~~~~~~~~~~~~~~
