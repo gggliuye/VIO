@@ -104,6 +104,12 @@ In summary, we note all the parameters to be :math:`\theta` , :math:` \lbrace \p
 .. math::
     \hat{\theat} = arg \max_{\theta} \prod_{k=1}^{K} p(x_{k} | \theta)
     
+.. math::
+    \hat{\theat} = arg \max_{\theta} \sum_{k=1}^{K} \log (p(x_{k} | \theta))
+    
+.. math::
+    \hat{\theat} = arg \max_{\theta} \mathcal{L}(\mathbf{x} | \theta)
+    
 
 
 VLAD
