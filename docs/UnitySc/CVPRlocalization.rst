@@ -232,14 +232,19 @@ Ours
 
 They all used Colmap pipeline as basic, and used deep learning mehtod to upate the features(add semantic labels / deep learning extraction method). As a result, we choose to go with the same direction : start from colmap structure, and use deep learning to help updating.
 
-Colmap
-~~~~~~~~~~~~~~~~~~~~~~~
+**Colmap** :
 Colmap offers tool to enable second development. However, I think it is better to use its results only to make it a seperated system. 
 
-1. **Decode Colmap's result.** Using SQL database C++ support, and also support python read gestion. Intereface could be found in "src/base/database.h". Colmap uses a standard SQLite data structure, which allow cross platform. The camera parameters, image features and descriptors are saved here. And the sparse (SFM) resconstruction results are save in another fold, with three files (bin or txt), with the infomation of cameras, images and 3d points. Its intereface can be found in "src/base/reconstruction.h". Or we can directly read the txt files.
+Decode Colmap's result
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using SQL database C++ support, and also support python read gestion. Intereface could be found in "src/base/database.h". Colmap uses a standard SQLite data structure, which allow cross platform. The camera parameters, image features and descriptors are saved here. And the sparse (SFM) resconstruction results are save in another fold, with three files (bin or txt), with the infomation of cameras, images and 3d points. Its intereface can be found in "src/base/reconstruction.h". Or we can directly read the txt files.
 
 
-2. For new input image, **use the same feature extraction method to extract features.** Using **SIFT** feature extraction as used in original colmap. Time consumptions for CPU(i5), and number of points extracted(number of points are not a well-defined general parameter, but we used it here only to compare) are shown below. The calculation intereface can be found in "src/feature/sift.h".
+Feature Extraction
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For new input image, **use the same feature extraction method to extract features.** Using **SIFT** feature extraction as used in original colmap. Time consumptions for CPU(i5), and number of points extracted(number of points are not a well-defined general parameter, but we used it here only to compare) are shown below. The calculation intereface can be found in "src/feature/sift.h".
 
        +-------+---------+----------+-----------+ 
        | width |  height |  time(s) |  #points  |
@@ -250,7 +255,11 @@ Colmap offers tool to enable second development. However, I think it is better t
        +-------+---------+----------+-----------+ 
        | 640   |    480  |   0.55   |  ~3000    |
        +-------+---------+----------+-----------+ 
-3. **Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
+
+Matching
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
 * Load the pretrained voc tree.
@@ -258,12 +267,18 @@ Exhaustive match will be too slow for our real time application, so we choost to
 * MatchNearestNeighborsInVisualIndex : **runtime** : take about 36 seconds for a data set with 650 images.
 * Math the SIFT keypoints : **runtime** : 14 seconds for image pair both has about 10000 points.
 
-4. **solve pose** for the input image. PnP + RANSAC. With the upper matching result, find the corresponding 3d pints -> solve PnP with outlier rejection. The whole process is considerably fast. There are two main function in this process :
+Pose Solver
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**solve pose** for the input image. PnP + RANSAC. With the upper matching result, find the corresponding 3d pints -> solve PnP with outlier rejection. The whole process is considerably fast. There are two main function in this process :
 
 * EstimateAbsolutePose : can be found in "src/estimators/pose.h", the main calculation part is to call the P3PEstimator/EPNPEstimator method with ransac.
 * RefineAbsolutePose : uses seres non linear optimization method to refine the camera pose.
 
-5. Further update : **feature extraction method** , **matching method** , **feature match methods**. The pose solving method is relative complete. 
+Further update 
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**feature extraction method** , **matching method** , **feature match methods**. The pose solving method is relative complete. 
 
 
 Reference
