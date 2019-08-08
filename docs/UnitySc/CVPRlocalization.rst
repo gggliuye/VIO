@@ -263,7 +263,7 @@ Exhaustive match will be too slow for our real time application, so we choost to
 * EstimateAbsolutePose : can be found in "src/estimators/pose.h", the main calculation part is to call the P3PEstimator/EPNPEstimator method with ransac.
 * RefineAbsolutePose : uses seres non linear optimization method to refine the camera pose.
 
-
+5. Further update : **feature extraction method** , **matching method**. The pose solving method is relative complete. 
 
 
 Reference
