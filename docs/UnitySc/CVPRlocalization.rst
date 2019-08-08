@@ -262,11 +262,6 @@ Matching
 **Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
-* Load the pretrained voc tree.
-* IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use. 
-* MatchNearestNeighborsInVisualIndex : **runtime** : take about 36 seconds for a data set with 650 images.
-* Math the SIFT keypoints : **runtime** : 14 seconds for image pair both has about 10000 points.
-
 Pose Solver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
