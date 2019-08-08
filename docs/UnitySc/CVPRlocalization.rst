@@ -254,15 +254,16 @@ Colmap offers tool to enable second development. However, I think it is better t
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
 * Load the pretrained voc tree.
-* IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use.
-* MatchNearestNeighborsInVisualIndex.
+* IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use. 
+* MatchNearestNeighborsInVisualIndex : **runtime** : take about 36 seconds for a data set with 650 images.
+* Math the SIFT keypoints : **runtime** : 14 seconds for image pair both has about 10000 points.
 
 4. **solve pose** for the input image. PnP + RANSAC. With the upper matching result, find the corresponding 3d pints -> solve PnP with outlier rejection. The whole process is considerably fast. There are two main function in this process :
 
 * EstimateAbsolutePose : can be found in "src/estimators/pose.h", the main calculation part is to call the P3PEstimator/EPNPEstimator method with ransac.
 * RefineAbsolutePose : uses seres non linear optimization method to refine the camera pose.
 
-5. Further update : **feature extraction method** , **matching method**. The pose solving method is relative complete. 
+5. Further update : **feature extraction method** , **matching method** , **feature match methods**. The pose solving method is relative complete. 
 
 
 Reference
