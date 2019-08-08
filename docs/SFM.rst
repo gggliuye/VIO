@@ -134,7 +134,8 @@ Used to large dataset (several thousands), bag of visual words. It is our normal
 * IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use. 
 * MatchNearestNeighborsInVisualIndex : **runtime** : take about 36 seconds for a data set with 622 images taking maximual 1000 features, in a i5 CPU.
 
-It is still too slow for a half-real-time application, we tried with less features. The system do speeds up, however the results became highly unreliable.
+When I tested it with a single image localization problem, I found it some time gave fault result, which will lead to bad performance. 
+And it is still too slow for a half-real-time application, we tried with less features. The system do speeds up, however the results became highly unreliable.
 
 **Spatial Matching**:
 
