@@ -250,9 +250,12 @@ Colmap offers tool to enable second development. However, I think it is better t
        +-------+---------+----------+-----------+ 
        | 640   |    480  |   0.55   |  ~3000    |
        +-------+---------+----------+-----------+ 
-
-3.  **Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
+3. **Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
+
+* Load the pretrained voc tree.
+* IndexImagesInVisualIndex.
+* MatchNearestNeighborsInVisualIndex.
 
 4. **solve pose** for the input image. PnP + RANSAC. With the upper matching result, find the corresponding 3d pints -> solve PnP with outlier rejection. The whole process is considerably fast. There are two main function in this process :
 
