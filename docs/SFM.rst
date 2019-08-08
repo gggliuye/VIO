@@ -128,7 +128,11 @@ Will not work for unordered images sets.
 
 **Vocabulary Tree Matching**:
 
-Used to large dataset (several thousands), bag of visual words.
+Used to large dataset (several thousands), bag of visual words. It is our normal choose, as it is relatively faster than exhaustive method, and it is robust. Its pipleine is :
+
+* Load the pretrained vocabulary tree.
+* IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use. 
+* MatchNearestNeighborsInVisualIndex : **runtime** : take about 36 seconds for a data set with 622 images, in a i5 CPU.
 
 **Spatial Matching**:
 
