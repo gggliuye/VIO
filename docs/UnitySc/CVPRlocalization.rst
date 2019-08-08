@@ -254,7 +254,7 @@ Colmap offers tool to enable second development. However, I think it is better t
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
 * Load the pretrained voc tree.
-* IndexImagesInVisualIndex.
+* IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use.
 * MatchNearestNeighborsInVisualIndex.
 
 4. **solve pose** for the input image. PnP + RANSAC. With the upper matching result, find the corresponding 3d pints -> solve PnP with outlier rejection. The whole process is considerably fast. There are two main function in this process :
