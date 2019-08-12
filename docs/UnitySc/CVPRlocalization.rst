@@ -256,11 +256,16 @@ For new input image, **use the same feature extraction method to extract feature
        | 640   |    480  |   0.55   |  ~3000    |
        +-------+---------+----------+-----------+ 
 
+We can also see the more detail evalutation of different feature extraction methods [9]_ .
+
 Matching
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
+
+* we used the `FBOW <https://github.com/rmsalinas/fbow>`_ method. It run extremely fast, 300 ms for an input image. However the precision is not satisfying. It is either because of the bad reconstructed vocabulary or because the image set have too much duplicate features, or both.
+* The matching time is not satisfying neither.
 
 Pose Solver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -294,3 +299,5 @@ Reference
 .. [7] Sánchez J, Perronnin F, Mensink T, et al. Image classification with the fisher vector: Theory and practice[J]. International journal of computer vision, 2013, 105(3): 222-245.
 
 .. [8] Gálvez-López D, Tardos J D. Bags of binary words for fast place recognition in image sequences[J]. IEEE Transactions on Robotics, 2012, 28(5): 1188-1197.
+
+.. [9] Canclini A, Cesana M, Redondi A, et al. Evaluation of low-complexity visual feature detectors and descriptors[C]//2013 18th International Conference on Digital Signal Processing (DSP). IEEE, 2013: 1-7.
