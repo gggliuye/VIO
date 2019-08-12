@@ -24,11 +24,15 @@ And as a result of these patch match approaches, they are very robust to fast mo
 
 
 SVO (Fast Semi-Direct Monocular Visual Odometry)
->>>>>>>>>>>>>
-SVO is designed for Drones(Micro Aerial Vehicles), a semmi-direct method. While the camera is localized under the drone, pointing downside. It can run very fast, 55 FPS on the onboard embedded computer. 
+~~~~~~~~~~~~~~~~~~
+SVO [1]_ is designed for **Drones(Micro Aerial Vehicles)** , a semmi-direct method. While the camera is localized under the drone, pointing downside. It can run very fast, 55 FPS on the onboard embedded computer. 
 
 However it is not robust for rotation. When test with AR situations, where exist a lot of rotation vertical, SVO system can easily failed. 
 
+DSO(Direct sparse odometry)
+~~~~~~~~~~~~~~~~~~~~~~
+
+`project page <https://vision.in.tum.de/research/vslam/dso?redirect=1>`_
 
 
 Pose Calculation
@@ -60,3 +64,11 @@ Multi-sensor Fusion
 * GPS / Blue Tooth : They can difinitly give us some information. The problem is how to use it.
 
 * LIDAR: e.g.VLOAM
+
+
+Reference
+-------------------------------
+
+.. [1] Forster C, Pizzoli M, Scaramuzza D. SVO: Fast semi-direct monocular visual odometry[C]//2014 IEEE international conference on robotics and automation (ICRA). IEEE, 2014: 15-22.
+
+.. [2] Engel J, Koltun V, Cremers D. Direct sparse odometry[J]. IEEE transactions on pattern analysis and machine intelligence, 2017, 40(3): 611-625.
