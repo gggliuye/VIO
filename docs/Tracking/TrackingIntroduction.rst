@@ -1,5 +1,17 @@
 Front End : Odometry
 ========================
+ 
+ As Jakob Engel summarized in [1]_ , SLAM front end can be generally devided into four categories by its methods and representations: 
+ 
+ * **Sparse + Indirect:** This is the most widly used formulation. Estimate the 3d geometry with indirect method, intermediate representation the image with feature points and descriptors, with geometry error of these geometry points. Such as : monoSLAM, PTAM, ORBSLAM, VINS, etc.
+ 
+ * **Dense + Indirect:** This formulation estimates 3D geometry from - or in conjunction with - a dense, regularized optical flow field, thereby combining a geometric error(from the flow field) with a geometry prior(smoothness of the flow field).
+ 
+ * **Dense + Direct:** This formulation employs a photometric error as well as a germetric priot to estimate dense or semi-dense geometry. Examples include DTAM, LSD-SLAM etc.
+ 
+ * **Sparse + Direct:** Thie formulation optimizes a photometric error defined directly on the image, without incorporating a geometric prior. Examples include SVO(optimization based), the work if Jin et al(EKF based).
+
+
 
 
 Feature Extraction And Match
