@@ -256,7 +256,7 @@ For new input image, **use the same feature extraction method to extract feature
        | 640   |    480  |   0.55   |  ~3000    |
        +-------+---------+----------+-----------+ 
 
-We can also see the more detail evalutation of different feature extraction methods [9]_ .
+We can also see the more detail evalutation of different feature extraction methods [9]_ . We can achieve real time requirement if run with GPU.
 
 Matching
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -265,7 +265,7 @@ Matching
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
 * we used the `FBOW <https://github.com/rmsalinas/fbow>`_ method. It run extremely fast, 300 ms for an input image. However the precision is not satisfying. It is either because of the bad reconstructed vocabulary or because the image set have too much duplicate features, or both.
-* The matching time is not satisfying neither.
+* The matching time consumed is not satisfying neither.
 
 Pose Solver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
