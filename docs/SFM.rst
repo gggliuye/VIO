@@ -119,7 +119,7 @@ Feature Matching
 
 **Exhaustive Matching**:
 
-Every image is matched against every other image, while the block size determines how many images are loaded from disk into memory at the same time.
+Every image is matched against every other image, while the block size determines how many images are loaded from disk into memory at the same time. It is extremly slow without GPU support.
 
 **Sequential Matching**:
 
