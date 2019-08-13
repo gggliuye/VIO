@@ -168,7 +168,7 @@ For most camera a radiomatric fall off of the pixel intensities can be observed 
 
 CRF camera response fcn
 ~~~~~~~~~~~~~~~~~~~
-The pixel intensities are therefore being mapped by the camera response function f : :math:`\mathcal{R} \ rightarrow ` [0,255].
+The pixel intensities are therefore being mapped by the camera response function f : :math:`\mathcal{R} \rightarrow` [0,255] to image output values.
 
 Calibration
 ~~~~~~~~~~~~~~~~~~~~~~
