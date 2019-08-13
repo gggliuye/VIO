@@ -33,7 +33,7 @@ Calibration Camera (IMU LIDAR)
 ---------------------------------
 
 Camera
->>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~
 
 Camera calibration is extremely important for SLAM system. Matlab and `OpenCV <https://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html>`_ image calibration tool boxes are the most used tools (they basicly use the same algorithm,  however different in realize method. For example, they use different non-linear optimization methods).
 
@@ -84,7 +84,7 @@ In general case, the distortion is represented as follows:
 
 
 IMU (Inertial measurement unit)
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~~~~~~~
 **Accelerometer(offer acceleration) + Gyroscope(offer angle velocity)**
 
 The most important parameters for IMU are **bias** and **white noise**.
@@ -118,13 +118,17 @@ Besides, there are **scale** error and **misalignment** for an Accelerometer , w
     + \begin{bmatrix} b_{ax}\\b_{ay}\\b_{az}\end{bmatrix} 
 
 LIDAR
->>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~~~~~~~
 (to do)
 
 
+Photometric calibration
+-----------------------
 
 gamma correction
------------------------
+~~~~~~~~~~~~~~~~~~~~~
+
+It is dur to the camera eletronic senor has a different sense of color compare to human eyes. Which result to different photometric distribution. This process is usually done for a better visual expriences. 
 
 `Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
@@ -147,12 +151,41 @@ Example of outdoor scene:
 .. image:: images/night_hists.png
    :width: 100%
 
+Exposure time
+~~~~~~~~~~~~~~~~~~~~
+The exposure time will affect the pixel intensity in an image, which can be control by user or may by automatic changed by camera device. This is essential element for SLAM Direct methods. This can be expressed as :
+
+.. math::
+    \mathbf{I} = t \mathbf{I}'
+
+Vignetting effect
+~~~~~~~~~~~~~~~~~
+In physic world, the scene we seen are the points reflect light, the amount of reflected light can be noted as :math:`\mathbf{V}(x)`
+For most camera a radiomatric fall off of the pixel intensities can be observed towards the image borders, in another word, the outer border pixels of an image can be less intense compared to the pixels in the center. This is the so called **Vignetting effect**.
+
+.. math::
+    \mathbf{I}(x) = t \mathbf{V}(x) \mathbf{L}(x)
+
+CRF camera response fcn
+~~~~~~~~~~~~~~~~~~~
+The pixel intensities are therefore being mapped by the camera response function f : :math:`\mathcal{R} \ rightarrow ` [0,255].
+
+Calibration
+~~~~~~~~~~~~~~~~~~~~~~
+The photometric calibration has only slight influence on feature point extraction within the indirect SLAM method. However it is essential in direct SLAM system.
+[#]_ shows a online/offline optimization based method for photometric calibration.
+
+
+
+
+.. [#] Bergmann P, Wang R, Cremers D. Online photometric calibration of auto exposure video for realtime visual odometry and SLAM[J]. IEEE Robotics and Automation Letters, 2017, 3(2): 627-634.
+
 
 Image Blurry
 ------------------
 
 Cameras
->>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~
 
 There are several types of cameras: global shutter cameras, rolling shutter cameras, event cameras, etc. The following image shows the different effect of global shutter camera and rolling shutter camera (from camera_compares_ ). Global shutter cameras take a snapshot of the entire scene at a single instant in time. However rolling shutter cameras scans across the scene rapidly, either vertically or horizontally.
 
@@ -186,7 +219,7 @@ For our cases, most phone cameras and AR glasses cameras are **Global shutter ca
 
 
 Point Spread Function (PSF)
->>>>>>>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~~~
 
 Point Spread Function (PSF) describes the response of an imaging system to a point source or point object. A more general term for the PSF is a system's impulse response, the PSF being the impulse response of a focused optical system. 
 
@@ -203,7 +236,7 @@ The PSF functions have a lot of type, different PSF will produce different image
 
 
 Laplacian
->>>>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~~~~
 The most simple method to measure burry degree is the **laplacian** , which is a differential operator given by the divergence of the gradient of a function on Euclidean space (in a word: 2nd derivative of an image). In computer vision, it is usually simplified by an matrix convolution operator: 
 
 .. math::
@@ -224,7 +257,7 @@ Having the 2nd derivative of the image, we can calcualte the variance of this 2n
 We tried the laplacian variance threshold to classify blur and non blur images. The best performance is got when the threshold is set as 11, and the result precision is 77.8%. 
 
 Singular feature
->>>>>>>>>>>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~~
 
 We can express an image by its singular value decomposition (SVD) :
   
@@ -267,7 +300,7 @@ We also test our classification, by predict through our dataset. Below we should
 In summary, for our data set, We should choose k = 10 and the corresponding beta threshould should be about 0.6.
 
 Alpha Channel
->>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~~~~
 Alpha channel modeling has been successfully applied on image deblurring and super resolution. With this technique, the image processing task can be much simplified since the edge contrast on alpha channel is normalized to a 0 to 1 transition, instead of arbitrary values in the color space [#]_ .
 
 
@@ -277,7 +310,7 @@ Alpha channel modeling has been successfully applied on image deblurring and sup
 .. [#] Dai S, Wu Y. Motion from blur[C]//2008 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2008: 1-8.
 
 Image Deblur
->>>>>>>>>>>>>>>>>>>>>
+~~~~~~~~~~~~~~~~~~~~
 
 
 * image blind-deconvolution_  for image deblur, etc. 
