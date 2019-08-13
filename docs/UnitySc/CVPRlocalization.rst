@@ -276,7 +276,8 @@ Pose Solver
 * RefineAbsolutePose : uses seres non linear optimization method to refine the camera pose.
 
 .. raw:: html
-    <iframe width="560" height="315" src="http://www.youtube.com/embed/PhaU7YKZhYk" frameborder="0" allowfullscreen></iframe>
+
+    <video controls src="http://www.youtube.com/embed/PhaU7YKZhYk"></video> 
 
 Further update 
 ~~~~~~~~~~~~~~~~~~~~~~~~
