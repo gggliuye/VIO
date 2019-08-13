@@ -166,14 +166,34 @@ For most camera a radiomatric fall off of the pixel intensities can be observed 
 .. math::
     \mathbf{I}(x) = t \mathbf{V}(x) \mathbf{L}(x)
 
+To simplfy the model, we can assume the vignetting effect is sysmetric around the center of vignetting. We can further assume the center of vignetting fails together with the center of the image, as a result :
+
+.. math::
+    \mathbf{V}(x) = 1 + v_{1} R(x)^{2} + v_{2} R(x)^{4} + v_{3} R(x)^{6} + \mathcal{O}
+
+
 CRF camera response fcn
 ~~~~~~~~~~~~~~~~~~~
 The pixel intensities are therefore being mapped by the camera response function f : :math:`\mathcal{R} \rightarrow` [0,255] to image output values.
 
+.. math::
+    \mathbf{O}(x) = f (\mathbf{I}(x))
+
+We can use the empiric model of response (EMoR) with principle component analysis (PCA) to model the CRF. 
+Using the mean response :math:`f_{0}(x)` and basis functions :math:`h_{k}(x)` to combine to form the overall response function.
+It is shown that the first 4 basis functions are sufficien to represent the empiric space of response well.
+
+.. math::
+    f_{G}(x) = f_{0}(x) + \sum_{k=1}^{n} c_{k}h_{k}(x)
+
 Calibration
 ~~~~~~~~~~~~~~~~~~~~~~
 The photometric calibration has only slight influence on feature point extraction within the indirect SLAM method. However it is essential in direct SLAM system.
-[#]_ shows a online/offline optimization based method for photometric calibration.
+[#]_ shows a online/offline optimization based method for photometric calibration. By combining the upper functions, we can summary the photometric model of a camera as :
+
+.. math::
+    \mathbf{O}(x) = f (t \mathbf{V}(x) \mathbf{L}(x))
+
 
 
 
