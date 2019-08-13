@@ -277,7 +277,7 @@ Pose Solver
 
 .. raw:: html
 
-    <video controls src="http://www.youtube.com/embed/PhaU7YKZhYk"></video> 
+    <video controls src="map_gestion.mp4"></video> 
 
 Further update 
 ~~~~~~~~~~~~~~~~~~~~~~~~
