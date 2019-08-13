@@ -201,13 +201,22 @@ We can formulate the residual of the system:
 
 Huber norm is used by the author for higher robustness (as the effect of outlier will be less remarkable). And it is solved by LM damped method. 
 
+This system has one dimension of zero space, as if :math:`\hat{f}(x) = f(x^{1/ \gamma})` ,  :math:`\hat{\mathbf{V}}(x) = \mathbf{V}(x)^{\gamma}` , :math:`\hat{t}_{i} = t_{i}^{\gamma}` , :math:`\hat{\mathbf{L}}(x^{p}) = \mathbf{L}(x^{p})^{\gamma})` :
+
+.. math::
+    \hat{f}(x) = \hat{f}(\hat{t} \hat{\mathbf{V}}(x) \hat{\mathbf{L}}(x)) = f ((t^{\gamma} \mathbf{V}(x)^{\gamma} \mathbf{L}(x)^{\gamma} )^{1/ \gamma}) = f(x)
+
 Online calibration
 ~~~~~~~~~~~~~~~~~~~~~
 
-For better real time performance, the optimzation of exposure time (various for images) and vignetting (stable for given camera) are sperated. 
-The system is realized by first optimze the exposure time by the linear optimization problem. Then optimization the whole system in the backend.
+* For better real time performance, the optimzation of exposure time (various for images) and vignetting (stable for given camera) are sperated. 
+* The system is realized by first optimze the exposure time by the linear optimization problem. 
 
-This has been shown reliable results in DSO (Direct Sparse Odometry), it remarkablely boost the result and its processing time is really small. 
+.. math::
+    E = \sum_{i = 1}^{M} \sum_{p \in P_{i}} w_{i}^{p} \|  \frac{ f^{-1} (\mathbf{O}_{i}^{p})} {\mathbf{V}(x_{i}^{p})} -  t_{i}  \mathbf{L}(x_{i}^{p})  \|_{2}
+
+* Then optimization the whole system in the backend.
+* This has been shown reliable results in DSO (Direct Sparse Odometry), it remarkablely boost the result and its processing time is really small. 
 
 Image Blurry
 ------------------
