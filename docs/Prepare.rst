@@ -328,6 +328,14 @@ Alpha Channel
 ~~~~~~~~~~~~~~~~~~~~~~
 Alpha channel modeling has been successfully applied on image deblurring and super resolution. With this technique, the image processing task can be much simplified since the edge contrast on alpha channel is normalized to a 0 to 1 transition, instead of arbitrary values in the color space [#]_ .
 
+Image Deblur
+----------------------------------
+* Seulement Wiener filter is not suitable for our cases as we have no knowledge about the motion kernel (unless we estimate it in the front end of the system).
+* image blind-deconvolution_  for image deblur, etc. 
+
+.. _blind-deconvolution: https://nl.mathworks.com/help/images/ref/deconvblind.html
+
+
 Reference
 -----------------------------
 
@@ -340,9 +348,4 @@ Reference
 .. [#] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
 .. [#] Dai S, Wu Y. Motion from blur[C]//2008 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2008: 1-8.
-
-
-* image blind-deconvolution_  for image deblur, etc. 
-
-.. _blind-deconvolution: https://nl.mathworks.com/help/images/ref/deconvblind.html
 
