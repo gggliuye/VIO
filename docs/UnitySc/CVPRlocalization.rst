@@ -275,6 +275,9 @@ Pose Solver
 * EstimateAbsolutePose : can be found in "src/estimators/pose.h", the main calculation part is to call the P3PEstimator/EPNPEstimator method with ransac.
 * RefineAbsolutePose : uses seres non linear optimization method to refine the camera pose.
 
+.. raw:: html
+    <iframe width="560" height="315" src="http://www.youtube.com/embed/PhaU7YKZhYk" frameborder="0" allowfullscreen></iframe>
+
 Further update 
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
