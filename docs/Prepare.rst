@@ -194,11 +194,19 @@ The photometric calibration has only slight influence on feature point extractio
 .. math::
     \mathbf{O}(x) = f (t \mathbf{V}(x) \mathbf{L}(x))
 
+We can formulate the residual of the system:
 
+.. math:: 
+    E = \sum_{p in P} \sum_{i \in F_{p}} w_{i}^{p} \|  \mathbf{O}_{i}^{p} -  f (t_{i} \mathbf{V}(x_{i}^{p}) \mathbf{L}(x_{i}^{p}))  \|_{h}
 
+Huber norm is used by the author for higher robustness (as the effect of outlier will be less remarkable). And it is solved by LM damped method. 
 
+Online calibration
+~~~~~~~~~~~~~~~~~~~~~
 
-.. [#] Bergmann P, Wang R, Cremers D. Online photometric calibration of auto exposure video for realtime visual odometry and SLAM[J]. IEEE Robotics and Automation Letters, 2017, 3(2): 627-634.
+For better real time performance, the optimzation of exposure time (various for images) and vignetting (stable for given camera) are sperated. 
+The system is realized by first optimze the exposure time by the linear optimization problem. Then optimization the whole system in the backend.
+
 
 
 Image Blurry
@@ -232,9 +240,6 @@ For our cases, most phone cameras and AR glasses cameras are **Global shutter ca
 
 **Data set** ： To analysis the motion blurry and the algorithms made to solve it, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image) 
 
-.. [#] Lovegrove S, Patron-Perez A, Sibley G. Spline Fusion: A continuous-time representation for visual-inertial fusion with application to rolling shutter cameras[C]//BMVC. 2013, 2(5): 8.
-
-.. [#] Rebecq H, Horstschaefer T, Scaramuzza D. Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization[C]//BMVC. 2017.
 
 
 
@@ -323,14 +328,18 @@ Alpha Channel
 ~~~~~~~~~~~~~~~~~~~~~~
 Alpha channel modeling has been successfully applied on image deblurring and super resolution. With this technique, the image processing task can be much simplified since the edge contrast on alpha channel is normalized to a 0 to 1 transition, instead of arbitrary values in the color space [#]_ .
 
+Reference
+-----------------------------
 
+.. [#] Bergmann P, Wang R, Cremers D. Online photometric calibration of auto exposure video for realtime visual odometry and SLAM[J]. IEEE Robotics and Automation Letters, 2017, 3(2): 627-634.
+
+.. [#] Lovegrove S, Patron-Perez A, Sibley G. Spline Fusion: A continuous-time representation for visual-inertial fusion with application to rolling shutter cameras[C]//BMVC. 2013, 2(5): 8.
+
+.. [#] Rebecq H, Horstschaefer T, Scaramuzza D. Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization[C]//BMVC. 2017.
 
 .. [#] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
 .. [#] Dai S, Wu Y. Motion from blur[C]//2008 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2008: 1-8.
-
-Image Deblur
-~~~~~~~~~~~~~~~~~~~~
 
 
 * image blind-deconvolution_  for image deblur, etc. 
