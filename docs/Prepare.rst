@@ -207,7 +207,7 @@ Online calibration
 For better real time performance, the optimzation of exposure time (various for images) and vignetting (stable for given camera) are sperated. 
 The system is realized by first optimze the exposure time by the linear optimization problem. Then optimization the whole system in the backend.
 
-
+This has been shown reliable results in DSO (Direct Sparse Odometry), it remarkablely boost the result and its processing time is really small. 
 
 Image Blurry
 ------------------
