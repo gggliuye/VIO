@@ -3,6 +3,8 @@ VINS code
 
 Analysis the structure and the details of `VINS <https://github.com/HKUST-Aerial-Robotics/VINS-Mono>`_ code [#]_ . Take the android implement as example. As the original code is based on ROS(robot opeartion system), changes are made to create virtual ROS message, and manual call the ros callback functions. It has two main threads: **vins_estimator** and **loop_fusion**.
 
+.. image:: images/vinsgraph.png
+   :width: 80%
 
 Top Node
 ----------------------------
