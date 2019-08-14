@@ -1,8 +1,8 @@
-VIO deep blue
--------------------------
+Hessian Matrix
+=====================
 
-**Question 1**: 
-~~~~~~~~~~~~~~~~~
+Simulation 1
+----------------------
 
 At a certain time, the cameras and landmarks seen of a SLAM system can be seen as the image below. xi is the camera pose, L represents the observed landmark. When a landmark k was seen by ith camera in the world frame, the reprojection error is noted as r(xi_i, L_k)
 
@@ -183,8 +183,8 @@ As a result, the magrinalization of the first camera pose, introduces the correl
    :align: center
 
 
-**Queation 2**
-~~~~~~~~~~~~~~~~~~~~~
+Simulation 2
+--------------------
 
 **1.1** Simulation with 10 camera poses and 20 landmarks. Data shown in the following image (with the first the frame as the reference):
 
@@ -325,6 +325,9 @@ Then we explanded the matrix, and add a new observation frame, get the new Hessi
    :align: center
 
 The result zero space remains 7.
+
+Zeros space
+-------------------------------
 
 
 .. [#] Dong-Si T C, Mourikis A I. Consistency analysis for sliding-window visual odometry[C]//2012 IEEE International Conference on Robotics and Automation. IEEE, 2012: 5202-5209.
