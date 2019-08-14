@@ -677,7 +677,7 @@ In factors,  we have the residual calculations and corresponding jacobian calcul
 
 Projection Factor
 ~~~~~~~~~~~~~~~~~~~~
-Projection factor corresponding to reprojection error which can also be called as visual measurement residual.
+Projection factor corresponding to **visual reprojection error** which can also be called as visual measurement residual.
 Considering a feature first seen in the ith frame, and analysis the residual for the feature observation in the jth frame.
 The camera model can be seen as a ray casting from the camera optical center, so the 3d matched point vector (to the jth camera center) and the 2d feature vector should be in the same direction. As a result, the residual is evaluated within the tangant plane.
 
