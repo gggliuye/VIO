@@ -329,6 +329,14 @@ The result zero space remains 7.
 Zeros space
 -------------------------------
 
+`code example <https://github.com/gggliuye/VIO/blob/master/docs/deepblue/zero%20space.ipynb>`_
+
+.. image:: images/zero_coll.png
+   :align: center
+
+First Estimate Jacobian
+-------------------------
+
 
 .. [#] Dong-Si T C, Mourikis A I. Consistency analysis for sliding-window visual odometry[C]//2012 IEEE International Conference on Robotics and Automation. IEEE, 2012: 5202-5209.
 
