@@ -133,7 +133,7 @@ A **IntegrationBase** class is made for pre-intergration management and calculat
 .. math::
     \bar{a}^{w} = \frac{1}{2} ( \gamma_{k}(a_{k}^{b} - b_{acc}) + \gamma_{k+1}(a_{k+1}^{b} - b_{acc}) )
     
-* **Jacobian update** : (it is optinal, normally set true) three matrix are calculated before to fasten. Noise is seen as gaussian. And the F matrix(15*15) and the error term propagation matrix V (15*18) are calculated. (remember to normalize quaternion). In the end, two 15*15 matrix : Jacobian and Covariance are calculated.
+* **Jacobian update** : (it is optinal, it is set true, However when considering First Estimation Jacobian , we should not update Jacobian) three matrix are calculated before to fasten. Noise is seen as gaussian. And the F matrix(15*15) and the error term propagation matrix V (15*18) are calculated. (remember to normalize quaternion). In the end, two 15*15 matrix : Jacobian and Covariance are calculated.
 
 .. math::
     [R_{\omega}]_{X} = [ \bar{\omega} ]_{X} , 
@@ -563,6 +563,9 @@ LinearAlignment
 ~~~~~~~~~~~~~~~~~~~~~~
 
 **Velocity, Gravity Vector and Metric Scale Initialization** (The gravity scale will not be traited as a pre-defined value in this process)
+
+**Accelerometer bias**, as the author claimed, the accelerometer bias is coupled with gravity, and due to the large magnitude of the gravity vector comparing to platform dynamics, and the relatively short during of the initailization phase, these bias terms are hard to observe. 
+
 As a result, therefor the state variable should be :
 
 .. math::
