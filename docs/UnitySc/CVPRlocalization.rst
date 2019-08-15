@@ -265,7 +265,8 @@ Matching
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
 * we used the `FBOW <https://github.com/rmsalinas/fbow>`_ method. It run extremely fast, 300 ms for an input image. However the precision is not satisfying. It is either because of the bad reconstructed vocabulary or because the image set have too much duplicate features, or both.
-* The matching time consumed is not satisfying neither.
+* We can use the voc tree method of original colmap, it's just that its calculation is too time consuming.
+* The feature matching time consumed is not satisfying neither.
 
 Pose Solver
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
