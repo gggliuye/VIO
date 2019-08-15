@@ -326,18 +326,50 @@ Then we explanded the matrix, and add a new observation frame, get the new Hessi
 
 The result zero space remains 7.
 
-Zeros space
+Nullspace
 -------------------------------
 
+In the upper simulations, we can see that for a visual only SLAM system Hessian has 7 dimension of nullspace. For a VIO VISLAM system, the Hessian matrix has 4 dimension of nullspace.  However it is shown that the perporty of Hessian matrix may change due to the different linearlization points selections [#]_ . Which will introduce inconsistency to the SLAM system. 
+
+Example 
+~~~~~~~~~~~~~~~~~~~
+
+The following images shown the energy function and its results with different linearlization points. 
 `code example <https://github.com/gggliuye/VIO/blob/master/docs/deepblue/zero%20space.ipynb>`_
+
+.. math::
+    E = E_{1} + E_{2} =  (xy - 1)^{2} + (xy - 1)^{2}
+
+.. math::
+    E_{1, x_{0}, y_{0}}'(x , y) = E_{2, x_{0}, y_{0}}'(x , y) = E_{1}(x_{0}, y_{0}) + J_{x} dx + J_{y} dy + J_{x}J_{x}dx^{2}
+                                + J_{y}J_{y}dy^{2} + 2J_{x}J_{y}dxdy
+                                
+.. math::
+    dx = x - x_{0}, dy = y - y_{0}
+
+:math:`E_{1}` is linearlized at point (1.4, 0.5), and :math:`E_{2}` is linearlized at point (0.6, 1.2). 
+  
+.. math::
+    E' =  E_{1}' + E_{2}'
 
 .. image:: images/zero_coll.png
    :align: center
 
-First Estimate Jacobian
--------------------------
+As the upper images shown the energy functions, for the original problem, the optimal solution is apparently "xy = 1" (1 dimension nullspace). However with :math:`E_{1}` , :math:`E_{2}` linearlized at different points, the final solution is collapsed into a point. 
 
+As a result, **Never combine linearizations around different linearization points, especially in the present of non-linear nullspace! it will render unbservable dimensions observable and corrupt the system.**
+
+First Estimate Jacobian
+~~~~~~~~~~~~~~~~~~~
+
+Here comes the FEJ (first esimate jacobian) as its solution. **Use the same linearization point for evaluating Jacobian**. For most cases, the jacobian will be only calculated once to keep its consistency. It has been used in MSCKF, OKVIS, DOS, etc. And this has been shown to make the system more robust, and introduce better performance.
+
+
+Reference
+--------------------------
 
 .. [#] Dong-Si T C, Mourikis A I. Consistency analysis for sliding-window visual odometry[C]//2012 IEEE International Conference on Robotics and Automation. IEEE, 2012: 5202-5209.
 
 .. [#] Jauffret C. Observability and Fisher information matrix in nonlinear regression[J]. IEEE Transactions on Aerospace and Electronic Systems, 2007, 43(2): 756-759.
+
+.. [#] Huang G P, Mourikis A I, Roumeliotis S I. A first-estimates Jacobian EKF for improving SLAM consistency[C]//Experimental Robotics. Springer, Berlin, Heidelberg, 2009: 373-382.
