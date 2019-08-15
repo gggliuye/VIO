@@ -151,6 +151,12 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 .. image:: put_model.PNG
    :align: center
 
+6.3 坐标系的变换
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+由于ORBSLAM使用的是常用的SLAM坐标系统，而Unity使用了常用的3D处理坐标系，坐标系之间存在差异。
+统一坐标系是在Unity端完成的，包括了其他需要的四元数和旋转矩阵的转换，信息的解码等，详细可以参见 ` Convert Matrix <https://github.com/gggliuye/VIO/blob/master/docs/UnitySc/ConvertMatrix.cs>`_
+
+
 7. ORBSLAM2的改良
 -----------------
 
