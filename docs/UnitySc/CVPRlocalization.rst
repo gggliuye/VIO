@@ -290,6 +290,7 @@ Further update
 **2019/08/16 summary:**
 
 Now the problem is mainly image retrival method. 
+
 * I have test the vocabulary tree of colmap original code, when the original support it is robust. However it is slow in my current CPU. 
 * And I tested the latest open source `FBOW <https://github.com/rmsalinas/fbow>`_ , which is extremely fast even in CPU (less than 0.3s for an image). However it is not rebust. It is either because of the bad reconstructed vocabulary or because the image set have too much duplicate features, or both.
 * The problem is if the whole process is time consuming, it is fine, but we have to make sure that we can find position for each input image. If the whole process is relatively fast (as we seen the colmap in GPU), we can have a loose constrain to the result.
