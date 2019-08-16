@@ -264,7 +264,7 @@ Matching
 **Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
-* we used the `FBOW <https://github.com/rmsalinas/fbow>`_ method. It run extremely fast, 300 ms for an input image. However the precision is not satisfying. It is either because of the bad reconstructed vocabulary or because the image set have too much duplicate features, or both.
+* we used the `FBOW <https://github.com/rmsalinas/fbow>`_ method. It run extremely fast, 300 ms for an input image. However the precision is not satisfying.
 * We can use the voc tree method of original colmap, it's just that its calculation is too time consuming.
 * The feature matching time consumed is not satisfying neither.
 
@@ -286,6 +286,14 @@ Further update
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 **feature extraction method** , **matching method** , **feature match methods**. The pose solving method is relative complete. 
+
+**2019/08/16 summary:**
+
+Now the problem is mainly image retrival method. 
+* I have test the vocabulary tree of colmap original code, when the original support it is robust. However it is slow in my current CPU. 
+* And I tested the latest open source `FBOW <https://github.com/rmsalinas/fbow>`_ , which is extremely fast even in CPU (less than 0.3s for an image). However it is not rebust. It is either because of the bad reconstructed vocabulary or because the image set have too much duplicate features, or both.
+* The problem is if the whole process is time consuming, it is fine, but we have to make sure that we can find position for each input image. If the whole process is relatively fast (as we seen the colmap in GPU), we can have a loose constrain to the result.
+* We can either change to a server with GPU or find a more rebust and faster image retrival algorithm.
 
 
 Reference
