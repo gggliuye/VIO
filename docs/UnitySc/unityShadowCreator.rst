@@ -280,7 +280,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 其中的状态量为（我们假设点云之间是相似变换）：
 
 .. math::
-    \xi = \begin{bmatrix}  \vec{\theta} & \vec{\t} & s  \end{bmatrix}
+    \xi = \begin{bmatrix}  \vec{\theta} & \vec{t} & s  \end{bmatrix}
 
 残差的雅各比矩阵可以写为：
 
@@ -291,16 +291,25 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
     \frac{\partial f} {\partial \vec{p}} = \mathbf{I}
     
 .. math::
-    \frac{\partial f} {\partial \vec{\theta}} = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{\theta}} (f(\vec{\theta}\delta \vec{\theta}))
+    \frac{\partial f} {\partial \vec{\theta}} = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{\theta}} f(\vec{\theta}\delta \vec{\theta})
     
 .. math::
-    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} 
+    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (Rexp([\delta \theta]_{X})\vec{x}_{i} - R\vec{x}_{i})
+    
+.. math::
+    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (R\vec{x}_{i} + R[\delta \theta]_{X}\vec{x}_{i} - R\vec{x}_{i})
+
+.. math::
+    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (- R[\vec{x}_{i}]_{X}\delta \theta)
+    
+.. math::
+    = - sR[\vec{x}_{i}]_{X}
     
 
 9. 误差分析
 ---------------------
 
-在实际测试的时候，我们很遇到这样的疑问： **一开始看得好好的，为什么一转头误差就这么大呢？**， 我们在这里分析一下原因：
+在实际测试的时候，我们很遇到这样的疑问： 当旋转角度加大的时候漂移会变得愈发明显， 我们在这里分析一下原因：
 
 
 .. image:: error_localization.png
