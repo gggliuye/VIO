@@ -291,7 +291,10 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
     \frac{\partial f} {\partial \vec{p}} = \mathbf{I}
     
 .. math::
-    \frac{\partial f} {\partial \vec{theta}} = \lim_{\delta \vec{theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{theta}} (f(\vec{theta}\delta \vec{theta}))
+    \frac{\partial f} {\partial \vec{\theta}} = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{\theta}} (f(\vec{\theta}\delta \vec{\theta}))
+    
+.. math::
+    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} 
     
 
 9. 误差分析
