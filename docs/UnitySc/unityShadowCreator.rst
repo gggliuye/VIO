@@ -291,19 +291,13 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
     \frac{\partial f} {\partial \vec{p}} = \mathbf{I}
     
 .. math::
-    \frac{\partial f} {\partial \vec{\theta}} = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{\theta}} f(\vec{\theta}\delta \vec{\theta})
-    
-.. math::
-    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (Rexp([\delta \theta]_{X})\vec{x}_{i} - R\vec{x}_{i})
-    
-.. math::
-    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (R\vec{x}_{i} + R[\delta \theta]_{X}\vec{x}_{i} - R\vec{x}_{i})
-
-.. math::
-    = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (- R[\vec{x}_{i}]_{X}\delta \theta)
-    
-.. math::
-    = - sR[\vec{x}_{i}]_{X}
+    \begin{aligned}
+    \frac{\partial f} {\partial \vec{\theta}} & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{\theta}} f(\vec{\theta}\delta \vec{\theta}) \\
+    & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (Rexp([\delta \theta]_{X})\vec{x}_{i} - R\vec{x}_{i}) \\
+    & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (R\vec{x}_{i} + R[\delta \theta]_{X}\vec{x}_{i} - R\vec{x}_{i}) \\
+    & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (- R[\vec{x}_{i}]_{X}\delta \theta) \\
+    & = - sR[\vec{x}_{i}]_{X}
+    \end{aligned}
     
 
 9. 误差分析
