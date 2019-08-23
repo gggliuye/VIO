@@ -265,7 +265,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 两队点（两个坐标系）之间的变换关系可以由7个变量表示（一个尺度变量，三个旋转变量，三个位移变量）。数学上可以表示为：
 
 .. math::
-    \vec{x}_{j} = s\mathbf{R}\vec{x}_{i} + \mathbf{t}
+    \vec{x}_{j} = s(\mathbf{R}\vec{x}_{i} + \mathbf{t})
 
 8.2 优化问题
 ~~~~~~~~~~~~~~~~~~~~
