@@ -272,10 +272,10 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 在取了这么多匹配的数据之后，这个问题可以转变为优化问题。这个系统中我们可以保持之前SLAM中的高斯分布观测的假设，仍然可以维持之前的最小二乘法。那么问题可以重新写为对能量（残差）方程求极值的问题：
 
 .. math::
-    E = \sum_{(i,j) matches} \| \vec{x}_{j} - (s\mathbf{R}\vec{x}_{i} + \mathbf{t}) \|_{2} = \sum_{(i,j) matches} \| f(x_{i}), x_{j}  \|
+    E = \sum_{(i,j) matches} \| s(\mathbf{R}\vec{x}_{i} + \mathbf{t}) - \vec{x}_{j} \|_{2} = \sum_{(i,j) matches} \| f(x_{i}), x_{j}  \|
 
 .. math::
-    \xi = arg \min_{\xi} \sum_{(i,j) matches} \| \vec{x}_{j} - (s\mathbf{R}\vec{x}_{i} + \mathbf{t}) \|_{2}
+    \xi = arg \min_{\xi} \sum_{(i,j) matches} \| s(\mathbf{R}\vec{x}_{i} + \mathbf{t}) - \vec{x}_{j} \|_{2}
 
 其中的状态量为（我们假设点云之间是相似变换）：
 
@@ -285,15 +285,15 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 残差的雅各比矩阵可以写为：
 
 .. math::
-    \frac{\partial f} {\partial s} = R\vec{x}_{i}
+    \frac{\partial f} {\partial s} = R\vec{x}_{i} + \mathbf{t}
 
 .. math::
-    \frac{\partial f} {\partial \vec{p}} = \mathbf{I}
+    \frac{\partial f} {\partial \vec{t}} = s \mathbf{I}
     
 .. math::
     \begin{aligned}
     \frac{\partial f} {\partial \vec{\theta}} & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{\theta}} f(\vec{\theta}\delta \vec{\theta}) \\
-    & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (Rexp([\delta \theta]_{X})\vec{x}_{i} - R\vec{x}_{i}) \\
+    & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (Rexp([\delta \theta]_{X})\vec{x}_{i} + \mathbf{t} - R\vec{x}_{i} - \mathbf{t}) \\
     & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (R\vec{x}_{i} + R[\delta \theta]_{X}\vec{x}_{i} - R\vec{x}_{i}) \\
     & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (- R[\vec{x}_{i}]_{X}\delta \theta) \\
     & = - sR[\vec{x}_{i}]_{X}
