@@ -312,6 +312,10 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 8.4 测试结果
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+下图是使用模拟数据（黑点）加上一定的噪音投影到黄点。通过SVD得到红点的测试结果，再通过优化方法得到蓝点的结果。
+
+.. image:: mergeTest.png
+   :align: center
 
 从测试结果中发现：
 
