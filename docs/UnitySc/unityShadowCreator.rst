@@ -413,3 +413,18 @@ SLAM的原本的结果应该是一个最佳的状态估计，和很多的系统�
 **解决思路1** : 将误差信息加入黑盒子中的传输（也要考虑边缘化的信息损失），用滤波过程代替现在的信息损失过程。
 
 **解决思路2** : 能否在移动设备上考虑将这些量整合为一个optimization系统。
+
+
+Update Thoughts
+-----------------------
+
+2019/09/06
+~~~~~~~~~~~~~~~~~~
+* I rethink the ORBSLAM system, and I cannot find any big drawback of its framework, especially its front end. And I thinks its front end framework is much better than other system. As it is a indirect method, it is using feature points. ORBSLAM makes the system keep finding corresponding point from the made map, and keep updating optimizing the already exist map points. Thanks to this, in my opinion ORBSLAM can make a better map than other algorithm. 
+* However, it is not as good as I excepted. The main issue is **ORB** point, ORB points are sparse compared to the direct or semi-direct methods, and its descriptor perporty is not ideal. As a result, its extraction is not stable, its matching is not ideal. (i.e. SFM methods take SIFT points which make the constructed map better.)
+* If we take **a better point extraction algorithm**, and **add more sensors**, ORBSLAM can be the best SLAM algorithm. 
+
+* For fast implement, we do not have much time to build a better point extraction. So I try to optimize the existing ORB strategy. 
+* In former tests, we found a lots of "bad" points existing in the map, which may make the localization less good. I re-read the relocalization algorithm and DBOW2 algorithm, the number of point in a keyframe, should not affect too much its visual words expression. So I consider to take **less points** when extracting , and set a **higher threshold** for point matching, frame matching, etc. And also develop a **strategy** to loop through all the points and delete some of the points.
+* Considering that we could have **a high-accuracy lidar scan** of the scene, I am think to optimize the point position by the lidar scan. By first make the **corresponding** of the two point sets, then **merge** them.
+
