@@ -439,3 +439,19 @@ When trying to implement visual localization based on Colmap, I found the image 
 
 * **Success rate**, it is hard to find an algorithm can find corresponding for all input image, in my opinion an algorithm with 80% retrieval rate is a great one.
 * **Computational cost**, the cost of image retrieval can be high. i.e for colmap, it use SIFT points, and an option voc-tree method to retrieve, it will take serval seconds if we do not use a GPU. For ORBSLAM, it is much faster however its result cannot be as good as Colmap.
+
+**Map point analysis 1.0**
+ 
+ Fisrt I analysis the found time of a constructed map:
+ 
+     num of points found less than  1.0  times is  0 %
+ 
+     num of points found less than  2.71828182846  times is  2 %
+ 
+     num of points found less than  7.38905609893  times is  17 %
+ 
+     num of points found less than  20.0855369232  times is  42 %
+ 
+     num of points found less than  54.5981500331  times is  67 %
+
+which shows that, there are serval points not viewed much, which may not be well optimized (as a result of lack of observation). We can delete these points, for a better map.
