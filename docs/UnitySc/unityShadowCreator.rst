@@ -420,13 +420,22 @@ Update Thoughts
 
 2019/09/06
 ~~~~~~~~~~~~~~~~~~
+**ORBSLAM：**
+
 * I rethink the ORBSLAM system, and I cannot find any big drawback of its framework, especially its front end. And I thinks its front end framework is much better than other system. As it is a indirect method, it is using feature points. ORBSLAM makes the system keep finding corresponding point from the made map, and keep updating optimizing the already exist map points. Thanks to this, in my opinion ORBSLAM can make a better map than other algorithm. 
 * However, it is not as good as I excepted. The main issue is **ORB** point, ORB points are sparse compared to the direct or semi-direct methods, and its descriptor perporty is not ideal. As a result, its extraction is not stable, its matching is not ideal. (i.e. SFM methods take SIFT points which make the constructed map better.)
 * If we take **a better point extraction algorithm**, and **add more sensors**, ORBSLAM can be the best SLAM algorithm. 
 
+**Point refinement:**
 
+For fast implement, we do not have much time to build a better point extraction. So I try to optimize the existing ORB strategy. 
 
-* For fast implement, we do not have much time to build a better point extraction. So I try to optimize the existing ORB strategy. 
 * In former tests, we found a lots of "bad" points existing in the map, which may make the localization less good. I re-read the relocalization algorithm and DBOW2 algorithm, the number of point in a keyframe, should not affect too much its visual words expression. So I consider to take **less points** when extracting , and set a **higher threshold** for point matching, frame matching, etc. And also develop a **strategy** to loop through all the points and delete some of the points.
 * Considering that we could have **a high-accuracy lidar scan** of the scene, I am think to optimize the point position by the lidar scan. By first make the **corresponding** of the two point sets, then **merge** them.
 
+**Image retrieval:**
+
+When trying to implement visual localization based on Colmap, I found the image retrieval part is essential in the whole pipeline (for most SFM, SLAM pipelinee, image localization is based on keyframe image retrieval). If we correctly find the corresponding keyframe image, and with the high accuacy point poisition estimated by Colmap, we can obtain a very accuarcy localization result. By it has serval problems: 
+
+* **Success rate**, it is hard to find an algorithm can find corresponding for all input image, in my opinion an algorithm with 80% retrieval rate is a great one.
+* **Computational cost**, the cost of image retrieval can be high. i.e for colmap, it use SIFT points, and an option voc-tree method to retrieve, it will take serval seconds if we do not use a GPU. For ORBSLAM, it is much faster however its result cannot be as good as Colmap.
