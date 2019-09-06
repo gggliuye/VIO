@@ -444,14 +444,14 @@ When trying to implement visual localization based on Colmap, I found the image 
  
  Fisrt I analysis the found time of a constructed map:
  
-     num of points found less than  1.0  times is  0 %
+     num of points found less than  1  times is  0 %
  
-     num of points found less than  2.71828182846  times is  2 %
+     num of points found less than  2  times is  2 %
  
-     num of points found less than  7.38905609893  times is  17 %
+     num of points found less than  7  times is  17 %
  
-     num of points found less than  20.0855369232  times is  42 %
+     num of points found less than  2  times is  42 %
  
-     num of points found less than  54.5981500331  times is  67 %
+     num of points found less than  54  times is  67 %
 
 which shows that, there are serval points not viewed much, which may not be well optimized (as a result of lack of observation). We can delete these points, for a better map.
