@@ -296,6 +296,16 @@ Now the problem is mainly image retrival method.
 * The problem is if the whole process is time consuming, it is fine, but we have to make sure that we can find position for each input image. If the whole process is relatively fast (as we seen the colmap in GPU), we can have a loose constrain to the result.
 * We can either change to a server with GPU or find a more rebust and faster image retrival algorithm.
 
+**2019/09/11**
+
+* Our test machine is a laptop with a GTX 960M GPU and an i5-6300HQ CPU, which is a low level PC.
+* Use GPU to boost SIFT extraction and SIFT matching process, get a remarkable advance (0.072 second for a 3648*2736 image). 
+* Former use Voc Tree to obtain the best match image. However the validation method the original code used, is time consuming. So I switch to use SIFT GPU matcher directly and process PnP match test to reject outlier images. As the matcher uses GPU, we get another great boost in speed (about 0.07 second per image with about 1000 points each to match). 
+* The viewer and the numeric result shows that the algorithm is quit process. However as we have no knowledge about the ground truth, I leave the accuracy analysis later.
+* The final process time can be seen in the image below.
+
+.. image:: ulocalization.png
+   :align: center
 
 Reference
 -----------------
