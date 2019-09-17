@@ -338,7 +338,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 
 使用上面所述方法，我们在实际情况中对算法进行了测试，成功的将Colmap得到的半稠密点云和ORBSLAM得到的稀疏点云融合。并且用ORBSLAM使用的深度相机的尺度数据，恢复了Colmap的尺度信息。
 
-.. image:: snapsho00.png
+.. image:: snapshot00.png
    :width: 50%
    :align: center
 
