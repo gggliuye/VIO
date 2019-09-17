@@ -171,7 +171,21 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 
 * **2.取巧的办法** 另外可以使用取巧的方法，系统定位的结果不是一瞬间反映到结果上，而是通过Unity中的Coroutine和yield return的方法，缓慢地作用。这种方法实现简单，系统不复杂，运算量要求也更低。
 
+我使用了第二种取巧的办法来解决这个问题，使用Coroutine和Lerp函数实现：
 
+.. highlight:: c
+      :linenos:
+    private IEnumerator WaitAndRotate(float waitTime)
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            float t = i * 0.1f;
+            Quaternion tmpQ = Quaternion.Lerp(quaternionRelativeFrom, quaternionRelativeTo, t);
+            Vector3 tmpP = Vector3.Lerp(positionRelativeFrom, positionRelativeTo, t);
+            convertMatrixRelative = new ConvertMatrix(tmpQ, tmpP);
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
 
 7. ORBSLAM2的改良
 -----------------
