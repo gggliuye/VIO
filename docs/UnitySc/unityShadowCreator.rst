@@ -173,20 +173,19 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 
 我使用了第二种取巧的办法来解决这个问题，使用Coroutine和Lerp函数实现：
 
-.. highlight:: c
-      :linenos:
-      
-    private IEnumerator WaitAndRotate(float waitTime)
+.. code:: c#      
+private IEnumerator WaitAndRotate(float waitTime)
+{
+    for (int i = 0; i < 30; i++)
     {
-        for (int i = 0; i < 30; i++)
-        {
-            float t = i * 0.1f;
-            Quaternion tmpQ = Quaternion.Lerp(quaternionRelativeFrom, quaternionRelativeTo, t);
-            Vector3 tmpP = Vector3.Lerp(positionRelativeFrom, positionRelativeTo, t);
-            convertMatrixRelative = new ConvertMatrix(tmpQ, tmpP);
-            yield return new WaitForSeconds(waitTime);
-        }
+        float t = i * 0.1f;
+        Quaternion tmpQ = Quaternion.Lerp(quaternionRelativeFrom, quaternionRelativeTo, t);
+        Vector3 tmpP = Vector3.Lerp(positionRelativeFrom, positionRelativeTo, t);
+        convertMatrixRelative = new ConvertMatrix(tmpQ, tmpP);
+        yield return new WaitForSeconds(waitTime);
     }
+}
+
 
 7. ORBSLAM2的改良
 -----------------
