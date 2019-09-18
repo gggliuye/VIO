@@ -1,4 +1,4 @@
-AR Garden
+AR Garden + Pop Art
 =========================================
 
 1. 简介
@@ -186,6 +186,7 @@ private IEnumerator WaitAndRotate(float waitTime)
     }
 }
 
+* 另外，还设定了相对位移（云端定位和本地追踪坐标系的相对位移）的变化设定了阈值，如果发现产生了突变，则很大程度上是由于定位误差造成的，那么系统会自动舍弃这个结果。
 
 7. ORBSLAM2的改良
 -----------------
@@ -488,3 +489,13 @@ When trying to implement visual localization based on Colmap, I found the image 
      num of points found less than  54  times is  67 %
 
 which shows that, there are serval points not viewed much, which may not be well optimized (as a result of lack of observation). We can delete these points, for a better map.
+
+2019/09/18
+
++ 针对修正造成的抖动做了修正（详见“6.4 对用户体验的优化”章节）。在实际实验中验证，这样简单的修改，完全解决了定位抖动的问题，另外也排除了一定的误匹配结果。
++ 使用了更加高清的图像数据进行定位和建图。具体反映在：
+  - 使用全高清的ZED mini双目IMU相机建图。GPU负荷很高，并且建图耗时和大小都有所增加。
+  - 在移动设备（AR眼镜）定位的时候使用相对高清的图像 1920 * 1080 （原来使用640 * 480）进行定位运算。
+
+
+
