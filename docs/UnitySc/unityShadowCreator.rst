@@ -491,9 +491,10 @@ When trying to implement visual localization based on Colmap, I found the image 
 which shows that, there are serval points not viewed much, which may not be well optimized (as a result of lack of observation). We can delete these points, for a better map.
 
 2019/09/18
+~~~~~~~~~~~~~~~~~~~~~
 
 + 使用激光设备的高精度扫描数据修正zed mini相机的尺度，得到激光扫描得到的尺度大约是zedmini的1.023倍。
-+ 尝试使用AR core和服务器定位融合使用，但是由于AR core粗鲁地占领了相机的使用权，导致无法再获取图片定位。
++ 尝试使用AR core和服务器定位融合使用，但是由于AR core粗鲁地占领了相机的使用权，导致无法再获取图片定位，尝试失败。
 + 针对定位修正造成的抖动做了修正（详见“6.4 对用户体验的优化”章节）。在实际实验中验证，这样简单的修改，完全解决了定位抖动的问题，另外也排除了一些误匹配结果。
 + 使用了更加高清的图像数据进行定位和建图。具体反映在：
   -- 使用全高清的ZED mini双目IMU相机建图。GPU负荷很高，并且建图耗时和大小都有所增加。
