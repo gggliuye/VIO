@@ -307,6 +307,19 @@ Now the problem is mainly image retrival method.
 .. image:: ulocalization.png
    :align: center
 
+Final 
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**2019/09/23**
+
+* 1. Record a video about 3 minutes in a large indoor sceen with mobile phone.
+* 2. Record serval images with another device. As we have no ground truth data, we choose some reference objects in the scene to measure its accuracy (in my case here, use the railings).
+* 3. Colmap offline reconstruction the whole scene (sparse reconstruction takes about 20 minutes, dense reconstrcution takes hours, which can be further reduced but reduce sample images).
+* 4. Test the localization using the images taken in the 2nd step. 
+* 5. Analysis the result and process time : about 0.7 second for an image in average; 9 out of 10 images have been successfully localized; their localization is considerably accurate error within 30cm (with respect the reference object I chosen).
+* 6.(TODO) connect with our server, and test with AR application.
+
+
 Reference
 -----------------
 
