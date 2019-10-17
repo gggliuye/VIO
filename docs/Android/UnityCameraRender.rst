@@ -38,16 +38,21 @@ The whole process structure and a time circle is shown here.
 
 .. image:: structure.PNG
    :width: 80%
+   :align: center
    
 .. image:: lifecircle.PNG
    :width: 80%
+   :align: center
 
 Android Java Camera Surface
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The camera is opened with android camera surface.
+The camera is opened with android camera surface. With three main function :
 
+* **public void initialize(int presetWidth, int presetHeight, long handlerPtr);** Initialize the camera , set the layout, and link the C++ "C++ handler"'s pointer. Inputs are the camera stream width and height, and the pointer to the handler.
+* **public void receiveCameraFrame(byte[] data, int width, int height, boolean backCamera);** This will call the callback function when receving a new image frame. The inputs are the image data, the image width and height, a bool to indicate the front/back camera.
+* **public  native void setCameraFrame(byte[] paramArrayOfByte, int width, int height, long handlerPtr);** This is the callback function (which is written in C++, but use plugin to introduce here), it will go to the "C++ handler", and call the function defined in the "C++ handler" to process the image (algorithm calculation and low level rendering). The inputs are the image data array, the width and height of the image, and the pointer to the handler.
 
-
-
+C++ Plugin
+~~~~~~~~~~~~~~~~~~~~~
 
