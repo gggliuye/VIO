@@ -164,11 +164,12 @@ Data process
 C++ Renderer
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Use the unity low level plugin here to render.
-We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions. 
-`[CSDN page] https://blog.csdn.net/weixin_44492024/article/details/102578846`_
+C++ plugin
+-------------------
 
+Use the unity low level plugin here to render.We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions. See this page `CSDN page <https://blog.csdn.net/weixin_44492024/article/details/102578846>`_ for more details (I am sorry that it is in chinese, but the basic idea is clear).
 
+I defined a "renderCameraFrame" function, and it will be called in "OnRenderEvent" method (which will be called further in Unity at the end of each frame).
 
    void UnityOpenGLCameraRenderer::renderCameraFrame(uint8_t* data) {
       if (data == NULL) {
@@ -188,4 +189,52 @@ We need to follow the instruction from Unity offical page, to define the "Load",
    }
 
 
+Unity3D part
+------------------
 
+We will start a coroutine as following :
+
+    private IEnumerator CallPluginAtEndOfFrames()
+    {
+        while (true)
+        {
+            // Wait until all frame rendering is done
+            yield return new WaitForEndOfFrame();
+
+            // Issue a plugin event with arbitrary integer identifier.
+            // The plugin can distinguish between different
+            // things it needs to do based on this ID.
+            // For our simple plugin, it does not matter which ID we pass here.
+            GL.IssuePluginEvent(GetRenderEventFunc(), 1);
+        }
+    }
+
+C++ Plugin for Unity
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I have defined four sample functions for our objective :
+
+    [DllImport("RenderingPlugin")]
+    private static extern bool AR_Init(int frameWidth, int frameHeight, IntPtr previewTexture);
+
+    [DllImport("RenderingPlugin")]
+    private static extern void AR_Start(int cameraFacing);
+
+    [DllImport("RenderingPlugin")]
+    private static extern void AR_Stop(int cameraFacing);
+
+    [DllImport("RenderingPlugin")]
+    private static extern IntPtr GetRenderEventFunc();
+
+
+Their functions are :
+
+* **AR_Init** Initialize the C++ handler and java handler, set the texture address to be rendered.
+* **AR_Start** Start the camera with desired camera, and start processing.
+* **AR_Stop** Stop the C++ program and java camera.
+* **GetRenderEventFunc()** Get the render callback function, to be called at the end of each frame(as we explained above).
+
+Result
+~~~~~~~~~~~~~~~~~
+
+With all the upper steps finished, we successfully open the camera, render the texture with camera frame and begin C++ algorithm processing correctly.
