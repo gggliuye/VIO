@@ -34,7 +34,7 @@ We used the first method in the very beginning of our project. And as our projce
 
 Whole Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-The whole process structure and a time circle is shown here. (It will be better if I use Capella, but nobody appreciate it here in the company. They always "plan" things without a clear guide, total different from what we had done in France. HaHa, nobody will read this anyway.)
+The whole process structure and a time circle is shown here. (It will be better if I use Capella, but nobody appreciate it here in the company. They always "plan" things without a clear guide, total different from what we had done in France. Nobody will read this anyway.)
 
 .. image:: structure.PNG
    :width: 80%
@@ -164,8 +164,28 @@ Data process
 C++ Renderer
 ~~~~~~~~~~~~~~~~~~~~~~
 
+Use the unity low level plugin here to render.
+We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions. 
+`[CSDN page] https://blog.csdn.net/weixin_44492024/article/details/102578846`_
 
 
+
+   void UnityOpenGLCameraRenderer::renderCameraFrame(uint8_t* data) {
+      if (data == NULL) {
+         return;
+      }
+      int glErCode = glGetError();
+    
+      glBindTexture(GL_TEXTURE_2D, textureId);
+      if ((glErCode = glGetError()) != GL_NO_ERROR) {
+         LOGE("[moonlight] [Render] GL Error binding: %d \n", glErCode);
+      }
+
+      glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, pixelFormat, pixelType, data);
+      if ((glErCode = glGetError()) != GL_NO_ERROR) {
+         LOGE("[moonlight] [Render] GL Error render: %d \n", glErCode);
+      }
+   }
 
 
 
