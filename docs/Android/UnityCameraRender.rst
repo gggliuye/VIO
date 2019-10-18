@@ -34,7 +34,7 @@ We used the first method in the very beginning of our project. And as our projce
 
 Whole Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-The whole process structure and a time circle is shown here.
+The whole process structure and a time circle is shown here. (It will be better if I use Capella, but nobody appreciate it here in the company. They always "plan" things without a clear guide, total different from what we had done in France. HaHa, nobody will read this anyway.)
 
 .. image:: structure.PNG
    :width: 80%
@@ -52,6 +52,24 @@ The camera is opened with android camera surface. With three main function :
 * **public void initialize(int presetWidth, int presetHeight, long handlerPtr);** Initialize the camera , set the layout, and link the C++ "C++ handler"'s pointer. Inputs are the camera stream width and height, and the pointer to the handler.
 * **public void receiveCameraFrame(byte[] data, int width, int height, boolean backCamera);** This will call the callback function when receving a new image frame. The inputs are the image data, the image width and height, a bool to indicate the front/back camera.
 * **public  native void setCameraFrame(byte[] paramArrayOfByte, int width, int height, long handlerPtr);** This is the callback function (which is written in C++, but use plugin to introduce here), it will go to the "C++ handler", and call the function defined in the "C++ handler" to process the image (algorithm calculation and low level rendering). The inputs are the image data array, the width and height of the image, and the pointer to the handler.
+
+And "setCameraFrame" function is defined in an JNI cpp file :
+
+   extern "C"
+   JNIEXPORT void JNICALL Java_com_moonlight_liuye_unityrenderplugin_ARCameraHandler_setCameraFrame(
+            JNIEnv *env, jobject obj,
+            jbyteArray dataArray, jint width, jint height, jlong handlerPtr)
+   {
+      int64 timestamp = cv::getTickCount();
+      jboolean isCopy = JNI_FALSE;
+      signed char *yuv = env->GetByteArrayElements(dataArray, &isCopy);
+
+      AndroidCameraInterface *cameraInterface = (AndroidCameraInterface*)handlerPtr;
+      cameraInterface->receiveCameraFrame((char*)yuv, width, height, timestamp);
+
+      env->ReleaseByteArrayElements(dataArray, yuv, 0);
+   }
+
 
 C++ Plugin
 ~~~~~~~~~~~~~~~~~~~~~
