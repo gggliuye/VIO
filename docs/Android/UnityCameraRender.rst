@@ -47,19 +47,22 @@ The whole process structure and a time circle is shown here. (It will be better 
 Android Java Camera Surface
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Java (ARCameraHandler)
+------------------
+
 The camera is opened with android camera surface. With three main function :
 
 * **public void initialize(int presetWidth, int presetHeight, long handlerPtr);** Initialize the camera , set the layout, and link the C++ "C++ handler"'s pointer. Inputs are the camera stream width and height, and the pointer to the handler.
 * **public void receiveCameraFrame(byte[] data, int width, int height, boolean backCamera);** This will call the callback function when receving a new image frame. The inputs are the image data, the image width and height, a bool to indicate the front/back camera.
 * **public  native void setCameraFrame(byte[] paramArrayOfByte, int width, int height, long handlerPtr);** This is the callback function (which is written in C++, but use plugin to introduce here), it will go to the "C++ handler", and call the function defined in the "C++ handler" to process the image (algorithm calculation and low level rendering). The inputs are the image data array, the width and height of the image, and the pointer to the handler.
 
+C++
+----------------
+
 And "setCameraFrame" function is defined in an JNI cpp file :
 
    extern "C"
-   JNIEXPORT void JNICALL Java_com_moonlight_liuye_unityrenderplugin_ARCameraHandler_setCameraFrame(
-            JNIEnv *env, jobject obj,
-            jbyteArray dataArray, jint width, jint height, jlong handlerPtr)
-   {
+   JNIEXPORT void JNICALL Java_com_moonlight_liuye_unityrenderplugin_ARCameraHandler_setCameraFrame(JNIEnv *env, jobject obj, jbyteArray dataArray, jint width, jint height, jlong handlerPtr){
       int64 timestamp = cv::getTickCount();
       jboolean isCopy = JNI_FALSE;
       signed char *yuv = env->GetByteArrayElements(dataArray, &isCopy);
@@ -70,7 +73,53 @@ And "setCameraFrame" function is defined in an JNI cpp file :
       env->ReleaseByteArrayElements(dataArray, yuv, 0);
    }
 
+Jar Library
+--------------
 
-C++ Plugin
+I used a "Jar" library instead of a "aar" library, so I can easily change the layout and other configuration parameters. To build a "jar" we need to add a few lines (some tasks) in the gradle build file :
+
+   task deleteJar(type: Delete) {
+        delete 'libs/cameraRender.jar'
+   }
+
+   task createJar(type: Copy){
+        from('build/intermediates/bundles/release')
+        into('libs/')
+        include('classes.jar')
+        rename('classses.jar','cameraRender.jar')
+   }
+
+   createJar.dependsOn(deleteJar, build)
+
+Then we need to go to the gradle page(mostly at the right hand side of Android Studio) to find the methods we have defined upward to build a Jar library. Finally find the "classes.jar" and write a correct "AndroidManifast.xml", while will be later added into Unity3D project.
+
+At the end of this step, we end up with two files **"classes.jar"** and **"AndroidManifast.xml"** . They will open the camera, set the right callback function and configurate the application layout.
+
+C++ Handler
 ~~~~~~~~~~~~~~~~~~~~~
+
+Now we need to define the handler for:
+
+* passing its pointer to Java's camera callback
+* send the image data to renderer
+* and also to trigger the algorithm processing
+
+I will talk about this three parts with more details
+
+Connect with java
+-----------------------
+
+To connect with java, we need :
+
+1. Find the java class by its name. (in my case, is "com/moonlight/liuye/unityrenderplugin/ARCameraHandler")
+2. Find the other methods we need in the class. (Above all, the "initialize" we talked about above)
+3. In the initailization of this handler, we will call the "initialize" of java ARCameraHandler. For passing the pointer of "this" object to java, for correctly setting the camera frame callback.
+
+   jniEnv->CallVoidMethod(localObj, handlerInit, frameWidth, frameHeight, (jlong)this);
+
+4. 
+
+   void AndroidCameraInterface::receiveCameraFrame(char *yuvFrameData, int width, int height, long timestamp);
+
+
 
