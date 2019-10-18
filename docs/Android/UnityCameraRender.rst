@@ -117,9 +117,55 @@ To connect with java, we need :
 
    jniEnv->CallVoidMethod(localObj, handlerInit, frameWidth, frameHeight, (jlong)this);
 
-4. 
+4. Define the "receiveCameraFrame" function, so we can call this function from the JNI function (as we defined above):
 
-   void AndroidCameraInterface::receiveCameraFrame(char *yuvFrameData, int width, int height, long timestamp);
+   void AndroidCameraInterface::receiveCameraFrame(char *yuvFrameData, int width, int height, long timestamp) {
+      LOGD("[moonlight] [Camera] received camera frame %d x %d\n", width, height);
+      if (grayFrame.cols != width || grayFrame.rows != height) {
+         grayFrame.create(height, width, CV_8UC1);
+         rgbFrame.create(height, width, CV_8UC3);
+      }
+
+      cv::Mat yuvMat(height + height / 2, width, CV_8UC1, yuvFrameData);
+      cv::cvtColor(yuvMat, rgbFrame, CV_YUV420sp2RGB, 3);
+      memcpy(grayFrame.data, yuvFrameData, grayFrame.total());
+
+      frameCallback(rgbFrame.data, grayFrame.data, timestamp);
+   }
+
+5. We need "frameCallback(rgbFrame.data, grayFrame.data, timestamp)" to trigger the data processing. We can set this callback from outside the class by :
+
+   void AndroidCameraInterface::start(FrameCallBackFunc callback, int cameraFacing) {
+      LOGD("[moonlight] [Camera] starting with camera %d\n", cameraFacing);
+      frameCallback = callback;
+
+      jniEnv->CallVoidMethod(handlerObject, handlerStart, cameraFacing);
+   }
+
+
+Data process
+------------------
+
+**FrameCallBackFunc** is defined as:
+
+   void AR_FrameProcess(unsigned char *colorData, unsigned char *grayData, double timestamp) {
+      // process the data by algorithm
+      processGrayData(grayData, timestamp);
+      
+      // copy the color data into a global variable to process
+      pthread_mutex_lock(&renderMutex);
+      memcpy(renderingFrame.data, colorData, renderingFrame.total() * renderingFrame.elemSize());
+      pthread_mutex_unlock(&renderMutex);
+   }
+
+* Pass the gray scale data for algorithm processing thread.
+* Save the color data to be render by renderer.
+
+C++ Renderer
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 
 
 
