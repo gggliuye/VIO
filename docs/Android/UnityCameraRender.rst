@@ -39,10 +39,7 @@ The whole process structure and a time circle is shown here. (It will be better 
 .. image:: structure.PNG
    :width: 80%
    :align: center
-   
-.. image:: lifecircle.PNG
-   :width: 80%
-   :align: center
+  
 
 Android Java Camera Surface
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -238,3 +235,7 @@ Result
 ~~~~~~~~~~~~~~~~~
 
 With all the upper steps finished, we successfully open the camera, render the texture with camera frame and begin C++ algorithm processing correctly.
+
+.. image:: lifecircle.PNG
+   :width: 80%
+   :align: center
