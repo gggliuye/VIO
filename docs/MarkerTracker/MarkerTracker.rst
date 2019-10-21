@@ -57,8 +57,47 @@ And we didn't do any more preprocessing here to avoid redundant calculation.
 Feature Extraction
 ----------------------
 
-There can be many way to extract the features. 
+There can be many way to extract the features. We used FAST cornor points(for both TYPE a and b) and BRIEF descritpors (will only be calculated for TYPE a feautures).
 
+Patch Match
+-------------------
+Here I use "Patch match" as the title, but it is different from the PatchMatch algorithm you may know. We simply use NCC (where Iij is the image pixel corresponding to the patch pixel Pij):
+
+.. math::
+    \frac{  \sum_{i,j} (I_{i,j}P_{i,j})  -  \sum_{i,j} I_{i,j} * \sum_{i,j} P_{i,j} * \frac{1}{N} } 
+    {\sqrt{  \sum_{i,j} P_{i,j}^{2} - \frac{1}{N} * \sum_{i,j} P_{i,j}  * \sum_{i,j} P_{i,j} * ( \sum_{i,j} I_{i,j}^{2} - \frac{1}{N} * \sum_{i,j} I_{i,j}  * \sum_{i,j} I_{i,j} ) } }
+
+We used NEON(These built-in intrinsics for the ARM Advanced SIMD extension are available when the -mfpu=neon switch is used) commond to optimize the calculation process.
+
+        uint16x8_t xImageSums = vdupq_n_u16(0);
+		uint32x4_t xImageSqSums = vdupq_n_u32(0);
+		uint32x4_t xCrossSums = vdupq_n_u32(0);
+
+		uint16x8_t xImageSq;
+		uint16x8_t xCross;
+		uint8x8_t xImage;
+		uint8x8_t xTemplate;
+
+		for (int i = 0; i < patch.rows; ++i) {
+			uchar *patchRow = patch.data + i * patch.step;
+			uchar *imageRow = image.data + (i + pt.y - patchRadius) * image.step
+			+ pt.x - patchRadius;
+
+			xImage = vld1_u8(reinterpret_cast<uint8_t*>(imageRow));
+			xTemplate = vld1_u8(reinterpret_cast<uint8_t*>(patchRow));
+
+			xImageSums = vaddq_u16(xImageSums, vmovl_u8(xImage));
+
+			xImageSq = vmull_u8(xImage, xImage);
+			xImageSqSums = vpadalq_u16(xImageSqSums, xImageSq);
+
+			xCross = vmull_u8(xImage, xTemplate);
+			xCrossSums = vpadalq_u16(xCrossSums, xCross);
+		}
+
+		imageSum = Sum_16(xImageSums);
+		imageSqSum = Sum_32(xImageSqSums);
+		imageCrossSum = Sum_32(xCrossSums);
 
 
 Further update thought
