@@ -154,7 +154,7 @@ we can make a link with the result of other SLAM algorithms.
     :width: 80%
     :align: center
 
-.. image:: MarkerXslam.gif
+.. image:: markerXslam.gif
     :width: 80%
     :align: center
 
