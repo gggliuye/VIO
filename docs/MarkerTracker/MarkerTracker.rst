@@ -140,6 +140,10 @@ The match patch processing loop functions as following :
         }
     }
 
+.. image:: outputMarker.gif
+    :width: 80%
+    :align: center
+
 
 Further update thought
 --------------------
