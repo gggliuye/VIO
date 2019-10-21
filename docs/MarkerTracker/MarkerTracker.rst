@@ -6,7 +6,8 @@ The point here, is to make a image(marker) localization algorithm, with the simi
 Pipeline
 ------------------------
 
-**Marker Maker**
+**Marker Maker**:
+
 * extract infomation we need
     - several features with descriptors 
     - more features but without descriptors
