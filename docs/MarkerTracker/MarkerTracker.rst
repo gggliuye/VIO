@@ -145,6 +145,16 @@ The match patch processing loop functions as following :
     :align: center
 
 
+With SLAM
+---------------------
+
+we can make a link with the result of other SLAM algorithms.
+
+.. image:: outputMarkerXslam.gif
+    :width: 80%
+    :align: center
+
+
 Further update thought
 --------------------
 
