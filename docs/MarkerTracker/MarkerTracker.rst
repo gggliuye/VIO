@@ -61,7 +61,13 @@ There can be many way to extract the features. We used FAST cornor points(for bo
 
 Patch Match
 -------------------
-Here I use "Patch match" as the title, but it is different from the PatchMatch algorithm you may know. We simply use NCC (where Iij is the image pixel corresponding to the patch pixel Pij):
+
+Here I use "Patch match" as the title, but it is different from the PatchMatch algorithm you may know. 
+
+Coefficient
+~~~~~~~~~~~~~~~~~~
+
+We simply use NCC (where Iij is the image pixel corresponding to the patch pixel Pij):
 
 .. math::
     \frac{  \sum_{i,j} (I_{i,j}P_{i,j})  -  \sum_{i,j} I_{i,j} * \sum_{i,j} P_{i,j} * \frac{1}{N} } 
@@ -98,6 +104,41 @@ We used NEON(These built-in intrinsics for the ARM Advanced SIMD extension are a
 		imageSum = Sum_16(xImageSums);
 		imageSqSum = Sum_32(xImageSqSums);
 		imageCrossSum = Sum_32(xCrossSums);
+
+
+Match Process
+~~~~~~~~~~~~~~~
+
+The match patch processing loop functions as following :
+
+    cv::Point2f searchCenter;
+    cv::Mat markerPatch;
+    cv::Rect searchROI;
+    cv::Point2f matchLoc;
+    for (int i = 0; i < nPoints; ++i) {
+        searchCenter = projectedPoints[i];
+        if (searchCenter.x < searchRadius || searchCenter.y < searchRadius
+                || searchCenter.x >= frame.cols - searchRadius
+                || searchCenter.y >= frame.rows - searchRadius) {
+            continue;
+        }
+        // and project the corresponding patch with warpPatch method
+        markerPatch = ImageUtils::warpPatch(homography,
+                markerInfo.markerImage, markerPoints[i], PATCH_SQUARE_WIDTH,
+                PATCH_SQUARE_WIDTH);
+        searchROI = cv::Rect(searchCenter.x - searchRadius,
+                searchCenter.y - searchRadius, SEARCH_SQUARE_WIDTH,
+                SEARCH_SQUARE_WIDTH);
+
+        // calculate if the warped Path is corresponding with the original patch
+	// and find the best path aroung warped path
+        ImageUtils::CCoeffPatchFinder patchFinder (markerPatch);
+        matchLoc = patchFinder.findPatch(frame, searchROI, PATCH_NCC_THRESHOLD);
+        if (matchLoc.x >= 0 && matchLoc.y >= 0) {
+            matchedMarkerPoints.push_back(markerPoints[i]);
+            matchedImagePoints.push_back(matchLoc);
+        }
+    }
 
 
 Further update thought
