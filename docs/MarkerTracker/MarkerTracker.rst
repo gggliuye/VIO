@@ -150,7 +150,11 @@ With SLAM
 
 we can make a link with the result of other SLAM algorithms.
 
-.. image:: outputMarkerXslam.gif
+.. image:: markerwithslam.PNG
+    :width: 80%
+    :align: center
+
+.. image:: MarkerXslam.gif
     :width: 80%
     :align: center
 
