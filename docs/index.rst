@@ -14,12 +14,13 @@ Welcome to SLAM-AR's documentation!
    Prepare
    SFM
    Tracking/TrackingIntroduction
-   UnitySc/unityShadowCreator
-   UnitySc/CVPRlocalization
    deepblue/LM
    deepblue/VIO
    deepblue/tmp
+   UnitySc/CVPRlocalization
+   UnitySc/unityShadowCreator
    Android/UnityCameraRender
+   MarkerTracker/MarkerTracker
 
 Indices and tables
 ==================
