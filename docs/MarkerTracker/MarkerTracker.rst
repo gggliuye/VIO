@@ -8,12 +8,24 @@ Pipeline
 
 **Marker Maker**:
 
-* extract infomation we need
-    - several features with descriptors 
-    - more features but without descriptors
+* Extract infomation we need
+    - several features(TYPE a) with descriptors 
+    - more features(TYPE b) but without descriptors
     - infomation of marker's real size 
-* save the infomation to a data file
+* Save the infomation to a data file
 
+**Process Loop**:
+
+* Load the marker data
+* for each new input image :
+    1. Extract a certain amount of features(TYPE a) and calculate its descriptors.
+    2. Match the features with the features of marker by their descriptors.
+    3. Use the matched features to calculate homography matrix between marker and the input image.
+    4. Project the features (TYPE b) of the marker by the homography matrix to the input image. And also project a rectangle patch surrounding the features to the image.
+    5. Use NCC (or other methods) to find the best match of the patch in the image, and calculate its position.
+    6. If have done enough iteration or the error is small enough, go to the final step
+    7. Go back to step 4.
+* Out put the homography matrix, and calculate the 4 times 4 transformation matrix with PnP method (using the marker's real size)
 
 
 PreTreatment
