@@ -53,3 +53,22 @@ To realize fast processing, we need to resize both the marker image and the inpu
 
 And we didn't do any more preprocessing here to avoid redundant calculation.
 
+
+Feature Extraction
+----------------------
+
+There can be many way to extract the features. 
+
+
+
+Further update thought
+--------------------
+
+* No need to extract feature (TYPE b), as we can better choose some patch from the marker image, with other methods. As features are designed for points, but here we need match of patches. If we can better choose the patch , we should get better result.
+* Feature extraction method choose. We can find a better and faster feature extraction method for our algorithm.
+* The connection of the history (or more precisely, the last frame). we can use optical flow to faster get point matches, which will reduce the need of feature descriptor calculation.
+     1. Assume we have find the marker and calculated its transformation matrix of the last frame.
+     2. Use optical flow to track features, and calcualte the inital homography matrix (or we can simply use the homography matrix of the last frame)
+     3. Return to the step 4 - step 7 of the original algorithm.
+     4. If lost the marker. Go back to step 1 of the original algorithm.
+
