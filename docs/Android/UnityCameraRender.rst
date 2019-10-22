@@ -92,6 +92,28 @@ Then we need to go to the gradle page(mostly at the right hand side of Android S
 
 At the end of this step, we end up with two files **"classes.jar"** and **"AndroidManifast.xml"** . They will open the camera, set the right callback function and configurate the application layout.
 
+Use opencv
+--------------------
+We can also use Opencv Java to open the camera by using "private CameraBridgeViewBase   mOpenCvCameraView;"
+
+        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.tutorial2_activity_surface_view);
+        mOpenCvCameraView.setVisibility(CameraBridgeViewBase.VISIBLE);
+        mOpenCvCameraView.setCvCameraViewListener(this);
+        mOpenCvCameraView.setMaxFrameSize(IMG_Width,IMG_Height);
+        mOpenCvCameraView.setClickable(true);
+
+And we can define the callback function more easily with (where "nativeProcessFrame" is the C++ native function to process the image):
+
+    mRgba = new Mat(height, width, CvType.CV_8UC4);
+    mGray = new Mat(height, width, CvType.CV_8UC1);
+    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+        mRgba = inputFrame.rgba();
+        mGray = inputFrame.gray();
+        nativeProcessFrame(mGray.getNativeObjAddr(), mRgba.getNativeObjAddr());
+        return mRgba;
+    }
+
+
 C++ Handler
 ~~~~~~~~~~~~~~~~~~~~~
 
