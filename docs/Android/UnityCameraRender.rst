@@ -251,6 +251,8 @@ With all the upper steps finished, we successfully open the camera, render the t
    :width: 80%
    :align: center
 
+Here is a result, shown in Unity Android, with a plan created in unity, which will be rendered in C++ low level plugin, and with a cube in front of the plan (which we can see in the center).
+
 .. image:: rendershow.gif
    :width: 80%
    :align: center
