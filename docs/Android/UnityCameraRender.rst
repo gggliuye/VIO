@@ -264,6 +264,67 @@ Their functions are :
 * **AR_Stop** Stop the C++ program and java camera.
 * **GetRenderEventFunc()** Get the render callback function, to be called at the end of each frame(as we explained above).
 
+
+IMU sensor
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To receive IMU data, we need to use android standard library with "sensor.h".  Basicly, we need to:
+
+* Start sensor queue : 
+
+    mpSensorEventQueue = ASensorManager_createEventQueue(mpSensorManager,
+            mpSensorThreadLooper, 0, SensorCallback, NULL);
+
+* In the "SensorCallback" function, define the different processes based on event types:
+
+    switch (sensorEvent.type){
+         case ASENSOR_TYPE_ACCELEROMETER:
+             HandleAccelerometerEvent(sensorEvent);
+             break;
+         case ASENSOR_TYPE_GYROSCOPE:
+             HandleGyroscopeEvent(sensorEvent);
+             break;
+         case ASENSOR_TYPE_ACCELEROMETER+100:
+             HandleAccelerometerEvent(sensorEvent);
+             break;
+         case ASENSOR_TYPE_GYROSCOPE+100:
+             HandleGyroscopeEvent(sensorEvent);
+             break;
+         default:
+             ;}
+
+* Finally, define the different processes as following:
+
+    void PhoneSensor::HandleAccelerometerEvent(ASensorEvent& sensorEvent)
+    {
+        PhoneSensor* pSensorInstance = PhoneSensor::GetInstance();
+        pSensorInstance->acc_gro.accX = sensorEvent.acceleration.x;
+        pSensorInstance->acc_gro.accY = sensorEvent.acceleration.y;
+        pSensorInstance->acc_gro.accZ = sensorEvent.acceleration.z;
+    }
+
+    void PhoneSensor::HandleGyroscopeEvent(ASensorEvent& sensorEvent)
+    {
+        PhoneSensor* pSensorInstance = PhoneSensor::GetInstance();
+
+        pSensorInstance->acc_gro.gyrX = sensorEvent.vector.x;
+        pSensorInstance->acc_gro.gyrY = sensorEvent.vector.y;
+        pSensorInstance->acc_gro.gyrZ = sensorEvent.vector.z;
+
+        pSensorInstance->acc_gro.header =  PVR::Timer::GetSeconds();
+        IMU_MSG tmp = pSensorInstance->acc_gro;
+        imuCallback(tmp);
+    }
+
+* Define the constume defined "imuCallback" process function. 
+
+We can receive IMU data with the upper method, and an example output can be seen: 
+
+.. image:: imuexample.PNG
+   :width: 80%
+   :align: center
+
+
 Result
 ~~~~~~~~~~~~~~~~~
 
