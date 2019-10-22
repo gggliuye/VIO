@@ -164,9 +164,20 @@ C++ Renderer
 C++ plugin
 -------------------
 
-Use the unity low level plugin here to render.We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions. See this page `CSDN page <https://blog.csdn.net/weixin_44492024/article/details/102578846>`_ for more details (I am sorry that it is in chinese, but the basic idea is clear).
+Use the unity low level plugin here to render.We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions. 
 
-I defined a "renderCameraFrame" function, and it will be called in "OnRenderEvent" method (which will be called further in Unity at the end of each frame).
+**See this page `CSDN page <https://blog.csdn.net/weixin_44492024/article/details/102578846>`_ for more details** (I am sorry that it is in chinese, but the basic idea is clear, and I will add english version in this page). In this page, the following pipeline will be introduced:
+
+* Create a mesh object in Unity, then pass its pointer to lower C++ layer.
+* In C++ plugin, define the renderer (mainly has a load , unload , and a event callback functions).
+* Change the mesh (its vertices and normals) and render it.
+* Also, create a new texture in C++ layer, then render it.
+
+.. image:: resultShow.png
+   :width: 80%
+   :align: center
+
+Here, I defined a "renderCameraFrame" function, and it will be called in "OnRenderEvent" method (which will be called further in Unity at the end of each frame).
 
    void UnityOpenGLCameraRenderer::renderCameraFrame(uint8_t* data) {
       if (data == NULL) {
@@ -239,3 +250,10 @@ With all the upper steps finished, we successfully open the camera, render the t
 .. image:: lifecircle.PNG
    :width: 80%
    :align: center
+
+.. image:: rendershow.gif
+   :width: 80%
+   :align: center
+
+The project uses it to realize a marker localization can be seen in the `next chapter <https://vio.readthedocs.io/zh_CN/latest/MarkerTracker/MarkerTracker.html>`_
+
