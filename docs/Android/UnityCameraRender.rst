@@ -166,7 +166,7 @@ C++ plugin
 
 Use the unity low level plugin here to render.We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions. 
 
-**See this page `CSDN page <https://blog.csdn.net/weixin_44492024/article/details/102578846>`_ for more details** (I am sorry that it is in chinese, but the basic idea is clear, and I will add english version in this page). In this page, the following pipeline will be introduced:
+**See this page**  `CSDN page <https://blog.csdn.net/weixin_44492024/article/details/102578846>`_ for more details (I am sorry that it is in chinese, but the basic idea is clear, and I will add english version in this page). In this page, the following pipeline will be introduced:
 
 * Create a mesh object in Unity, then pass its pointer to lower C++ layer.
 * In C++ plugin, define the renderer (mainly has a load , unload , and a event callback functions).
