@@ -1,4 +1,4 @@
-Image(Marker) Localization
+Marker Localization
 ===================================
 
 The point here, is to make a image(marker) localization algorithm, with the similar effect as the one Vuforia did. With high precise and fast processing.
