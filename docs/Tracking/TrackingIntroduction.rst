@@ -71,11 +71,49 @@ Multi-sensor Fusion
 
 * IMU: 
   IMU is used in a lot of SLAM system, as VINS for drones, and MSCKF for AR kit, etc.
-  
 
 * GPS / Blue Tooth : They can difinitly give us some information. The problem is how to use it.
 
 * LIDAR: e.g.VLOAM
+
+
+Our VIO front-end
+------------------------
+
+Feature Extraction
+~~~~~~~~~~~~~~~~~~~
+Basicly, will use good feature to track (Shi-Tomasi method) with mask.
+
+    cv::goodFeaturesToTrack(forw_img, n_pts, MAX_CNT - forw_pts.size(), 0.01, MIN_DIST, mask);
+
+* Make mask for detection (version 1):
+    1. Make a circle mask for fish eye camera.
+    2. Sort all the points by its tracked count.
+    3. Make mask based on its tracked count's rank with a circle.
+    4. If a point is already in the mask, skip the point. 
+    5. As a result, the feature extraction will favor the long tracked points.
+
+* Make mask for detection (version 2), I found the rank process may not be that profitable:
+    1. Make a circle mask for fish eye camera.
+    3. Make mask around all tracked points with a circle.
+
+
+
+Optical flow
+~~~~~~~~~~~~~~~~~~~
+Basicly, we used pyramid LK optical flow to track features. 
+
+    cv::calcOpticalFlowPyrLK(cur_img, forw_img, cur_pts, forw_pts, status, err, cv::Size(21, 21), 3);
+
+Then we will filter the tracked points :
+* If the input point is in the image border. As for optical flow, the points can be followed into border, where the points will be kept and effect greatly the tracking result.
+* Reject point by fundamental check. This process will be done with the following steps:
+    1. Lifts a point from the image plane to its projective ray.
+    2. project the point back to the image plane with another focus length, obatin un_pts.
+    3. use the un_cur_pts and un_forw_pts to calculate fundamental matrix with RANSAC.
+    4. As a result, the plane points will be reduced and line points will be kept.
+    5. Experiments show this process optimized the robustness, and had spent almost no time.
+
 
 
 Reference
