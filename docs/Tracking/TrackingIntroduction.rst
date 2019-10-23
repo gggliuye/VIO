@@ -97,6 +97,10 @@ Basicly, will use good feature to track (Shi-Tomasi method) with mask.
     1. Make a circle mask for fish eye camera.
     3. Make mask around all tracked points with a circle.
 
+.. image:: images/features.png
+   :width: 60%
+   :align: center
+
 * Update the state. Save the current data to the last data.
 
 
