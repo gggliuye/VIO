@@ -97,6 +97,7 @@ Basicly, will use good feature to track (Shi-Tomasi method) with mask.
     1. Make a circle mask for fish eye camera.
     3. Make mask around all tracked points with a circle.
 
+* Update the state. Save the current data to the last data.
 
 
 Optical flow
@@ -106,6 +107,7 @@ Basicly, we used pyramid LK optical flow to track features.
     cv::calcOpticalFlowPyrLK(cur_img, forw_img, cur_pts, forw_pts, status, err, cv::Size(21, 21), 3);
 
 Then we will filter the tracked points :
+
 * If the input point is in the image border. As for optical flow, the points can be followed into border, where the points will be kept and effect greatly the tracking result.
 * Reject point by fundamental check. This process will be done with the following steps:
     1. Lifts a point from the image plane to its projective ray.
