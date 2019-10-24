@@ -146,6 +146,9 @@ The match patch processing loop functions as following :
 With SLAM
 ---------------------
 
+Stereo Camera Devices
+~~~~~~~~~~~~~~~~~~~~~~~
+
 we can make a link with the result of other SLAM algorithms.
 
 .. image:: markerwithslam.PNG
@@ -153,6 +156,13 @@ we can make a link with the result of other SLAM algorithms.
     :align: center
 
 .. image:: markerXslam.gif
+
+VINS
+~~~~~~~~~~~~~~~~~~~~
+
+We have also complete a versio with VINS together ( `Youtube video <https://youtu.be/DLmFFdof-1Y>`_ ).
+The more difficult part is to make VINS work in android cellphone.
+
 
 
 Further update thought
