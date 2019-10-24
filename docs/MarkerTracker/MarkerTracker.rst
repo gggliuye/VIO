@@ -163,9 +163,14 @@ VINS
 We have also complete a versio with VINS together ( `Youtube video <https://youtu.be/DLmFFdof-1Y>`_ ).
 The more difficult part is to make VINS work in android cellphone.
 
+Problems and possible updates (24/10/2019):
+
+* VINS initialization took too much time (and from times to times, we cannot succeefully initialize with a lot of try) -> we should try some better initialization method. Even, by offline map build process if possible.
+* VINS results are still unstable, but quiet satisfying in stable environment.
+* VINS's loop closure is not satisfying. (VINS's loop closure is a backend optimization process for the keyframes only. That is to say, it cannot optimize map points. And as some of the frames can have great error, it will drag the "correct" keyframe further. As a result, the good frames become less good, the bad frame become less bad. This will help to obtain a better trajectory for error analysis for sure. However for AR application, this may be a disaster. In the contrary, ORBSLAM for example, use all the infomation all the feature observations and the keyframes, which will difinitly give a better optimization result.) -> we should study more about VINS's loop closure algorithm. And I think we should consider the possiblity to build the loop keyframes by other algorithm (e.g. ORBSLAM2, which use FAST points and FREAK descriptors is exactly the same as VINS's) .
 
 
-Further update thought
+Further update thought (22/10/2019)
 --------------------
 
 * No need to extract feature (TYPE b), as we can better choose some patch from the marker image, with other methods. As features are designed for points, but here we need match of patches. If we can better choose the patch , we should get better result.
