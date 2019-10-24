@@ -16,7 +16,6 @@ Welcome to SLAM-AR's documentation!
    Tracking/TrackingIntroduction
    deepblue/LM
    deepblue/VIO
-   deepblue/tmp
    UnitySc/CVPRlocalization
    UnitySc/unityShadowCreator
    Android/UnityCameraRender
