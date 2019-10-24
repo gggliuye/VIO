@@ -365,6 +365,100 @@ First Estimate Jacobian
 Here comes the FEJ (first esimate jacobian) as its solution. **Use the same linearization point for evaluating Jacobian**. For most cases, the jacobian will be only calculated once to keep its consistency. It has been used in MSCKF, OKVIS, DOS, etc. And this has been shown to make the system more robust, and introduce better performance.
 
 
+Gauge Freedom
+-----------------------
+
+This article  [#]_  talks about the influence of  **Gauge Freedom** to VI (visual inertial) system.  **Gauge Freedom** can be seen as the uncertainty of the system, the variables we cannot obeserve, and the null(zero) space of Hessian matrix. For visual only SLAM, its Gauge Freedom equals to seven (six for the initial pose, and one the scale). But for VI system, we have additional infomation about the gravity, as a result its Gauge Freedom is 3 (two for translatio and one the yam angle).
+
+Analysis methods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to solve the VI slam system stably, we need to deal with these four degrees of freedom. In this paper, three methods are discussed, and numerical analysis and discussion are made respectively.
+
+1. **fixing** the unobservable states to some given values.  :math:`p_{0}^{0}, R_{0}^{0}` 。
+2. setting a **prior** on such states. Add prior knowledge to these non observable measures. Specifically, a priori information is added to the Hessian matrix corresponding to the initial pose in the form of a superimposed diagonal matrix.
+3. letting the states evolve **freely** . 
+
+The prior method is equivalent to the average of the other two methods. As with the fixation method, it also adds constraints to the non observable measurement, but at the same time adds the uncertainty of the state. So:
+
+* If the element value of the superimposed diagonal matrix is very large, the result will be basically the same as that of the Fixing gauge.
+* If the stacked diagonal elements are very small and close to zero, the result will be the same as free gauge.
+
+In terms of analysis, three directions are analyzed:
+
+1. Accuracy, first align the trajectory of the result. After that, the position error is measured by the physical distance of the keyframe, and the rotation error is measured by the relative angle.
+2. Computational cost. By simulating 50 times of optimization, the total time, the number of iterations and the time of each iteration are measured respectively.
+3. Estimated covariance. Because they are not unified in the fractal space, the author adopts the form of linear transformation to unify them in the high-dimensional parameter space, and then analyzes them.
+
+The **residuals** residuals of the VI system contain IMU items and visual items, which are simulated by the same model as the general vio: vision uses the re projection model, IMU uses the prediction and measurement differences.
+
+**The simulation data** uses the combination of plane points and random points, in addition, the initial position also adds some disturbance, and B splines is used to simulate IMU data. In addition, euroc's **real data** is also used for comparison.
+
+Problem elaboration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In vislam, due to the lack of global translation and yaw angle observation, the system has multiple sets of solutions (no unique solution). So many solutions can be described as: flow pattern in **parameter space (~ special high-dimensional geometry)**, all points on this flow pattern **m** are system solutions. In order to get a unique solution, you can choose to add constraints in space. The constraints will be represented in the form of another high-dimensional geometry **c**, and the solution after constraints will surely fall on the intersection of **m** and **c** (the geometric junction of parameter space).
+
+.. image:: images/maniford.PNG
+   :width: 50%
+   :align: center
+   
+As shown in the figure above, the result of fixation gauge will be at the junction of  **m** and **c**, and the result of free gauge will fall on **m** (the specific location will be affected by the initial start value). According to the previous analysis, the result of the prior gauge method will fall between the other two methods, and the specific location is determined by the prior information matrix.
+
+Prior Gauge
+~~~~~~~~~~~~~~~~~~~~~
+
+The author analyzes the influence of different prior information matrix on the system, and uses :math:`\sigma` to measure the information matrix. Discovered
+
+* When :math:`\sigma` is small, it will affect the system to different degrees. The iteration time and the final error of the system are not stable.
+* When :math:`\sigma` is too large, the system will be very stable. This is because the influence of prior error is too large, and the influence of other residual terms is almost ignored in optimization, leading to chaos of the system.
+*When :math:`\sigma` is large, the convergence state of the system is stable.
+
+* In fact, I think this is because: the information of :math:`\sigma` is large enough compared with other items, which makes this item almost a fixed top. The current system is very close to the situation of fixation gauge. The author's later simulation results also prove this point, using a larger one: the result of :math:`\sigma` is almost the same as that of fixation gauge. **I think it's better to take a relatively small** :math:`\mathbf{\sigma}` **to analysis**.
+
+Error and cost result
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: images/eurocResult.PNG
+   :width: 70%
+   :align: center
+   
+In general:
+
+* The error results of fix and prior are very consistent, almost no difference. Free has the smallest error.
+* However, prior needs more iteration time than fix, which is because although they are almost the same in fact, prior still has four more variables, and its iteration time is always long.
+* Fix has the shortest iteration time, but more iterations.
+* Free has fewer iterations, with the longest iteration time each time, but the lowest total iteration time.
+
+
+Covariance processing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It can be found from the above parametric space graph that the covariance matrix obtained by several methods is actually not uniform, and it can not be directly compared.
+
+From the direct covariance matrix results, we can see that:
+
+* The "distribution" of the mean covariance of free gauge is on all variables.
+* Due to the increase of constraints, the covariance of the first pose of the fixation gauge is zero (because it is fixed), and then the covariance of the pose will continue to increase (because the error will continue to accumulate, which is very consistent with the physical reality).
+
+
+
+So the covariance results of free gauge are transformed as follows.
+
+.. image:: images/manifordTranform.PNG
+   :width: 70%
+   :align: center
+
+1. Translate the result of free gauge :math:`\theta` and :math:`\Delta \theta` to the intersection position of **c** on **m** flow pattern.
+2. At this position, decompose :math:`\theta` and :math:`\Delta \theta` on the tangent plane of **c** and take out the components in the tangent direction.
+3. Calculate the new corresponding covariance matrix, which is obtained from the simultaneous linear translation :math:`\Delta \theta` (see the original article for the specific expression).
+
+.. image:: images/transformed.PNG
+   :width: 100%
+   :align: center
+
+The covariance matrix of free gauge after linear translation transformation is basically the same as that of fixation gauge. For the author's simulation data set, the gap is 0.11%, while euroc's result gap was 0.02%. It can be considered that the covariance of the two systems is the same.
+
+
 Reference
 --------------------------
 
@@ -373,3 +467,5 @@ Reference
 .. [#] Jauffret C. Observability and Fisher information matrix in nonlinear regression[J]. IEEE Transactions on Aerospace and Electronic Systems, 2007, 43(2): 756-759.
 
 .. [#] Huang G P, Mourikis A I, Roumeliotis S I. A first-estimates Jacobian EKF for improving SLAM consistency[C]//Experimental Robotics. Springer, Berlin, Heidelberg, 2009: 373-382.
+
+.. [#] Zhang Z, Gallego G, Scaramuzza D. On the comparison of gauge freedom handling in optimization-based visual-inertial state estimation[J]. IEEE Robotics and Automation Letters, 2018, 3(3): 2710-2717.
