@@ -242,25 +242,7 @@ processImage
 initialStructure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* check IMU state. where Delta V is the result of preintegration between two frames in integration base, Delta t is the time interval between frames.
-
-.. math::
-    \bar{g} = \frac{1}{Size_{window}} \sum_{window} \frac{\Delta v} {\Delta t}
-
-.. math::
-    \Delta g = \frac{\Delta v}{\Delta t} - \bar{g}
-    
-.. math::
-    Var = \sqrt{ \frac{1}{Size_{window}} \sum_{window} (\Delta g)^{T} (\Delta g)  }
-
-if Var < 0.25 : "IMU excitation not enouth!"
-
-* initialize a sfm features vector by **FeatureManager** .
-* check the relative pose, if not enough features or parallax, ask to move the device.
-* **GlobalSFM** construct.
-* if global sfm succeed, solve PnP for all frames.
-* solve odometry and manage slide window
-* visualInitialAlign.   VisualIMUAlignment
+* This is the main part of the initialization process of VINS, and it is realized by a global SFM. So I will cover its details in GLOBAL SFM part.
 
 solveOdometry
 ~~~~~~~~~~~~~~~~~~~~
@@ -443,7 +425,37 @@ Global SfM
 
 This is a simplified Global SfM method, reduced lots of algorithm details (outlier rejection, retriangulation, multiply global BA, etc). However, it works well for a real time SLAM application, and we can try multiply times to initialize. 
 
-Notice that, in Estimator::initialStructure(), the system will solve PnP again, after this Global SfM process. (why not do this step here**?**)
+Main process loop
+~~~~~~~~~~~~~~~~~~~~~
+
+1. check IMU state. where Delta V is the result of preintegration between two frames in integration base, Delta t is the time interval between frames. To make sure the IMU data in the window have enough variance, so that it may give enough triangulation possibility. The main process is realized by :
+
+.. math::
+    \bar{g} = \frac{1}{Size_{window}} \sum_{window} \frac{\Delta v} {\Delta t}
+
+.. math::
+    \Delta g = \frac{\Delta v}{\Delta t} - \bar{g}
+    
+.. math::
+    Var = \sqrt{ \frac{1}{Size_{window}} \sum_{window} (\Delta g)^{T} (\Delta g)  }
+
+    if Var < 0.25 : "IMU excitation not enouth!" (that is to say , IMU hasn't enough variance).
+
+    But in real AR application test, we found this part may not be necessary. 
+
+2. Initialize a sfm features vector by **FeatureManager** .
+3. Check the relative pose, if not enough features or parallax, ask to move the device.
+4. **GlobalSFM** process, this is the main part of the whole process. And global SFM process will return a value "l", which indicates the reference frame index. As a result, the lth frame will be our world frame.
+5. If global sfm succeed, solve PnP for all frames. To calcuate all the pose with respect to the lth frame.
+6. **fcn visualInitialAlign** which is to optimize and refine the IMU parameters.   
+
+Notice that, in Estimator::initialStructure(), the system will solve PnP again, after this Global SfM process. Why?
+
+Their are several port to call this process:
+
+1. Initialization state (when the system begin).
+2. When failure detected. They are some criterions to tell that the system may fail (for example, un normal movement). This part should be paied enough attention.
+
 
 triangulate point
 ~~~~~~~~~~~~~~~~
