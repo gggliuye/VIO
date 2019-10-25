@@ -453,7 +453,7 @@ Notice that, in Estimator::initialStructure(), the system will solve PnP again, 
 Their are several port to call this process:
 
 1. Initialization state (when the system begin).
-2. When failure detected. They are some criterions to tell that the system may fail (for example, un normal movement). This part should be paied enough attention.
+2. When failure detected. They are some criterions to tell that the system may fail (for example, un normal movement). This part should be paied enough attention. (In real application, it is mostly the estimated bias of accelerator too large, which is un norml)
 
 
 triangulate point
