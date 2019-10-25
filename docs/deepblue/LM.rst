@@ -439,9 +439,8 @@ Main process loop
 .. math::
     Var = \sqrt{ \frac{1}{Size_{window}} \sum_{window} (\Delta g)^{T} (\Delta g)  }
 
-    if Var < 0.25 : "IMU excitation not enouth!" (that is to say , IMU hasn't enough variance).
 
-    But in real AR application test, we found this part may not be necessary. 
+* if Var < 0.25 : "IMU excitation not enouth!" (that is to say , IMU hasn't enough variance). But in real AR application test, we found this part may not be necessary. 
 
 2. Initialize a sfm features vector by **FeatureManager** .
 3. Check the relative pose, if not enough features or parallax, ask to move the device.
