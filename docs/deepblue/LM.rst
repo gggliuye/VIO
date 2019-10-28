@@ -714,8 +714,18 @@ Finally, the residual can be write as (the square sum of the residual is actuall
 
 .. math::
     \mathbf{r} = \begin{bmatrix} \mathbf{b} \cdot \mathbf{d} \\ \mathbf{c} \cdot \mathbf{d}  \end{bmatrix}
+    
+DT optimization
+~~~~~~~~~~~~~~~~~~~~
+Here we talk about the optimization of the error of timestamp **td** (the error of timestamp of the camera sensor and the IMU sensor). It is mostly introduced by the explosion time of camera, and also influenced by other hardware processing. It is included as a part of VINS-mono, but is removed in VINS-Fusion. 
 
+This is realized by rewrite point poisition in the reprojection error factor with :
 
+.. math::
+    p_{i} \leftarrow p_{i} - [(td - td_{i}) + \frac{TR}{ROW}row_{i}] * v_{i}
+    p_{j} \leftarrow p_{j} - [(td - td_{j}) + \frac{TR}{ROW}row_{j}] * v_{j}
+
+Where, TR is the rolling camera parameter (the time of each rolling), for global shutter camera TR equals zero.
 
 
 Reference
