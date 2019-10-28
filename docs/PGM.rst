@@ -48,6 +48,12 @@ As a result, if the difference two components are smaller than the internal diff
 2. Loop through all the edges and start from the edge with smallest weight:
     3. Compare the two components, which the edge's nodes belong to, by the Predicate D.
 
+Graph Weight
+---------------------
+
+
+
+
 Reference
 -----------------
 
