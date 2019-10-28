@@ -40,6 +40,13 @@ where, **Diff** defines the difference between two components (the minimal dista
 
 Parameter k in :math:`\tau(C)` helps to control the component. Large k leads to a larger object(As large k will lead to a large MInt, then lead to two components to merge into one). 
 
+As a result, if the difference two components are smaller than the internal difference within the two components, we should merge these two componencts.
+
+**Algorithm**: 
+
+1. Rank all the edges based on their weights
+2. Loop through all the edges and start from the edge with smallest weight:
+    3. Compare the two components, which the edge's nodes belong to, by the Predicate D.
 
 Reference
 -----------------
