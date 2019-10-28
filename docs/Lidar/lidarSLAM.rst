@@ -60,10 +60,10 @@ It is a Stereo Visiual Inertial Lidar SLAM. Compared to VLOAM, this work uses a 
 
 1. Stereo visual KLT optical flow tracking and ORB feature matching. 
 2. IMU preintegartion, and tightly coupled VIO (until this part, it is tha same as VINS-Fusion).
-3. Use the VIO output pose to unwarp the lidar scan. 
+3. Use the VIO output pose to unwarp the lidar scan. And registre the scan by Edge and planar points (LOAM method)
 4. Loop clousre.
     1. Propose candidates by Bag-of-Words.
     2. PnP(Perspective-n-Point) to obtain relative pose initial estimation.
     3. Use ICP to refine the estimation.
 
-In my point of view, this work is a mixture of a tightly coupled VIO (VINS) and a loosely coupled Lidar Visual (VLOAM). Still need to check its optimizatio backend.
+In my point of view, this work is a mixture of a tightly coupled VIO (VINS) and a loosely coupled Lidar Visual (VLOAM). Can be seen as a update version of V-LOAM.
