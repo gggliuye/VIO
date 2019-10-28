@@ -49,7 +49,21 @@ Scan-Model Match
 * Kinect fusion uses TSDF for scan-to-model match, but TSDF surface is defined by a voxel grid (empty . SDF, known) and then is usable only in a small volume space. As a result, TSDF cannot be used in large outdoor environment.
 * This article uses IMLS (Implicit Moving Least Square) surface (the set of zeros of a function)
 
+VIL-SLAM
+-------------------
 
+It is a Stereo Visiual Inertial Lidar SLAM. Compared to VLOAM, this work uses a tightly coupled VIO (VLOAM uses a loosely coupled one), and VIL-SLAM has a Lidar enhanced loop closure.
+`paper <https://arxiv.org/abs/1902.10741>`_
 
+.. image:: vilSLAM.PNG
+   :align: center
 
+1. Stereo visual KLT tracking and ORB feature matching. 
+2. IMU preintegartion, and tightly coupled VIO (until this part, it is tha same as VINS-Fusion).
+3. Use the VIO output pose to unwarp the lidar scan. 
+4. Loop clousre.
+    1. Propose candidates by Bag-of-Words.
+    2. PnP(Perspective-n-Point) to obtain relative pose initial estimation.
+    3. Use ICP to refine the estimation.
 
+In my point of view, this work is a mixture of a tightly coupled VIO (VINS) and a loosely coupled Lidar Visual (VLOAM). 
