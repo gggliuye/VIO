@@ -38,7 +38,9 @@ where, **Diff** defines the difference between two components (the minimal dista
 .. math:: 
     \tau(C) = k / \| C \|
 
-Parameter k in :math:`\tau(C)` helps to control the component. Large k leads to a larger object(As large k will lead to a large MInt, then lead to two components to merge into one). 
+Parameter k in :math:`\tau(C)` helps to control the component. Large k leads to a larger object(As large k will lead to a large MInt, then lead to two components to merge into one). For small components, we require stronger evidence for a boundary.
+
+However, the definition of **Diff** only reflects the smallest edge weight between two component, but not a global one. Changing the definition to median weight or other quantiles will improve the result. 
 
 As a result, if the difference two components are smaller than the internal difference within the two components, we should merge these two componencts.
 
@@ -48,10 +50,15 @@ As a result, if the difference two components are smaller than the internal diff
 2. Loop through all the edges and start from the edge with smallest weight:
     3. Compare the two components, which the edge's nodes belong to, by the Predicate D. To determine whether merge these two components.
 
-Graph Weight
+Graph Edge
 ---------------------
 
+* **Grid Graph** can be used to build the graph model, where all the neighbor pixels have connected edges.
 
+* **Nearest Neighbor Graph** is another method to connect edges. All the nodes are projected into another space ((u,v) to (u,v,r,g,b) in our case), then nearest neighbors have edges to connect them. In the experiment [2]_ , this method shows more global properties.
+
+Graph Weight
+-------------------
 
 
 Reference
