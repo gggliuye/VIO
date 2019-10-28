@@ -63,7 +63,7 @@ It is a Stereo Visiual Inertial Lidar SLAM. Compared to VLOAM, this work uses a 
 3. Use the VIO output pose to unwarp the lidar scan. And registre the scan by Edge and planar points (LOAM method)
 4. Loop clousre.
     1. Propose candidates by Bag-of-Words.
-    2. PnP(Perspective-n-Point) to obtain relative pose initial estimation.
-    3. Use ICP to refine the estimation.
+    2. PnP(Perspective-n-Point) to obtain relative pose initial estimation (of VIO).
+    3. Use ICP to refine the estimation (of Lidar Odometry).
 
 In my point of view, this work is a mixture of a tightly coupled VIO (VINS) and a loosely coupled Lidar Visual (VLOAM). Can be seen as a update version of V-LOAM.
