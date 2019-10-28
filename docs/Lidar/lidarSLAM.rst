@@ -55,7 +55,7 @@ VIL-SLAM
 It is a Stereo Visiual Inertial Lidar SLAM. Compared to VLOAM, this work uses a tightly coupled VIO (VLOAM uses a loosely coupled one), and VIL-SLAM has a Lidar enhanced loop closure.
 `paper <https://arxiv.org/abs/1902.10741>`_
 
-.. image:: vilSLAM.PNG
+.. image:: vilslam.PNG
    :align: center
 
 1. Stereo visual KLT tracking and ORB feature matching. 
