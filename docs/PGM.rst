@@ -46,7 +46,7 @@ As a result, if the difference two components are smaller than the internal diff
 
 1. Rank all the edges based on their weights
 2. Loop through all the edges and start from the edge with smallest weight:
-    3. Compare the two components, which the edge's nodes belong to, by the Predicate D.
+    3. Compare the two components, which the edge's nodes belong to, by the Predicate D. To determine whether merge these two components.
 
 Graph Weight
 ---------------------
