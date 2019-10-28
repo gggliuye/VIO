@@ -12,7 +12,6 @@ Welcome to SLAM-AR's documentation!
 
    Introduction
    Prepare
-   SFM
    Tracking/TrackingIntroduction
    deepblue/LM
    deepblue/VIO
@@ -21,6 +20,7 @@ Welcome to SLAM-AR's documentation!
    Android/UnityCameraRender
    MarkerTracker/MarkerTracker
    Lidar/lidarSLAM
+   PGM
 
 Indices and tables
 ==================
