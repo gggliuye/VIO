@@ -15,7 +15,7 @@ Efficient Graph-based
 
 **Problem formulation** : Having a graph G = (V, E), where V is the set of nodes(pixels in our case), and E is the set of edges (undirected, and represent the relationship between pixels in our case). :math:`w(v_{i}, v_{j})` is the weight of the edge between node i and node j. The objective is to find a segmentation S, which divide G into G' = (V', E'). Such that G' contains distinct components of C. [2]_  
 
-.. image:: images/segmentation.PNG
+.. image:: images/segmentation2.PNG
     :align: center
 
 And the segmentations are defined by **Predicate D**, to determines whether there is a boundary for segmentations, D segments G into G', and :math:`C_{i} \subset G`, such that it satisfies :
@@ -24,7 +24,7 @@ And the segmentations are defined by **Predicate D**, to determines whether ther
     D(C_{i}, C_{j}) = \begin{cases} true, & \mbox{if } Diff(C_{i}, C_{j}) > MInt(C_{i}, C_{j})  \\
                                  false, & \mbox{otherwise} \end{cases}
 
-where, 
+where, **Diff** defines the difference between two components (the minimal distance between elements in two components). **Int** is the maximum edge weight within a component. **MInt** is the minial internal difference of the two component.
 
 .. math:: 
     Diff(C_{i}, C_{j}) = \min_{v_{i} \in C_{i}, v_{j} \in C_{j}, (v_{i},v_{j}) \in E } w(v_{i}, v_{j})
@@ -32,11 +32,14 @@ where,
 .. math:: 
     MInt(C_{i}, C_{j}) = min(Int(C_{i})+ \tau(C_{i}), Int(C_{j})+ \tau(C_{j}))
 
+.. math::
+    Int(C) = \max_{e \in MST(C,E)} w(e)
+
 .. math:: 
     \tau(C) = k / \| C \|
 
-.. math::
-    Int(C) = \max_{e \in MST(C,E)} w(e)
+Parameter k in :math:`\tau(C)` helps to control the component. Large k leads to a larger object(As large k will lead to a large MInt, then lead to two components to merge into one). 
+
 
 Reference
 -----------------
