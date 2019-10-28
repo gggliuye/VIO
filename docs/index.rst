@@ -20,6 +20,7 @@ Welcome to SLAM-AR's documentation!
    UnitySc/unityShadowCreator
    Android/UnityCameraRender
    MarkerTracker/MarkerTracker
+   Lidar/lidarSLAM
 
 Indices and tables
 ==================
