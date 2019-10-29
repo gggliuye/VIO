@@ -72,6 +72,9 @@ Mine Implementation
 * **segmentGraph()** : segment the graph into multiple components using the algorithm descripted above. 
 * **postProcessComponents()** : delete the component with small size, by merge it into its edge-neighbor. 
 
+.. image:: images/PGM_graph_image.png
+    :align: center
+
 Reference
 -----------------
 
