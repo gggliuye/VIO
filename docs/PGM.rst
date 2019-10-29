@@ -59,6 +59,8 @@ Graph Edge
 
 Graph Weight
 -------------------
+1. Use RGB color difference.
+2. Convert to HSV (hue, saturation, value) space, use a weighted sum of distance in the three channels of HSV image.
 
 
 Reference
