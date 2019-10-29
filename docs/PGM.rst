@@ -63,6 +63,14 @@ Graph Weight
 2. Convert to HSV (hue, saturation, value) space, use a weighted sum of distance in the three channels of HSV image.
 
 
+Mine Implementation
+-------------------
+` Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
+
+* **buildSegmentationGraph()**: construction of the graph(grid graph here), build the vertices and the edges.
+* **segmentGraph()** : segment the graph into multiple components using the algorithm descripted above. 
+* **postProcessComponents()** : delete the component with small size, by merge it into its edge-neighbor. 
+
 Reference
 -----------------
 
