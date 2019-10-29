@@ -65,6 +65,7 @@ Graph Weight
 
 Mine Implementation
 -------------------
+
 ` Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
 
 * **buildSegmentationGraph()**: construction of the graph(grid graph here), build the vertices and the edges.
