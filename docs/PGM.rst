@@ -66,11 +66,14 @@ Graph Weight
 Mine Implementation
 -------------------
 
-` Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
+The C++ implementation `Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
 
 * **buildSegmentationGraph()**: construction of the graph(grid graph here), build the vertices and the edges.
 * **segmentGraph()** : segment the graph into multiple components using the algorithm descripted above. 
 * **postProcessComponents()** : delete the component with small size, by merge it into its edge-neighbor. 
+
+Build Graph
+~~~~~~~~~~~~~~~~~~
 
 .. image:: images/PGM_graph_image.png
     :align: center
