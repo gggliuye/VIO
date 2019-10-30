@@ -732,6 +732,9 @@ Loop Closure
 
 VINS uses DBOW2 for the detection of loops. The basic pipeline and some important structures can be seen in the figure below.
 
+.. image:: images/VINS_loopclosure.png
+    :align: center
+
 The processing in the detectloop function is :
 
 1. Transform the descriptor into **BowVector** and **FeatureVector** (which are types of DBOW).
