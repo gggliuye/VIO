@@ -727,6 +727,19 @@ This is realized by rewrite point poisition in the reprojection error factor wit
 
 Where, TR is the rolling camera parameter (the time of each rolling), for global shutter camera TR equals zero.
 
+Loop Closure
+---------------------
+
+VINS uses DBOW2 for the detection of loops. The basic pipeline and some important structures can be seen in the figure below.
+
+The processing in the detectloop function is :
+
+1. Transform the descriptor into **BowVector** and **FeatureVector** (which are types of DBOW).
+2. If the query id is large enough. Query the transformed two vectors into the bag-of-words database to find matches.
+3. Add the two vectors to the bag-of-words database anyway.
+4. Delete the candidates with low scores, after which, pick the candidate with the highest score if exists.
+5. Check geometrically consistent by **isGeometricallyConsistent_DI**.
+6. Save the keypoints, descriptors (for geometry check), and this BowVector(for NSS normalization).
 
 Reference
 ---------------------
