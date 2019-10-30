@@ -72,12 +72,17 @@ The C++ implementation `Github page <https://github.com/gggliuye/graph_based_ima
 * Preprocess the image:
 
     // gaussian blur the image to avoid noise
+    
     cv::GaussianBlur(image, imageOrigin, cv::Size(3, 3), sigma, sigma);
     
     // convert to HSV color space if it is not a gray image
+    
     // As we will see that HSV will lead to better result
+    
     if(!isGray && useHSV){
+    
         cvtColor(imageOrigin,imageOrigin,CV_BGR2HSV);
+	
     }
     
 * **buildSegmentationGraph()**: construction of the graph(grid graph here), build the vertices and the edges. I have build a grid graph based on the following two type of loop. The first one will connect all the pixel with the 8 pixels around it. The second one will connect additional with the 4 pixels, to which distances are 2 pixel size, hoping it can obtain more global properity.
@@ -87,53 +92,89 @@ The C++ implementation `Github page <https://github.com/gggliuye/graph_based_ima
     :width: 80%
 
     // initialize the edge array
+    
     // one edge will contain two pixels (pxiel i and j)
+    
     // and the weight of the edge
+    
     edges = new edge[initsize];
+    
     for(int i = 0; i < imageOrigin.rows; i++){
+    
         for(int j = 0; j < imageOrigin.cols; j++){
+	
             // loop through all the pixels to build the graph
+	    
             // (skip a great amount of code)
+	    
             edges[count].pixel_i.i = xx;
+	    
             edges[count].pixel_i.j = xx;
+	    
             edges[count].pixel_j.i = xx;
+	    
             edges[count].pixel_j.j = xx;
+	    
             assignEdgeWeight(&edges[count]);
+	    
         }
+	
     }
 
 * **segmentGraph()** : segment the graph into multiple components using the algorithm descripted above.
 
     // create "component" strcture, and a componentTree class
+    
     // in the initial state, each pixel is a component
+    
     // through the loop, the componets will be joined together
+    
     componentTree = new ComponentTree(verticesSize, c);
     
     // sort the edges based on their weight
+    
     std::sort(edges, edges + edge_count);
     
     // for each edge, in non-decreasing weight order...
+    
     for (int i = 0; i < edge_count; i++) {
+    
         edge *edge_i = &edges[i];
+	
         // components conected by this edge
+	
         int idx_a = edge_i->pixel_i.i * cols + edge_i->pixel_i.j;
+	
         int idx_b = edge_i->pixel_j.i * cols + edge_i->pixel_j.j;
+	
         int a = componentTree->findParent(idx_a);
+	
         int b = componentTree->findParent(idx_b);
+	
         if (a != b) {
+	
             if((edge_i->weight <= componentTree->getMInt(a)) &&
+	    
 	       (edge_i->weight <= componentTree->getMInt(b))) {
+	       
 	        componentTree->join(a, b, edge_i->weight);
+		
             }
+	    
         }
+	
     }
 
 * **postProcessComponents()** : delete the component with small size, by merge it into its edge-neighbor. 
 
     // for two different components, if the size is small.
+    
     // we will join them togehter based on the edge connection
+    
     if ((a != b) && ((componentTree->sizeOfComponent(a) < min_size) 
+    
           || (componentTree->sizeOfComponent(b) < min_size)))
+	  
             componentTree->join(a, b, -1);
 
     
