@@ -741,8 +741,11 @@ The processing in the detectloop function is :
 1. Transform the descriptor into **BowVector** and **FeatureVector** (which are types of DBOW).
 2. If the query id is large enough. Query the transformed two vectors into the bag-of-words database to find matches.
 3. Add the two vectors to the bag-of-words database anyway.
-4. Delete the candidates with low scores, after which, pick the candidate with the highest score if exists.
+4. Delete the candidates with low scores, after which, initialize the match index as the candidate with the highest score if exists.
+    * And will transform the query result into a vector of "islands" (that is, divide all the candidates into blocks in ascending order of ids)
+    * Find the island with the highest score. 
 5. Check geometrically consistent by **isGeometricallyConsistent_DI**.
+    * Use the island with the highest score (we have found above) to check
 6. Save the keypoints, descriptors (for geometry check), and this BowVector(for NSS normalization).
 
 Map save
