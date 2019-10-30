@@ -746,6 +746,8 @@ The processing in the detectloop function is :
     * Find the island with the highest score. 
 5. Check geometrically consistent by **isGeometricallyConsistent_DI**.
     * Use the island with the highest score (we have found above) to check
+    * Find the feature matches by the descriptor distance (use bag-of-words's tree structure to accelerate)
+    * Use fundamental matrix geometry properity to check.
 6. Save the keypoints, descriptors (for geometry check), and this BowVector(for NSS normalization).
 
 Map save
