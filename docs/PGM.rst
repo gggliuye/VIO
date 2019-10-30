@@ -69,20 +69,13 @@ Mine Implementation
 
 The C++ implementation `Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
 
-* Preprocess the image:
-
+* Preprocess the image ::
     // gaussian blur the image to avoid noise
-    
     cv::GaussianBlur(image, imageOrigin, cv::Size(3, 3), sigma, sigma);
-    
     // convert to HSV color space if it is not a gray image
-    
     // As we will see that HSV will lead to better result
-    
     if(!isGray && useHSV){
-    
         cvtColor(imageOrigin,imageOrigin,CV_BGR2HSV);
-	
     }
     
 * **buildSegmentationGraph()**: construction of the graph(grid graph here), build the vertices and the edges. I have build a grid graph based on the following two type of loop. The first one will connect all the pixel with the 8 pixels around it. The second one will connect additional with the 4 pixels, to which distances are 2 pixel size, hoping it can obtain more global properity.
