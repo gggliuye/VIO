@@ -69,7 +69,9 @@ Mine Implementation
 
 The C++ implementation `Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
 
-* Preprocess the image ::
+* Preprocess the image 
+
+::
     // gaussian blur the image to avoid noise
     cv::GaussianBlur(image, imageOrigin, cv::Size(3, 3), sigma, sigma);
     // convert to HSV color space if it is not a gray image
