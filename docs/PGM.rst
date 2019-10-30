@@ -75,7 +75,20 @@ The C++ implementation `Github page <https://github.com/gggliuye/graph_based_ima
 Build Graph
 ~~~~~~~~~~~~~~~~~~
 
+I have build a grid graph based on the following two type of loop. The first one will connect all the pixel with the 8 pixels around it. The second one will connect additional with the 4 pixels, to which distances are 2 pixel size, hoping it can obtain more global properity.
+
 .. image:: images/PGM_graph_image.png
+    :align: center
+    :width: 80%
+    
+Experiment Results
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The results are shown below. The two type of graphs result in similar result (figure (b) and (c)). When I found it cannot handle well the back wall, which has great light diversity. This is the motivation to switch to HSV color space. 
+
+Firstly, I used opencv method to convert the image, this will project the H channel into a range of 0 to 180, and S V channels to the range of 0 to 255. I assiged different weight for the three channel(2 for H, and 0.5 for S V), to make the color more important than light differences. The result is shown in the last figure (figure (d)). We can see, it do handle better the light difference.
+
+.. image:: images/segmentationresults.jpg
     :align: center
 
 Reference
