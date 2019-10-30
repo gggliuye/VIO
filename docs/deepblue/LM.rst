@@ -745,6 +745,15 @@ The processing in the detectloop function is :
 5. Check geometrically consistent by **isGeometricallyConsistent_DI**.
 6. Save the keypoints, descriptors (for geometry check), and this BowVector(for NSS normalization).
 
+Map save
+~~~~~~~~~~~
+As a result, if I want to save the map. I need :
+
+* DBOW2 Bag-of-words database.
+* All the history keypoints and descriptors. (If I want to enable the geometry check) 
+
+As DBOW2's database has its own load/save support, this will be a easy work. As for the keypoints and descripotrs we need to save them in correct format in binary file (txt/json/xml/etc will work too, but binary is the fastest choice).
+
 Reference
 ---------------------
 
