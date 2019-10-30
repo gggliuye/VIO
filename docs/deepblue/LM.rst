@@ -749,13 +749,15 @@ The processing in the detectloop function is :
     * Find the feature matches by the descriptor distance (use bag-of-words's tree structure to accelerate)
     * Use fundamental matrix geometry properity to check.
 6. Save the keypoints, descriptors (for geometry check), and this BowVector(for NSS normalization).
+7. And VINS processor thread will go find the keyframe with the candidate index. To use PnP solver to find relative pose, and pass the loop to optimization thread.
 
 Map save
 ~~~~~~~~~~~
 As a result, if I want to save the map. I need :
 
 * DBOW2 Bag-of-words database.
-* All the history keypoints and descriptors. (If I want to enable the geometry check) 
+* All the history keypoints and descriptors. (If you want to enable the geometry check)
+* VINS processor thread need to load all the history frame too. 
 
 As DBOW2's database has its own load/save support, this will be a easy work. As for the keypoints and descripotrs we need to save them in correct format in binary file (txt/json/xml/etc will work too, but binary is the fastest choice).
 
