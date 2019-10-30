@@ -723,6 +723,7 @@ This is realized by rewrite point poisition in the reprojection error factor wit
 
 .. math::
     p_{i} \leftarrow p_{i} - [(td - td_{i}) + \frac{TR}{ROW}row_{i}] * v_{i}
+    
     p_{j} \leftarrow p_{j} - [(td - td_{j}) + \frac{TR}{ROW}row_{j}] * v_{j}
 
 Where, TR is the rolling camera parameter (the time of each rolling), for global shutter camera TR equals zero.
