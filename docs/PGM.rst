@@ -51,14 +51,14 @@ As a result, if the difference two components are smaller than the internal diff
     3. Compare the two components, which the edge's nodes belong to, by the Predicate D. To determine whether merge these two components.
 
 Graph Edge
----------------------
+~~~~~~~~~~~~~~~
 
 * **Grid Graph** can be used to build the graph model, where all the neighbor pixels have connected edges.
 
 * **Nearest Neighbor Graph** is another method to connect edges. All the nodes are projected into another space ((u,v) to (u,v,r,g,b) in our case), then nearest neighbors have edges to connect them. In the experiment [2]_ , this method shows more global properties.
 
 Graph Weight
--------------------
+~~~~~~~~~~~~~~~~~~~~
 1. Use RGB color difference.
 2. Convert to HSV (hue, saturation, value) space, use a weighted sum of distance in the three channels of HSV image.
 
