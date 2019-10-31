@@ -1,5 +1,9 @@
 PGM
 ===========================
+
+1. Introduction
+-------------------
+
 Probabilistic graphical model is a method combining probabilistic mothods with graph model for solving problem. It is consist of:
 
 1. Build the model.
@@ -8,9 +12,9 @@ Probabilistic graphical model is a method combining probabilistic mothods with g
 
 It can be solved via a Maximum a posteriori (MAP) inference of a Bayseian inference. Only when having a gaussian assumpution they will obtain the same result. Here, we consider the Maximum a posteriori (MAP) inference which is to optimize the energy function E (which has been proven to be equal to Brief propagation algorithm [1]_ ).
 
-Here we want to solve image segmentation task with energy minimization using PGM theory.
+Here we want to solve image segmentation task with energy minimization using PGM theory. The arrangement of this article will be : chatper 2 will use gragh based representation method to solve a more general image segmentation task. chapter 3 will use maxflow/minuct algorithm to solve background/object segmentation in image processing. Each chapter will begin with the explanation of the theory and followed by C++ implementation with its results.
 
-Efficient Graph-based
+2. Efficient Graph-based
 ------------------------
 
 **Problem formulation** : Having a graph G = (V, E), where V is the set of nodes(pixels in our case), and E is the set of edges (undirected, and represent the relationship between pixels in our case). :math:`w(v_{i}, v_{j})` is the weight of the edge between node i and node j. The objective is to find a segmentation S, which divide G into G' = (V', E'). Such that G' contains distinct components of C. [2]_  
@@ -65,20 +69,20 @@ Graph Weight
 
 
 Mine Implementation
--------------------
+~~~~~~~~~~~~~~~~~~~~
 
 The C++ implementation `Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
 
 * Preprocess the image 
 
-|    // gaussian blur the image to avoid noise
-|    cv::GaussianBlur(image, imageOrigin, cv::Size(3, 3), sigma, sigma);
+|        // gaussian blur the image to avoid noise
+|        cv::GaussianBlur(image, imageOrigin, cv::Size(3, 3), sigma, sigma);
 |
-|    // convert to HSV color space if it is not a gray image
-|    // As we will see that HSV will lead to better result
-|    if(!isGray && useHSV){
-|        cvtColor(imageOrigin,imageOrigin,CV_BGR2HSV);
-|    }
+|        // convert to HSV color space if it is not a gray image
+|        // As we will see that HSV will lead to better result
+|        if(!isGray && useHSV){
+|            cvtColor(imageOrigin,imageOrigin,CV_BGR2HSV);
+|        }
     
 * **buildSegmentationGraph()**: construction of the graph(grid graph here), build the vertices and the edges. I have build a grid graph based on the following two type of loop. The first one will connect all the pixel with the 8 pixels around it. The second one will connect additional with the 4 pixels, to which distances are 2 pixel size, hoping it can obtain more global properity.
 
@@ -86,56 +90,56 @@ The C++ implementation `Github page <https://github.com/gggliuye/graph_based_ima
     :align: center
     :width: 80%
 
-|    // initialize the edge array
-|    // one edge will contain two pixels (pxiel i and j)
-|    // and the weight of the edge
-|    edges = new edge[initsize];
+|        // initialize the edge array
+|        // one edge will contain two pixels (pxiel i and j)
+|        // and the weight of the edge
+|        edges = new edge[initsize];
 |    
-|    for(int i = 0; i < imageOrigin.rows; i++){
-|        for(int j = 0; j < imageOrigin.cols; j++){
-|            // loop through all the pixels to build the graph
-|            // (skip a great amount of code)    
-|            edges[count].pixel_i.i = xx;
-|            edges[count].pixel_i.j = xx;
-|            edges[count].pixel_j.i = xx;
-|            edges[count].pixel_j.j = xx;
-|            assignEdgeWeight(&edges[count]);
-|        }	
-|    }
+|        for(int i = 0; i < imageOrigin.rows; i++){
+|            for(int j = 0; j < imageOrigin.cols; j++){
+|                // loop through all the pixels to build the graph
+|                // (skip a great amount of code)    
+|                edges[count].pixel_i.i = xx;
+|                edges[count].pixel_i.j = xx;
+|                edges[count].pixel_j.i = xx;
+|                edges[count].pixel_j.j = xx;
+|                assignEdgeWeight(&edges[count]);
+|            }	
+|        }
 
 * **segmentGraph()** : segment the graph into multiple components using the algorithm descripted above.
 
-|    // create "component" strcture, and a componentTree class
-|    // in the initial state, each pixel is a component
-|    // through the loop, the componets will be joined together
-|    componentTree = new ComponentTree(verticesSize, c);
-|    
-|    // sort the edges based on their weight
-|    std::sort(edges, edges + edge_count);
-|    
-|    // for each edge, in non-decreasing weight order...
-|    for (int i = 0; i < edge_count; i++) {
-|        edge *edge_i = &edges[i];
-|        // components conected by this edge
-|        int idx_a = edge_i->pixel_i.i * cols + edge_i->pixel_i.j;
-|        int idx_b = edge_i->pixel_j.i * cols + edge_i->pixel_j.j;
-|        int a = componentTree->findParent(idx_a);
-|        int b = componentTree->findParent(idx_b);
-|        if (a != b) {
-|            if((edge_i->weight <= componentTree->getMInt(a)) &&
-|	       (edge_i->weight <= componentTree->getMInt(b))) {
-|	        componentTree->join(a, b, edge_i->weight);	
-|            }    
+|        // create "component" strcture, and a componentTree class
+|        // in the initial state, each pixel is a component
+|        // through the loop, the componets will be joined together
+|        componentTree = new ComponentTree(verticesSize, c);
+|        
+|        // sort the edges based on their weight
+|        std::sort(edges, edges + edge_count);
+|        
+|        // for each edge, in non-decreasing weight order...
+|        for (int i = 0; i < edge_count; i++) {
+|            edge *edge_i = &edges[i];
+|            // components conected by this edge
+|            int idx_a = edge_i->pixel_i.i * cols + edge_i->pixel_i.j;
+|            int idx_b = edge_i->pixel_j.i * cols + edge_i->pixel_j.j;
+|            int a = componentTree->findParent(idx_a);
+|            int b = componentTree->findParent(idx_b);
+|            if (a != b) {
+|                if((edge_i->weight <= componentTree->getMInt(a)) &&
+|	           (edge_i->weight <= componentTree->getMInt(b))) {
+|	            componentTree->join(a, b, edge_i->weight);	
+|                }    
+|            }
 |        }
-|    }
 
 * **postProcessComponents()** : delete the component with small size, by merge it into its edge-neighbor. 
 
-|    // for two different components, if the size is small.
-|    // we will join them togehter based on the edge connection
-|    if ((a != b) && ((componentTree->sizeOfComponent(a) < min_size) 
-|          || (componentTree->sizeOfComponent(b) < min_size)))
-|            componentTree->join(a, b, -1);
+|        // for two different components, if the size is small.
+|        // we will join them togehter based on the edge connection
+|        if ((a != b) && ((componentTree->sizeOfComponent(a) < min_size) 
+|              || (componentTree->sizeOfComponent(b) < min_size)))
+|                componentTree->join(a, b, -1);
 
     
 Experiment Results
@@ -148,7 +152,7 @@ Firstly, I used opencv method to convert the image, this will project the H chan
 .. image:: images/segmentationresults.jpg
     :align: center
 
-Graph Cut
+3. Graph Cut
 ------------------------
 Another task for image segmentation is to seperate background and object pixels. The most common utils for this task is graph cut (maxflow/mincut). Here I used maxflow from `IST Austria <http://pub.ist.ac.at/~vnk/software.html>`_ a implentation of [4]_ .
 
@@ -177,7 +181,12 @@ And B is the edge energy, it is based on pixel difference:
     B(p,q) = exp(- \frac{ (I_{p} -I_{q})^{2} } { 2 \sigma^{2} })
 
 The build of the graph can be seen in "example/cut.cc" file.
-    
+
+**Algorithm**:
+
+1. Build the model, assign the nodes and the edges.
+2. Find min cut.
+
 Result
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
