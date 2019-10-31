@@ -12,7 +12,7 @@ Probabilistic graphical model is a method combining probabilistic mothods with g
 
 It can be solved via a Maximum a posteriori (MAP) inference of a Bayseian inference. Only when having a gaussian assumpution they will obtain the same result. Here, we consider the Maximum a posteriori (MAP) inference which is to optimize the energy function E (which has been proven to be equal to Brief propagation algorithm [1]_ ).
 
-Here we want to solve image segmentation task with energy minimization using PGM theory. The arrangement of this article will be : chatper 2 will use gragh based representation method to solve a more general image segmentation task. chapter 3 will use maxflow/minuct algorithm to solve background/object segmentation in image processing. Each chapter will begin with the explanation of the theory and followed by C++ implementation with its results.
+Here we want to solve image segmentation task with energy minimization using PGM theory. The arrangement of this article will be : chatper 2 will use gragh based and kd tree based representation method to solve a more general image segmentation task. chapter 3 will use maxflow/minuct algorithm to solve background/object segmentation in image processing. Each chapter will begin with the explanation of the theory and followed by C++ implementation with its results.
 
 2. Efficient Graph-based
 ------------------------
@@ -68,7 +68,7 @@ Graph Weight
 2. Convert to HSV (hue, saturation, value) space, use a weighted sum of distance in the three channels of HSV image.
 
 
-Mine Implementation
+Grid Graph Implementation
 ~~~~~~~~~~~~~~~~~~~~
 
 The C++ implementation `Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found. 
@@ -151,6 +151,23 @@ Firstly, I used opencv method to convert the image, this will project the H chan
 
 .. image:: images/segmentationresults.jpg
     :align: center
+
+KD TREE Implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* **Build the KD tree** : the KD tree distance is based on 5 values, (u,v) for the pixel positions and (r,g,b) or (h,s,v) for image color space. And I choose different weights for the three HSV channels (2.0,0.3, and 0.3 in experiments).
+* **Retrive Close nodes from the tree** : then find the close points in the set, here I choose all the close points, as they can possible contribute to the graph model.
+* **Solve the model** : the models are solved based on the same methods as mentioned above in grid graph.
+
+In the experiments, I tested various choice of the close radius of KD tree. And using KD tree require more calculation cost, as a result, they may run relatively slow compare to grid model. But the results shows more global property, we can see in next section.
+
+All Results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: images/allresults.jpg
+    :align: center
+
+Here shows many result, KD tree graph shows more global property, we can find that especially in the segmentation of walls and some seperated object parts. But It does not work well with great light change, as in the first image. 
 
 3. Graph Cut
 ------------------------
