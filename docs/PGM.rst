@@ -148,6 +148,15 @@ Firstly, I used opencv method to convert the image, this will project the H chan
 .. image:: images/segmentationresults.jpg
     :align: center
 
+Graph Cut
+------------------------
+Another task for image segmentation is to seperate background and object pixels. The most common utils for this task is graph cut (maxflow/mincut). Here I used maxflow from ` IST Austria <http://pub.ist.ac.at/~vnk/software.html>`_ a implentation of [4]_ .
+
+I build the graph using the edge connection mentioned above, and assign the weight based on RGB color space and HSV color space seperately. The result is shown below.
+
+.. image:: images/graphcutresult.jpg
+    :align: center
+
 Reference
 -----------------
 
@@ -156,3 +165,5 @@ Reference
 .. [2] Felzenszwalb P F, Huttenlocher D P. Efficient graph-based image segmentation[J]. International journal of computer vision, 2004, 59(2): 167-181.
 
 .. [3] Kim T, Nowozin S, Kohli P, et al. Variable grouping for energy minimization[C]//CVPR 2011. IEEE, 2011: 1913-1920.
+
+.. [4] Boykov Y, Kolmogorov V. An experimental comparison of min-cut/max-flow algorithms for energy minimization in vision[J]. IEEE Transactions on Pattern Analysis & Machine Intelligence, 2004 (9): 1124-1137.
