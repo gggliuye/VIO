@@ -152,7 +152,34 @@ Graph Cut
 ------------------------
 Another task for image segmentation is to seperate background and object pixels. The most common utils for this task is graph cut (maxflow/mincut). Here I used maxflow from ` IST Austria <http://pub.ist.ac.at/~vnk/software.html>`_ a implentation of [4]_ .
 
-I build the graph using the edge connection mentioned above, and assign the weight based on RGB color space and HSV color space seperately. The result is shown below.
+Graph Cut is to build a graph model of the input image, assign each pixel with a label indicates whehter it belongs to a object or the background. All the pixels in the image are corresponding to the nodes, and the edge is defined based on pixel differences. After built the graph model, the labels will be solved based on **min cut** algorithm. Mincut is too cut the graph into two seperate parts (source and sink), by cutting in edge with relatively small weight (Energy). Mincut is equal to find a cut, which minimize the free energy.
+
+The energy in our case, has two parts : node part and edge part. 
+
+.. math::
+    E = B + R
+
+Where R is the node energy, it is defined as follows, where p is pixel, :math:`\mathcal{O} ` is the object pixel set, :math:`\mathcal{B} ` is the backgroud pixel set
+.. math::
+    R(p, S) = \begin{cases} C, & \mbox{if } p \in \mathcal{O}   \\
+                         0 , & \mbox{if } p \in \mathcal{B}   \\
+                         \lambda_{s}  & \mbox{otherwise}   \end{cases}
+                         
+.. math::
+    R(p, T) = \begin{cases} 0, & \mbox{if } p \in \mathcal{O}   \\
+                         C , & \mbox{if } p \in \mathcal{B}   \\
+                         \lambda_{t}  & \mbox{otherwise}   \end{cases}
+
+And B is the edge energy, it is based on pixel difference:
+
+.. math::
+    B(p,q) = exp(- \frac{ (I_{p} -I_{q})^{2} } { 2 \sigma^{2} })
+    
+
+Result
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I build the graph using the edge connection mentioned above, and assign the weight based on RGB color space and HSV color space seperately. And give the graph two guide rectangles, one in green, indicates the object, the other in red, indicates the background. The result is shown below.
 
 .. image:: images/graphcutresult.jpg
     :align: center
