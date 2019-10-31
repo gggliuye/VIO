@@ -186,6 +186,8 @@ I build the graph using the edge connection mentioned above, and assign the weig
 .. image:: images/graphcutresult.jpg
     :align: center
 
+We can see that HSV color space has a much better result than normal RGB color space. And the algorithm works well in our task. But we always need some guide to let algorithm work, further work should be the reduction of user guide.
+
 Reference
 -----------------
 
