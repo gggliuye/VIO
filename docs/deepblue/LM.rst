@@ -728,8 +728,16 @@ This is realized by rewrite point poisition in the reprojection error factor wit
 
 Where, TR is the rolling camera parameter (the time of each rolling), for global shutter camera TR equals zero.
 
+Map Reuse
+---------------
+The objective of this part is to solve such problem:
+
+**Given a prebuilt map, use VINS to achieve better real time properity (faster processing and higher accuracy).**
+
+The key to solve this problem is the reuse of map. To fulfill this objective, we need to study mainly the loop closure thread of VINS. This chapter will start from the `VINS moblie <https://github.com/HKUST-Aerial-Robotics/VINS-Mobile>`_ 's implementation of loop closure, followed by my changement of the system to allow better reuse of high accuracy prebuilt map.
+
 Loop Closure
----------------------
+~~~~~~~~~~~~~~~
 
 VINS uses DBOW2 for the detection of loops. The basic pipeline and some important structures can be seen in the figure below.
 
@@ -751,6 +759,8 @@ The processing in the detectloop function is :
 6. Save the keypoints, descriptors (for geometry check), and this BowVector(for NSS normalization).
 7. And VINS processor thread will go find the keyframe with the candidate index. To use PnP solver to find relative pose, and pass the loop to optimization thread.
 
+We need to know that, in the VINS's keyframe database, only the connection of keyframes are saved (ni keypoints ni imu-preintegration terms is saved). Though, only the relative pose is optimized within the loop closing optimization thread. Which is a rather coarse loop closure.
+
 Map save
 ~~~~~~~~~~~
 As a result, if I want to save the map. I need :
@@ -760,6 +770,29 @@ As a result, if I want to save the map. I need :
 * VINS processor thread need to load all the history frame too. 
 
 As DBOW2's database has its own load/save support, this will be a easy work. As for the keypoints and descripotrs we need to save them in correct format in binary file (txt/json/xml/etc will work too, but binary is the fastest choice).
+
+Summary
+~~~~~~~~~~~~~~~~~~~~~
+
+In summary, we need to save the system state infomation and change the optimization logicial. 
+
+**Save Data**
+
+1. Save the BOW database, all the keyframe keypoints and their corresponding descriptors.
+2. Load the data:
+    1. Loop detector needs all the saved file.
+    2. VINS's main thread needs all the keypoints and descriptors.
+
+**New Relocalization Process**
+
+1. PnP RANSAC (2d pts from current frame, 3d pts from old frame) to solve the current pose.
+2. Update the estimation of inlier points depth.
+    1. Set the point as a child of this current frame. (As we are not sure about its original parent's pose)
+    2. Assign inverse depth.
+3. Add this loop pair constrain to the optimization thread, however the old frame's pose will not change.
+4. The keyframe dataset of VINS estimator will not update (will not take in new keyframe).
+    1. Or we can save the new keyframes into another queue. Process the loop closure differently. But I prefer to drop them, as VINS's tracking is very robust, we don't depends much on the relocalzaiton process, but we need to correct accumulated error by accurate loop closing.
+
 
 Reference
 ---------------------
