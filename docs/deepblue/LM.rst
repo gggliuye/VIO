@@ -736,7 +736,7 @@ The objective of this part is to solve such problem:
 
 The key to solve this problem is the reuse of map. To fulfill this objective, we need to study mainly the loop closure thread of VINS. This chapter will start from the `VINS moblie <https://github.com/HKUST-Aerial-Robotics/VINS-Mobile>`_ 's implementation of loop closure, followed by my changement of the system to allow better reuse of high accuracy prebuilt map.
 
-Loop Closure
+Loop Detection
 ~~~~~~~~~~~~~~~
 
 VINS uses DBOW2 for the detection of loops. The basic pipeline and some important structures can be seen in the figure below.
@@ -759,7 +759,11 @@ The processing in the detectloop function is :
 6. Save the keypoints, descriptors (for geometry check), and this BowVector(for NSS normalization).
 7. And VINS processor thread will go find the keyframe with the candidate index. To use PnP solver to find relative pose, and pass the loop to optimization thread.
 
-We need to know that, in the VINS's keyframe database, only the connection of keyframes are saved (ni keypoints ni imu-preintegration terms is saved). Though, only the relative pose is optimized within the loop closing optimization thread. Which is a rather coarse loop closure.
+Loop Correction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: images/loopcorrection.jpg
+    :align: center
 
 Map save
 ~~~~~~~~~~~
