@@ -784,7 +784,8 @@ In summary, we need to save the system state infomation and change the optimizat
 **Save Data**
 
 1. Save the BOW database, all the keyframe keypoints and their corresponding descriptors.
-2. Load the data:
+2. Save all the keyframes for KerFrameDatabase.
+3. Load the data:
     1. Loop detector needs all the saved file.
     2. VINS's main thread needs all the keypoints and descriptors.
 
@@ -794,7 +795,7 @@ In summary, we need to save the system state infomation and change the optimizat
 2. Update the estimation of inlier points depth.
     1. Set the point as a child of this current frame. (As we are not sure about its original parent's pose)
     2. Assign inverse depth.
-    * Implementation can be seen in `my blog <https://blog.csdn.net/weixin_44492024/article/details/102841080>`_ .
+    3. Implementation can be seen in `my blog <https://blog.csdn.net/weixin_44492024/article/details/102841080>`_ .
 3. Add this loop pair constrain to the optimization thread, however the old frame's pose should not change.
 4. The keyframe dataset of VINS estimator will not update (will not take in new keyframe).
     1. Or we can save the new keyframes into another queue. Process the loop closure differently. But I prefer to drop them, as VINS's tracking is very robust, we don't depends much on the relocalzaiton process, but we need to correct accumulated error by accurate loop closing.
