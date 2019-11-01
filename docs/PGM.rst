@@ -1,5 +1,11 @@
-PGM
+Probabilistic graphical model based image segmentation
 ===========================
+
+Abstract
+--------------------
+
+Image segmentation is a hot topic right now, but most of the solution is based on deep learning, neural network. However, the expersive computation cost makes them hard to run in realtime unless offering a high level hard device. 
+This article is focused on solving segmentation problem using Probabilistic graphical model (PGM) to achieve realtime performance, while maintain accuracy. This article has two main parts, one focus on graph based image segmentation, the other focus on graph cut background/foreground segmentation. We got a staisfying result at the end of this article.
 
 1. Introduction
 -------------------
