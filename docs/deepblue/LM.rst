@@ -765,6 +765,10 @@ Loop Correction
 .. image:: images/loopcorrection.jpg
     :align: center
     :width: 60%
+    
+.. image:: images/correction_thread.jpg
+    :align: center
+    :width: 60%
 
 Map save
 ~~~~~~~~~~~
