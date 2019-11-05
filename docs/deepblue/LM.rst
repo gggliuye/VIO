@@ -736,6 +736,16 @@ The objective of this part is to solve such problem:
 
 The key to solve this problem is the reuse of map. To fulfill this objective, we need to study mainly the loop closure thread of VINS. This chapter will start from the `VINS moblie <https://github.com/HKUST-Aerial-Robotics/VINS-Mobile>`_ 's implementation of loop closure, followed by my changement of the system to allow better reuse of high accuracy prebuilt map.
 
+Keyframe
+~~~~~~~~~~~~~~~~
+Firstly, VINS introduced "keyframe" and "keyframe database". As the BOW matching and loop found all based on keyframes. 
+However, VINS does not have a well-defined keyframe selection algorithm, which may cause it less good.
+
+
+.. image:: images/vinskeyframe.jpg
+    :align: center
+
+
 Loop Detection
 ~~~~~~~~~~~~~~~
 
