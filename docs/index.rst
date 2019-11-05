@@ -21,6 +21,7 @@ Welcome to SLAM-AR's documentation!
    MarkerTracker/MarkerTracker
    Lidar/lidarSLAM
    PGM
+   Gloopclosure/paper
 
 Indices and tables
 ==================
