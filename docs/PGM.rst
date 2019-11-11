@@ -1,4 +1,4 @@
-Probabilistic graphical model based image segmentation
+PGM segmentation
 ===========================
 
 Abstract
