@@ -6,13 +6,13 @@ The motivation of this article is to develop a method to reuse a offline refined
 
 
 Save/Load Map
-~~~~~~~~~~~~~~~~~
+--------------------
 
 * Save and load map points and keyframes using binary encoding.
 * After loading the data, we need to reindex the map points and the keyframes to BOW index, and make extension connection between them to accelerate the later calculations.
 
 Loop Detection
-~~~~~~~~~~~~~~~~~
+-------------------
 
 1. Use BOW(bag of words) to find possible candidates.
 2. Loop through all the candidates with high enough score, to find feature points matches based on BOW vocabulary tree (try to match features belong to the same node). 
