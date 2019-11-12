@@ -48,3 +48,14 @@ Experiments
    :align: center
 
 
+Loop Correction
+--------------------
+
+.. image:: loopcorrection.PNG
+   :align: center
+
+1. Initialize relocalization relative pose with the first loop detected.
+2. Project all the detected matched map points into the current local reference with the relocalization relative pose. 
+3. Add the loop match points edges to slide window optimization process. Optimize the slide window.
+4. Recover the global pose by relocalization pose.
+
