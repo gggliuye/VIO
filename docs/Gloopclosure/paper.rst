@@ -54,8 +54,24 @@ Loop Correction
 .. image:: loopcorrection.PNG
    :align: center
 
-1. Initialize relocalization relative pose with the first loop detected.
+1. Initialize relocalization relative pose with the first loop detected (and this realtive pose will not change anymore).
 2. Project all the detected matched map points into the current local reference with the relocalization relative pose. 
 3. Add the loop match points edges to slide window optimization process. Optimize the slide window.
 4. Recover the global pose by relocalization pose.
+
+Experiments
+~~~~~~~~~~~~~~~
+
+The results of test with loop correction with respect the offline map,
+
+.. image:: loop1.png
+   :align: center
+   
+The comparsion of trajectories of the test with/without loop correction, and the ground truth.
+   
+.. image:: loop4.png
+   :align: center
+
+Test the loop detection and correction on phone data. We found the correction edges did help to have a better estimation. However the edges are too isolated from the other, these edges can only help to control one frame (and help others parameter indirectly). As a result, when the system fails too far, this looply coupled loop clousre cannot help the correct the system. In summary, we need a **Much tighter Optmization edge**.
+
 
