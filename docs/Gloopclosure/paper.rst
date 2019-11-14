@@ -65,11 +65,13 @@ Experiments
 The results of test with loop correction with respect the offline map,
 
 .. image:: loop1.png
+   :width: 100%
    :align: center
    
 The comparsion of trajectories of the test with/without loop correction, and the ground truth.
    
 .. image:: loop4.png
+   :width: 80%
    :align: center
 
 Test the loop detection and correction on phone data. We found the correction edges did help to have a better estimation. However the edges are too isolated from the other, these edges can only help to control one frame (and help others parameter indirectly). As a result, when the system fails too far, this looply coupled loop clousre cannot help the correct the system. In summary, we need a **Much tighter Optmization edge**.
