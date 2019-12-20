@@ -18,6 +18,7 @@ Welcome to SLAM-AR's documentation!
    UnitySc/CVPRlocalization
    UnitySc/unityShadowCreator
    Android/UnityCameraRender
+   ArCoreServer/main
    MarkerTracker/MarkerTracker
    Lidar/lidarSLAM
    PGM
