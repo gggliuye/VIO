@@ -19,18 +19,23 @@ Frame
 ArCore还提供了许多的功能，但是这里只着重于图像数据的获取。
 
             // 获取ArCore的相机数据类格式的数据
+            
             GoogleARCore.CameraImageBytes image = Frame.CameraImage.AcquireCameraImageBytes();
 
             // 需要将数据提取到buffer中进行下一步操作
+            
             int bufferSize = image.YRowStride * image.Height;
+            
             byte[] s_ImageBuffer = new byte[bufferSize];
 
             // Move raw data into managed buffer.
+            
             System.Runtime.InteropServices.Marshal.Copy(image.Y, s_ImageBuffer, 0, bufferSize);
 
 然后就可以调用unity的C++ plugin传递图像数据并发送。
 
     [DllImport("TextureDecoder")]
+    
     private static extern void AR_SendImageNetty(byte[] data, int size);
     
     AR_SendImageNetty(s_ImageBuffer, bufferSize);
