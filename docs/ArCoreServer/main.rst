@@ -69,4 +69,11 @@ ArCore还提供了许多的功能，但是这里只着重于图像数据的获�
     
     AR_SendImageNetty(s_ImageBuffer, bufferSize);
     
-    
+
+Unity场景布置
+~~~~~~~~~~~~~~~~~~~~~
+
+场景布置的逻辑和Nova Game的一致，**不过ArCore摆放锚点的坐标变换还需要调整**。
+
+
+
