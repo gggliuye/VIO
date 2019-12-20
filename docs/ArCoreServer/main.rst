@@ -8,6 +8,35 @@ ArCore SLAM and Server Localization
 * Java的Netty服务收到信息之后直接调用Unity的回调函数。
 
 
+Netty
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Unity
+--------------------------
+
+    [DllImport("TextureDecoder")]
+    
+    private static extern void AR_SetNettyParameters(int a, int b, int c, int d, int port, double focus, int mapid, int devicetype);
+
+    [DllImport("TextureDecoder")]
+    
+    private static extern void AR_InitNetty();
+
+Netty初始化
+
+            SetTextureFromUnity(Frame.CameraImage.Texture.GetNativeTexturePtr());
+            
+            txt.text = "Init Netty " + ip[0] + "." + ip[1] + "." + ip[2] + "." + ip[3] + ":" + ip[4];
+            
+            AR_InitNetty();
+            
+            AR_SetNettyParameters(ip[0], ip[1], ip[2], ip[3], ip[4], focus, map_id, device_type);
+            
+            txt.text = "Init Done";
+            
+            nettyinited = true;
+
+
 ArCore
 ~~~~~~~~~~~~~~~~
 
