@@ -11,6 +11,8 @@ While actually we have other important processes:
 * Marker image based camera localization, combined with server cloud marker check.
 * etc.
 
+`Capella <https://www.eclipse.org/capella/>`_  is a comprehensive, extensible and field-proven MBSE tool and method
+to successfully design systems architecture.
 The Whole Capella project could be found `here <https://pan.baidu.com/s/18FRxRCYTzJRJV3WDM3WM6Q>`_ with safty code 'kgna'.
 
 
