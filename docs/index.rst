@@ -23,5 +23,7 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-contact us
+contact me
 ============
+
+liuye@utopa.com.cn

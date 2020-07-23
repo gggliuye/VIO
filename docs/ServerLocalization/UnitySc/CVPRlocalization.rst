@@ -5,11 +5,11 @@ Visual Localization
 SFM
 -------------
 
-SfM (structure from motion), is an other useful tool for localization and mapping. 
-Basicly, SfM uses the same technique as SLAM system : feature point extraction, matching algorithms, multiple view geometry, and non linear optimization(bundle adjustment). 
+SfM (structure from motion), is an other useful tool for localization and mapping.
+Basicly, SfM uses the same technique as SLAM system : feature point extraction, matching algorithms, multiple view geometry, and non linear optimization(bundle adjustment).
 At the same time SfM and SLAM have many differences, mostly in their pipeline (SLAM uses a realtime pipeline, however SfM has three main types: **incremental** , **global**  and **hierarchical** ) and some algorithm details.
 
-* Incremental SfM has the most close structure to SLAM. It is fast and robust. 
+* Incremental SfM has the most close structure to SLAM. It is fast and robust.
 * Global SfM is a process, try to initialize all camera posese, and triangulation, then do global bundle adjustment directly.
 It is more accurate, however takes longer to calculate. And its result dependents heavily on the initialization.
 * Hierachical SfM is the between of the upper two methods. It initialize multiply submaps optimization each of them, then take then together.
@@ -17,7 +17,7 @@ It is more accurate, however takes longer to calculate. And its result dependent
 
 Here is SFM result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
 
-.. image:: ../images/sfm/1.png
+.. image:: ../../images/sfm/1.png
    :scale: 80 %
    :align: center
 
@@ -35,14 +35,14 @@ The depths of this point in two views are unknown, however we know that x and X 
 
 .. math::
     \mathbf{x} \times (P\mathbf{X}) = \mathbf{0}
-    
+
 The upper function can be write as :
 
 .. math::
-    x(p^{3T}\mathbf{X}) - (p^{1T}\mathbf{X}) = 0 
+    x(p^{3T}\mathbf{X}) - (p^{1T}\mathbf{X}) = 0
 
 .. math::
-    y(p^{3T}\mathbf{X}) - (p^{2T}\mathbf{X}) = 0 
+    y(p^{3T}\mathbf{X}) - (p^{2T}\mathbf{X}) = 0
 
 .. math::
     x(p^{2T}\mathbf{X}) - y(p^{1T}\mathbf{X}) = 0
@@ -52,10 +52,10 @@ If we have two points, we can rewrite the problem to be a linear optimization pr
 
 .. math::
     \mathbf{AX} = 0
-    
+
 .. math::
     \mathbf{A} = \begin{bmatrix}
-    xp^{3T} - p^{1T} \\  yp^{3T} - p^{2T} \\ x'p'^{3T} - p'^{1T} \\  y'p'^{3T} - p'^{2T} 
+    xp^{3T} - p^{1T} \\  yp^{3T} - p^{2T} \\ x'p'^{3T} - p'^{1T} \\  y'p'^{3T} - p'^{2T}
     \end{bmatrix}
 
 **Homogeneous method (DLT)**
@@ -64,7 +64,7 @@ The problem becomes:
 
 .. math::
     \min \lVert \mathbf{AX} \Vert ^{2} =  \min \mathbf{X^{T}A^{T}AX}
-   
+
 From basic in Calculus, we know that the solution must fulfill:
 
 .. math::
@@ -101,7 +101,7 @@ All the data is saved into a **database.db** file.
 * descriptors : uint 8 binary blobs (only offer 128 bits descriptors).
 * matches : pair ids + F,E,H blobs
 
-For **Sparse Reconstruction** the data can be saved as "txt" or "bin" files. 
+For **Sparse Reconstruction** the data can be saved as "txt" or "bin" files.
 
 * cameras : cameras' intrinsic parameters
 * images : two lines for each image, 1) image Id + quaternion + position + camera Id + name, 2) set of feature points X + Y + point3d Id.
@@ -123,7 +123,7 @@ For **Sparse Reconstruction** the data can be saved as "txt" or "bin" files.
 
 * **Vocabulary Tree Matching**: Used to large dataset (several thousands), bag of visual words. It is our normal choose, as it is relatively faster than exhaustive method, and it is robust. Its pipleine is :
     * Load the pretrained vocabulary tree.
-    * IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use (runtime : 0.1s for an image with GTX 1070 GPU). 
+    * IndexImagesInVisualIndex : extracte the top scale features and add the image to vocabulary index. And compute the tf-idf index. We can save the made index for further use (runtime : 0.1s for an image with GTX 1070 GPU).
     * MatchNearestNeighborsInVisualIndex : (**runtime** : take about 36 seconds for a data set with 622 images taking maximual 1000 features, in a i5 CPU. And 3s to 9s with GTX 1070 GPU)
     * When I tested it with a single image localization problem, I found it some time gave fault result, which will lead to bad performance. And it is still too slow for a half-real-time application, we tried with less features. The system do speeds up, however the results became highly unreliable.
 
@@ -141,8 +141,8 @@ Its objective is to build a denser map, using multiply view geometry. Made for d
 
 Here is the MVS fusion result built with `colmap <https://colmap.github.io/>`_ , with images taken from Winter Plaze, GuangZhou.
 
-   
-.. image:: ../images/sfm/7.png
+
+.. image:: ../../images/sfm/7.png
    :scale: 80 %
    :align: center
 
@@ -173,18 +173,18 @@ The robustness of localization is maximized while retaining tractable computatio
 
 **HF-Net**
 
-It is composed of a single encoder (a **MobileNet** bakcbone: optimized for mobile inference) and three heads predicting : 
+It is composed of a single encoder (a **MobileNet** bakcbone: optimized for mobile inference) and three heads predicting :
 
 1. keypoint detection scores
 2. dense local descriptors
 3. a global image-wide descriptor.
 
-The global descriptor is predicted by NetVLAD layer on top of the last feature map of Moblie Net.     
+The global descriptor is predicted by NetVLAD layer on top of the last feature map of Moblie Net.
 
 1st CAS
 ~~~~~~~~~~~~~~~~~~~~
 **EN:** From China Academy of Sciences.
-The following image shows the system pipeline. They used Colmap [3]_ for offline SfM reconstruction, DeeplabV3 [4]_ to offer semantic segmentation, and NetVLAD [5]_ to offer image match.  `paper page <https://arxiv.org/abs/1904.03803>`_ 
+The following image shows the system pipeline. They used Colmap [3]_ for offline SfM reconstruction, DeeplabV3 [4]_ to offer semantic segmentation, and NetVLAD [5]_ to offer image match.  `paper page <https://arxiv.org/abs/1904.03803>`_
 
 **CH:** 下图是整个系统的流程图解析，SfM离线建图的部分使用了Colmap，语义分割使用了Deeplabv3，图像匹配使用了NetVLAD。总的来说，排除外点的想法具有原创性。
 
@@ -204,12 +204,12 @@ The following image shows the system pipeline. They used Colmap [3]_ for offline
 * 一个新的定位模式框架：使用语义信息提供新的排除外点的标准。
 * 不需要一些额外信息（比如相机的高度和重力方向）。
 
-**personal view**: lack of originality. 
+**personal view**: lack of originality.
 
 D2-Net
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`github page <https://github.com/mihaidusmanu/d2-net>`_  `paper in arXiv <https://arxiv.org/abs/1905.03561>`_  `project page <https://dsmn.ml/publications/d2-net.html>`_ . 
+`github page <https://github.com/mihaidusmanu/d2-net>`_  `paper in arXiv <https://arxiv.org/abs/1905.03561>`_  `project page <https://dsmn.ml/publications/d2-net.html>`_ .
 
 
 Traditional methods
@@ -233,7 +233,7 @@ We introduce here the basic popeline of DBOW [8]_ . `github <https://github.com/
 * Inverse index is used to fast visit each weight of each word.
 * Direct index is used to fast record feature of each image.
 * Using k means/medians clustering with tf-idf weight to build a retrival data set.
-* For a new process image, for all its features find the closest word in the vocabulary (normally use binary Hamming distance for fast process). With the words, encode the image to t-dim vector (t = number of words in the vocabulary). 
+* For a new process image, for all its features find the closest word in the vocabulary (normally use binary Hamming distance for fast process). With the words, encode the image to t-dim vector (t = number of words in the vocabulary).
 
 **DRAWBACKS**
 
@@ -253,19 +253,19 @@ GMM is a mixture of multiple gaussian models ( :math:`\mathcal{N}( x | \mu_{k}, 
 .. math::
     p(x) = \sum_{k=1}^{K} \pi_{k} \mathcal{N}( x | \mu_{k}, \Sigma_{k})
 
-where :math:`\pi_{k}` are normalization parameters , 
+where :math:`\pi_{k}` are normalization parameters ,
 
 .. math::
     \sum_{k=1}^{K} \pi_{k} = 1 , 0 \leqslant \pi_{k} \leqslant 1
 
-In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi_{k}, \mu_{k}, \Sigma_{k} \rbrace = \theta`  . We can treat the problem as a optimization problem : maximumal the sample's likelihood with respect to the parameters  :math:`\theta` of this distribution: 
+In summary, we note all the parameters to be :math:`\theta` , :math:`\lbrace \pi_{k}, \mu_{k}, \Sigma_{k} \rbrace = \theta`  . We can treat the problem as a optimization problem : maximumal the sample's likelihood with respect to the parameters  :math:`\theta` of this distribution:
 
 .. math::
     \hat{\theta} = arg \max_{\theta} \prod_{k=1}^{K} p(x_{k} | \theta)
-    
+
 .. math::
     \hat{\theta} = arg \max_{\theta} \sum_{k=1}^{K} \log (p(x_{k} | \theta))
-    
+
 .. math::
     \hat{\theta} = arg \max_{\theta} \mathcal{L}(\mathbf{x} | \theta)
 
@@ -279,7 +279,7 @@ As a result, the **Fisher vector** (also name as Fisher score in `wiki <https://
 .. math::
     \mathbf{U}_{X} =  \nabla_{\theta} \log (p(x_{k} | \theta))
 
-As we know the expression of gaussian distribution, we can analyticly solve the vector. 
+As we know the expression of gaussian distribution, we can analyticly solve the vector.
 
 * If the dimension of X is D, then each gaussian model should has (2D+1) parameters. Suppose we have k gaussian models, the total number of parameters is k(2D+1), as we also know the :math:`\pi_{k}` are normalized. As a result, the Fisher vector has **k(2D+1) - 1** elements.
 
@@ -297,7 +297,7 @@ As we know the expression of gaussian distribution, we can analyticly solve the 
 
 VLAD
 ~~~~~~~~~~~~~~~
-VLAD : vector of locally aggregated descriptors. It can be seen as a simplification of the Fisher kernel [6]_ . 
+VLAD : vector of locally aggregated descriptors. It can be seen as a simplification of the Fisher kernel [6]_ .
 
 * Learn a codebook(~vocabulary) :math:`\mathcal{C}= \lbrace c_{1}, ...,c_{k} \rbrace` of k visual words with k-means.
 * Each local descriptor x is associated to its nearest visual word :math:`c_{i} = NN(x)`
@@ -378,7 +378,7 @@ Ours
 They all used Colmap pipeline as basic, and used deep learning mehtod to upate the features(add semantic labels / deep learning extraction method). As a result, we choose to go with the same direction : start from colmap structure, and use deep learning to help updating.
 
 **Colmap** :
-Colmap offers tool to enable second development. However, I think it is better to use its results only to make it a seperated system. 
+Colmap offers tool to enable second development. However, I think it is better to use its results only to make it a seperated system.
 
 Decode Colmap's result
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -391,22 +391,22 @@ Feature Extraction
 
 For new input image, **use the same feature extraction method to extract features.** Using **SIFT** feature extraction as used in original colmap. Time consumptions for CPU(i5), and number of points extracted(number of points are not a well-defined general parameter, but we used it here only to compare) are shown below. The calculation intereface can be found in "src/feature/sift.h".
 
-       +-------+---------+----------+-----------+ 
+       +-------+---------+----------+-----------+
        | width |  height |  time(s) |  #points  |
-       +=======+=========+==========+===========+ 
+       +=======+=========+==========+===========+
        | 3648  |   2736  |  16.72   |  ~12500   |
-       +-------+---------+----------+-----------+ 
+       +-------+---------+----------+-----------+
        | 1280  |    960  |   2.31   |  ~10000   |
-       +-------+---------+----------+-----------+ 
+       +-------+---------+----------+-----------+
        | 640   |    480  |   0.55   |  ~3000    |
-       +-------+---------+----------+-----------+ 
+       +-------+---------+----------+-----------+
 
 We can also see the more detail evalutation of different feature extraction methods [9]_ . We can achieve real time requirement if run with GPU.
 
 Matching
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**. 
+**Match with image database.** Possible choice: BOW, Exhaustive, Deep learning( `NetVLAD <https://www.di.ens.fr/willow/research/netvlad/>`_ ). Or **Match with whole map/local map**.
 Exhaustive match will be too slow for our real time application, so we choost to use vocabulary tree method (~BOW).
 
 * we used the `FBOW <https://github.com/rmsalinas/fbow>`_ method. It run extremely fast, 300 ms for an input image. However the precision is not satisfying.
@@ -427,16 +427,16 @@ Pose Solver
         <iframe src="//www.youtube.com/embed/C1ChkUU_Puk" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
     </div>
 
-Further update 
+Further update
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-**feature extraction method** , **matching method** , **feature match methods**. The pose solving method is relative complete. 
+**feature extraction method** , **matching method** , **feature match methods**. The pose solving method is relative complete.
 
 **2019/08/16 summary:**
 
-Now the problem is mainly image retrival method. 
+Now the problem is mainly image retrival method.
 
-* I have test the vocabulary tree of colmap original code, when the original support it is robust. However it is slow in my current CPU. 
+* I have test the vocabulary tree of colmap original code, when the original support it is robust. However it is slow in my current CPU.
 * And I tested the latest open source `FBOW <https://github.com/rmsalinas/fbow>`_ , which is extremely fast even in CPU (less than 0.3s for an image). However it is not rebust. It is either because of the bad reconstructed vocabulary or because the image set have too much duplicate features, or both.
 * The problem is if the whole process is time consuming, it is fine, but we have to make sure that we can find position for each input image. If the whole process is relatively fast (as we seen the colmap in GPU), we can have a loose constrain to the result.
 * We can either change to a server with GPU or find a more rebust and faster image retrival algorithm.
@@ -444,15 +444,15 @@ Now the problem is mainly image retrival method.
 **2019/09/11**
 
 * Our test machine is a laptop with a GTX 960M GPU and an i5-6300HQ CPU, which is a low level PC.
-* Use GPU to boost SIFT extraction and SIFT matching process, get a remarkable advance (0.072 second for a 3648*2736 image). 
-* Former use Voc Tree to obtain the best match image. However the validation method the original code used, is time consuming. So I switch to use SIFT GPU matcher directly and process PnP match test to reject outlier images. As the matcher uses GPU, we get another great boost in speed (about 0.07 second per image with about 1000 points each to match). 
+* Use GPU to boost SIFT extraction and SIFT matching process, get a remarkable advance (0.072 second for a 3648*2736 image).
+* Former use Voc Tree to obtain the best match image. However the validation method the original code used, is time consuming. So I switch to use SIFT GPU matcher directly and process PnP match test to reject outlier images. As the matcher uses GPU, we get another great boost in speed (about 0.07 second per image with about 1000 points each to match).
 * The viewer and the numeric result shows that the algorithm is quit process. However as we have no knowledge about the ground truth, I leave the accuracy analysis later.
 * The final process time can be seen in the image below.
 
 .. image:: ulocalization.png
    :align: center
 
-Final 
+Final
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 **2019/09/23**
@@ -460,7 +460,7 @@ Final
 * 1. Record a video about 3 minutes in a large indoor sceen with mobile phone.
 * 2. Record serval images with another device. As we have no ground truth data, we choose some reference objects in the scene to measure its accuracy (in my case here, use the railings).
 * 3. Colmap offline reconstruction the whole scene (sparse reconstruction takes about 20 minutes, dense reconstrcution takes hours, which can be further reduced but reduce sample images).
-* 4. Test the localization using the images taken in the 2nd step. 
+* 4. Test the localization using the images taken in the 2nd step.
 * 5. Analysis the result and process time : about 0.7 second for an image in average; 9 out of 10 images have been successfully localized; their localization is considerably accurate error within 30cm (with respect the reference object I chosen).
 * 6.(TODO) connect with our server, and test with AR application.
 

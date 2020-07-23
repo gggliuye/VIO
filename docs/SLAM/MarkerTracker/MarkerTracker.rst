@@ -9,9 +9,9 @@ Pipeline
 **Marker Maker**:
 
 * Extract infomation we need
-    - several features(TYPE a) with descriptors 
+    - several features(TYPE a) with descriptors
     - more features(TYPE b) but without descriptors
-    - infomation of marker's real size 
+    - infomation of marker's real size
 * Save the infomation to a data file
 
 **Process Loop**:
@@ -62,7 +62,7 @@ There can be many way to extract the features. We used FAST cornor points(for bo
 Patch Match
 -------------------
 
-Here I use "Patch match" as the title, but it is different from the PatchMatch algorithm you may know. 
+Here I use "Patch match" as the title, but it is different from the PatchMatch algorithm you may know.
 
 Coefficient
 ~~~~~~~~~~~~~~~~~~
@@ -70,7 +70,7 @@ Coefficient
 We simply use NCC (where Iij is the image pixel corresponding to the patch pixel Pij):
 
 .. math::
-    \frac{  \sum_{i,j} (I_{i,j}P_{i,j})  -  \sum_{i,j} I_{i,j} * \sum_{i,j} P_{i,j} * \frac{1}{N} } 
+    \frac{  \sum_{i,j} (I_{i,j}P_{i,j})  -  \sum_{i,j} I_{i,j} * \sum_{i,j} P_{i,j} * \frac{1}{N} }
     {\sqrt{  \sum_{i,j} P_{i,j}^{2} - \frac{1}{N} * \sum_{i,j} P_{i,j}  * \sum_{i,j} P_{i,j} * ( \sum_{i,j} I_{i,j}^{2} - \frac{1}{N} * \sum_{i,j} I_{i,j}  * \sum_{i,j} I_{i,j} ) } }
 
 We used NEON(These built-in intrinsics for the ARM Advanced SIMD extension are available when the -mfpu=neon switch is used) commond to optimize the calculation process.
@@ -141,7 +141,8 @@ The match patch processing loop functions as following :
     }
 
 .. image:: outputMarker.gif
-
+      :width: 80%
+      :align: center
 
 With SLAM
 ---------------------
@@ -180,4 +181,3 @@ Further update thought (22/10/2019)
      2. Use optical flow to track features, and calcualte the inital homography matrix (or we can simply use the homography matrix of the last frame)
      3. Return to the step 4 - step 7 of the original algorithm.
      4. If lost the marker. Go back to step 1 of the original algorithm.
-
