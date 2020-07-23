@@ -13,3 +13,26 @@
 
 .. image:: images/SDFBRootSystemFunction.jpg
    :align: center
+
+1.3 Scenario
+------------------------------
+
+**Send image**:
+
+.. image:: images/FSScenarioSendImage.jpg
+   :align: center
+
+**Search the corresponding server map**:
+
+.. image:: images/FSScenarioSearchMap.jpg
+   :align: center
+
+**Calculate pose in the map**:
+
+.. image:: images/FSScenarioLocalization.jpg
+   :align: center
+
+**Fusion of the two coordinate system**:
+
+.. image:: images/FSScenarioPoseFusion.jpg
+   :align: center
