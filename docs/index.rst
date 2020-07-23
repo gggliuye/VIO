@@ -10,19 +10,11 @@ Welcome to SLAM-AR's documentation!
    :maxdepth: 3
    :caption: Contents:
 
-   Introduction
-   Prepare
-   Tracking/TrackingIntroduction
-   deepblue/LM
-   deepblue/VIO
-   UnitySc/CVPRlocalization
-   UnitySc/unityShadowCreator
-   Android/UnityCameraRender
-   ArCoreServer/main
-   MarkerTracker/MarkerTracker
-   Lidar/lidarSLAM
-   PGM
-   Gloopclosure/paper
+   SLAM
+   ServerLocalization
+   Unity
+   Other
+
 
 Indices and tables
 ==================
