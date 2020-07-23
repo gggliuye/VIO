@@ -140,9 +140,6 @@ The match patch processing loop functions as following :
         }
     }
 
-.. image:: outputMarker.gif
-      :width: 80%
-      :align: center
 
 With SLAM
 ---------------------
@@ -156,7 +153,12 @@ we can make a link with the result of other SLAM algorithms.
     :width: 80%
     :align: center
 
-.. image:: markerXslam.gif
+
+.. image:: output_marker.PNG
+    :width: 75%
+    :align: center
+
+
 
 VINS
 ~~~~~~~~~~~~~~~~~~~~
