@@ -1,8 +1,8 @@
 1. Operational Analysis
 ==========================
 
-1.1 Operational Capabuilities
+1.1 Operational Capabilities
 --------------------------------
 
-.. image:: [OCB] Operational Capabilities.jpg
+.. image:: images/[OCB] Operational Capabilities.jpg
    :align: center
