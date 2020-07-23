@@ -40,6 +40,7 @@ Details will be shown in the **Activity Scenario**.
 
 .. image:: images/OASScenarioInitnetty.jpg
    :align: center
+   :width: 50%
 
 **Localization Main Process**
 

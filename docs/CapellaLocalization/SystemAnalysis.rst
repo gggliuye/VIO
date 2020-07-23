@@ -27,7 +27,7 @@
 
 .. image:: images/FSScenarioSearchMap.jpg
    :align: center
-   :width: 80%
+   :width: 70%
 
 **Calculate pose in the map**:
 
