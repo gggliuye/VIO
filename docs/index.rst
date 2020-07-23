@@ -1,19 +1,19 @@
-.. SLAM-AR documentation master file, created by
+.. UTOPA-AR documentation master file, created by
    sphinx-quickstart on Wed Jul 10 15:07:51 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to SLAM-AR's documentation!
+Welcome to UTOPA-AR's documentation!
 ===================================
 
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
 
-   SLAM
-   ServerLocalization
-   Unity
-   Other
+   SLAM/index
+   ServerLocalization/index
+   Unity/index
+   Other/index
 
 
 Indices and tables

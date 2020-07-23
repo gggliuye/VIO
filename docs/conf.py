@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'SLAM-AR'
+project = u'UTOPA-AR'
 copyright = u'2019, LIUYE'
 author = u'LIUYE'
 
@@ -107,7 +107,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'SLAM-ARdoc'
+htmlhelp_basename = 'UTOPA-ARdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -134,7 +134,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'SLAM-AR.tex', u'SLAM-AR Documentation',
+    (master_doc, 'UTOPA-AR.tex', u'SLAM-AR Documentation',
      u'LIUYE', 'manual'),
 ]
 
@@ -144,7 +144,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'slam-ar', u'SLAM-AR Documentation',
+    (master_doc, 'utopa-ar', u'UTOPA-AR Documentation',
      [author], 1)
 ]
 
@@ -155,8 +155,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'SLAM-AR', u'SLAM-AR Documentation',
-     author, 'SLAM-AR', 'One line description of project.',
+    (master_doc, 'UTOPA-AR', u'UTOPA-AR Documentation',
+     author, 'UTOPA-AR', 'One line description of project.',
      'Miscellaneous'),
 ]
 
