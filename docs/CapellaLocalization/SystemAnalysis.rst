@@ -6,6 +6,7 @@
 
 .. image:: images/SFBDRootSystemFunction.jpg
    :align: center
+   :width: 60%
 
 
 1.2 System Data Flow Blank
@@ -26,6 +27,7 @@
 
 .. image:: images/FSScenarioSearchMap.jpg
    :align: center
+   :width: 80%
 
 **Calculate pose in the map**:
 
