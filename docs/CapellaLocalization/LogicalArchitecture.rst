@@ -7,7 +7,7 @@
 
 .. image:: images/LFBDRootLogicalFunction.jpg
    :align: center
-   :width: 60%
+   :width: 80%
 
 3.2 Logical Data Flow Blank
 ----------------------------
