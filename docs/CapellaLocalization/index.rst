@@ -17,3 +17,4 @@ While actually we have other important processes:
 
    OperationalAnalysis
    SystemAnalysis
+   LogicalArchitecture
