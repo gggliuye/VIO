@@ -86,7 +86,7 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 
 .. math::
     P_{Local Pose} = T_{Local To Camera}^{-1}
-    
+
     P_{Global Pose} = T_{Global To Camera}^{-1}
 
 4.3 位置融合
@@ -128,7 +128,7 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 * 由于相机的分辨率有限，太小的细节是没有帮助的（例如一张图片，可能只会有四个角点是有效的特征点）。
 * 纹理特征适合追踪模式，但是对于重定位没有帮助，重定位需要的是图像的特征。例如，下面第一张图片，图片的纹理结构很好，追踪模式不会跟丢，但是却没有自己的特点，我们不知道它是第几排第几个桌子。但是在其中增加一些 **“个性”** 之后，定位的效果会明显增加，比如下面的第三张图片，我们就可以准确的说出它是第二张桌子了。
 
-.. image:: ../images/envo.PNG
+.. image:: ../../images/envo.PNG
    :width: 100%
    :align: center
 
@@ -173,7 +173,7 @@ SLAM和SFM的区别主要在与他们的目的性不同：SLAM的重要要求是
 
 我使用了第二种取巧的办法来解决这个问题，使用Coroutine和Lerp函数实现：
 
-.. code:: c#      
+.. code:: c#
 private IEnumerator WaitAndRotate(float waitTime)
 {
     for (int i = 0; i < 30; i++)
@@ -215,24 +215,24 @@ SLAM与SFM的区别之一就是全局优化的次数，由于我们没有了实�
 
 .. image:: blur.PNG
    :align: center
-   
+
 经过细致的相关文献调研，我们发现修正模糊图像的代价过大，处理时间会严重影响系统的效率，进而影响精度。所以我们决定舍弃模糊图像的处理，为此我们提出了运动模糊检测算法 （详情见 `Image Blurry <https://vio.readthedocs.io/en/latest/Prepare.html#image-blurry>`_）。 并且，在加入筛除模糊图像的算法加入后，系统的稳定性得到了很大程度的提高。
 
 在上述调研中我们研究了两种算法：Laplacian Variance 检测模糊， Eigen Feature 检测模糊。
 Eigen feature的检测准确率可以达到超过90%，但是由于其中涉及到SVD的计算，运算量的代价大。Laplacian方法检测的结果准确率达到77.8%，由于仅仅涉及了一个卷积运算，运算代价很小，同时准确率也能够满足我们的要求，所以，在我们的系统中，我们使用Laplacian Variance 检测模糊。
-   
-   
+
+
 * 光强修正（使用gamma=0.5的Gamma Correction）
 
 .. math::
     I_{i}^{\gamma} = ( I_{i} / 255) ^{\gamma} * 255
 
-.. image:: ../images/night_images.png
+.. image:: ../../images/night_images.png
    :width: 100%
 
-.. image:: ../images/night_hists.png
+.. image:: ../../images/night_hists.png
    :width: 100%
-   
+
 7.4 Deep Learning
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -297,7 +297,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 首先对两个点云计算质心的位置:
 
 .. math::
-    \hat{p}_{i} = \frac{1}{N} \sum_{k=1}^{N} p_{i,k}, \hat{p}_{j} = \frac{1}{N} \sum_{k=1}^{N} p_{j,k} 
+    \hat{p}_{i} = \frac{1}{N} \sum_{k=1}^{N} p_{i,k}, \hat{p}_{j} = \frac{1}{N} \sum_{k=1}^{N} p_{j,k}
 
 细节推导在这里省略，从大部分的ICP推导为基础可以简单的得到，只需要注意我们的变量多了一个尺度scale参数，需要考虑。
 
@@ -324,7 +324,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 
 .. math::
     \frac{\partial f} {\partial \vec{t}} = s \mathbf{I}
-    
+
 .. math::
     \begin{aligned}
     \frac{\partial f} {\partial \vec{\theta}} & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{1}{\delta \vec{\theta}} f(\vec{\theta}\delta \vec{\theta}) \\
@@ -333,7 +333,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
     & = \lim_{\delta \vec{\theta} \rightarrow \vec{0}} \frac{s}{\delta \vec{\theta}} (- R[\vec{x}_{i}]_{X}\delta \theta) \\
     & = - sR[\vec{x}_{i}]_{X}
     \end{aligned}
-    
+
 8.4 模拟测试结果
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -365,7 +365,7 @@ extern "C" float* Internal_TrackMonocularWithID(int idx, unsigned char* inputIma
 
 .. image:: error_localization.png
    :align: center
-   
+
 上图可以理解定位误差的影响（在这里只对位置讨论，旋转的误差造成的不良效果类似）。由于我们是基于图像定位的，云端定位的结果会优化
 使得地图中对应的特征点投影到当前图片的相对位置。但是由于照片的分辨率限制，距离远的一个像素点的误差可能会导致定位误差（上图中的红色误差error localization）。所以距离特征点越近，定位的误差就会越小。
 
@@ -456,36 +456,36 @@ Update Thoughts
 ~~~~~~~~~~~~~~~~~~
 **ORBSLAM：**
 
-* I rethink the ORBSLAM system, and I cannot find any big drawback of its framework, especially its front end. And I thinks its front end framework is much better than other system. As it is a indirect method, it is using feature points. ORBSLAM makes the system keep finding corresponding point from the made map, and keep updating optimizing the already exist map points. Thanks to this, in my opinion ORBSLAM can make a better map than other algorithm. 
+* I rethink the ORBSLAM system, and I cannot find any big drawback of its framework, especially its front end. And I thinks its front end framework is much better than other system. As it is a indirect method, it is using feature points. ORBSLAM makes the system keep finding corresponding point from the made map, and keep updating optimizing the already exist map points. Thanks to this, in my opinion ORBSLAM can make a better map than other algorithm.
 * However, it is not as good as I excepted. The main issue is **ORB** point, ORB points are sparse compared to the direct or semi-direct methods, and its descriptor perporty is not ideal. As a result, its extraction is not stable, its matching is not ideal. (i.e. SFM methods take SIFT points which make the constructed map better.)
-* If we take **a better point extraction algorithm**, and **add more sensors**, ORBSLAM can be the best SLAM algorithm. 
+* If we take **a better point extraction algorithm**, and **add more sensors**, ORBSLAM can be the best SLAM algorithm.
 
 **Point refinement:**
 
-For fast implement, we do not have much time to build a better point extraction. So I try to optimize the existing ORB strategy. 
+For fast implement, we do not have much time to build a better point extraction. So I try to optimize the existing ORB strategy.
 
 * In former tests, we found a lots of "bad" points existing in the map, which may make the localization less good. I re-read the relocalization algorithm and DBOW2 algorithm, the number of point in a keyframe, should not affect too much its visual words expression. So I consider to take **less points** when extracting , and set a **higher threshold** for point matching, frame matching, etc. And also develop a **strategy** to loop through all the points and delete some of the points.
 * Considering that we could have **a high-accuracy lidar scan** of the scene, I am think to optimize the point position by the lidar scan. By first make the **corresponding** of the two point sets, then **merge** them.
 
 **Image retrieval:**
 
-When trying to implement visual localization based on Colmap, I found the image retrieval part is essential in the whole pipeline (for most SFM, SLAM pipelinee, image localization is based on keyframe image retrieval). If we correctly find the corresponding keyframe image, and with the high accuacy point poisition estimated by Colmap, we can obtain a very accuarcy localization result. By it has serval problems: 
+When trying to implement visual localization based on Colmap, I found the image retrieval part is essential in the whole pipeline (for most SFM, SLAM pipelinee, image localization is based on keyframe image retrieval). If we correctly find the corresponding keyframe image, and with the high accuacy point poisition estimated by Colmap, we can obtain a very accuarcy localization result. By it has serval problems:
 
 * **Success rate**, it is hard to find an algorithm can find corresponding for all input image, in my opinion an algorithm with 80% retrieval rate is a great one.
 * **Computational cost**, the cost of image retrieval can be high. i.e for colmap, it use SIFT points, and an option voc-tree method to retrieve, it will take serval seconds if we do not use a GPU. For ORBSLAM, it is much faster however its result cannot be as good as Colmap.
 
 **Map point analysis 1.0**
- 
+
  Fisrt I analysis the found time of a constructed map:
- 
+
      num of points found less than  1  times is  0 %
- 
+
      num of points found less than  2  times is  2 %
- 
+
      num of points found less than  7  times is  17 %
- 
+
      num of points found less than  2  times is  42 %
- 
+
      num of points found less than  54  times is  67 %
 
 which shows that, there are serval points not viewed much, which may not be well optimized (as a result of lack of observation). We can delete these points, for a better map.

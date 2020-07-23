@@ -17,7 +17,7 @@ I will start from the very first step : **open camera**.
 Open Camera
 ~~~~~~~~~~~~~~~~~~~~~
 
-For this task, we have three choices. 
+For this task, we have three choices.
 
 * Unity open the camera
 * Android Java open the camera
@@ -29,7 +29,7 @@ They have different advantages and drawbacks:
 * All we can use Android java to opencv camera, and set the frame callback to be our C++ function. As a result, we need to build another Java plugin package along with the C++ plugin. And we need to implement the renderer plugin to avoid too much memory use. But we can still easily open camera and manger it with "android.hardware.camera".
 * The third one is to C++ code in the whole process. Open camera with Opencv C++, process the image, and render image with unity low level plugin. We should have one single C++ plugin library. However, we need include dependence of Opencv (or we need to implement the whole image receive and decode process, which is very hard).
 
-We used the first method in the very beginning of our project. And as our projcet precceding, I begin to try to realize the second method. It takes me a few days to finish it (with almost no Java experience, and limited unity exprience, but robust C++ fundation). 
+We used the first method in the very beginning of our project. And as our projcet precceding, I begin to try to realize the second method. It takes me a few days to finish it (with almost no Java experience, and limited unity exprience, but robust C++ fundation).
 
 
 Whole Process
@@ -39,7 +39,7 @@ The whole process structure and a time circle is shown here. (It will be better 
 .. image:: structure.PNG
    :width: 80%
    :align: center
-  
+
 
 Android Java Camera Surface
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -170,7 +170,7 @@ Data process
    void AR_FrameProcess(unsigned char *colorData, unsigned char *grayData, double timestamp) {
       // process the data by algorithm
       processGrayData(grayData, timestamp);
-      
+
       // copy the color data into a global variable to process
       pthread_mutex_lock(&renderMutex);
       memcpy(renderingFrame.data, colorData, renderingFrame.total() * renderingFrame.elemSize());
@@ -186,7 +186,7 @@ C++ Renderer
 C++ plugin
 -------------------
 
-Use the unity low level plugin here to render.We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions. 
+Use the unity low level plugin here to render.We need to follow the instruction from Unity offical page, to define the "Load", "unLoad" and "OnRenderEvent" functions.
 
 **See this page**  `CSDN page <https://blog.csdn.net/weixin_44492024/article/details/102578846>`_ for more details (I am sorry that it is in chinese, but the basic idea is clear, and I will add english version in this page). In this page, the following pipeline will be introduced:
 
@@ -206,7 +206,7 @@ Here, I defined a "renderCameraFrame" function, and it will be called in "OnRend
          return;
       }
       int glErCode = glGetError();
-    
+
       glBindTexture(GL_TEXTURE_2D, textureId);
       if ((glErCode = glGetError()) != GL_NO_ERROR) {
          LOGE("[moonlight] [Render] GL Error binding: %d \n", glErCode);
@@ -270,7 +270,7 @@ IMU sensor
 
 To receive IMU data, we need to use android standard library with "sensor.h".  Basicly, we need to:
 
-* Start sensor queue : 
+* Start sensor queue :
 
     mpSensorEventQueue = ASensorManager_createEventQueue(mpSensorManager,
             mpSensorThreadLooper, 0, SensorCallback, NULL);
@@ -316,9 +316,9 @@ To receive IMU data, we need to use android standard library with "sensor.h".  B
         imuCallback(tmp);
     }
 
-* Define the constume defined "imuCallback" process function. 
+* Define the constume defined "imuCallback" process function.
 
-We can receive IMU data with the upper method, and an example output can be seen: 
+We can receive IMU data with the upper method, and an example output can be seen:
 
 .. image:: imuexample.PNG
    :width: 80%
@@ -336,7 +336,5 @@ With all the upper steps finished, we successfully open the camera, render the t
 
 Here is a result, shown in Unity Android, with a plan created in unity, which will be rendered in C++ low level plugin, and with a cube in front of the plan (which we can see in the center).
 
-.. image:: rendershow.gif
 
 The project uses it to realize a marker localization can be seen in the `next chapter <https://vio.readthedocs.io/zh_CN/latest/MarkerTracker/MarkerTracker.html>`_
-

@@ -25,7 +25,7 @@ Here we want to solve image segmentation task with energy minimization using PGM
 
 **Problem formulation** : Having a graph G = (V, E), where V is the set of nodes(pixels in our case), and E is the set of edges (undirected, and represent the relationship between pixels in our case). :math:`w(v_{i}, v_{j})` is the weight of the edge between node i and node j. The objective is to find a segmentation S, which divide G into G' = (V', E'). Such that G' contains distinct components of C. [2]_
 
-.. image:: images/segmentation2.PNG
+.. image:: ../images/segmentation2.PNG
     :align: center
 
 And the segmentations are defined by **Predicate D**, to determines whether there is a boundary for segmentations, D segments G into G', and :math:`C_{i} \subset G`, such that it satisfies :
