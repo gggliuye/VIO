@@ -9,5 +9,6 @@ This page includes all about image localization in a prebuilt scene (that will m
    :caption: Contents:
 
    UnitySc/CVPRlocalization
+   Methods
    UnitySc/unityShadowCreator
    ArCoreServer/main
