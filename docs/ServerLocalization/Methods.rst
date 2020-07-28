@@ -24,7 +24,7 @@ descriptors from `VLFeat <https://www.vlfeat.org/overview/dsift.html>`_ for loca
 **Image Retrive** : NetVLAD. Will evaluate the top-10 matched images.
 
 **Pose Estimation** : use RANSAC-based dense feature match, dense pose estimation (DensePE), and dense pose validation
-(DensePV). These 'Dense' processes are mainly match the query image with the synthesized view (rendered image) using 3D scans.
+(DensePV). These 'Dense' processes are mainly pixel-wise comparison of the query image with the synthesized view (rendered image) using 3D scans.
 
 **Result** rate (%) of correctly localized querier within given distance(m) threshold and within 10 degree angular error:
 
@@ -57,3 +57,4 @@ to accelarate the algorithm. And LO+-RANSAC uses a truncate quadratic cost funct
 
 This paper focus on the **Pose Validation** step. It shows that combining different modalities namely appearance, geometry, and semantics,
 considerably boost pose verification and consequently pose accuracy.
+Mainly surface normals and semantic segmentation results.
