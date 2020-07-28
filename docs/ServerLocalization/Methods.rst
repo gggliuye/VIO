@@ -46,4 +46,6 @@ Then, compare RootSIFT descriptors using Euclidean distance is equivalent to usi
 
 .. [1] From the paper *Three things everyone should know to improve object retrieval*. This paper contributs three parts: **RootSIFT** (as descripted above). Secondly, **DQE** (Discriminative query expansion) which is a linear SVM discriminative for image retrival. And finally **AUG** (Database-side feature augmentation).
 
-Another paper is also mentioned to be closly related to its DensePE process `Fixing the Locally Optimized RANSAC <https://www.researchgate.net/publication/259338571_Fixing_the_locally_optimized_RANSAC>`_ , which proposed LO+-RANSAC.
+Another paper is also mentioned to be closly related to its DensePE process `Fixing the Locally Optimized RANSAC <https://www.researchgate.net/publication/259338571_Fixing_the_locally_optimized_RANSAC>`_ , which proposed LO+-RANSAC (has improvements in two aspects).
+LO-RANSAC adds a local optimzation (LO) step to RANSAC, which is done after the verification phase. LO-RANSAC is slower but much more accurate than the original RANSAC. While LO+-RANSAC uses a randomly sampled subset to perform local optimization,
+to accelarate the algorithm. And LO+-RANSAC uses a truncate quadratic cost function to the LO process.
