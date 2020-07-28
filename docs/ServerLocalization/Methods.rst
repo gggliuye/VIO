@@ -22,7 +22,7 @@ descriptors from `VLFeat <https://www.vlfeat.org/overview/dsift.html>`_ for loca
 using vl_dsift over vl_sift is speed, and the obvious difference is that with dense SIFT you get a SIFT descriptor
 at every location, while with normal sift you get a SIFT descriptions at the locations determined by Lowe's
 algorithm. **RootSIFT**: L1 normalize the SIFT vector, then take square root of each element (for more, see
-`Arandjelovic and Zisserman, 2012 paper <https://www.robots.ox.ac.uk/~vgg/publications/2012/Arandjelovic12/arandjelovic12.pdf>`_ paper ObjectRetrieval_).
+`Arandjelovic and Zisserman, 2012 paper <https://www.robots.ox.ac.uk/~vgg/publications/2012/Arandjelovic12/arandjelovic12.pdf>`_ paper [1]_).
 Then, compare RootSIFT descriptors using Euclidean distance is equivalent to using the Hellinger kernel to compare the orignal SIFT vectors
 (it is benefit to use Hellinger kernel to compare histogram distance) .
 
@@ -44,4 +44,4 @@ Then, compare RootSIFT descriptors using Euclidean distance is equivalent to usi
 | 1.0m   |  22.5        |  41.0        |  42.6            |  69.9        |
 +--------+--------------+--------------+------------------+--------------+
 
-.. _ObjectRetrieval: From the paper *Three things everyone should know to improve object retrieval*. 
+.. [1] From the paper *Three things everyone should know to improve object retrieval*. This paper contributs three parts: RootSIFT (as descripted above)
