@@ -44,4 +44,5 @@ Then, compare RootSIFT descriptors using Euclidean distance is equivalent to usi
 | 1.0m   |  22.5        |  41.0        |  42.6            |  69.9        |
 +--------+--------------+--------------+------------------+--------------+
 
-.. [1] From the paper *Three things everyone should know to improve object retrieval*. This paper contributs three parts: RootSIFT (as descripted above)
+.. [1] From the paper *Three things everyone should know to improve object retrieval*. This paper contributs three parts: **RootSIFT** (as descripted above),
+secondly, **DQE**(Discriminative query expansion) which is a linear SVM discriminative for image retrival, and finally **AUG**(Database-side feature augmentation).
