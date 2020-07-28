@@ -17,16 +17,22 @@ This page shows some works of single image based localization task.
 
 **Map** : built with lidar 3D scans, of high accuracy, with depth map provided.
 
-**Feature** : use multi-scale dense CNN features. (use VGG-16 for global descriptor, and use DenseSIFT extractor and its RootSIFT descriptors from VLFearfor local features )
+**Feature** : use multi-scale dense CNN features. This paper uses VGG-16 for global descriptor, and use DenseSIFT extractor and its RootSIFT
+descriptors from `VLFeat <https://www.vlfeat.org/overview/dsift.html>`_ for local features. **DenseSIFT**'The main advantage of
+ using vl_dsift over vl_sift is speed', and the obvious difference is that with dense SIFT you get a SIFT descriptor
+ at every location, while with normal sift you get a SIFT descriptions at the locations determined by Lowe's
+ algorithm. **RootSIFT**: L1 normalize the SIFT vector, then take square root of each element (for more, see
+ `Arandjelovic and Zisserman, 2012 paper <https://www.robots.ox.ac.uk/~vgg/publications/2012/Arandjelovic12/arandjelovic12.pdf>`_).
 
 **Image Retrive** : NetVLAD. Will evaluate the top-10 matched images.
 
-**Pose Estimation** : use RANSAC-based dense feature match, dense pose estimation (DensePE), and dense pose validation (DensePV).
+**Pose Estimation** : use RANSAC-based dense feature match, dense pose estimation (DensePE), and dense pose validation
+(DensePV). These 'Dense' processes are mainly match the query image with the synthesized view using 3D scans.
 
 **Result** rate (%) of correctly localized querier within given distance(m) threshold and within 10 degree angular error:
 
 +--------+--------------+--------------+------------------+--------------+
-|        |  Direct2d-3D |  BoW-SparsePE| NetVLAD+SparsePE |        InLoc |
+|        |  Direct2D-3D |  BoW-SparsePE| NetVLAD+SparsePE |        InLoc |
 +========+==============+==============+==================+==============+
 | 0.25m  |  11.9        |  20.1        |  21.3            |  38.9        |
 +--------+--------------+--------------+------------------+--------------+
