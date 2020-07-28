@@ -23,6 +23,9 @@ descriptors from `VLFeat <https://www.vlfeat.org/overview/dsift.html>`_ for loca
  at every location, while with normal sift you get a SIFT descriptions at the locations determined by Lowe's
  algorithm. **RootSIFT**: L1 normalize the SIFT vector, then take square root of each element (for more, see
  `Arandjelovic and Zisserman, 2012 paper <https://www.robots.ox.ac.uk/~vgg/publications/2012/Arandjelovic12/arandjelovic12.pdf>`_).
+Then, compare RootSIFT descriptors using Euclidean distance is equivalent to using the Hellinger kernel to compare the orignal SIFT vectors
+(it is benefit to use Hellinger kernel to compare histogram distance) .
+
 
 **Image Retrive** : NetVLAD. Will evaluate the top-10 matched images.
 
