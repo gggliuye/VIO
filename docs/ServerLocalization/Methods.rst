@@ -103,3 +103,18 @@ Learning Less is More - 6D Camera Localization via 3D Surface Regression, 2018.
 
 .. image:: images/APR.png
    :align: center
+
+* The first step is feature extraction : :math:`F(I)`
+* Followed by the APR process : image decoder :math:`E(F(I))` into a vector :math:`\alpha^{I} \in \mathbb{R}^{n}`.
+* Finally go through a fully-connected layer to generate output, which is an linear projection :math:`P\alpha^{I}+b`, where :math:`P\in \mathbb{R}^{(3+r)\times n}`, output the result with 3+r dimension (3: position, r: rotation).
+
+The upper process can be summarized into :
+
+.. math::
+  \begin{align*}
+  L(I) &= P\times E(F(I)) +b \\
+  &= b+ \sum_{j= 1}^{n}\alpha_{j}^{I}P_{j} \\
+  &= \begin{bmatrix}c_{b} \\ r_{b}\end{bmatrix} + \sum_{j=1}^{n}\alpha_{j}^{I}\begin{bmatrix}c_{p,j} \\r_{p,j}\end{bmatrix}
+  \end{align*}
+
+The upper equation could be interpretated as **a linear combination of a poses base** :math:`\mathcal{B} = \{ (c_{p,j}, r_{p,j})\}`
