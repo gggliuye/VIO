@@ -14,3 +14,15 @@ Use the panorama image to estimate.
 
 1.1 Panorama camera model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Generate a cube point cloud for simulation
+
+.. image:: images/cube.PNG
+  :align: center
+  :width: 30%
+
+Generate the panorama image using the `scripts <https://github.com/gggliuye/VIO/blob/master/pretreatment/Panorama_Distort.ipynb>`_
+
+.. image:: images/panorama_1.jpg
+  :align: center
+  :width: 60%
