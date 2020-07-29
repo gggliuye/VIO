@@ -58,3 +58,44 @@ to accelarate the algorithm. And LO+-RANSAC uses a truncate quadratic cost funct
 This paper focus on the **Pose Validation** step. It shows that combining different modalities namely appearance, geometry, and semantics,
 considerably boost pose verification and consequently pose accuracy.
 Mainly surface normals and semantic segmentation results.
+
+3. Pose Regression
+------------------------
+
+Deep learning based end-to-end image localization task (input image, directly output the pose estimation).
+
+3.1 PoseNet
+~~~~~~~~~~~~~~~~~
+
+
+PoseNet, a convolutional network for realtime 6-dof camera relocalization, 2016.
+Univerity of Cambridge.
+
+* Train the model to learn the corresponding scene.
+* Runtime input : image , output : estimated pose.
+* For outdoor scene (50,000 :math:`m^{2}`) error within 2m and 6 degree.
+
+3.2 MapNet
+~~~~~~~~~~~~~~~~~~~
+
+Geometry-Aware Learning of Maps for Camera Localization, 2018.
+
+* Use additional sense for help.
+* Could apply optimizing during inference.
+
+3.3 Leaning Less is More
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Learning Less is More - 6D Camera Localization via 3D Surface Regression, 2018.
+
+* Given 3D environment.
+* Phase one : input RGB image, output scene coodinate prediction.
+* Phase two : run phase one multiple times to have pose hypothese, than refine to get a final estimation.
+
+3.4 Limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`Understanding the Limitations of CNN-based Absolute Camera Pose Regression <https://arxiv.org/abs/1903.07504v1>`_ , 2019, TUM , ETH, Microsoft.
+
+This paper develops a theoretical model for camera pose regression, shows that pose regression is more closely
+related to pose approximation via image retrieval than to accurate pose estimation via 3D structure.
