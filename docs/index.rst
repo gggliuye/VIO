@@ -12,7 +12,7 @@ Welcome to UTOPA-AR's documentation!
 
    SLAM/index
    ServerLocalization/index
-   CapellaLocalization/index
+   CapellaLocalization/Main
    Unity/index
    Other/index
 
