@@ -97,5 +97,9 @@ Learning Less is More - 6D Camera Localization via 3D Surface Regression, 2018.
 
 `Understanding the Limitations of CNN-based Absolute Camera Pose Regression <https://arxiv.org/abs/1903.07504v1>`_ , 2019, TUM , ETH, Microsoft.
 
-This paper develops a theoretical model for camera pose regression, shows that pose regression is more closely
-related to pose approximation via image retrieval than to accurate pose estimation via 3D structure.
+* This paper develops a theoretical model for camera pose regression, shows that pose regression is more closely related to pose approximation via image retrieval than to accurate pose estimation via 3D structure.
+* Both theoretically and through experiments that there is no guarantee that absolute pose regression (APR) methods, unlike structure-based method, generalize beyond their trainning data.
+* APR performance is much closer to a handcrafted retrival baseline.
+
+.. image:: images/APR.png
+   :align: center
