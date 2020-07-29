@@ -117,4 +117,4 @@ The upper process can be summarized into :
   &= \begin{bmatrix}c_{b} \\ r_{b}\end{bmatrix} + \sum_{j=1}^{n}\alpha_{j}^{I}\begin{bmatrix}c_{p,j} \\r_{p,j}\end{bmatrix}
   \end{align*}
 
-The upper equation could be interpretated as **a linear combination of a poses base** :math:`\mathcal{B} = \{ (c_{p,j}, r_{p,j})\}`
+The upper equation could be interpretated as **a linear combination of a poses base** :math:`\mathcal{B} = \{ (c_{p,j}, r_{p,j})\}`.
