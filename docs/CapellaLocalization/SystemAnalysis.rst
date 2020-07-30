@@ -65,3 +65,4 @@ To realize this function,  we have two choice: one by GPS, and another by the fo
 
 .. image:: images/FSScenarioPoseFusion.jpg
    :align: center
+   :width: 90%

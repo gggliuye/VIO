@@ -1,4 +1,4 @@
-M1. MOperationalAnalysis
+M1. Operational Analysis
 ==============================
 
 .. image:: images/MOCB.PNG

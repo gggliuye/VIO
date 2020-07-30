@@ -6,6 +6,7 @@ L1. Operational Analysis
 
 .. image:: images/OEBDOperationalContext.jpg
    :align: center
+   :width: 80%
 
 We have the upper three main entities here : **Native**, **Unity3D**, and **Server**.
 
@@ -28,6 +29,7 @@ We have three main tasks here:
 
 .. image:: images/OABDRootOperationalActivity.jpg
    :align: center
+   :width: 70%
 
 We have these activities, and they will be all involving in the **Operational Capabilities** we defined above.
 Details will be shown in the **Activity Scenario**.

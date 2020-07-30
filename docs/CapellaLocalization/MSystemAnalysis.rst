@@ -6,6 +6,7 @@ M2. System Analysis
 
 .. image:: images/MSDFB.PNG
    :align: center
+   :width: 90%
 
 
 1.2 System Data Flow Blank
@@ -19,6 +20,7 @@ M2. System Analysis
 
 .. image:: images/MakerMapS.PNG
    :align: center
+   :width: 90%
 
 * First Collect the map data.
 * Build the Visual sparse map (SFM map) and MVS map.
