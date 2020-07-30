@@ -1,4 +1,4 @@
-3. L: Logical Architecture
+L3. Logical Architecture
 ================================
 
 
