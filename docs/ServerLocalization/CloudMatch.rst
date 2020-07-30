@@ -33,12 +33,23 @@ Using some simple method we can transform the panorama image into a pinhole came
 2. Faro Scan
 --------------------
 
-However the Faro device is a Lidar dominated device, it lacks a fine calibration of the panorama image.
-(For an example, it doesn't have a uniform panorma image size, and it dosen't follow the upper camera model)
-
 We also tried to use the raw image from faro, unfortunately it is of bad quality.
+
 * It is captured by a spinning device -> lack of uniform exterior calibration.
 * About 40% of the image is consist of the outer shell of the Lidar Device.
 * It is registered by the lidar scan data -> hard for us to calibration.
 
-As a result, we decide to add an additional camera to the Faro device to get a stable image rescource.
+We turn to the unified panorama image output of Faro. We found the lower part is hidden.
+So we complete the missing part, and apply the camera model to the lidar scan, result in an
+accurate RGB image with aligned depth image.
+
+Using the `code <https://github.com/gggliuye/VIO/blob/master/pretreatment/panorama_extraction_perfect_sphere.ipynb>`_
+We can get the aligned depth image :
+
+.. image:: images/pano_faro.PNG
+  :align: center
+
+And some sample of pinhole camera images:
+
+.. image:: images/pinhole_faro.PNG
+  :align: center

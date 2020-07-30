@@ -118,3 +118,33 @@ The upper process can be summarized into :
   \end{align*}
 
 The upper equation could be interpretated as **a linear combination of a poses base** :math:`\mathcal{B} = \{ (c_{p,j}, r_{p,j})\}`.
+
+
+4. Hierarchical Localization
+----------------------------
+
+Great work of Paul-Edouard Sarlin (from ETH).
+
+.. image:: images/HL.png
+   :align: center
+
+4.1 Leveraging Deep Visual Descriptors for Hierarchical Efficient Localization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Publisded in 2018. This paper is the starting point of their works. It shows its pipeline :
+A **hierarchical search structure**, from global descriptor match to local descriptor match.
+The key objective of this method is to find 2D-3D point matches.
+
+* Use the original NetVLAD as a teacher for trainning a student MobileNetVLAD, which use a MobileNet as image encode (instead of VGG for original NetVLAD), then match the global descriptors.
+* Build **Covisibility Clusters**
+* Local matching (Map built with Maplab, using SIFT) and pose estimation using P3P-RANSAC.
+
+4.2 HF-Net
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*From Coarse to Fine : Robust Hierarchical Localization at Large Scale*, 2019, top-1, 2019 CVPR image Localization benchmark.
+
+* Basicly the same structure as the upper work. VetVLAD image retrival, feature match then PnP pose estimation.
+* Use HF-Net (followed SuperPoint) for both global encoder and local feature extractor.
+* Sparse feature map built with colmap.
+* Main contribution : HF-Net. Using MobileNet, much faster than the origianl SuperPOint+VGG structure. Deep Learning feature extraction : much more robust to environment change.
