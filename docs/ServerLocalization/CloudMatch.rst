@@ -61,8 +61,7 @@ This is for test the possiblity of using a simple SIFT for a large scene localiz
 For a validation of this thought, we only apply one panorama image and some reasonable query images for test.
 The objective here is to test this method, and to offer a base.
 
-* Firstly, create several keyframe images (in pinhole camera model) and its corresponding aligned depth, using the
-3D Lidar Scan data.
+* Firstly, create several keyframe images (in pinhole camera model) and its corresponding aligned depth, using the 3D Lidar Scan data.
 
 .. image:: images/transformed_depth.PNG
   :align: center
