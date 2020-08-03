@@ -43,7 +43,7 @@ We turn to the unified panorama image output of Faro. We found the lower part is
 So we complete the missing part, and apply the camera model to the lidar scan, result in an
 accurate RGB image with aligned depth image.
 
-Using the `code <https://github.com/gggliuye/VIO/blob/master/pretreatment/panorama_extraction_perfect_sphere.ipynb>`_
+Using the `code <https://github.com/gggliuye/VIO/blob/master/panorama_images/panorama_extraction_perfect_sphere.ipynb>`_
 We can get the aligned depth image :
 
 .. image:: images/pano_faro.PNG
@@ -53,3 +53,30 @@ And some sample of pinhole camera images:
 
 .. image:: images/pinhole_faro.PNG
   :align: center
+
+3. Localization using SIFT
+------------------------------
+
+This is for test the possiblity of using a simple SIFT for a large scene localization.
+For a validation of this thought, we only apply one panorama image and some reasonable query images for test.
+The objective here is to test this method, and to offer a base.
+
+* Firstly, create several keyframe images (in pinhole camera model) and its corresponding aligned depth, using the
+3D Lidar Scan data.
+
+.. image:: images/transformed_depth.PNG
+  :align: center
+
+* Then, realize a simple SIFT (using RootSIFT) feature matching system with PnP pose estimation process.
+The results are shown below:
+
+.. image:: images/match_res.PNG
+  :align: center
+
+* The left image is the query image, the middle image is the matched keyframe, the right image is the rendered image using the panorama scan and the estimated pose.
+
+From the upper test, we found the following problems:
+
+* SIFT could only match a limited number of features (some well structed points), while it cannot handle some hard cases (for the plants).
+* With the limited matches, the pose estimation is far from ideal.
+* We need a better feature extraciton and matching strategy, for an example using SuperPoint + SuperGlue.
