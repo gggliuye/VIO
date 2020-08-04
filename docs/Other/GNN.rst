@@ -60,3 +60,18 @@ To evaluate a network, or analysis its characteristics, we need a model to compa
 +--------+--------------+
 | Connectivity  |   GCC exists of :math:`\bar{k}>1`   |
 +--------+--------------+
+
+* It is the simplest model -> a reference model.
+* Helps to compare and understand properties.
+
+2.3 The Small-world Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Has high clustering and short average path length, lots of neighbor clusterings with
+some link in large range . Which is similar to our social networks.
+
+Developed in 1998, **Watts Strogate Model**.
+
+.. image:: images/small_world.png
+  :align: center
+  :width: 75%
