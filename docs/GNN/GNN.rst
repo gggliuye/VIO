@@ -44,17 +44,19 @@ To evaluate a network, or analysis its characteristics, we need a model to compa
 * :math:`G_{np}` (n = # nodes, p = probability of the connection idd).
 * :math:`G_{nm}` (n = # nodes, m = # edges).
 
-+--------+--------------+
-| Properties |  Expressions |
-+========+==============+
-| Average degree     |  :math:`\bar{k} = p(n-1)`     |
-+--------+--------------+
-| Average path length     |  :math:`O(\log n)`     |
-+--------+--------------+
-| Cluster coefficient  |   :math:`\mathcal{E}[C_{i}] = p \approx \frac{\bar{k}}{n}`   |
-+--------+--------------+
-| Connectivity  |   GCC exists of :math:`\bar{k}>1`   |
-+--------+--------------+
+Summary:
+
++--------------------+--------------------------------------------------------------+
+| Properties         |  Expressions                                                 |
++====================+==============================================================+
+| Average degree     |  :math:`\bar{k} = p(n-1)`                                    |
++--------------------+--------------------------------------------------------------+
+| Average path length|  :math:`O(\log n)`                                           |
++--------------------+--------------------------------------------------------------+
+| Cluster coefficient|   :math:`\mathcal{E}[C_{i}] = p \approx \frac{\bar{k}}{n}`   |
++--------------------+--------------------------------------------------------------+
+| Connectivity       |   GCC exists of :math:`\bar{k}>1`                            |
++--------------------+--------------------------------------------------------------+
 
 * It is the simplest model -> a reference model.
 * Helps to compare and understand properties.
