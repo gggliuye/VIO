@@ -10,3 +10,4 @@ This page includes all about SLAM.
 
    lidarSLAM
    PGM
+   GNN
