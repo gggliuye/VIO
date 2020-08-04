@@ -24,7 +24,7 @@ Then some application examples are shown, they could be classified into two clas
 1.3 Book Read
 ----------------------
 
-Chapter of book `Networks, Crowds, and Markets <http://www.cs.cornell.edu/home/kleinber/networks-book/>`_
+Chapter 1 of book `Networks, Crowds, and Markets <http://www.cs.cornell.edu/home/kleinber/networks-book/>`_
 
 **Behavior and Dynamics** : the connected network will result in ta dynamics influence of each entity's behavior.
 As the consequence will transform based on the structure of the network. It is essential for descision making.
@@ -100,17 +100,40 @@ generalizes the mathematics of random graphs to non-Poisson degree distributions
 * The normal Gnp model could not capture the properties of a directed network.
 * Some networks are better modeled with bipartite graphs.
 
+'Generate' the model by generating function :math:`G_{0}(x) = \sum_{i=0}^{\infty} p_{k}x^{k}`
+
 2.3 The Small-world Model
 ----------------------
 
 Has high clustering and short average path length, lots of neighbor clusterings with
-some link in large range . Which is similar to our social networks.
+some link in large range. Most people only knew their near neighbors, and a few people knew someone far
+away.
+Which is similar to our social networks: many closed triads, but also very short paths.
 
-Developed in 1998, **Watts Strogate Model**.
+Developed in 1998, **Watts Strogatz Model**.
 
 .. image:: images/small_world.png
   :align: center
   :width: 75%
+
+2.3.1 Book Read
+~~~~~~~~~~~~~~~~~~~~
+
+Chapter 20 of book `Networks, Crowds, and Markets <http://www.cs.cornell.edu/home/kleinber/networks-book/>`_
+The Small-World Phenomenon.
+
+**Milgram’s experiment** really demonstrated two striking facts about large social networks:
+
+* first, that short paths are there in abundance;
+* and second, that people, acting without any sort of global “map” of the network, are effective at collectively finding these short paths.
+
+**The Watts-Strogatz model** : the crux : introducing a tiny amount of randomness
+— in the form of long-range weak ties — is enough to make the world “small,” with
+short paths between every pair of nodes.
+
+**What makes the decentralized search so effective?** one can prove that decentralized search in the Watts-
+Strogatz model will necessarily require a large number of steps to reach a target — much
+larger than the true length of the shortest path
 
 2.4 Kronecker Graph Model
 ----------------------
@@ -124,3 +147,14 @@ Developed in 1998, **Watts Strogate Model**.
 * Generate large graph with self-similarity.
 * Stochastic Kronecker graph model. (apply a fast edge dropping/adding step)
 * Close to real social networks.
+
+2.5 HW0
+-------------------
+
+**SNAP**
+
+Stanford Network Analysis Platform `site <http://snap.stanford.edu/>`_ , in Python and C++ (core in C++).
+
+.. image:: images/hw0wiki.PNG
+   :align: center
+   :width: 80%
