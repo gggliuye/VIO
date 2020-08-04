@@ -155,6 +155,8 @@ larger than the true length of the shortest path
 
 Stanford Network Analysis Platform `site <http://snap.stanford.edu/>`_ , in Python and C++ (core in C++).
 
+`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW0-IntorSNAP.ipynb>`_
+
 .. image:: images/hw0wiki.PNG
    :align: center
    :width: 80%
