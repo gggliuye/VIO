@@ -159,4 +159,4 @@ Stanford Network Analysis Platform `site <http://snap.stanford.edu/>`_ , in Pyth
 
 .. image:: images/hw0wiki.PNG
    :align: center
-   :width: 80%
+   :width: 90%
