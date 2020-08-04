@@ -2,7 +2,7 @@
 =============================
 
 1.1 Introduction
-~~~~~~~~~~~~~~~~
+-----------------------
 
 *How the systems are organized? And what's their property?*
 
@@ -14,18 +14,39 @@ Then some application examples are shown, they could be classified into two clas
 * Information cascade in the networks (more officially, marginalization inference of the networks).
 
 1.2 Graph
-~~~~~~~~~~~~~~~~
+----------------------
 
 * Directed graph, undirected graph. Complete graph, bipartite graph.
 * Representations: adjacency matrix, edge/adjacency list. Most of the graphs are **sparse** !
 * Additional on graphs : attach more informations, add weights to edges; loops; etc.
 * Connectivity of graphs , connected components, different for directed and undirected graphs.
 
+1.3 Book Read
+----------------------
+
+Chapter of book `Networks, Crowds, and Markets <http://www.cs.cornell.edu/home/kleinber/networks-book/>`_
+
+**Behavior and Dynamics** : the connected network will result in ta dynamics influence of each entity's behavior.
+As the consequence will transform based on the structure of the network. It is essential for descision making.
+And help us to understand the world.
+
+**Graph theory**
+
+**Game theory**, the network plays a role of shared resource, while our decision will depends on the choices of ohters.
+The combined actions of its users can either congest this resource or use it more efficiently.
+
+*Markets and Strategic Interaction on Networks*
+
+*Information networks*
+
+*Network Dynamics: Population Effects, Structural Effects*
+
+
 2. Properties of Networks and Random Graph Models
 =============================
 
 2.1 Properties
-~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 * Degree distribution (P(k)) : mainly in form of a histogram.
 * Path length (h) : distance, mean distance, diameter, etc.
@@ -39,30 +60,48 @@ Then some application examples are shown, they could be classified into two clas
 To evaluate a network, or analysis its characteristics, we need a model to compare as a reference.
 
 2.2 Erolos-Renyi Random Graph Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 * :math:`G_{np}` (n = # nodes, p = probability of the connection idd).
 * :math:`G_{nm}` (n = # nodes, m = # edges).
 
+The probability of degree of :math:`G_{np}` is (which is a Poisson distribution):
+
+.. math::
+  p_{k} = C_{k}^{N} p^{k}(1-p)^{N-k}
+
 Summary:
 
-+--------------------+--------------------------------------------------------------+
-| Properties         |  Expressions                                                 |
-+====================+==============================================================+
-| Average degree     |  :math:`\bar{k} = p(n-1)`                                    |
-+--------------------+--------------------------------------------------------------+
-| Average path length|  :math:`O(\log n)`                                           |
-+--------------------+--------------------------------------------------------------+
-| Cluster coefficient|   :math:`\mathcal{E}[C_{i}] = p \approx \frac{\bar{k}}{n}`   |
-+--------------------+--------------------------------------------------------------+
-| Connectivity       |   GCC exists of :math:`\bar{k}>1`                            |
-+--------------------+--------------------------------------------------------------+
++--------------------+--------------------------------------------------------+
+| Properties         |  Expressions                                           |
++====================+========================================================+
+| Average degree     |  :math:`\bar{k} = p(n-1)`                              |
++--------------------+--------------------------------------------------------+
+| Average path length|  :math:`O(\log n)`                                     |
++--------------------+--------------------------------------------------------+
+| Cluster coefficient|:math:`\mathcal{E}[C_{i}] = p \approx \frac{\bar{k}}{n}`|
++--------------------+--------------------------------------------------------+
+| Connectivity       |   GCC exists of :math:`\bar{k}>1`                      |
++--------------------+--------------------------------------------------------+
 
 * It is the simplest model -> a reference model.
 * Helps to compare and understand properties.
+* Example : the passage of a disease.
+
+2.2.1 Paper Read
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Random graphs with arbitrary degree distributions and their applications 2001*.
+generalizes the mathematics of random graphs to non-Poisson degree distributions, and to directed and bipartite graphs.
+
+**Motivations**:
+
+* The normal Gnp model's degree follows Poisson distribution, while most networks dosen't e.g. social network.
+* The normal Gnp model could not capture the properties of a directed network.
+* Some networks are better modeled with bipartite graphs.
 
 2.3 The Small-world Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 Has high clustering and short average path length, lots of neighbor clusterings with
 some link in large range . Which is similar to our social networks.
@@ -74,7 +113,7 @@ Developed in 1998, **Watts Strogate Model**.
   :width: 75%
 
 2.4 Kronecker Graph Model
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 * Build based on recursively apply Kronecker product.
 
