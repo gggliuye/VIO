@@ -1,10 +1,5 @@
-Machine Learning with Graphs
-================================
-
-CS224W Stanford `note page <https://snap-stanford.github.io/cs224w-notes/>`_
-
 1. Introduction: Structure of Graphs
----------------------------------
+=============================
 
 1.1 Introduction
 ~~~~~~~~~~~~~~~~
@@ -27,7 +22,7 @@ Then some application examples are shown, they could be classified into two clas
 * Connectivity of graphs , connected components, different for directed and undirected graphs.
 
 2. Properties of Networks and Random Graph Models
-----------------------------------------
+=============================
 
 2.1 Properties
 ~~~~~~~~~~~~~~~~~~~~~
@@ -75,3 +70,16 @@ Developed in 1998, **Watts Strogate Model**.
 .. image:: images/small_world.png
   :align: center
   :width: 75%
+
+2.4 Kronecker Graph Model
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Build based on recursively apply Kronecker product.
+
+.. math::
+   A \otimes B = \begin{bmatrix}a_{1,1}B & ... & a_{1,n}B \\
+   . & & . \\ . & & . \\ a_{m,1}B & ... & a_{m,n}B \end{bmatrix}
+
+* Generate large graph with self-similarity.
+* Stochastic Kronecker graph model. (apply a fast edge dropping/adding step)
+* Close to real social networks.
