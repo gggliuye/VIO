@@ -15,6 +15,7 @@ Welcome to UTOPA-AR's documentation!
    CapellaLocalization/Main
    Unity/index
    Other/index
+   GNN/index
 
 
 Indices and tables
