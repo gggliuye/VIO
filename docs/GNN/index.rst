@@ -5,6 +5,7 @@ This page includes CS224W Stanford `note page <https://snap-stanford.github.io/c
 
 My notes and all documents could be found `here with code 2rlj <https://pan.baidu.com/s/18EdD8mdlIdNxADFGrmUM-w>`_ in Baidu Cloud.
 
+And `link of snap documentation <http://snap.stanford.edu/snappy/doc/reference/index-ref.html>`_
 
 .. toctree::
    :maxdepth: 3
