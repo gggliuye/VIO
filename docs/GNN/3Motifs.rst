@@ -149,4 +149,4 @@ In practice say 0.3-0.7 to be significant community structure. Negative value : 
 
 .. [4] Start from the communities of nodes, randomly connect the node in same community. If have multiple common communities, we should have high probability.
 
-.. [5] :math:`P(G\mid F) = \sum_{(u,v)\in G}P(u,v) \sum_{(u,v)\nin G}(1-P(u,v))` probability graph model. BigCLAM Model : strength of edges -> probabilities.
+.. [5] :math:`P(G\mid F) = \sum_{(u,v)\in G}P(u,v) \sum_{(u,v)\notin G}(1-P(u,v))` probability graph model. BigCLAM Model : strength of edges -> probabilities.
