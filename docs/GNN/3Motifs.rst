@@ -105,7 +105,7 @@ He included another view of friendship to explain it :
 **Edge overlap** -> Communities
 
 .. math::
-  O_{i,j} = \frac{\mid (N(i) \cap N(j)) \setminus \{i,j\} \mid} {\mid (N(i) \cup \N(j) \setminus \{i,j\})\mid}
+  O_{i,j} = \frac{\mid (N(i) \cap N(j)) \setminus \{i,j\} \mid} {\mid (N(i) \cup N(j) \setminus \{i,j\})\mid}
 
 If O equal 0, then the edge is a local bridge. If O equals one, then the two nodes of the edge are structural equivalent.
 
@@ -118,12 +118,13 @@ Granovetter's theory suggests that network are composed of tightly connected set
 Famerous example *Zachary's Karate clue network*.
 
 
-**Modularity Q** : a measurement of how well a network is partitioned into communities. Need a null model [3]_ for meansre the 'expected' number.
+**Modularity Q** : (in range [-1,1]) a measurement of how well a network is partitioned into communities. Need a null model [3]_ for meansre the 'expected' number.
+In practice say 0.3-0.7 to be significant community structure. Negative value : nodes should link with each other while actully not (e.g. enemy).
 
 .. math::
-  Q \propto \sum_{s\in S} [(#edges\ within\ group\ s) - (expected\ #edges \ within \ group \ s)]
+  Q \propto \sum_{s\in S} [(#)]
 
 .. math::
   Q(G,S) = \frac{1}{2m} \sum_{s\in S}\sum_{i\in s}\sum_{j\in s}(A_{ij} - \frac{k_{i}k_{j}}{2m})
 
-.. [3] Given G = (V,E) (n nodes and m edges)construct rewried network G' as a multigraph : expected #edges within group s :math:`= (1/2)\sum_{i} \sum_{j}k_{i}k_{j}/(2m) = m`
+.. [3] Given G = (V,E) (n nodes and m edges)construct rewired network G' as a multigraph : expected #edges within group s :math:`= (1/2)\sum_{i} \sum_{j}k_{i}k_{j}/(2m) = m`
