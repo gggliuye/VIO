@@ -36,7 +36,7 @@ The idea here is to characterize and discriminiate networks using the **subgraph
 
 Find the structural equivalent nodes. Or find structural 'similar' nodes, which could be used to identify roles.
 
-**RoIX** : find feature vectors for all the nodes to help identify roles. Obtained by the Adjacency matrix. The vector captures
+**RoIX** (Role eXtraction : Structural Role Extraction & Mining in Large Graphs) : find feature vectors for all the nodes to help identify roles. Obtained by the Adjacency matrix. The vector captures
 features of different scale : **local** (properties of the node itself), **egonet** (properties of neighbors, similar to a
 convolution step), and **recursive** (mean/sum of neighbors, similar to a pooling step). Followed by a clustering process,
 we could find nodes grouped by similar roles.
