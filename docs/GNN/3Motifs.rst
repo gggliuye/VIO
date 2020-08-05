@@ -36,9 +36,49 @@ The idea here is to characterize and discriminiate networks using the **subgraph
 
 Find the structural equivalent nodes. Or find structural 'similar' nodes, which could be used to identify roles.
 
-**RoIX** (Role eXtraction : Structural Role Extraction & Mining in Large Graphs) :
+**RolX** (Role eXtraction : Structural Role Extraction & Mining in Large Graphs) :
 an unsupervised learning approach for automatically extracting structural roles from general network data sets.
 find feature vectors for all the nodes to help identify roles. Obtained by the Adjacency matrix. The vector captures
 features of different scale : **local** (properties of the node itself), **egonet** (properties of neighbors, similar to a
 convolution step), and **recursive** (mean/sum of neighbors, similar to a pooling step). Followed by a clustering process,
 we could find nodes grouped by similar roles.
+
+3.3 HW1 - q2
+------------------------
+
+`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW1-q2.ipynb>`_
+
+In this problem, we will explore the structural role extraction algorithm Rolx and its recursive
+feature extraction method ReFex.
+
+**Local Feature**, the top-5 similar node in the graph for node 9::
+
+  Top 1  similar node ID is : 415 with score 0.999615754068427
+  Top 2  similar node ID is : 288 with score 0.9963436806278279
+  Top 3  similar node ID is : 286 with score 0.9963436806278279
+  Top 4  similar node ID is : 1054 with score 0.9961182380000688
+  Top 5  similar node ID is : 1336 with score 0.9961182380000688
+
+**Recursive Features** with two iterations, the top-5 similar node in the graph for node 9::
+
+  Top 1  similar node ID is : 973 with score 0.9959848829010806
+  Top 2  similar node ID is : 537 with score 0.9946130044020561
+  Top 3  similar node ID is : 415 with score 0.9937284425239259
+  Top 4  similar node ID is : 496 with score 0.9922839741918225
+  Top 5  similar node ID is : 25 with score 0.9922413199302673
+
+*Histogram : similarity between node 9 and other nodes* :
+
+.. image:: images/hw1-q2-histo.PNG
+    :align: center
+    :width: 55%
+
+*Subgraphs of nodes of the top 5 similar* and the subgraph of node 9.
+
+.. image:: images/hw1-q2-role.PNG
+    :align: center
+
+We could see from the upper histogram that the similar nodes of node 9 are well clustered. As the histogram
+only has values of very close nodes, and very far nodes. Which show that the Rolx model could well capture
+some properties of the roles. And from the upper subgraphs, we see the node with similar feaure vector do
+looks close to each other.
