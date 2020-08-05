@@ -71,7 +71,7 @@ feature extraction method ReFex.
 
 .. image:: images/hw1-q2-histo.PNG
     :align: center
-    :width: 55%
+    :width: 50%
 
 *Subgraphs of nodes of the top 5 similar* and the subgraph of node 9.
 
@@ -82,3 +82,48 @@ We could see from the upper histogram that the similar nodes of node 9 are well 
 only has values of very close nodes, and very far nodes. Which show that the Rolx model could well capture
 some properties of the roles. And from the upper subgraphs, we see the node with similar feaure vector do
 looks close to each other.
+
+4. Community Structure in Networks
+=====================================
+
+Identify nodes closely connected to each other.
+
+4.1 Edge overlap
+----------------------------
+
+The Prof started the topic from the example *How people find new jobs?* by Mark Granovetter in 1960s. It shows that
+people find opportunitise through personal contacts, while, more through acquaintances rather than
+close friends.
+
+He included another view of friendship to explain it :
+
+* Interpersonal : the weight of the friendship edge.
+* Structural :
+    * Structurally embedded edge -> stronger connection, while have redundant information. -> **Triadic closure**.
+    * Long-range edge -> weak connection, while have more information. -> better job opportunity.
+
+**Edge overlap** -> Communities
+
+.. math::
+  O_{i,j} = \frac{\mid (N(i) \cap N(j)) \setminus \{i,j\} \mid} {\mid (N(i) \cup \N(j) \setminus \{i,j\})\mid}
+
+If O equal 0, then the edge is a local bridge. If O equals one, then the two nodes of the edge are structural equivalent.
+
+Granovetter's theory suggests that network are composed of tightly connected sets of nodes.
+
+4.2 Network Communities
+----------------------------
+
+**Network Communities** : sets of nodes with lots of internal connections and few external ones (to the rest of the network).
+Famerous example *Zachary's Karate clue network*.
+
+
+**Modularity Q** : a measurement of how well a network is partitioned into communities. Need a null model [3]_ for meansre the 'expected' number.
+
+.. math::
+  Q \propto \sum_{s\in S} [(#edges\ within\ group\ s) - (expected\ #edges \ within \ group \ s)]
+
+.. math::
+  Q(G,S) = \frac{1}{2m} \sum_{s\in S}\sum_{i\in s}\sum_{j\in s}(A_{ij} - \frac{k_{i}k_{j}}{2m})
+
+.. [3] Given G = (V,E) (n nodes and m edges)construct rewried network G' as a multigraph : expected #edges within group s :math:`= (1/2)\sum_{i} \sum_{j}k_{i}k_{j}/(2m) = m`
