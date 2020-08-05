@@ -10,4 +10,5 @@ My notes and all documents could be found `here with code 2rlj <https://pan.baid
    :maxdepth: 3
    :caption: Contents:
 
-   GNN
+   12GNN
+   3Motifs
