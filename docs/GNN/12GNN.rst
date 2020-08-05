@@ -41,6 +41,18 @@ The combined actions of its users can either congest this resource or use it mor
 
 *Network Dynamics: Population Effects, Structural Effects*
 
+1.4 HW0
+-------------------
+
+**SNAP**
+
+Stanford Network Analysis Platform `site <http://snap.stanford.edu/>`_ , in Python and C++ (core in C++).
+
+`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW0-IntorSNAP.ipynb>`_
+
+.. image:: images/hw0wiki.PNG
+   :align: center
+   :width: 90%
 
 2. Properties of Networks and Random Graph Models
 =============================
@@ -148,15 +160,26 @@ larger than the true length of the shortest path
 * Stochastic Kronecker graph model. (apply a fast edge dropping/adding step)
 * Close to real social networks.
 
-2.5 HW0
--------------------
+2.5 HW1 - q1
+------------------------
 
-**SNAP**
+`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW1-q1-starter.py>`_
 
-Stanford Network Analysis Platform `site <http://snap.stanford.edu/>`_ , in Python and C++ (core in C++).
+Compare three networks: Erdos-Renyi Random graph, Small-World Random network, and Real-World Collaboration Network.
 
-`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW0-IntorSNAP.ipynb>`_
+**Degree Distribution**:
 
-.. image:: images/hw0wiki.PNG
-   :align: center
-   :width: 90%
+.. image:: images/hw1-q1.png
+  :align: center
+  :width: 60%
+
+**Clustering Coefficient**:
+
+* Clustering Coefficient for Erdos Renyi Network: 0.000898
+* Clustering Coefficient for Small World Network: 0.284203
+* Clustering Coefficient for Collaboration Network: 0.529636
+
+The random network, will be linked randomly, which is natural that it will not have few clustering.
+The small world model is designed to have small diameter, as a result, it will have larger clustering coefficient.
+While the real model, which is a network represent authors of research papers on the arXiv in the General Relativity and Quantum Cosmology section
+As the scientists collaborate together to work on papers, it definitely end up with the highest clustering coefficient.

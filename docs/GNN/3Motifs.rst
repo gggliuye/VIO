@@ -12,7 +12,7 @@ The idea here is to characterize and discriminiate networks using the **subgraph
   Z_{i} = (N_{i}^{real} - \bar{N}_{i}^{rand})/std(N_{i}^{rand})
 
 .. math::
-  SP_{i} = Z_{i}/(\sum_{j}Z_{J}^{2})
+  SP_{i} = Z_{i}/(\sum_{j}Z_{j}^{2})
 
 * **Graphlets** : Node level subgraph metric. Node feature vectors. Using the parameter **Graphlet degree vector** (GDV) [2]_ , reflects the node's level network topology.
 
@@ -36,7 +36,9 @@ The idea here is to characterize and discriminiate networks using the **subgraph
 
 Find the structural equivalent nodes. Or find structural 'similar' nodes, which could be used to identify roles.
 
-**RoIX** (Role eXtraction : Structural Role Extraction & Mining in Large Graphs) : find feature vectors for all the nodes to help identify roles. Obtained by the Adjacency matrix. The vector captures
+**RoIX** (Role eXtraction : Structural Role Extraction & Mining in Large Graphs) :
+an unsupervised learning approach for automatically extracting structural roles from general network data sets.
+find feature vectors for all the nodes to help identify roles. Obtained by the Adjacency matrix. The vector captures
 features of different scale : **local** (properties of the node itself), **egonet** (properties of neighbors, similar to a
 convolution step), and **recursive** (mean/sum of neighbors, similar to a pooling step). Followed by a clustering process,
 we could find nodes grouped by similar roles.
