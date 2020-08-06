@@ -158,3 +158,9 @@ details in the paper, also see in the HW1 Q3.3-3.4 .
 .. [4] Start from the communities of nodes, randomly connect the node in same community. If have multiple common communities, we should have high probability.
 
 .. [5] :math:`P(G\mid F) = \sum_{(u,v)\in G}P(u,v) \sum_{(u,v)\notin G}(1-P(u,v))` probability graph model. BigCLAM Model : strength of edges -> probabilities.
+
+4.4 HW1 - q3
+------------------
+
+`Hand writing homework <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW1-q3.pdf>`_
+Derivatives and the intrinsic multi-level nature of **Louvain Algorithm**.
