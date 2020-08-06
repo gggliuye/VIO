@@ -48,7 +48,7 @@ The combined actions of its users can either congest this resource or use it mor
 
 Stanford Network Analysis Platform `site <http://snap.stanford.edu/>`_ , in Python and C++ (core in C++).
 
-`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW0-IntorSNAP.ipynb>`_
+`Python homework <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW0-IntorSNAP.ipynb>`_
 
 .. image:: images/hw0wiki.PNG
    :align: center
@@ -163,7 +163,7 @@ larger than the true length of the shortest path
 2.5 HW1 - q1
 ------------------------
 
-`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW1-q1-starter.py>`_
+`Python homework <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW1-q1-starter.py>`_
 
 Compare three networks: Erdos-Renyi Random graph, Small-World Random network, and Real-World Collaboration Network.
 

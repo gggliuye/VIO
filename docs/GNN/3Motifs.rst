@@ -46,7 +46,7 @@ we could find nodes grouped by similar roles.
 3.3 HW1 - q2
 ------------------------
 
-`Python homework <https://github.com/gggliuye/VIO/blob/master/docs/GNN/HWs/HW1-q2.ipynb>`_
+`Python homework <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW1-q2.ipynb>`_
 
 In this problem, we will explore the structural role extraction algorithm Rolx and its recursive
 feature extraction method ReFex.
@@ -91,7 +91,7 @@ Identify nodes closely connected to each other.
 4.1 Edge overlap
 ----------------------------
 
-The Prof started the topic from the example *How people find new jobs?* by Mark Granovetter in 1960s. It shows that
+The Prof started the topic from the example *How people find new jobs?* by Mark Granovetter in 1960s `link <https://sociology.stanford.edu/publications/strength-weak-ties>`_ . It shows that
 people find opportunitise through personal contacts, while, more through acquaintances rather than
 close friends.
 
@@ -127,19 +127,27 @@ In practice say 0.3-0.7 to be significant community structure. Negative value : 
 .. math::
   Q(G,S) = \frac{1}{2m} \sum_{s\in S}\sum_{i\in s}\sum_{j\in s}(A_{ij} - \frac{k_{i}k_{j}}{2m})
 
+Where :math:`A_{ij}` is the weight of the edge, and :math:`m = (1/2)\sum_{ij}A_{ij}`
+
 .. [3] Given G = (V,E) (n nodes and m edges)construct rewired network G' as a multigraph : expected #edges within group s :math:`= (1/2)\sum_{i} \sum_{j}k_{i}k_{j}/(2m) = m`
 
-**Louvain Algorithm** Greedy algorithm (O(nlogn)), to identify communities by maximizing modularity.
+**Louvain Algorithm** Greedy algorithm (O(nlogn)), to identify communities by maximizing modularity. `paper link <https://arxiv.org/pdf/0803.0476>`_
 
 * Initialize communities.
-* Assign nodes to communities. Whether move node i from C to D, judged by :math:`\Delta Q = \Delta Q(i\to C) + \Delta Q(D\to i)` .
-* Update communities by the assigned nodes (Rebuild phase). then go back to the former step.
+* Phase 1. Assign nodes to communities. Whether move node i from C to D, judged by :math:`\Delta Q = \Delta Q(i\to C) + \Delta Q(D\to i)` .
+* Phase 2. The identified communities are aggregated into super-nodes to build a new network (Rebuild phase). Then go back to phase 1.
+* Stop as no increase of modularity is possible, or stop as we want.
 
-**Question** : Convergence proof?
+**Problem 1.** : Convergence ? Find answer in the paper : this algorithm may converge to local minimal.
+
+**Problem 2.** : The resolution limit problem of modulaity (due to the intrinsic multi-level nature of the algorithm), see more
+details in the paper, also see in the HW1 Q3.3-3.4 .
+
 
 4.3 Overlapping Communities
 -------------------------
 
+`paper link <http://infolab.stanford.edu/~crucis/pubs/paper-nmfagm.pdf>`_
 
 * Step 1. Define a generative model for graphs that is based on node community affiliations **Community Affiliation Graph Model (AGM)** [4]_.
 * Step 2.

@@ -7,6 +7,8 @@ My notes and all documents could be found `here with code 2rlj <https://pan.baid
 
 And `link of snap documentation <http://snap.stanford.edu/snappy/doc/reference/index-ref.html>`_
 
+`HWs <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs>`_
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
