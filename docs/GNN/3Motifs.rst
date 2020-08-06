@@ -83,6 +83,9 @@ only has values of very close nodes, and very far nodes. Which show that the Rol
 some properties of the roles. And from the upper subgraphs, we see the node with similar feaure vector do
 looks close to each other.
 
+Visualization using package : `doc networkx <https://networkx.github.io/documentation/stable/>`_ or
+`graphviz download <https://graphviz.org/download/>`_ .
+
 4. Community Structure in Networks
 =====================================
 
@@ -162,5 +165,5 @@ details in the paper, also see in the HW1 Q3.3-3.4 .
 4.4 HW1 - q3
 ------------------
 
-`Hand writing homework <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW1-q3.pdf>`_
+`Hand writing homework <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW1-q3.pdf>`_ :
 Derivatives and the intrinsic multi-level nature of **Louvain Algorithm**.
