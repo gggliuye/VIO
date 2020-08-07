@@ -103,7 +103,7 @@ close friends.
 He included another view of friendship to explain it :
 
 * Interpersonal : the weight of the friendship edge.
-* Structural :
+* Structural focusing on the way these friendships span different portions of the full network:
     * Structurally embedded edge -> stronger connection, while have redundant information. -> **Triadic closure**.
     * Long-range edge -> weak connection, while have more information. -> better job opportunity.
 
