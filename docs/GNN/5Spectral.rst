@@ -64,7 +64,7 @@ Generalize the 'edge' definitation to motif level.
 * Motif count.
 
 .. math::
-  \phi_{M}(S) = \frac{\#motifs\cut}{motif\ volume}
+  \phi_{M}(S) = \frac{\#motifs\ cut}{motif\ volume}
 
 Example in the gene regulation show the **feedward loops**, exactly the same as shown in the course
 Human Behavioral Biology BIO150.
