@@ -29,7 +29,7 @@ conductance optimization problem.
     * L has degrees in the disagonal part, and negative edge weight at the other part.
     * Non-negative real eigenvalues, and real eigenvectors.
     * We have :math:`L \mathbb{1} = 0`, :math:`\lambda_{1} = 0`, and :math:`\mathbb{1}` is its corresponding eigenvector.
-* Use normalized laplacian matrix :math:`\bar{L} = D^{-1/2}LD_{-1/2}` for better performance. (see the proof in HW1-Q4)
+* Use normalized laplacian matrix :math:`\bar{L} = D^{-1/2}LD^{-1/2}` for better performance. (see the proof in HW1-Q4)
 
 The problem could be reformed to :
 
