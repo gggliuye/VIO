@@ -15,3 +15,4 @@ And `link of snap documentation <http://snap.stanford.edu/snappy/doc/reference/i
 
    12GNN
    3Motifs
+   5Spectral
