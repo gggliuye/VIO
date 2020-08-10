@@ -35,6 +35,14 @@ Result in a 236Mb map file, with 1258 keyframes inside.
 2. Run the localization process
 ----------------------
 
+* Find candidate frames using the pose differences.
+* Project the map points to courrent frame (using the initial pose guess).
+* Use PnP RANSAC to get final pose estimation.
+
+.. image:: images/test.png
+   :align: center
+   :width: 50%
+
 Run in this project ::
 
   ./Test_video_images /home/viki/Lucas/garden/garden_v2/SavedMap.dat /home/viki/UTOPA/Server_Localization/Maps/winter_garden_test/ /home/viki/Lucas/garden/garden_v2/sparse/video_result.txt 596.1
@@ -48,3 +56,6 @@ The result trajectory shown here :
 .. image:: images/debug.png
     :align: center
     :width: 40%
+
+The algorithm could find some correct feature matches. While it was affected greatly by the noise. And the
+plants' features are similar to each other, using the local matching process will surly produce error.
