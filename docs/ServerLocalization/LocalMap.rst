@@ -51,7 +51,7 @@ Run in this project ::
   ==> Success average runtime : 0.51011
   ==> Average noise translation distance is 0.184469, Average estimated translation distance is 0.295995
 
-The result trajectory shown here :
+The result trajectory shown here (upper: top view, lower: side view):
 
 .. image:: images/debug.png
     :align: center
