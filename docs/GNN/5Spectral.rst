@@ -3,7 +3,7 @@
 
 For community detection using eigenvectors and eigenvalues.
 
-* Pre-processing : matrix representation : **Laplacian matrix**.
+* Pre-processing : matrix representation : (noramlized) **Laplacian matrix**.
 * Decomposition : **second** eigenvalue and eigenvector.
 * Grouping : take the **sign** / maximize **eigengap**.
 
@@ -64,7 +64,7 @@ Generalize the 'edge' definitation to motif level.
 * Motif count.
 
 .. math::
-  \phi_{M}(S) = \frac{\#motifs\ cut}{motif\ volume}
+  \phi_{M}(S) = \frac{\#motif\ cut}{motif\ volume}
 
 Example in the gene regulation show the **feedward loops**, exactly the same as shown in the course
 Human Behavioral Biology BIO150.
@@ -74,3 +74,77 @@ Human Behavioral Biology BIO150.
 
 `Hand writing homework <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW1-q4.pdf>`_ :
 **Normalized laplacian matrix** and **Relationship with modularity**.
+
+6. Message Passing and Node Classification
+===================
+
+Start of **Machine Learning** with Graphs.
+
+Message Passing and Node Classification : Given a network with
+labels on some nodes, assign labels to all other nodes in the network.
+
+* Relational classification
+* Iterative classification
+* Belief propagation
+
+6.1 Correlations
+--------------------
+
+* Homophily : the tendency of individuals to associate and bond with similar others.
+* Influence : social connections can influence the individual characteristics of a person.
+* Cofounding : both of the upper two acting together.
+
+Leverage the correlation : **Guilt-by-association** If I am connected to a node with label 𝑋,
+then I am likely to have label 𝑋 as well.
+Motivation: the close relationship of *Lable*, *Feature*, and *Neighborhood*.
+
+Problem: Given the adjacency matrix and the initial label vector, predict the full label.
+
+6.2 Collectivce classification
+-----------------------
+
+**Collectivce classification**  (based on Markov assumption) the exact inference is NP-hard, so we will look at approximation inference.
+
+* Local classifier : initial assignment.
+* Relation Classifier : capture correlations between nodes (use the graph information).
+* Collective inference : propagate correlations through network. Apply to each node iteratively, for minimize the inconsistency between neighboring nodes' labels.
+
+6.3 Probabilistic Relational Classifier
+------------------------------
+
+A flow process driven by the potential energy.
+
+.. math::
+  P(Y_{i} = c) = \frac{1}{\mid N_{i}\mid}\sum_{(i,j)\in E}W(i,j)P(Y_{j}=c)
+
+* The convergence not guaranteed.
+* Cannot use node feature information, only use the graph information.
+
+6.4 Iterative Classification
+---------------------------
+
+Classify also based on the attributes of neighbor set. (plays a key role in Graph Neural Network)
+Each node maintains a vector of neighborhood labels.
+
+* **Bootstrap phase** , a warm start.
+* **Iteration phase** , repeatly update relational features and classify.
+* However, convergence is also not guaranteed.
+
+Example, `Fake Review Spam <https://cs.stanford.edu/~srijan/pubs/rev2-wsdm18.pdf>`_ . Using the property that *graph structure of the reviews is hard to fake*.
+
+6.5 Brief Propagation
+-----------------------------
+
+**Message Passing**
+
+.. image:: images/message_passing.png
+   :align: center
+   :width: 50%
+
+.. math::
+  m_{i\to j}(Y_{j}) = \alpha \sum_{Y_{i}\in L}\psi(Y_{i}, Y_{j})\phi_{i}(Y_{i}) \prod_{k\in N_{i} \setminus j} m_{k\to i}(Y_{i})
+
+Summary of all states, the production of label-label potential, the prior, and all messages sent by the neigbors from
+previous round.
+
+`Fraud Detection in Online Auction Networks <http://www.cs.cmu.edu/~christos/PUBLICATIONS/netprobe-www07.pdf>`_
