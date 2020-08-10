@@ -13,3 +13,4 @@ This page includes all about image localization in a prebuilt scene (that will m
    UnitySc/unityShadowCreator
    ArCoreServer/main
    CloudMatch
+   LocalMap
