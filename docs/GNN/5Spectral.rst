@@ -144,7 +144,11 @@ Example, `Fake Review Spam <https://cs.stanford.edu/~srijan/pubs/rev2-wsdm18.pdf
 .. math::
   m_{i\to j}(Y_{j}) = \alpha \sum_{Y_{i}\in L}\psi(Y_{i}, Y_{j})\phi_{i}(Y_{i}) \prod_{k\in N_{i} \setminus j} m_{k\to i}(Y_{i})
 
+.. math::
+  b_{i}(Y_{i}) = \alpha \phi_{i}(Y_{i}) \prod_{j\in N_{i}}m_{j\to i }(Y_{i}), \ \forall  Y_{i}\in L
+
 Summary of all states, the production of label-label potential, the prior, and all messages sent by the neigbors from
-previous round.
+previous round. Message Loop could cause bad effect, and convergence is also not guaranteed.
+
 
 `Fraud Detection in Online Auction Networks <http://www.cs.cmu.edu/~christos/PUBLICATIONS/netprobe-www07.pdf>`_
