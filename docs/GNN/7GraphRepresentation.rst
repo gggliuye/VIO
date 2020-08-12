@@ -72,36 +72,115 @@ Applications :
 * Calculate :math:`f(z_{i})` for node classifications.
 * Calculate :math:`f(z_{i}, z_{j})` for link predictions.
  
- 7.5 TransE
- --------------------
+7.5 TransE
+--------------------
  
- **Represent the relationships as a linear translation in the embedding space** : :math:`h+l\approx t` , head+ relation = tail.
+**Represent the relationships as a linear translation in the embedding space** : :math:`h+l\approx t` , head+ relation = tail.
  
- The obejective loss function could be defined as :
+The obejective loss function could be defined as :
  
- .. math::
-   \mathcal{L} = \sum_{(h,l,t)\in S} (\sum_{(h',l,t')\in S'} [\gamma + d(h+l,t) - d'(h'+l,t')]_{+})
+.. math::
+  \mathcal{L} = \sum_{(h,l,t)\in S} (\sum_{(h',l,t')\in S'} [\gamma + d(h+l,t) - d'(h'+l,t')]_{+})
    
- Where S' is the negative samples generated (which are not real).
+Where S' is the negative samples generated (which are not real).
  
- 7.6 Graph Embedding 
- -------------------
+7.6 Graph Embedding 
+-------------------
  
- The former descussed the node embedding, here we consider the embedding of the whole graph (for an example, for graph classification tasks) .
- Here shown some cases for realize it:
+The former descussed the node embedding, here we consider the embedding of the whole graph (for an example, for graph classification tasks) .
+Here shown some cases for realize it:
  
- * Simple summary :math:`z_{G} = \sum_{v\in G} z_{v}`.
- * Introduce a virtual node to represent the (sub)graph and run a standard graph embedding technique. (see *Li et al., Gated Graph Sequence Neural Networks (2016)*)
- * Anonymous walk embeddings : keep tracking the index of its first time visit in a random walk, other than the specific node.
+* Simple summary :math:`z_{G} = \sum_{v\in G} z_{v}`.
+* Introduce a virtual node to represent the (sub)graph and run a standard graph embedding technique. (see *Li et al., Gated Graph Sequence Neural Networks (2016)*)
+* Anonymous walk embeddings : keep tracking the index of its first time visit in a random walk, other than the specific node.
  
- 8. Graph Neural Networks
- =============================
+8. Graph Neural Networks
+=============================
  
- Here we learned :
+Here we learned :
  
- * GCN
- * Graph SAGE
- * GAT
+* GCN
+* Graph SAGE
+* GAT
  
+8.1 Introduction
+---------------------
  
+* Encoding function : network structure. (ML/DL)
+* Similarity function : loss function.
  
+Graph Neural Network (multiple layers of nonlinear transformations of graph structure) -> Graph convolution (:math:`\approx \sum_{i}w_{i}h_{i}`)
+
+8.2 GCN
+------------------
+
+The key-element of GCN is the neighborhood computation graph (neighborhood aggregation), shown as follows:
+
+.. image::images/aggregate_neighbors.png
+   :align: center
+   :width: 75%
+
+And we could find the graph for all the nodes in the example graph:
+
+.. image::images/computation_graph.png
+   :align: center
+   :width: 90%
+
+The basic structure is shown in the following image. 
+
+.. image::images/computation_graph_for_a.png
+   :align: center
+   :width: 60%
+
+* We don't need to much layers, as we don't want to capture the whole network, while we want to explore more the local properties.
+* Each element block is a Graph convolution element, we could apply a summary/average/pooling/etc and following a neural network, finally apply a nonlinear activation function. For average GCN we have :
+
+.. math::
+  h_{v}^{k} = \sigma(w_{k}\sum_{u\in N(v)} \frac{h_{u}^{k-1}}{\mid N(v)\mid} + B_{k}h_{v}^{k-1} )
+
+* Trainning of the network could using unsupervised method (last lecture), or supervised method using loss function, here we show an example of the node classification loss function (e.g. for application of drug-drug graph safe/toxic classification):
+
+.. math::
+  \mathcal{L} = \sum_{v\in V}y_{v}\log(\simga(z_{v}^{T}\theta)) + (1-y_{v})\log(1-\sigma(z_{v}^{T}\theta))
+
+Matirx representation:
+
+.. math::
+  H^{k} = D^{-1}AH^{k-1} = D^{-1/2}AD^{-1/2}}H^{k-1}
+
+8.3 Graph SAGE
+---------------------
+
+It introduce a more general aggregation function choices here.
+
+.. math::
+  h_{v}^{k} = \sigma([W_{k}AGG( \{ h_{u}^{k-1}, \forall u\in N(v)  \})  ,B_{k}h_{v}^{k-1}} ])
+
+There are some commonly used aggregation functions:
+
+* Mean: :math:`AGG = \sum_{u\in N(v)}h_{u}^{k-1}/\mid N(v)\mid`.
+* Pooling : :math:`AGG = \gamma (\{ Qh_{u}^{k-1}, \forall u\in N(v)  \})` .
+* LSTM : (applied to several randomly reshuffled neighbors) :math:`AGG=LSTM(\{ h_{u}^{k-1}, \forall u\in \pi(N(v))\})`
+
+
+8.4 Graph Attention Networks
+---------------------------
+
+In the GCN, we take the summary of all the neighbors with the same weight :math:`1/\mid N(v)\mid`, we also equally count the neighbors in Graph SAGE too.
+So the motivation here is to dynamically choose different weights for nodes, based on **Attention Mechanism**.
+
+.. math::
+  e_{vu} = a(W_{k}h_{u}^{k-1}, W_{k}h_{v}^{k-1})
+  
+Then apply a softmax for the normalization of the weights :
+
+.. math::
+  \alpha_{vu} = exp(e_{vu})/(\sum_{k\in N(v)} exp(e_{vk}))
+
+Therefore we have :
+
+.. math::
+  h_{v}^{k} = \simga(\sum_{u\in N(v)} \alpha_{vu}W_{k}h_{u}^{k-1})
+  
+  
+Example : PinSAGE.
