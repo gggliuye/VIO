@@ -98,11 +98,14 @@ We got result ::
   ==> Success average runtime : 1.02683
   ==> Average noise translation distance is 0.276471, Average estimated translation distance is 0.023072
 
-
+.. image:: images/debug_flann.png
+   :align: center
+   :width: 40%
+   
 4. Comparison 
 --------------------
 
-I had run 3 tests for each of the upper methods, resulted in 6 results log in total. And the comparison of derivation was done with respect ot the result of the GPU colmap pipeline, which is not *ground truth* (that the reason I called it derivation rather than *error*). The tests are carried out in PC with Intel(R) Core(TM) i7-9750H CPU, 2.60GHz.  **Attention** : the real scale of the test map is about 6, which means error 0.3 means about 1.8 meter in real world.
+I had run 3 tests (with different noise levels) for each of the upper methods, resulted in 6 results log in total. And the comparison of derivation was done with respect ot the result of the GPU colmap pipeline, which is not *ground truth* (that the reason I called it derivation rather than *error*). The tests are carried out in PC with Intel(R) Core(TM) i7-9750H CPU, 2.60GHz.  **Attention** : the real scale of the test map is about 6, which means error 0.3 means about 1.8 meter in real world.
 
 Average success rate and total runtime ::
 
