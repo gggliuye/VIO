@@ -141,12 +141,12 @@ The basic structure is shown in the following image.
 * Trainning of the network could using unsupervised method (last lecture), or supervised method using loss function, here we show an example of the node classification loss function (e.g. for application of drug-drug graph safe/toxic classification):
 
 .. math::
-  \mathcal{L} = \sum_{v\in V}y_{v}\log(\simga(z_{v}^{T}\theta)) + (1-y_{v})\log(1-\sigma(z_{v}^{T}\theta))
+  \mathcal{L} = \sum_{v\in V}y_{v}\log(\sigma(z_{v}^{T}\theta)) + (1-y_{v})\log(1-\sigma(z_{v}^{T}\theta))
 
 Matirx representation:
 
 .. math::
-  H^{k} = D^{-1}AH^{k-1} = D^{-1/2}AD^{-1/2}}H^{k-1}
+  H^{k} = D^{-1}AH^{k-1} = D^{-1/2}AD^{-1/2}H^{k-1}
 
 8.3 Graph SAGE
 ---------------------
@@ -154,7 +154,7 @@ Matirx representation:
 It introduce a more general aggregation function choices here.
 
 .. math::
-  h_{v}^{k} = \sigma([W_{k}AGG( \{ h_{u}^{k-1}, \forall u\in N(v)  \})  ,B_{k}h_{v}^{k-1}} ])
+  h_{v}^{k} = \sigma([W_{k}AGG( \{ h_{u}^{k-1}, \forall u\in N(v)  \})  ,B_{k}h_{v}^{k-1} ])
 
 There are some commonly used aggregation functions:
 
@@ -180,7 +180,7 @@ Then apply a softmax for the normalization of the weights :
 Therefore we have :
 
 .. math::
-  h_{v}^{k} = \simga(\sum_{u\in N(v)} \alpha_{vu}W_{k}h_{u}^{k-1})
+  h_{v}^{k} = \sigma(\sum_{u\in N(v)} \alpha_{vu}W_{k}h_{u}^{k-1})
   
   
 Example : PinSAGE.
