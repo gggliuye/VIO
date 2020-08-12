@@ -43,7 +43,7 @@ The performance show ::
 
 
 
-2. Run the localization process
+2. Local Region Tracking
 ----------------------
 
 Process pipeline:
@@ -81,3 +81,47 @@ The result trajectory shown here (upper: top view, lower: side view):
 
 The algorithm could find some correct feature matches. While it was affected greatly by the noise. And the
 plants' features are similar to each other, using the local matching process will surly produce error.
+
+3. FLANN Match
+--------------------------
+
+I also run another method to compare:
+
+* Candidate keyframes selection based on shared view.
+* Two-way FLANN based feature matching.
+* P3P-RANSAC based pose estimation.
+* Ceres based pose refinement.
+
+We got result ::
+
+  ==> Success rate 0.802817 [ 57 / 71 ]
+  ==> Success average runtime : 1.02683
+  ==> Average noise translation distance is 0.276471, Average estimated translation distance is 0.023072
+
+
+4. Comparison 
+--------------------
+
+I had run 3 tests for each of the upper methods, resulted in 6 results log in total. And the comparison of derivation was done with respect ot the result of the GPU colmap pipeline, which is not *ground truth* (that the reason I called it derivation rather than *error*). The tests are carried out in PC with Intel(R) Core(TM) i7-9750H CPU, 2.60GHz.  **Attention** : the real scale of the test map is about 6, which means error 0.3 means about 1.8 meter in real world.
+
+Average success rate and total runtime ::
+
+  Average time for Local Search Match is 0.4932324466465487
+  Average time for FLANN Match is 0.9969336698830409
+  Average success rate for Local Search Match is 0.8755555555555555
+  Average success rate for FLANN Match is 0.7733333333333334
+
+Histogram of running time:
+
+.. image::images/hist_time.png
+   :align:center
+   :width: 90%
+
+Histogram of derivation :
+
+.. image::images/hist_error.png
+   :align:center
+   :width: 90%
+
+We found that the second method, the FLANN match method, is very robust and accruate, however it has a lower success rate, and is more computational expensive.
+I think the first method, the Local region match method, has more potention, as it is faster, and we can try to implement more tricks to achieve higher robustness and accuracy.
