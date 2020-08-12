@@ -116,14 +116,14 @@ Average success rate and total runtime ::
 
 Histogram of running time:
 
-.. image::images/hist_time.png
-   :align:center
+.. image:: images/hist_time.png
+   :align: center
    :width: 90%
 
 Histogram of derivation :
 
-.. image::images/hist_error.png
-   :align:center
+.. image:: images/hist_error.png
+   :align: center
    :width: 90%
 
 We found that the second method, the FLANN match method, is very robust and accruate, however it has a lower success rate, and is more computational expensive.
