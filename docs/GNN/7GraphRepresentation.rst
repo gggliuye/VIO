@@ -86,7 +86,7 @@ Where S' is the negative samples generated (which are not real).
 
 .. image:: images/transe.PNG
   :align: center
-  :width: 75%
+  :width: 90%
 
 7.6 Graph Embedding
 -------------------
@@ -127,19 +127,19 @@ GraphSAGE (graph sampling and aggregation).
 
 The key-element of GCN is the neighborhood computation graph (neighborhood aggregation), shown as follows:
 
-.. image::images/aggregate_neighbors.png
+.. image:: images/aggregate_neighbors.png
    :align: center
    :width: 75%
 
 And we could find the graph for all the nodes in the example graph:
 
-.. image::images/computation_graph.png
+.. image:: images/computation_graph.png
    :align: center
    :width: 90%
 
 The basic structure is shown in the following image.
 
-.. image::images/computation_graph_for_a.png
+.. image:: images/computation_graph_for_a.png
    :align: center
    :width: 60%
 
@@ -154,10 +154,24 @@ The basic structure is shown in the following image.
 .. math::
   \mathcal{L} = \sum_{v\in V}y_{v}\log(\sigma(z_{v}^{T}\theta)) + (1-y_{v})\log(1-\sigma(z_{v}^{T}\theta))
 
+* It has steps : **Message computation** (calculate H), **Aggregation** (:math:`D^{-1/2}AD^{-1/2}`), **Update**(in GCNs, a multi-layer perceptron (MLP) is used), **Pooling** (usually done for the purposes of graph classication).
+
 Matirx representation:
 
 .. math::
   H^{k} = D^{-1}AH^{k-1} = D^{-1/2}AD^{-1/2}H^{k-1}
+
+For GCN the following equation is used:
+
+.. math::
+  h^{k} = \sigma(D^{-1/2}AD^{-1/2}h^{k-1}W^{k})
+
+where :math:`\sigma` is non-linear function, it could be activation function, drop-out function , etc. and :math:`W^{k}` is the
+learnable parameter.
+
+.. image:: images/gcn_sudocode.PNG
+   :align: center
+   :width: 90%
 
 8.3 Graph SAGE
 ---------------------
