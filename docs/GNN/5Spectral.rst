@@ -120,6 +120,8 @@ A flow process driven by the potential energy.
 * The convergence not guaranteed.
 * Cannot use node feature information, only use the graph information.
 
+See HW2 Q1.1 for an example.
+
 6.4 Iterative Classification
 ---------------------------
 
@@ -143,6 +145,8 @@ Example, `Fake Review Spam <https://cs.stanford.edu/~srijan/pubs/rev2-wsdm18.pdf
 
 .. math::
   m_{i\to j}(Y_{j}) = \alpha \sum_{Y_{i}\in L}\psi(Y_{i}, Y_{j})\phi_{i}(Y_{i}) \prod_{k\in N_{i} \setminus j} m_{k\to i}(Y_{i})
+
+It contains the message of ith node multiplied by the edge weight, and all the messages node i received. (See HW2 Q1.2 for an example.)
 
 .. math::
   b_{i}(Y_{i}) = \alpha \phi_{i}(Y_{i}) \prod_{j\in N_{i}}m_{j\to i }(Y_{i}), \ \forall  Y_{i}\in L
