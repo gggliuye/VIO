@@ -202,6 +202,10 @@ Then apply a softmax for the normalization of the weights :
 .. math::
   \alpha_{vu} = exp(e_{vu})/(\sum_{k\in N(v)} exp(e_{vk}))
 
+s
+.. math::
+  \alpha_{vu} = exp(LeakyReLU(e_{vu}))/(\sum_{k\in N(v)} exp(LeakyReLUe_{vk})))
+
 Therefore we have :
 
 .. math::
