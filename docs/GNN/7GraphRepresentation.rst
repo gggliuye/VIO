@@ -169,10 +169,6 @@ For GCN the following equation is used:
 where :math:`\sigma` is non-linear function, it could be activation function, drop-out function , etc. and :math:`W^{k}` is the
 learnable parameter.
 
-.. image:: images/gcn_sudocode.PNG
-   :align: center
-   :width: 90%
-
 8.3 Graph SAGE
 ---------------------
 
@@ -187,6 +183,9 @@ There are some commonly used aggregation functions:
 * Pooling : :math:`AGG = \gamma (\{ Qh_{u}^{k-1}, \forall u\in N(v)  \})` .
 * LSTM : (applied to several randomly reshuffled neighbors) :math:`AGG=LSTM(\{ h_{u}^{k-1}, \forall u\in \pi(N(v))\})`
 
+.. image:: images/gcn_sudocode.PNG
+   :align: center
+   :width: 90%
 
 8.4 Graph Attention Networks
 ---------------------------
@@ -202,9 +201,8 @@ Then apply a softmax for the normalization of the weights :
 .. math::
   \alpha_{vu} = exp(e_{vu})/(\sum_{k\in N(v)} exp(e_{vk}))
 
-s
 .. math::
-  \alpha_{vu} = exp(LeakyReLU(e_{vu}))/(\sum_{k\in N(v)} exp(LeakyReLUe_{vk})))
+  \alpha_{vu} = \exp(LeakyReLU(e_{vu}))/(\sum_{k\in N(v)} \exp(LeakyReLU(e_{vk})))
 
 Therefore we have :
 
