@@ -122,7 +122,7 @@ See the unity code of this module `here <https://github.com/gggliuye/VIO/tree/ma
 
 * Use the input feature point cloud.
 * Check the number of 2d feature points in the camera view grid (we use a 32*24 2d grid).
-* If get enough grids filled with point(s). we will then allow to send image.
+* If get enough grids filled with point(s) (200 will be reasonable choice). we will then allow to send image. 
 
 As it will loop through all feature points, it will be slightly slower than the upper method. While this module won't need any further
 development, which will be extremely easy for other departement to use.
