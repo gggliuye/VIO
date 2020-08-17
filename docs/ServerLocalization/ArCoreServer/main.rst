@@ -10,6 +10,8 @@ SLAM and Server Localization
 * C++调用Java的Netty服务将图片传递给服务器。
 * Java的Netty服务收到信息之后直接调用Unity的回调函数。
 
+See the unity code of this module `here <https://github.com/gggliuye/VIO/tree/master/UnityModules/NettyManager>`_ .
+
 1.1 Unity
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -113,6 +115,8 @@ However, we need an addition map file for the local device, which will require a
 Which will cost our server java department a great amount of time, and further impede my development.
 So I develop the following method, which will use total C#, and will not require additional server function.
 
+See the unity code of this module `here <https://github.com/gggliuye/VIO/tree/master/UnityModules/MapSenderManager>`_ .
+
 2.2. Use #keypoints
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -136,3 +140,5 @@ Then, in the main loop, give the camera pose in the map reference frame, along w
   txt_sender.text = count + " points in current view.";
 
 Finally, judge by the occupied grid count.
+
+See the unity code of this module `here <https://github.com/gggliuye/VIO/tree/master/UnityModules/SenderJudeger>`_ .
