@@ -307,11 +307,29 @@ Example : PinSAGE.
 8.5 Test Results
 -------------------
 
-with number_layer = 3
-with global_max_pooling
+First I test for different number of layers. The table below shows the graph classfication results
+of layer 3. And if I further increase the layer number, the accuracy will all converge to 0.2083,
+which means that if we imply too much layers, we could over smooth the result and will not get ideal prediction (as is shown in HW2).
 
 +--------+-------+-----------+-------+
 | Model  | GCN   | GraphSAGE | GAT   |
 +========+=======+===========+=======+
 |Accuracy|0.3583 | 0.2083    | 0.2083|
 +--------+-------+-----------+-------+
+
+I also test the number of layers for node classification tasks, I found 2 layers may be reasonable for our data.
+And more than 3 layers will produce a very bad result.
+So the latter results are  all done with 2 layers.
+
++--------+-------+-----------+-------+
+| Model  | GCN   | GraphSAGE | GAT   |
++========+=======+===========+=======+
+|Graph   |0.3458 | 0.2625    | 0.2729|
++--------+-------+-----------+-------+
+|Node    |0.811  | 0.796     | 0.779 |
++--------+-------+-----------+-------+
+
+I found the origianl GCN got the best result.
+
+.. image:: images/res.png
+   :align: center
