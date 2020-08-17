@@ -1,15 +1,14 @@
 SLAM and Server Localization
 ===================================
 
+1. Netty
+----------------------------
+
 * C++负责调用Java，开启Netty（可以自定义IP），并且负责触发信息发送。
 * 使用ArCore的Unity接口（实际还是调用的Arcore的Android SDK，如果可以直接从Android调用会更好），获取当前帧的图像数据。
 * 将图像数据（byte[]）传递给C++端，并且在C++实现数据的格式转换，得到Java的Array数据。
 * C++调用Java的Netty服务将图片传递给服务器。
 * Java的Netty服务收到信息之后直接调用Unity的回调函数。
-
-
-1. Netty
-----------------------------
 
 1.1 Unity
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -108,10 +107,32 @@ And corresponding calling function is ::
       debug_txt.text = "Won't Send Image";
   }
 
-In my `video experiment <https://www.bilibili.com/video/BV1NZ4y1j7Ba?p=7>`_ , it shows great result. However,
-we need an addition map file for the local map, which will require additional server function to development.
+In my `video experiment <https://www.bilibili.com/video/BV1NZ4y1j7Ba?p=7>`_ , it shows great result (in the demo we could see the
+outputs : *Will Send Image* or *Won't Send Image* ).
+However, we need an addition map file for the local device, which will require additional server function to development.
 Which will cost our server java department a great amount of time, and further impede my development.
 So I develop the following method, which will use total C#, and will not require additional server function.
 
 2.2. Use #keypoints
 ~~~~~~~~~~~~~~~~~~~~~~
+
+* Use the input feature point cloud.
+* Check the number of 2d feature points in the camera view grid (we use a 32*24 2d grid).
+* If get enough grids filled with point(s). we will then allow to send image.
+
+As it will loop through all feature points, it will be slightly slower than the upper method. While this module won't need any further
+development, which will be extremely easy for other departement to use.
+
+Firstly, initialize the module by giving the point cloud ply file ::
+
+  tSenderJudgerFeatures = new SenderJudgerFeatures("cloud_sparse.ply", initCameraPose.colmapScale);
+
+Then, in the main loop, give the camera pose in the map reference frame, along with the camera parameters ::
+
+  Quaternion q_camera = cameraParent.transform.localRotation * initCameraPose.slamCamera.transform.localRotation;
+  Vector3 p_camera = cameraParent.transform.localRotation * initCameraPose.slamCamera.transform.localPosition
+            + cameraParent.transform.localPosition;
+  int count = tSenderJudgerFeatures.CheckToSendImage(q_camera, p_camera, (float)focus, 640, 480);
+  txt_sender.text = count + " points in current view.";
+
+Finally, judge by the occupied grid count.
