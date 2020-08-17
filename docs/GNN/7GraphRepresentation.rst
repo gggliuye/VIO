@@ -98,6 +98,11 @@ Here shown some cases for realize it:
 * Introduce a virtual node to represent the (sub)graph and run a standard graph embedding technique. (see *Li et al., Gated Graph Sequence Neural Networks (2016)*)
 * Anonymous walk embeddings : keep tracking the index of its first time visit in a random walk, other than the specific node.
 
+7.7 HW2 Q123
+--------------------
+
+`HW2 Q123 <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/HW2-q123.pdf>`_
+
 8. Graph Neural Networks
 =============================
 
@@ -121,6 +126,8 @@ by iteratively aggregating feature information from local graph neighborhoods us
 works; embeddings can then be used for recommendations, classication, link prediction or other
 downstream tasks. Two important types of GNNs are GCNs (graph convolutional networks) and
 GraphSAGE (graph sampling and aggregation).
+
+An implementation and tests of the three algorithms could be found in `HW2 Q4 <https://github.com/gggliuye/VIO/tree/master/MachineLearningWithGraph/HWs/q4_starter_code>`_ .
 
 8.2 GCN
 ------------------
@@ -187,6 +194,43 @@ There are some commonly used aggregation functions:
    :align: center
    :width: 90%
 
+The realization of GraphSage in pytorch is ::
+
+  class GraphSage(pyg_nn.MessagePassing):
+      """Non-minibatch version of GraphSage."""
+      def __init__(self, in_channels, out_channels, reducer='mean',
+                   normalize_embedding=True):
+          super(GraphSage, self).__init__(aggr='mean') # /space
+
+          self.lin = nn.Linear(in_channels, in_channels)
+          self.agg_lin = nn.Linear(in_channels+in_channels, out_channels)
+
+          self.normailze_agg = False
+          if normalize_embedding:
+              self.normalize_emb = True
+
+      def forward(self, x, edge_index):
+          # remove the self edges, as we will concate the self features in the update stage.
+          edge_index, _ = pyg_utils.remove_self_loops(edge_index)
+          return self.propagate(edge_index, x=x)
+
+      def message(self, x_j, edge_index):
+          if(self.normailze_agg):
+              row, col = edge_index
+              deg = pyg_utils.degree(col, x_j.size(0), dtype=x_j.dtype)
+              deg_inv_sqrt = deg.pow(-0.5)
+              norm = deg_inv_sqrt[row] * deg_inv_sqrt[col]
+              return norm.view(-1, 1) * x_j
+          else :
+              return x_j
+
+      def update(self, aggr_out, x):
+          concat_out = torch.cat((x, aggr_out), 1)
+          aggr_out = F.relu(self.agg_lin(concat_out))
+          if self.normalize_emb:
+              aggr_out = F.normalize(aggr_out, p=2, dim=1)
+          return aggr_out
+
 8.4 Graph Attention Networks
 ---------------------------
 
@@ -209,5 +253,65 @@ Therefore we have :
 .. math::
   h_{v}^{k} = \sigma(\sum_{u\in N(v)} \alpha_{vu}W_{k}h_{u}^{k-1})
 
+And its realization in pytorch ::
+
+  class GAT(pyg_nn.MessagePassing):
+      def __init__(self, in_channels, out_channels, num_heads=1, concat=True,
+                 dropout=0, bias=True, **kwargs):
+          super(GAT, self).__init__(aggr='add', **kwargs)
+
+          self.in_channels = in_channels
+          self.out_channels = out_channels
+          self.heads = num_heads
+          self.concat = concat
+          self.dropout = dropout
+          self.lin = nn.Linear(self.in_channels, self.out_channels * self.heads)
+          self.att = nn.Parameter(torch.Tensor(1, self.heads, self.out_channels * 2))
+          if bias and concat:
+              self.bias = nn.Parameter(torch.Tensor(self.heads * self.out_channels))
+          elif bias and not concat:
+              self.bias = nn.Parameter(torch.Tensor(out_channels))
+          else:
+              self.register_parameter('bias', None)
+          nn.init.xavier_uniform_(self.att)
+          nn.init.zeros_(self.bias)
+
+      def forward(self, x, edge_index, size=None):
+          x = self.lin(x)
+          return self.propagate(edge_index, size=size, x=x)
+
+      def message(self, edge_index_i, x_i, x_j, size_i):
+          [shape0, shape1] = x_j.shape
+          x_i = x_i.view(-1, self.heads, self.out_channels)
+          x_j = x_j.view(-1, self.heads, self.out_channels)
+          alpha = (torch.cat([x_i, x_j], dim=-1) * self.att).sum(dim=-1)
+          alpha = F.leaky_relu(alpha, 0.2)
+          alpha = pyg_utils.softmax(alpha, edge_index_i)
+          alpha = F.dropout(alpha, p=self.dropout, training=self.training)
+          out = (x_j * alpha.view(-1, self.heads,1)).view(shape0, shape1);
+          return out
+
+      def update(self, aggr_out):
+          # Updates node embedings.
+          if self.concat is True:
+              aggr_out = aggr_out.view(-1, self.heads * self.out_channels)
+          else:
+              aggr_out = aggr_out.mean(dim=1)
+
+          if self.bias is not None:
+              aggr_out = aggr_out + self.bias
+          return aggr_out
 
 Example : PinSAGE.
+
+8.5 Test Results
+-------------------
+
+with number_layer = 3
+with global_max_pooling
+
++--------+-------+-----------+-------+
+| Model  | GCN   | GraphSAGE | GAT   |
++========+=======+===========+=======+
+|Accuracy|0.3583 | 0.2083    | 0.2083|
++--------+-------+-----------+-------+
