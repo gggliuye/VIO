@@ -75,6 +75,17 @@ By solving the problems using the upper methods, we will have :
 11.4 HW3 Q1
 -----------------
 
+Here I plot some information about the two graphs:
+
+.. image:: images/email_degree.png
+   :align: center
+
+.. image:: images/epinions_degree.png
+   :align: center
+
+.. image:: images/scc_dist.png
+   :align: center
+
 **Question 1.1** : We could roughly tell if a node is belong to SCC, IN or OUT, by the difference pf the number of nodes in the
 inward BFS tree and the outward BFS tree. If the difference is relatively small, it should be in the SCC. If large, it will be in IN or OUT.
 The result of this question is ::
@@ -89,6 +100,3 @@ And I run 1000 random walk to get a better simulation result (even it took a lot
 
 .. image:: images/bowtie_q1.png
    :align: center
-
-* I found the two plots (in/out) of the Epinions social network is similar to each other. Which means that most of the nodes in the graph are in the SCC, as social network is closely connected.
-* While in the email graph, the difference is huge, larger part of the nodes has many outlinks, while much fewer nodes has many inlinks. which means the graph has a relative small SCC and OUT, while a very large IN group. 
