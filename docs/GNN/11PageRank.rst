@@ -21,6 +21,9 @@ Directed Acyclic Graph (DAG: A graph where there are no cycles and if u can reac
 
 **Bowtie structure** of network :
 
+* IN : there is a directed path from each node of IN to (all the nodes of) SCC.
+* OUT : containing all starting points for which the backward BFS ‘explodes’. There is a directed path from any node in the SCC to every node in OUT.
+
 .. image:: images/BowTie_2.png
    :align: center
    :width: 60%
@@ -100,3 +103,18 @@ And I run 1000 random walk to get a better simulation result (even it took a lot
 
 .. image:: images/bowtie_q1.png
    :align: center
+
+* I found the two plots (in/out) of the Epinions social network is similar to each other. Which means that most of the nodes in the graph are in the SCC, as social network is closely connected.
+* While in the email graph, the difference is huge, larger part of the nodes has many outlinks, while much fewer nodes has many inlinks. which means the graph has a relative small SCC and OUT, while a very large IN group.
+
+**Question 1.3** : We simulate random BFS from the nodes in the SCC. We know SCC+IN by the inward BFS tree node count,
+and SCC+OUT by the outward BFS tree node count.
+Finally, since we know the size of the largest weak component, we can subtract SCC, IN, and OUT to get TENDRILS .
+
++--------+--------------+--------------+------------------+--------------+--------------+
+|        |  SCC         |  IN          | OUT              |TENDRILS+TUBES| DISCONNECTED |
++========+==============+==============+==================+==============+==============+
+| Email  |  34203       |  151023      | 17900            |  21706       | 40382        |
++--------+--------------+--------------+------------------+--------------+--------------+
+|Epinions|  32223       |  24236       | 15453            | 3965         |    2         |
++--------+--------------+--------------+------------------+--------------+--------------+
