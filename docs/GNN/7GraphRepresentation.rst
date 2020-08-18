@@ -334,6 +334,13 @@ I found the origianl GCN got the best result.
 .. image:: images/res.png
    :align: center
 
+9. Hands-on
+========================
+
+The nine-the lecture is a toturial of pytorch GCN.
+See the jupyter notebook `here <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs/GNN%20hand-on%20section.ipynb>`_.
+
+
 10. Graph RNN
 ==============================
 
@@ -429,4 +436,4 @@ previous nodes (will make the adjacenecy matrix block diagonal).
 * Obey underlying rules (Valid) : e.g., chemical valency rules.
 * Are learned from examples (Realistic) : e.g., Imitating a molecule graph dataset.
 
-Example : GCPN 
+Example : GCPN
