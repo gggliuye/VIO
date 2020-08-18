@@ -333,3 +333,100 @@ I found the origianl GCN got the best result.
 
 .. image:: images/res.png
    :align: center
+
+10. Graph RNN
+==============================
+
+**Deep generative models for graphs**.
+
+10.1 GCN review
+-------------------------
+**Deep Graph Encoder**:
+
+* GCN Intuition: Nodes aggregate information from their neighbors using neural networks.
+* Graph Convolutional Neural Networks: Basic variant: Average neighborhood information and stack neural networks.
+* GraphSAGE: Generalized neighborhood aggregation.
+* GAT : with attention model.
+
+10.2 Graph Generation
+----------------------
+
+**Deep Graph Decoder**.
+
+Objective :
+
+* Realistic graph generation.
+* Goal-directed graph generation.
+
+Difficulty :
+
+* Graph size could be huge.
+* Complexity of the adjacency matrix.
+* Non-unique representation of a graph.
+* Long-range dependence in a graph (which may require long term connection).
+
+Methods :
+
+* **Given**: Graphs sampled from :math:`p_{data}(G)` , the training data.
+* **Goal** : learn the distribution based on some model parameters :math:`p_{model}(G\mid \theta)`, and could sample from this distribution.
+* Objective function **Maximum Likelihood** :
+
+.. math::
+  \theta^{*} = \arg\max_{\theta}\mathbb{E}_{x\sim p_{data}} \log p_{model}(x\mid \theta)
+
+* **Sample** from :math:`p_{model}` : step one, sample from asimple noise distribution :math:`z_{i}\sim N(0,1)`; step two, transform the noise via f :math:`x_{i} = f(z_{i};\theta)`. And we assume Markov property for the graph sampling process [1]_ .
+
+.. math::
+  p_{model}(x;\theta) = \prod_{t=1}^{n}p_{model}(x_{t}\mid x_{1}, x_{2},...,x_{t-1};\theta)
+
+.. [1] It is a graph generation sequence, where :math:`x_{t}`is the action of generate a graph (in our case here), which is adding a node or an edge. And it will be described later.
+
+10.3 Graph RNN
+---------------------
+
+**Theorem : Model Graphs as Sequences** Graph G with node ordering :math:`\pi` can be uniquely mapped into a sequence of node
+and edge addition actions :math:`S^{\pi}`.
+
+Based on the upper theorem, the Graph RNN could **transformed graph generation problem into a sequence generation problem** with two steps :
+
+* Node-Level RNN : generate nodes.
+* Edge-Level RNN : generate edges (~ adjacency matrix generation ). Iterate for each generated node, decide whether to add edge with each of the previous nodes.
+
+Each RNN cell [2]_ will be shown in the image below, where s is the history state, x the input action and y the output action.
+
+.. image:: images/RNN_cell.PNG
+   :align: center
+
+To make it a random process, we will model :
+
+.. math::
+  x_{t+1} \sim y_{t-1} = p_{model}(x_{t}\mid x_{1},..,x_{t-1};\theta)
+
+The whole process is :
+
+.. image:: images/RNN_process.PNG
+   :align: center
+
+Training :
+
+* Teacher forcing : Replace input and output by the real sequence.
+* Loss 𝐿 : Binary cross entropy.
+
+.. [2] We could use some more expressive cells : GRU, LSTM, etc.
+
+10.4 Tractability
+------------------
+
+**Problem** : Any node can connect to any prior node -> Too many steps for edge generation.
+
+**Solution** : Breadth-First Search node ordering. Reorder the nodes, to make each node connects only to a few nearby
+previous nodes (will make the adjacenecy matrix block diagonal).
+
+10.5 Applications
+------------------
+
+* Optimize a given objective (High scores) : e.g., drug-likeness (black box).
+* Obey underlying rules (Valid) : e.g., chemical valency rules.
+* Are learned from examples (Realistic) : e.g., Imitating a molecule graph dataset.
+
+Example : GCPN 
