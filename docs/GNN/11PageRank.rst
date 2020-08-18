@@ -71,3 +71,24 @@ By solving the problems using the upper methods, we will have :
 * Normal pagerank: Teleportation vector is uniform.
 * Personalized PageRank: Teleport to a topic specific set of pages. Nodes can have different probabilities of surfer landing there.
 * Random walk with restarts: Topic specific pagerank where teleport is always to the same node. In this case, we don’t need power iteration we can just use random walk and its very fast and easy.
+
+11.4 HW3 Q1
+-----------------
+
+**Question 1.1** : We could roughly tell if a node is belong to SCC, IN or OUT, by the difference pf the number of nodes in the
+inward BFS tree and the outward BFS tree. If the difference is relatively small, it should be in the SCC. If large, it will be in IN or OUT.
+The result of this question is ::
+
+  GT: Node 2018 in the SCC :  False
+  A lot more nodes in the outward BFS tree, Node 2018 should be in IN set.
+  GT: Node 224 in the SCC :  True
+  Inward and outward trees have roughly the same size, Node 224 should be in SCC set.
+
+**Question 1.2** : The question ask us to plot four images, while I plot two image by combining the inward/outward in the same image, to better illustrate the result.
+And I run 1000 random walk to get a better simulation result (even it took a lot more times).
+
+.. image:: images/bowtie_q1.png
+   :align: center
+
+* I found the two plots (in/out) of the Epinions social network is similar to each other. Which means that most of the nodes in the graph are in the SCC, as social network is closely connected.
+* While in the email graph, the difference is huge, larger part of the nodes has many outlinks, while much fewer nodes has many inlinks. which means the graph has a relative small SCC and OUT, while a very large IN group. 
