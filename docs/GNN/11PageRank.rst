@@ -61,6 +61,8 @@ By solving the problems using the upper methods, we will have :
 .. math::
   r = \beta Mr + \frac{[1-beta]}{N} = Ar
 
+By adding an addition term, we make A a positive semi-definite matrix, which will have better property.
+
 11.3 Examples
 ----------------------
 
@@ -118,3 +120,38 @@ Finally, since we know the size of the largest weak component, we can subtract S
 +--------+--------------+--------------+------------------+--------------+--------------+
 |Epinions|  32223       |  24236       | 15453            | 3965         |    2         |
 +--------+--------------+--------------+------------------+--------------+--------------+
+
+**Question 1.4** : Made a 1000 tests for each graphs (undirected situation), and gets (which is easy to Interpretate as it
+could be estimated by the ratio of the largest weakly connected component) ::
+
+  --- graph Email ---
+  fraction of reachable pairs 0.698
+  --- graph Epinions ---
+  fraction of reachable pairs 1.0
+
+Consider directed graph situation ::
+
+  --- graph Email ---
+  fraction of reachable pairs 0.124
+  --- graph Epinions ---
+  fraction of reachable pairs 0.457
+
+In this case (Assume TUBES, TENDRILS, and DISCONNECTED all have negligible size), if start from IN, it will surly connect
+to SCC and OUT node. If in SCC, then it could connect to OUT and SCC. If in OUT, than it could only connect to almost on other nodes.
+As a result, the probability is :
+
+.. math::
+  p(connected) \approx \frac{IN}{TOTAL}\frac{SCC+OUT}{TOTAL} + \frac{SCC}{TOTAL} \frac{SCC+OUT}{TOTAL}
+
+The estimated fraction for Email graph is 0.137205584, for Epinions graph is 0.46750880. Which totaly match our simulation results.
+
+11.4 HW3 Q2
+-----------------
+
+**Question 2.1** : We could build a user-item graph, then with random walk simulation. We could get the
+relationship of each teleport to other teleports. For (i) (ii) the vector could be simply get. and for
+(iii) we could use a weighted sum of the teleport's vectors in the set.
+
+**Question 2.2** : The set of linear combination of all the columns in V: :math:`\{ u\mid u = \sum_{i}\alpha_{i}V_{:,i}\}` .
+
+**Question 2.3** : obviously.
