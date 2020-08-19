@@ -155,3 +155,41 @@ relationship of each teleport to other teleports. For (i) (ii) the vector could 
 **Question 2.2** : The set of linear combination of all the columns in V: :math:`\{ u\mid u = \sum_{i}\alpha_{i}V_{:,i}\}` .
 
 **Question 2.3** : obviously.
+
+12. Network Effects And Cascading Behaviour
+================================
+
+**Spreading through network** (disease/information/rumors/news/etc).
+Formally, an “infection” event can spread contagion through main players (active/infected nodes) which constitute a propagation tree, known as a cascade.
+
+* Decision-based: each node decides whether to activate based on its neighbors’ decisions. Deterministic rule, nodes are active players, and suited for modeling adoption.
+* Probabilistic: infected nodes “push” contagion to uninfected nodes with some probability. Can involve randomness, nodes are passive, and suited for modeling epidemic spreading.
+
+12.1 Decision Based Diffusion
+------------------------
+
+**Game Theoretic Model of Cascades: single behavior adoption** : The key intuition behind the game theoretic model
+is that a node will gain more payoff if its neighbors adopt the same behavior as it. Decision is made based on payoff matrix.
+This process is not inversable.
+
+a : payoff of adopting A, b: payoff of adapting B, p : fraction of edges connected to nodes adopted A, d: degree of the node.
+If we have :math:`adp > b(1-p)d \Rightarrow p> b/(a+b) =q`, then this node will adopt to A.
+
+**Case Study: Modelling Protest Recruitment on social networks** `link <https://arxiv.org/abs/1111.5595>`_ .
+Anti-austerity protests in Spain May 15-22, 2011 as a response to the financial crisis.
+Undirected network of Twitter users, 70 identified hashtags associated, 581,750 tweets, 87,569 users.
+
+*Activation Threshold Distribution* : Uniform activation threshold for users, with two local peaks :
+
+.. image:: images/activation_threshold_distribution.jpg
+   :align: center
+
+*Information Cascades* : Most cascades are short. Successful cascade starters are central (higher k-core number).
+
+.. image:: images/info_cascades.PNG
+   :align: center
+
+**Extending Game Theoretic Model: multi-behavior adoption** , *Node switch* : Add state that could maintain both strategies with some cost (c).
+
+.. image:: images/decision_model_path_graph.png
+   :align: center

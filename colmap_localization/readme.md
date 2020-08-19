@@ -1,1 +1,0 @@
-rocalizalization based on colmap
