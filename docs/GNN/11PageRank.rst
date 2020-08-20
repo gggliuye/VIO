@@ -183,6 +183,7 @@ Undirected network of Twitter users, 70 identified hashtags associated, 581,750 
 
 .. image:: images/activation_threshold_distribution.jpg
    :align: center
+   :width: 90%
 
 *Information Cascades* : Most cascades are short. Successful cascade starters are central (higher k-core number).
 
@@ -227,6 +228,7 @@ networks are efficient transmission media and online content can be very infecti
 
 .. image:: images/seir_model.PNG
    :align: center
+   :width: 80%
 
 **SIR Model** : Assuming perfect mixing (The network is a complete graph) the model dynamics are:
 
@@ -243,6 +245,7 @@ networks are efficient transmission media and online content can be very infecti
 
 .. image:: images/sis.PNG
    :align: center
+   :width: 70%
 
 .. image:: images/sis_model.PNG
    :align: center
@@ -263,7 +266,7 @@ and `Estimation R0 of Ebola <http://currents.plos.org/outbreaks/article/estimati
 
 .. image:: images/rumor.PNG
    :align: center
-   :width: 75%
+   :width: 70%
 
 
 .. math::
@@ -283,6 +286,7 @@ It is simple but requires many parameters.
 
 .. image:: images/exposures_curves.PNG
    :align: center
+   :width: 90%
 
 * **Adoption** : The node acts on the contagion.
 
