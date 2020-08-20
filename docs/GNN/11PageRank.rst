@@ -189,7 +189,82 @@ Undirected network of Twitter users, 70 identified hashtags associated, 581,750 
 .. image:: images/info_cascades.PNG
    :align: center
 
-**Extending Game Theoretic Model: multi-behavior adoption** , *Node switch* : Add state that could maintain both strategies with some cost (c).
+**Extending Game Theoretic Model: multi-behavior adoption** , **Node switch example** : Add state that could maintain both strategies with some cost (c).
 
 .. image:: images/decision_model_path_graph.png
    :align: center
+
+12.2(13) Probabilistic Diffusion
+--------------------------
+
+Process of contagion is complex and unobservable (and may involve randomness).
+
+12.2.1 Basic Reproductive Number
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Probabilistic Spreading Models** epidemic model based on random trees. :math:`p_{h}` prob. a node at depth h is infected (prob infected :q).
+we want to know :math:`\lim_{h\to \infty}p_{h}`
+
+.. math::
+  p_{h} = 1 - (1-q\cdot p_{h-1})^{d} = f(p_{h-1})
+
+Fixed point :math:`f(x) = x` , :math:`f'(x)` is monotone non-increasing on [0,1].
+For the epidemic to die out we need fixed point at zero, which requires :math:`f(x)` to be below :math:`y=x`.
+So we need :math:`R_{0} = f'(0) = q\cdot d < 1`.
+
+* If :math:`R_{0} \ge 1` : epidemic never dies and the number of infected people increases exponentially.
+* If :math:`R_{0} < 1` : Epidemic dies out exponentially quickly.
+* HIV has an :math:`R_{0}` between 2 and 5; Measles between 12 and 18; Ebola between 1.5 and 2 (low, only because it is too deadly).
+
+**Cascades on Flickr** The basic reproduction number of popular photos is between 1 and 190.
+This is much higher than very infectious diseases like measles, indicating that social
+networks are efficient transmission media and online content can be very infectious.
+
+12.2.2 Epidemic Model
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+**S+E+I+R Model** General scheme for epidemic models.
+
+.. image:: images/seir_model.PNG
+   :align: center
+
+**SIR Model** : Assuming perfect mixing (The network is a complete graph) the model dynamics are:
+
+.. image:: images/sir.PNG
+   :align: center
+
+.. math::
+  \frac{dS}{dt} = - \beta SI , \ \frac{dI}{dt} = \beta SI - \delta I, \ \frac{dR}{dt} = \delta I
+
+.. image:: images/sir_model.PNG
+   :align: center
+
+**SIS Model** Susceptible-Infective-Susceptible (SIS) model. Cured nodes immediately become susceptible.
+
+.. image:: images/sis.PNG
+   :align: center
+
+.. image:: images/sis_model.PNG
+   :align: center
+
+We have no epidemic if virus is not strong enough :
+
+.. math::
+  \beta / \delta < \tau = 1/\lambda_{1,A}
+
+Where :math:`\lambda_{1,A}` is the largest eigenvalue of the adjacency matrix A of graph G.
+And the initial infected number is not important.
+
+**Example: Ebola** . `Assessing the International Spreading Risk Associated with the 2014 West African Ebola Outbreak <http://currents.plos.org/outbreaks/index.html%3Fp=40803.html>`_
+and `Estimation R0 of Ebola <http://currents.plos.org/outbreaks/article/estimating-the-reproduction-number-of-zaire-ebolavirus-ebov-during-the-2014-outbreak-in-west-africa/>`_ .
+
+12.2.2 Application Rumor spread
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: images/rumor.PNG
+   :align: center
+   :width: 75%
+
+
+.. math::
+  R_{SI} = \frac{(1-p)\beta + (1-l)b}{\rho + \epsilon}
