@@ -268,3 +268,25 @@ and `Estimation R0 of Ebola <http://currents.plos.org/outbreaks/article/estimati
 
 .. math::
   R_{SI} = \frac{(1-p)\beta + (1-l)b}{\rho + \epsilon}
+
+The difference of :math:`R_{SI}` between real news and rumors is huge -> efficiently identifies rumors vs news.
+
+12.3 Independent Cascade Model
+---------------------------
+
+Initially some nodes S are active, Each edge (u,v) has probability (weight) :math:`p_{uv}`. -> Activations spread through the network.
+It is simple but requires many parameters.
+
+**From exposures to adoptions** Seperate the notation of exposures and adoptions to reduce parameters:
+
+* **Exposure** : Node’s neighbor exposes the node to the contagion. **Exposure curve** : Probability of adopting new behavior depends on the total number of friends who have already adopted.
+
+.. image:: images/exposures_curves.PNG
+   :align: center
+
+* **Adoption** : The node acts on the contagion.
+
+**Example Twitter hashtags** Persistence and Stickiness :
+
+* Persistence of P is the ratio of the area under the curve P and the area of the rectangle of height.
+* Stickiness of P is max(P).
