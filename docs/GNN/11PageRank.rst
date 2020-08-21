@@ -195,6 +195,42 @@ Undirected network of Twitter users, 70 identified hashtags associated, 581,750 
 .. image:: images/decision_model_path_graph.png
    :align: center
 
+**HW3 Q3** (all the code could be found in `the homework folder <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs>`_ ):
+
+1. ::
+
+  In graph 1 , candidate B wins by 5048 votes
+  In graph 2 , candidate B wins by 5128 votes
+
+2. ::
+
+  On graph 1, the minimum amount you can spend to win is 5000
+  On graph 2, the minimum amount you can spend to win is 7000
+
+.. image:: images/hw3q3_2.png
+   :align: center
+   :width: 50%
+
+3. ::
+
+  On graph 1, the minimum amount you can spend to win is 2000
+  On graph 2, the minimum amount you can spend to win is 1000
+
+.. image:: images/hw3q3_3.png
+   :align: center
+   :width: 50%
+
+We have the degree distribution of the two graphs below:
+
+.. image:: images/hw3q3_degree_dist.png
+   :align: center
+
+We could see that in graph 1, the network is closely connected, there are some nodes
+have extremely large degree (as the "leader" of the network), paying them will be
+extremely useful. While the graph 2, where they are not such "leader", as a result,
+the Dining will not be such efficient.
+
+
 12.2(13) Probabilistic Diffusion
 --------------------------
 
