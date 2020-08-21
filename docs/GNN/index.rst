@@ -18,3 +18,4 @@ And `link of snap documentation <http://snap.stanford.edu/snappy/doc/reference/i
    5Spectral
    7GraphRepresentation
    11PageRank
+   14InfluenceMaximization
