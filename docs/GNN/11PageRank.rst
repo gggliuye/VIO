@@ -197,24 +197,15 @@ Undirected network of Twitter users, 70 identified hashtags associated, 581,750 
 
 **HW3 Q3** (all the code could be found in `the homework folder <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs>`_ ):
 
-1. ::
+1. In graph 1 , candidate B wins by 5048 votes. In graph 2 , candidate B wins by 5128 votes
 
-  In graph 1 , candidate B wins by 5048 votes
-  In graph 2 , candidate B wins by 5128 votes
-
-2. ::
-
-  On graph 1, the minimum amount you can spend to win is 5000
-  On graph 2, the minimum amount you can spend to win is 7000
+2.On graph 1, the minimum amount you can spend to win is 5000. On graph 2, the minimum amount you can spend to win is 7000
 
 .. image:: images/hw3q3_2.png
    :align: center
    :width: 50%
 
-3. ::
-
-  On graph 1, the minimum amount you can spend to win is 2000
-  On graph 2, the minimum amount you can spend to win is 1000
+3. On graph 1, the minimum amount you can spend to win is 2000. On graph 2, the minimum amount you can spend to win is 1000
 
 .. image:: images/hw3q3_3.png
    :align: center
