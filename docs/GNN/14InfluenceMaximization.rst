@@ -37,21 +37,32 @@ If node v is active, it gets **one** chance to make w active, with probability :
 
 **Most influential Set of size k** , (k is a user-defined parameter) is a set S
 containing k nodes that if activated, produces the largest expected cascade size f(S).
-optimzation problem (NP hard, at least as hard as a set cover problem) :
+optimzation problem (NP hard [1]_ ) :
 
 .. math::
-  \max_{\# S = k}f(S) = \max_{\# S = k}\farc{1}{\mid I\mid}\sum_{i \in I\ random\ simulation}f_{i}(S)
+  \max_{\# S = k}f(S) = \max_{\# S = k}\frac{1}{\mid I\mid}\sum_{i \in I\ random\ simulation}f_{i}(S)
 
 **Influence set** :math:`X_{u}` of node u, is the set of nodes that will be eventually (expected)
 activated by node u.
 
 .. math::
-  f(S) = \mid \cup_{u\in S}X_{u} \mid
+  f_{i}(S) = \mid \cup_{u\in S}X_{u}^{i} \mid
 
-**Hill Climbing** that gives a sub-optimal solution (:math:`f(S)\ge (1-1/e)f(S_{opt})`) [1]_ :
+**Hill Climbing** that gives a sub-optimal solution (:math:`f(S)\ge (1-1/e)f(S_{opt})`) [2]_ :
 At each iteration, activate the node u that gives the largest marginal gain:
 
 .. math::
   \max_{u}f(S_{i-1}\cap \{ u\})
 
-.. [1] As it is monotone and submodular.
+**Monotone** : If S is a subset of T, then :math:`f(S)\le f(T)`, and :math:`f(\emptyset) = 0`.
+
+**Submodular** : If S is a subset of T, then for any node u [3]_ :
+
+.. math::
+  f(S\cup \{ u\}) -f(S) \ge f(T\cup \{ u\}) -f(T)
+
+.. [1] See the hand-on, we could prove **Set Cover** problem (which is NP-hard) could be reduced to Influence maximization problem.
+
+.. [2] As it is monotone and submodular. See the prove in the hand-on.
+
+.. [3] Which means that adding a node to a set has less impact ("marginal gain") than adding the same node to a smaller subset of that set. f is submodular as it is a positive linear combination of submodualr functions :math:`f_{i}` .
