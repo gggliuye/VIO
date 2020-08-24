@@ -90,13 +90,13 @@ From the upper test, we found the following problems:
 ------------------------------
 Here we test the pipeline of Deep learning.
 
-* **Make the dataset** : we make a dataset of the indoor complicated scene, with 133 lidar scans. Which includes indoor plants scene, indoor market, and some outdoor views.
+* **Make the dataset** : we make a dataset of the indoor complicated scene, with 133 lidar scans. Which includes indoor plants scene, indoor market, and some outdoor views. Our test query images were taken at least 2 weeks before.
 * **Pretreatment** : for matching with query image, we project the panorama images to several pinhole model images, as is shown in the chapters before.
 * **NetVLAD Index** : here we extract the global descriptor for the database images using a VGG-encoded NetVLAD network. And using SQLite3 for save the results.
-* **Feature extraction** : we use SuperPoint (pretrained model) as our feature extraction.
+* **Feature extraction** : we use SuperPoint (pretrained model) as our feature extraction. And using SQLite3 for save the results. (result in a 1.2G database)
 * **Feature matcher** : we use SuperGlue (indoor pretrained model) as our feature matcher.
 * **Pose Estimation** : we use a EPnP-RANSAC method for pose estimation.
-* **Pose Refinement** : we use iterative optimization method for pose refinement.
+* **Pose Refinement** : we use a iterative optimization method for pose refinement.
 
 We got ideal results. The follwoing image shows the result for the same query image, as the former chapter.
 
@@ -110,7 +110,7 @@ which results in the fourth column.
 
 **Run time** :
 
-Here we show the run time in our tests (using i7 CPU and RTX2080 GPU) for each candidate keyframe.
+Here we show the run-time histograms in our tests (using i7 CPU and RTX2080 GPU) for each candidate keyframe.
 
 .. image:: images/run_time.png
   :align: center
@@ -124,7 +124,7 @@ It requires a well designed keyframe proposition algorithm, to most drasticly re
 .. image:: images/sg_succeed.png
   :align: center
 
-We could observe that there is nosie both in the keyframe images and the depth data (both result from the
+We could observe that there exists nosie both in the keyframe images and the depth data (both result from the
 moving objects shown in the view). Generally, our pipeline
 could offer a quite satisfying result. While when there is a vast view point changement (the last row),
 the pose estimation may be less accurate.
