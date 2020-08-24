@@ -54,6 +54,11 @@ And some sample of pinhole camera images:
 .. image:: images/pinhole_faro.PNG
   :align: center
 
+**Calibration of the Faro Device**. we found the output panorama images of Faro has constant height H (which miss a part in the bottom),
+and different width W (which make the panorama images to have observable boundary).
+I introduce a margin variable M to fix the height, and use twice the length of the height to assign width.
+Finally I resize the panorama images in to shape :math:`(H+M)\timas 2(H+M)` , Which makes a perfect calibration for our later tests.
+
 3. Localization using SIFT
 ------------------------------
 
