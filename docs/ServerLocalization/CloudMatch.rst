@@ -108,20 +108,26 @@ in the images. Using these matches we got our pose estimation T. Using T we proj
 with the depth image shown in the third column. To compare the error, we extract the edges in the depth image, then praint them into our query image,
 which results in the fourth column.
 
-**Summary** :
+**Run time** :
+
+Here we show the run time in our tests (using i7 CPU and RTX2080 GPU) for each candidate keyframe.
 
 .. image:: images/run_time.png
   :align: center
   :width: 80%
 
-* We get much more robust feature extraction and matching.
-* **TODO** need to refine the pose refinement process.
-* **TODO** the performance of the pretrained NetVLAD is not ideal, better to train in our dataset.
+In real application, we will process for multiply keyframes for a single input query image.
+It requires a well designed keyframe proposition algorithm, to most drasticly reduce the calculation time.
 
 **Succeed Cases** :
 
 .. image:: images/sg_succeed.png
   :align: center
+
+We could observe that there is nosie both in the keyframe images and the depth data (both result from the
+moving objects shown in the view). Generally, our pipeline
+could offer a quite satisfying result. While when there is a vast view point changement (the last row),
+the pose estimation may be less accurate.
 
 **Failed Cases** :
 
@@ -130,3 +136,9 @@ which results in the fourth column.
 
 We could still fail, if too much plants points show up. To overcome this we need to retrain the feature extraction
 and matching algorithms based on our specified data.
+
+**Summary** :
+
+* We get much more robust feature extraction and matching.
+* **TODO** need to refine the pose refinement process.
+* **TODO** the performance of the pretrained NetVLAD is not ideal, better to train in our dataset.
