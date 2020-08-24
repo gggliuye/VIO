@@ -95,8 +95,8 @@ Here we test the pipeline of Deep learning.
 * **NetVLAD Index** : here we extract the global descriptor for the database images using a VGG-encoded NetVLAD network. And using SQLite3 for save the results.
 * **Feature extraction** : we use SuperPoint (pretrained model) as our feature extraction.
 * **Feature matcher** : we use SuperGlue (indoor pretrained model) as our feature matcher.
-* **Pose Estimation** : we use a RANSAC iterative based PnP method for pose estimation.
-* **Pose Refinement** : TODO : we will use P3P-RANSAC for the fast pose estimation, and using optimization tools for pose refinement.
+* **Pose Estimation** : we use a EPnP-RANSAC method for pose estimation.
+* **Pose Refinement** : we use iterative optimization method for pose refinement.
 
 We got ideal results. The follwoing image shows the result for the same query image, as the former chapter.
 
@@ -108,8 +108,25 @@ in the images. Using these matches we got our pose estimation T. Using T we proj
 with the depth image shown in the third column. To compare the error, we extract the edges in the depth image, then praint them into our query image,
 which results in the fourth column.
 
-Summary :
+**Summary** :
+
+.. image:: images/run_time.png
+  :align: center
+  :width: 80%
 
 * We get much more robust feature extraction and matching.
 * **TODO** need to refine the pose refinement process.
 * **TODO** the performance of the pretrained NetVLAD is not ideal, better to train in our dataset.
+
+**Succeed Cases** :
+
+.. image:: images/sg_succeed.png
+  :align: center
+
+**Failed Cases** :
+
+.. image:: images/sg_failed.png
+  :align: center
+
+We could still fail, if too much plants points show up. To overcome this we need to retrain the feature extraction
+and matching algorithms based on our specified data.
