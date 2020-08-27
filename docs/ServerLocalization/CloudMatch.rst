@@ -67,11 +67,11 @@ Finally I resize the panorama images in to shape :math:`(H+M)\times 2(H+M)` , Wh
 **Problems** of the images : We have two main problems **The intersection of the panorama images** and **Noise in the depth data**.
 
 * As the un-uniformed panorama images of the Faro device, as we descussed above, we sometimes have to leave a black margin in the projected pinhole image. which could be seen in the left image below (as a black line obervable in the left half).
-* As we didn't exclude all the moving people, nor other noise object. We could end up with lots of bruits in the lidar scan data (as shown in the right image below). Which could affect the localization process, and also the 3d model reconstruction process.
+* As we didn't exclude all the moving people, nor other noise object. We could end up with lots of bruits in the lidar scan data (as shown in the right image below, there are lots of shadows in the depth image). Which could affect the localization process, and also the 3d model reconstruction process.
 
 .. image:: images/problematic_images.png
    :align: center
-   :width: 60%
+   :width: 80%
 
 3. Localization using SIFT
 ------------------------------
@@ -116,9 +116,25 @@ Here we test the pipeline of Deep learning.
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **NetVLAD pretrained** We tested the pretrained NetVALD model (with an vgg front-end).
+We found that the the pretrained model performs badly in our dataset. while require us to train on our data.
 
+**BOW** : To compare the performance of the retrained NetVLAD result, we use a BOW model as reference. While use the SuperPoint descripotrs,
+and uses a 1000 words vocabulary.
+And in our later tests, we use the BOW model to maintain a stable version of the algorithm.
 
+3.2 Features 
+~~~~~~~~~~~~~~~~~~
 
+We use the pretrained SuperPoint and SuperGlue, and they do offer a great result.
+
+3.3 Pose 
+~~~~~~~~~~~~~~~~~~~
+
+* We use a P3P-RANSAC based pose estimation algorithm for a fast pose estimation, while will also achieve a stable outlier rejection.
+* Then we apply a Optimization based method for the refinement of the pose. In our first tests, we use the iterative method offered by OpenCV, which gave a very unstable result. We found that a normal Newton iterative method is not robust enough, as we could still includes a few outliers. So I developped a **Ceres based Optimization based method with robust loss function** for the pose refinement task, which gives a very robust result.
+
+3.4 Results
+~~~~~~~~~~~~~~~~~
 
 We got ideal results. The follwoing image shows the result for the same query image, as the former chapter.
 
@@ -159,13 +175,10 @@ the pose estimation may be less accurate.
 We could still fail, if too much plants points show up. To overcome this we need to retrain the feature extraction
 and matching algorithms based on our specified data.
 
-**Summary** :
-
-* We get much more robust feature extraction and matching.
-* **TODO** need to refine the pose refinement process.
-* **TODO** the performance of the pretrained NetVLAD is not ideal, better to train in our dataset.
-
 4. TODOs
 ------------------------
 
-* Dataset : there are problems with data, as seen in chapter 2. we should deal with it.
+* **Dataset** : there are problems with data, as seen in chapter 2. we should deal with it.
+* **NetVLAD** : the performance of the pretrained NetVLAD is not ideal, better to train in our dataset.
+* **Parameters tune** : we could further choose better parameter threshold for the feature match phase.
+* **Pose Refinement** : I am consider to use a l1-norm based optimization method for the pose refinement (e.g. use ADMM method).
