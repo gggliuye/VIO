@@ -1,7 +1,12 @@
-Panorama Match
+Super Panorama
 =======================
 
-Match the SFM/MVS generated point cloud with 3D panorama scan point cloud.
+**Single Image Localization** based on Deeplearning, and a lidar scan prebuilt map.
+
+* Calibration of the panorama images. Analysis of the panorama camera model.
+* Faro Scan.
+* Classic method test (BOW + SIFT + FLANN + PNP-RANSAC + optimization).
+* Deep learning method test (NetVLAD + SuperPoint + SuperGlue + PNP-RANSAC + optimization).
 
 1. Panorama Image
 ------------------
@@ -59,6 +64,15 @@ and different width W (which make the panorama images to have observable boundar
 I introduce a margin variable M to fix the height, and use twice the length of the height to assign width.
 Finally I resize the panorama images in to shape :math:`(H+M)\times 2(H+M)` , Which makes a perfect calibration for our later tests.
 
+**Problems** of the images : We have two main problems **The intersection of the panorama images** and **Noise in the depth data**.
+
+* As the un-uniformed panorama images of the Faro device, as we descussed above, we sometimes have to leave a black margin in the projected pinhole image. which could be seen in the left image below (as a black line obervable in the left half).
+* As we didn't exclude all the moving people, nor other noise object. We could end up with lots of bruits in the lidar scan data (as shown in the right image below). Which could affect the localization process, and also the 3d model reconstruction process.
+
+.. image:: images/problematic_images.png
+   :align: center
+   :width: 60%
+
 3. Localization using SIFT
 ------------------------------
 
@@ -97,6 +111,14 @@ Here we test the pipeline of Deep learning.
 * **Feature matcher** : we use SuperGlue (indoor pretrained model) as our feature matcher.
 * **Pose Estimation** : we use a EPnP-RANSAC method for pose estimation.
 * **Pose Refinement** : we use a iterative optimization method for pose refinement.
+
+3.1 Image Retrival
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**NetVLAD pretrained** We tested the pretrained NetVALD model (with an vgg front-end).
+
+
+
 
 We got ideal results. The follwoing image shows the result for the same query image, as the former chapter.
 
@@ -142,3 +164,8 @@ and matching algorithms based on our specified data.
 * We get much more robust feature extraction and matching.
 * **TODO** need to refine the pose refinement process.
 * **TODO** the performance of the pretrained NetVLAD is not ideal, better to train in our dataset.
+
+4. TODOs
+------------------------
+
+* Dataset : there are problems with data, as seen in chapter 2. we should deal with it.
