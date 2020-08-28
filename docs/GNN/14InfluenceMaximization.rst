@@ -61,8 +61,15 @@ At each iteration, activate the node u that gives the largest marginal gain:
 .. math::
   f(S\cup \{ u\}) -f(S) \ge f(T\cup \{ u\}) -f(T)
 
-.. [1] See the hand-on, we could prove **Set Cover** problem (which is NP-hard) could be reduced to Influence maximization problem.
+While the greedy approach is slow. **Sketch-based** algorithm to accelerate : compute small structure per node from which to estimate its influence.
+Then run influence maximization using these estimates.
+
+.. [1] See the hand-on, we could prove **Set Cover** problem (briefly take k subsets to cover the most), which is NP-hard, could be reduced to Influence maximization problem.
 
 .. [2] As it is monotone and submodular. See the prove in the hand-on.
 
 .. [3] Which means that adding a node to a set has less impact ("marginal gain") than adding the same node to a smaller subset of that set. f is submodular as it is a positive linear combination of submodualr functions :math:`f_{i}` .
+
+
+15. Outbreak Detection
+=========================
