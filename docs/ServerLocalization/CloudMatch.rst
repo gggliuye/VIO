@@ -73,6 +73,13 @@ Finally I resize the panorama images in to shape :math:`(H+M)\times 2(H+M)` , Wh
    :align: center
    :width: 80%
 
+**Reconstruction** using TSDF.
+
+.. image:: images/mesh_2.png
+  :align: center
+  :width: 80%
+
+
 3. Localization using SIFT
 ------------------------------
 
