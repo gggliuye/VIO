@@ -35,8 +35,8 @@ Generate the panorama image using the `scripts <https://github.com/gggliuye/VIO/
 There exist variations on the sphere model center. While we can always obtain a fine result.
 Using some simple method we can transform the panorama image into a pinhole camera image (for an example `python <https://github.com/adynathos/panorama_to_pinhole>`_ ).
 
-2. Faro Scan
---------------------
+1.2 Faro Scan
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We also tried to use the raw image from faro, unfortunately it is of bad quality.
 
@@ -81,7 +81,7 @@ or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXx
   :width: 80%
 
 
-3. Localization using SIFT
+2. Localization using SIFT
 ------------------------------
 
 This is for test the possiblity of using a simple SIFT for a large scene localization.
@@ -145,6 +145,7 @@ We use the pretrained SuperPoint and SuperGlue, and they do offer a great result
 ~~~~~~~~~~~~~~~~~
 
 We got ideal results. The follwoing image shows the result for the same query image, as the former chapter.
+See more result images in `Baidu Driver with coe rqmy <https://pan.baidu.com/s/1icp7K-1BXvT_ykWb9-d1Rg>`_ .
 
 .. image:: images/superglue.jpg
   :align: center

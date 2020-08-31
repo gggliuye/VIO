@@ -1,79 +1,67 @@
 Super Panorama (中文)
 =======================
 
-使用深度学习的，建立在激光扫描数据集基础上的**单张图片定位系统**。
+使用深度学习的，建立在激光扫描数据集基础上的 **单张图片定位系统** 。
 
 * 全景相机的标定。
 * 激光扫描，数据集的建立。
 * 传统计算机视觉方法测试（视觉词袋+SIFT特征点+FLANN特征点匹配+PnP位姿估计+最小二乘优化方法的位姿优化）。
 * 深度学习方法测试（NetVLAD深度学习图像检索+SuperPoint深度学习特征点提取+SuperGlue深度学习特征点匹配+PnP位姿估计+凸优化的位姿优化）。
 
-1. Panorama Image
+1. 全景相机模型
 ------------------
 
-Use the panorama image to estimate.
+为了更好的使用我们的数据集，首先我们分析研究全景相机的图像模型。
 
-* Localize the panorama images in our prebuilt map.
-* ICP to estimate relative transformation.
-
-
-1.1 Panorama camera model
+1.1 全景相机模型
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Generate a cube point cloud for simulation
+我们虚拟生成了一个三维的立方体，以研究全景相机模型。
 
 .. image:: images/cube.PNG
   :align: center
   :width: 30%
 
-Generate the panorama image using the `scripts <https://github.com/gggliuye/VIO/blob/master/pretreatment/Panorama_Distort.ipynb>`_
+生成的虚拟全景图片将使用如下代码： `scripts <https://github.com/gggliuye/VIO/blob/master/pretreatment/Panorama_Distort.ipynb>`_
 
 .. image:: images/panorama_1.jpg
   :align: center
   :width: 60%
 
-There exist variations on the sphere model center. While we can always obtain a fine result.
-Using some simple method we can transform the panorama image into a pinhole camera image (for an example `python <https://github.com/adynathos/panorama_to_pinhole>`_ ).
+在全景相机模型中，存在可以调节的参数（主要是全景相机的光心位置，由于Faro没有提供他们的全景相机模型的参数，我们需要额外标定他们的相机数据）。
+为了和用户定位的图像相匹配，我决定 **将全景图转化为针孔相机模型** ，以实现图片模型的统一。
 
-2. Faro Scan
---------------------
+1.2. Faro Scan
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We also tried to use the raw image from faro, unfortunately it is of bad quality.
+首先，我们尝试使用法如的原始RGB图像（全景拼接前），但是这些图像缺少很多信息：缺少标定参数，缺少有效图像区域的范围参数。而且缺少和激光扫描的外参标定。
 
-* It is captured by a spinning device -> lack of uniform exterior calibration.
-* About 40% of the image is consist of the outer shell of the Lidar Device.
-* It is registered by the lidar scan data -> hard for us to calibration.
+**全景标定** ：
 
-We turn to the unified panorama image output of Faro. We found the lower part is hidden.
-So we complete the missing part, and apply the camera model to the lidar scan, result in an
-accurate RGB image with aligned depth image.
+* 法如的相机模型存在问题，输出的全景图的高度并不对应于180度， 而是存在一个角度缺失。
+* 另外没有统一的宽度输出（标准的输出宽度将对应水平视野360度，而法如的输出有时多，有时少），进一步增加了误差。
+* 另外法如相机和激光的外参没有标定的数据输出，需要我们进行标定。
 
-Using the `code <https://github.com/gggliuye/VIO/blob/master/panorama_images/panorama_extraction_perfect_sphere.ipynb>`_
-We can get the aligned depth image :
+最终我们解决了以上问题，实现了标定，并且通过激光数据生成了对应的深度图像。实现的代码见： `code <https://github.com/gggliuye/VIO/blob/master/panorama_images/panorama_extraction_perfect_sphere.ipynb>`_ 。
 
 .. image:: images/pano_faro.PNG
   :align: center
 
-And some sample of pinhole camera images:
+通过标定好的相机模型，我们生成了如下几个真空相机图像的例子：
 
 .. image:: images/pinhole_faro.PNG
   :align: center
 
-**Calibration of the Faro Device**. we found the output panorama images of Faro has constant height H (which miss a part in the bottom),
-and different width W (which make the panorama images to have observable boundary).
-I introduce a margin variable M to fix the height, and use twice the length of the height to assign width.
-Finally I resize the panorama images in to shape :math:`(H+M)\times 2(H+M)` , Which makes a perfect calibration for our later tests.
+  **其他问题** ：标定结束后，Faro的数据仍然存在一下几个问题：
 
-**Problems** of the images : We have two main problems **The intersection of the panorama images** and **Noise in the depth data**.
-
-* As the un-uniformed panorama images of the Faro device, as we descussed above, we sometimes have to leave a black margin in the projected pinhole image. which could be seen in the left image below (as a black line obervable in the left half).
-* As we didn't exclude all the moving people, nor other noise object. We could end up with lots of bruits in the lidar scan data (as shown in the right image below, there are lots of shadows in the depth image). Which could affect the localization process, and also the 3d model reconstruction process.
+* 由于Faro全景图的水平视野不能保证都是360度，有个别出现的全景图出现了拼接间隔的问题。（见下图左，在图像中存在明显的数值的黑色空白区域。）
+* 由于在测量的时候，我们无法进行清场（由于运营的原因），深度数据中存在很多的噪声（见下右图中的“鬼影”）。
 
 .. image:: images/problematic_images.png
    :align: center
    :width: 80%
 
-**Reconstruction** using TSDF. The mesh (with scale 0.1) could be found in `Baidu Drive with code arot <https://pan.baidu.com/s/1OSKP5dQl62NMPHtp_x7rTQ>`_ ,
+**模型重建** ：为了完善这个数据集，我简单进行了TSDF的地图重建，并且进行了简单的模型简化（~一百万面）。模型可以在如下地址下载 `Baidu Drive with code arot <https://pan.baidu.com/s/1OSKP5dQl62NMPHtp_x7rTQ>`_ ,
 or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXxJ7ZAlO/view?usp=sharing>`_ .
 
 .. image:: images/mesh_2.png
@@ -81,140 +69,94 @@ or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXx
   :width: 80%
 
 
-3. Localization using SIFT
+2. 传统方法的定位实现
 ------------------------------
 
-This is for test the possiblity of using a simple SIFT for a large scene localization.
-For a validation of this thought, we only apply one panorama image and some reasonable query images for test.
-The objective here is to test this method, and to offer a base.
+使用传统方法的实现，主要是为了测试方法的可行性，建立算法的框架，并且为深度学习方法的结果提供简单的对比（另外，我们也可以使用Colamp图像重建的结果进行对比）。
 
-* Firstly, create several keyframe images (in pinhole camera model) and its corresponding aligned depth, using the 3D Lidar Scan data.
+* 首先，我通过全景扫描，使用上一章的相机模型，进行针孔相机RGBD数据集的建立。
 
 .. image:: images/transformed_depth.PNG
   :align: center
 
-* Then, realize a simple SIFT (using RootSIFT) feature matching system with PnP pose estimation process.
-The results are shown below:
+* 我们使用RootSIFT进行特征点的匹配，使用PnP-RANSAC进行位姿的估计。并且，我们把激光扫描的三维使用，使用位姿估计的结果，投影为虚拟的针孔图像，以便于输入图像进行对比。
 
 .. image:: images/match_res.PNG
   :align: center
 
-* The left image is the query image, the middle image is the matched keyframe, the right image is the rendered image using the panorama scan and the estimated pose.
+传统方法存在一下问题：
 
-From the upper test, we found the following problems:
-
-* SIFT could only match a limited number of features (some well structed points), while it cannot handle some hard cases (for the plants).
-* With the limited matches, the pose estimation is far from ideal.
-* We need a better feature extraciton and matching strategy, for an example using SuperPoint + SuperGlue.
+* 特征点的匹配质量收到环境限制，完全无法处理植物。
+* 由于没有足够的匹配点，位姿估计的结果也很糟糕。
 
 
-3. Localization using DL
+3. 深度学习方法的实现
 ------------------------------
-Here we test the pipeline of Deep learning.
 
-* **Make the dataset** : we make a dataset of the indoor complicated scene, with 133 lidar scans. Which includes indoor plants scene, indoor market, and some outdoor views. Our test query images were taken at least 2 weeks before.
-* **Pretreatment** : for matching with query image, we project the panorama images to several pinhole model images, as is shown in the chapters before.
-* **NetVLAD Index** : here we extract the global descriptor for the database images using a VGG-encoded NetVLAD network. And using SQLite3 for save the results.
-* **Feature extraction** : we use SuperPoint (pretrained model) as our feature extraction. And using SQLite3 for save the results. (result in a 1.2G database)
-* **Feature matcher** : we use SuperGlue (indoor pretrained model) as our feature matcher.
-* **Pose Estimation** : we use a EPnP-RANSAC method for pose estimation.
-* **Pose Refinement** : we use a iterative optimization method for pose refinement.
+* **数据集的建立** ： 133站全景扫描，扫描数据包含室内室外，存在大量移动的噪音。每张全景数据分为若干（我们使用了9张）RGBD针孔模型的数据。测试图像拍摄至少有一个月的时间差。
+* **图像预处理** ： 通过如上章节的相机模型对图像进行处理，提取SuperPoint特征点，并且使用SuperPoint的描述子生成图像的Global全局描述子（用作图像检索）。
+* **图像检索** ：我分别测试了NetVLAD和Bow方法。
+* **特征点** ： 我使用magicleap公开的SuperPoint特征点和SuperGlue特征点匹配方法（基于深度学习Pytorch）。
+* **位姿估计** ：使用P3P-RANSAC作为外点提取和位姿粗估计。
+* **位姿优化** ：我分别比较了简单的迭代的最小二乘优化(opencv方法)，和使用了鲁棒和函数的最小二乘优化（使用C++ Ceres的凸优化方法）。
 
-3.1 Image Retrival
-~~~~~~~~~~~~~~~~~~~~~~~~~
+3.1 实验结果
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**NetVLAD pretrained** We tested the pretrained NetVALD model (with an vgg front-end).
-We found that the the pretrained model performs badly in our dataset. while require us to train on our data.
+**运行时间** :
 
-**BOW** : To compare the performance of the retrained NetVLAD result, we use a BOW model as reference. While use the SuperPoint descripotrs,
-and uses a 1000 words vocabulary.
-And in our later tests, we use the BOW model to maintain a stable version of the algorithm.
-
-3.2 Features
-~~~~~~~~~~~~~~~~~~
-
-We use the pretrained SuperPoint and SuperGlue, and they do offer a great result.
-
-3.3 Pose
-~~~~~~~~~~~~~~~~~~~
-
-* We use a P3P-RANSAC based pose estimation algorithm for a fast pose estimation, while will also achieve a stable outlier rejection.
-* Then we apply a Optimization based method for the refinement of the pose. In our first tests, we use the iterative method offered by OpenCV, which gave a very unstable result. We found that a normal Newton iterative method is not robust enough, as we could still includes a few outliers. So I developped a **Ceres based Optimization based method with robust loss function** for the pose refinement task, which gives a very robust result.
-
-3.4 Results
-~~~~~~~~~~~~~~~~~
-
-We got ideal results. The follwoing image shows the result for the same query image, as the former chapter.
-
-.. image:: images/superglue.jpg
-  :align: center
-
-Where the first image is the query image, the second image is the matched reference keyframe proposed by NetVLAD. SuperGlue matches are shown
-in the images. Using these matches we got our pose estimation T. Using T we project the whole panorama image into the virtual camera plane,
-with the depth image shown in the third column. To compare the error, we extract the edges in the depth image, then praint them into our query image,
-which results in the fourth column.
-
-**Run time** :
-
-Here we show the run-time histograms in our tests (using i7 CPU and RTX2080 GPU) for each candidate keyframe.
+我使用了i7的CPU和RTX2080的GPU进行测试。对于数据库中得到的检索图像，每一张候选关键帧的处理时间平均为0.1s。
+实际测试中，我们将选取三张候选关键帧，所以实际的测试中，每一张输入图像的处理时间大约0.3s。
 
 .. image:: images/run_time.png
   :align: center
   :width: 80%
 
-In real application, we will process for multiply keyframes for a single input query image.
-It requires a well designed keyframe proposition algorithm, to most drasticly reduce the calculation time.
-
-**Succeed Cases** :
+**成功案例** :
 
 .. image:: images/sg_succeed.png
   :align: center
 
-We could observe that there exists nosie both in the keyframe images and the depth data (both result from the
-moving objects shown in the view). Generally, our pipeline
-could offer a quite satisfying result. While when there is a vast view point changement (the last row),
-the pose estimation may be less accurate.
+  第一列为输入的定位图像。第二列为寻找到的匹配关键帧。第三列中我们将激光的深度数据通过位姿估计的结果，
+  投影为模拟的深度图。最后一列中，我提取深度图中的边缘，并渲染到输入图像中（以比较模拟的深度边界和真实图像中的边界，以可视化误差）。
 
-**Failed Cases** :
+**失败案例** :
 
 .. image:: images/sg_failed.png
   :align: center
 
-We could still fail, if too much plants points show up. To overcome this we need to retrain the feature extraction
-and matching algorithms based on our specified data.
 
-
-**Unity Demo** : Here we show our demo, to combine our localization system with a local SLAM (we used ARCore) to realize a large scene consist AR application.
+**Unity Demo** : 我将整个系统和手机本地的SLAM系统（我们使用了ArCore）集成，以实现大场景的AR应用。
 
 .. raw:: html
 
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe src="//player.bilibili.com/player.html?aid=626953712&bvid=BV1et4y1S778&cid=229955696&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <iframe src="//player.bilibili.com/player.html?aid=626953712&bvid=BV1et4y1S778&cid=229955696&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
     </div>
 
-3.5 Advantages
+3.5 优势
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-* Much more robust to lightness changes than traditional methods.
-* Much more robust to view-point changes than traditional methods.
-* Much more accurate.
-* A great mesh model could be offered.
-* Can match most of the plants points (after a lone period), which is impossible for traditional methods.
+* 对于环境光照的变化更加鲁棒了（可以应对白天黑夜情况）。
+* 对于视角的变化更加鲁棒了（需要更少的数据集关键帧）。
+* 很好的处理了植物和其他的（传统方法无法处理的）视觉特征，大大提高了匹配质量。
+* 由于匹配的质量提高了（数量和精度），位姿估计的结果精度更高。
+* 同时可以直接提供对应的模型数据。
 
-3.6 Problems
+3.6 问题
 ~~~~~~~~~~~~~~~~~~~~~~
 
-* Shared scene of the first floor and the second floor. Lead to negative match.
+* 遇到几乎完全相同的场景，无法区分（比如下图中，一楼和二楼几乎完全相同的角落，导致匹配误差）
 
 .. image:: images/1245.jpg
   :align: center
 
-* Drasticly changed scene.
+* 测试图像拍取时，场景出现了非常非常大的变动（相对较小的变动，算法是可以克服的）。
 
 .. image:: images/1255.jpg
   :align: center
 
-* Too few distinctable features within the plants. Lead to negative match.
+* 区分度太过小的场景（人类专家都无法分辨的场景），如下图中的植物柱子。
 
 .. image:: images/1735.jpg
   :align: center
