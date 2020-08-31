@@ -190,7 +190,7 @@ and matching algorithms based on our specified data.
 .. raw:: html
 
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe src="//player.bilibili.com/player.html?aid=626953712&bvid=BV1et4y1S778&cid=229955696&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <iframe src="//player.bilibili.com/player.html?aid=626953712&bvid=BV1et4y1S778&cid=229955696&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
     </div>
 
 3.5 Advantages
