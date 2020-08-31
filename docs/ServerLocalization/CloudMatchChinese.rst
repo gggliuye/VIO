@@ -97,6 +97,8 @@ Super Panorama (中文)
 3.1 实验结果
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+更多的测试结果图像 `Baidu rqmy <https://pan.baidu.com/s/1icp7K-1BXvT_ykWb9-d1Rg>`_ 。
+
 **运行时间** :
 
 我使用了i7的CPU和RTX2080的GPU进行测试。对于数据库中得到的检索图像，每一张候选关键帧的处理时间平均为0.1s。
