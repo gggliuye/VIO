@@ -73,7 +73,8 @@ Finally I resize the panorama images in to shape :math:`(H+M)\times 2(H+M)` , Wh
    :align: center
    :width: 80%
 
-**Reconstruction** using TSDF.
+**Reconstruction** using TSDF. The mesh (with scale 0.1) could be found in `Baidu Drive with code arot <https://pan.baidu.com/s/1OSKP5dQl62NMPHtp_x7rTQ>`_ ,
+or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXxJ7ZAlO/view?usp=sharing>`_ .
 
 .. image:: images/mesh_2.png
   :align: center
