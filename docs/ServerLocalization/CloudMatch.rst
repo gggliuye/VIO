@@ -129,12 +129,12 @@ We found that the the pretrained model performs badly in our dataset. while requ
 and uses a 1000 words vocabulary.
 And in our later tests, we use the BOW model to maintain a stable version of the algorithm.
 
-3.2 Features 
+3.2 Features
 ~~~~~~~~~~~~~~~~~~
 
 We use the pretrained SuperPoint and SuperGlue, and they do offer a great result.
 
-3.3 Pose 
+3.3 Pose
 ~~~~~~~~~~~~~~~~~~~
 
 * We use a P3P-RANSAC based pose estimation algorithm for a fast pose estimation, while will also achieve a stable outlier rejection.
@@ -181,6 +181,16 @@ the pose estimation may be less accurate.
 
 We could still fail, if too much plants points show up. To overcome this we need to retrain the feature extraction
 and matching algorithms based on our specified data.
+
+
+**Unity Demo** : Here we show our demo, to combine our localization system with a local SLAM (we used ARCore) to realize a large scene consist AR application.
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="//player.bilibili.com/player.html?aid=626953712&bvid=BV1et4y1S778&cid=229955696&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+    </div>
+
 
 4. TODOs
 ------------------------
