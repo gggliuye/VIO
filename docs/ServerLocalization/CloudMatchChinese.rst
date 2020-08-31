@@ -43,16 +43,15 @@ Super Panorama (中文)
 * 另外法如相机和激光的外参没有标定的数据输出，需要我们进行标定。
 
 最终我们解决了以上问题，实现了标定，并且通过激光数据生成了对应的深度图像。实现的代码见： `code <https://github.com/gggliuye/VIO/blob/master/panorama_images/panorama_extraction_perfect_sphere.ipynb>`_ 。
+通过标定好的相机模型，我们生成了如下几个针孔相机图像的例子：
 
-.. image:: images/pano_faro.PNG
+.. image:: images/transformed_depth.PNG
   :align: center
-
-通过标定好的相机模型，我们生成了如下几个真空相机图像的例子：
 
 .. image:: images/pinhole_faro.PNG
   :align: center
 
-  **其他问题** ：标定结束后，Faro的数据仍然存在一下几个问题：
+**其他问题** ：标定结束后，Faro的数据仍然存在一下几个问题：
 
 * 由于Faro全景图的水平视野不能保证都是360度，有个别出现的全景图出现了拼接间隔的问题。（见下图左，在图像中存在明显的数值的黑色空白区域。）
 * 由于在测量的时候，我们无法进行清场（由于运营的原因），深度数据中存在很多的噪声（见下右图中的“鬼影”）。
@@ -62,7 +61,7 @@ Super Panorama (中文)
    :width: 80%
 
 **模型重建** ：为了完善这个数据集，我简单进行了TSDF的地图重建，并且进行了简单的模型简化（~一百万面）。模型可以在如下地址下载 `Baidu Drive with code arot <https://pan.baidu.com/s/1OSKP5dQl62NMPHtp_x7rTQ>`_ ,
-or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXxJ7ZAlO/view?usp=sharing>`_ .
+或者 `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXxJ7ZAlO/view?usp=sharing>`_ .
 
 .. image:: images/mesh_2.png
   :align: center
@@ -74,12 +73,7 @@ or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXx
 
 使用传统方法的实现，主要是为了测试方法的可行性，建立算法的框架，并且为深度学习方法的结果提供简单的对比（另外，我们也可以使用Colamp图像重建的结果进行对比）。
 
-* 首先，我通过全景扫描，使用上一章的相机模型，进行针孔相机RGBD数据集的建立。
-
-.. image:: images/transformed_depth.PNG
-  :align: center
-
-* 我们使用RootSIFT进行特征点的匹配，使用PnP-RANSAC进行位姿的估计。并且，我们把激光扫描的三维使用，使用位姿估计的结果，投影为虚拟的针孔图像，以便于输入图像进行对比。
+我们使用RootSIFT进行特征点的匹配，使用PnP-RANSAC进行位姿的估计。并且，我们把激光扫描的三维使用，使用位姿估计的结果，投影为虚拟的针孔图像，以便于输入图像进行对比。
 
 .. image:: images/match_res.PNG
   :align: center
@@ -112,13 +106,11 @@ or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXx
   :align: center
   :width: 80%
 
-**成功案例** :
+**成功案例** : 第一列为输入的定位图像。第二列为寻找到的匹配关键帧。第三列中我们将激光的深度数据通过位姿估计的结果，
+投影为模拟的深度图。最后一列中，我提取深度图中的边缘，并渲染到输入图像中（以比较模拟的深度边界和真实图像中的边界，以可视化误差）。
 
 .. image:: images/sg_succeed.png
   :align: center
-
-  第一列为输入的定位图像。第二列为寻找到的匹配关键帧。第三列中我们将激光的深度数据通过位姿估计的结果，
-  投影为模拟的深度图。最后一列中，我提取深度图中的边缘，并渲染到输入图像中（以比较模拟的深度边界和真实图像中的边界，以可视化误差）。
 
 **失败案例** :
 
@@ -167,7 +159,6 @@ or in `Google Drive <https://drive.google.com/file/d/11LVCc8Yi5HtLM5OBz-wjPoneXx
 4. TODOs
 ------------------------
 
-* **Dataset** : there are problems with data, as seen in chapter 2. we should deal with it.
-* **NetVLAD** : the performance of the pretrained NetVLAD is not ideal, better to train in our dataset.
-* **Parameters tune** : we could further choose better parameter threshold for the feature match phase.
-* **Pose Refinement** : I am consider to use a l1-norm based optimization method for the pose refinement (e.g. use ADMM method).
+* **数据集问题** ： 数据集中的噪音和干扰进行处理（见上面章节1）。
+* **NetVLAD** ：需要重新针对我们的场景训练神经网络，以加速系统的匹配（争取做到图像检索的百分比正确率，以大大提高处理效率）。
+* **参数选取** ： 在SuperPoint和SuperGlue中需要更加精致的参数选取。
