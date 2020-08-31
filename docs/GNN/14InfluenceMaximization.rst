@@ -284,3 +284,6 @@ Geometric Intersection Operator ℐ  :math:`\mathcal{J} : Box\times ...\times Bo
 .. image:: images/entity_box_dist.PNG
   :align: center
   :width: 40%
+
+.. math::
+  L = - \log \sigma (\gamma - d_{box}(q,v)) - \log\sigma(d_{box}(q,v_{i}') - \gamma)
