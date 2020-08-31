@@ -1,12 +1,12 @@
-Super Panorama
+Super Panorama (中文)
 =======================
 
-**Single Image Localization** based on Deeplearning, and a lidar scan prebuilt map.
+使用深度学习的，建立在激光扫描数据集基础上的**单张图片定位系统**。
 
-* Calibration of the panorama images. Analysis of the panorama camera model.
-* Faro Scan.
-* Classic method test (BOW + SIFT + FLANN + PNP-RANSAC + optimization).
-* Deep learning method test (NetVLAD + SuperPoint + SuperGlue + PNP-RANSAC + optimization).
+* 全景相机的标定。
+* 激光扫描，数据集的建立。
+* 传统计算机视觉方法测试（视觉词袋+SIFT特征点+FLANN特征点匹配+PnP位姿估计+最小二乘优化方法的位姿优化）。
+* 深度学习方法测试（NetVLAD深度学习图像检索+SuperPoint深度学习特征点提取+SuperGlue深度学习特征点匹配+PnP位姿估计+凸优化的位姿优化）。
 
 1. Panorama Image
 ------------------

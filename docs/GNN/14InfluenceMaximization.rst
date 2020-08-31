@@ -74,7 +74,7 @@ Then run influence maximization using these estimates.
 15. Outbreak Detection
 =========================
 
-`More <https://snap-stanford.github.io/cs224w-notes/network-methods/outbreak-detection>`_ 
+`More <https://snap-stanford.github.io/cs224w-notes/network-methods/outbreak-detection>`_
 
 15.1 Introduction
 -------------------
@@ -106,3 +106,19 @@ Reform the probelm as penalty reduction to prove the problem as submodular.
 
 CELF: Algorithm for Optimziating Submodular Functions Under Cost Constraints. `Leskovec er al. 2007 <https://www.cs.cmu.edu/~jure/pubs/detect-kdd07.pdf>`_ .
 Find the best along : **unit cost greedy** and **benefit-cost greedy**.
+
+16. Network Evolution
+==========================
+
+16.1 Edges w.r.t. Nodes
+-------------------------
+
+**Edges w.r.t. Nodes** : The growth of number of edges w.r.t. the number of nodes.
+
+.. math::
+  E(t) \propto N(t)^{a}
+
+* Generally, we have :math:`1\le a \le 2` . Examples: we have a = 1.2 for internet, and a = 1.6 for citations network.
+* a = 1 linear growth (constant out-degree), a = 2 quadratic growth (fully connected network).
+
+**Diameter** shrinks over time : As the network grows the distances between the nodes slowly decreas.
