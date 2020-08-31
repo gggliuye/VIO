@@ -97,6 +97,7 @@ Super Panorama (中文)
 3.1 实验结果
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+非算法工作人员在两层楼随机拍取1800张各式图片的成功率在75%以上。
 更多的测试结果图像 `Baidu rqmy <https://pan.baidu.com/s/1icp7K-1BXvT_ykWb9-d1Rg>`_ 。
 
 **运行时间** :
@@ -114,11 +115,6 @@ Super Panorama (中文)
 .. image:: images/sg_succeed.png
   :align: center
 
-**失败案例** :
-
-.. image:: images/sg_failed.png
-  :align: center
-
 
 **Unity Demo** : 我将整个系统和手机本地的SLAM系统（我们使用了ArCore）集成，以实现大场景的AR应用。
 
@@ -133,7 +129,7 @@ Super Panorama (中文)
 
 * 对于环境光照的变化更加鲁棒了（可以应对白天黑夜情况）。
 * 对于视角的变化更加鲁棒了（需要更少的数据集关键帧）。
-* 很好的处理了植物和其他的（传统方法无法处理的）视觉特征，大大提高了匹配质量。
+* 很好的处理了植物和其他的（传统方法无法处理的）视觉特征，大大提高了匹配质量和定位的成功率。
 * 由于匹配的质量提高了（数量和精度），位姿估计的结果精度更高。
 * 同时可以直接提供对应的模型数据。
 
@@ -150,12 +146,15 @@ Super Panorama (中文)
 .. image:: images/1255.jpg
   :align: center
 
-* 区分度太过小的场景（人类专家都无法分辨的场景），如下图中的植物柱子。
+* 区分度太过小的场景（人类专家都无法分辨的场景），如下图中的植物柱子, 和花坛植物太过迷惑的例子。
 
 .. image:: images/1735.jpg
   :align: center
 
 .. image:: images/1805.jpg
+  :align: center
+
+.. image:: images/sg_failed.png
   :align: center
 
 4. TODOs
