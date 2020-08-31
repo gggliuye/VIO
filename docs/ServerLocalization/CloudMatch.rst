@@ -176,15 +176,6 @@ moving objects shown in the view). Generally, our pipeline
 could offer a quite satisfying result. While when there is a vast view point changement (the last row),
 the pose estimation may be less accurate.
 
-**Failed Cases** :
-
-.. image:: images/sg_failed.png
-  :align: center
-
-We could still fail, if too much plants points show up. To overcome this we need to retrain the feature extraction
-and matching algorithms based on our specified data.
-
-
 **Unity Demo** : Here we show our demo, to combine our localization system with a local SLAM (we used ARCore) to realize a large scene consist AR application.
 
 .. raw:: html
@@ -210,7 +201,7 @@ and matching algorithms based on our specified data.
 .. image:: images/1245.jpg
   :align: center
 
-* Drasticly changed scene.
+* Drasticly changed scene. (lead to large error, while we could still match successfully)
 
 .. image:: images/1255.jpg
   :align: center

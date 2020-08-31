@@ -141,7 +141,7 @@ Super Panorama (中文)
 .. image:: images/1245.jpg
   :align: center
 
-* 测试图像拍取时，场景出现了非常非常大的变动（相对较小的变动，算法是可以克服的）。
+* 测试图像拍取时，场景出现了非常非常大的变动（关键帧匹配和大致的位姿是正确的，但是误差极大）。
 
 .. image:: images/1255.jpg
   :align: center
