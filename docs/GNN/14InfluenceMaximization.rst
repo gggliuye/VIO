@@ -203,4 +203,84 @@ the temporal PageRank converges to the static PageRank [1]_ .
 
 **Knowledge in graph form** : Capture entities (nodes), types (node lables), and relationships (edges).
 
-**Datasets** : FreeBase, Wikidata, Dbpedia, YAGO, NELL, etc. Massive: millions of nodes, and edges and Incomplete: many true edges are missing
+**Datasets** : FreeBase, Wikidata, Dbpedia, YAGO, NELL, etc. **Massive** : millions of nodes, and edges and **Incomplete** : many true edges are missing
+
+17.1 Link prediction
+-------------------
+
+**TransE** (see `TransE <https://vio.readthedocs.io/zh_CN/latest/GNN/7GraphRepresentation.html?highlight=transe#transe>`_ )
+use TransE to predict links.
+
+17.2 Path Queries
+----------------------
+
+**Path Query** (e.g. “Where did Turing Award winners graduate?”)
+
+* Brute Force. The graph could be imcomplete, and the time complexity of traversing a dense KG will be :math:`O(\mid V\mid^{n})` , which intractable.
+* Traversing KG in vector space (embed queries): generalize TransE to multi-hop reasoning :math:`q = v_{a} + r_{1}+...+ r_{n}` (time complexity : :math:`O(\mid V\mid)`) .
+
+.. image:: images/path_query.PNG
+  :align: center
+  :width: 60%
+
+17.3 Conjunctive Queries
+----------------------------
+
+Start from multiple anchor nodes.
+(e.g. “Where did Canadian citizens with Turing Award graduate?”)
+Also : embed queries in vector space.
+
+**Neural Intersection Operator** , which should be permutation invariant. Input: current query embeddings :math:`q_{1},...,q_{m}`,  Output: intersection query embedding 𝐪.
+Same training strategy as TransE.
+
+.. image:: images/NeuralIntersection.PNG
+  :align: center
+  :width: 75%
+
+Taking the intersection between two vectors is an operation that does not follow intuition.
+Can we define a more expressive geometry to embed the queries?
+
+.. image:: images/path_query_com.PNG
+  :align: center
+  :width: 60%
+
+.. image:: images/path_query_nn.PNG
+  :align: center
+  :width: 60%
+
+17.4 Query2Box
+------------------------
+
+**Reasoning with Box Embeddings** (Center, Offset). Intersection of boxes is well-defined !
+Boxes are a powerful abstraction, as we can project the center and control the offset to model
+the set of entities enclosed in the box.
+
+Geometric Projection Operator 𝒫 :math:`\mathcal{P} : Box\times Relation \to Box`:
+
+.. math::
+  Center(q') = Center(q) + Center(r)
+
+.. math::
+  Offset(q') = Offset(q) + Offset(r)
+
+Geometric Intersection Operator ℐ  :math:`\mathcal{J} : Box\times ...\times Box \to Box`:
+(using weighted average by operator :math:`\bigodot` the dimension-wise product)
+
+.. math::
+  Center(q_{inter}) = \sum_{i}w_{i}\bigodot Center(q_{i})
+
+.. math::
+  Offset(q_{inter}) = \min (Offset(q_{1}), ..., Offset(q_{n})) \bigodot \sigma(Deepsets(q_{1},..,q_{n}))
+
+.. image:: images/path_query_box.PNG
+  :align: center
+  :width: 60%
+
+**Entity-to-Box distance** :
+
+.. math::
+  d_{box}(q,v) = d_{out}(q,v) + \alpha\cdot d_{in}(q,v), \ 0<\alpha<1
+
+.. image:: images/entity_box_dist.PNG
+  :align: center
+  :width: 40%

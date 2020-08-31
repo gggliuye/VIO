@@ -76,6 +76,26 @@ Applications :
 --------------------
 
 **Represent the relationships as a linear translation in the embedding space** : :math:`h+l\approx t` , head+ relation = tail.
+**KG Representation** , edges : head relation and tail. Relation Patterns:
+
+* Symmetric Relations (e.g. family, roommate):
+
+.. math::
+  r(h,t) \to r(t,h) \ \forall h,t
+
+* Composition Relations (e.g. My mother's husband is my father):
+
+.. math::
+  r_{1}(x,y) \wedge r_{2}(y,z) \to r_{3}(x,z)\ \forall x,y,z
+
+* 1-to-N amd N-to-1 Relations (e.g. r is "students of"):
+
+.. math::
+  r(h,t_{1}), r(h,t_{2}), ..., r(h,t_{n}) \ are \ all \ true
+
+.. image:: images/transe_show.PNG
+  :align: center
+  :width: 70%
 
 The obejective loss function could be defined as :
 
@@ -85,6 +105,14 @@ The obejective loss function could be defined as :
 Where S' is the negative samples generated (which are not real).
 
 .. image:: images/transe.PNG
+  :align: center
+  :width: 90%
+
+**TransR** : model entities as vectors in the entity space :math:`\mathbb{R}^{d}` ( and model each relation as vector 𝒓 in
+relation space :math:`\mathbb{R}^{k}` with :math:`M_{r}\in \mathbb{R}^{k\times d}` as the projection matrix.
+(Difference : model entities and relations on different spaces.)
+
+.. image:: images/transe_transr.PNG
   :align: center
   :width: 90%
 
