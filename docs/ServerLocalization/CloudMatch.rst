@@ -191,6 +191,12 @@ and matching algorithms based on our specified data.
         <iframe src="//player.bilibili.com/player.html?aid=626953712&bvid=BV1et4y1S778&cid=229955696&page=2" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
     </div>
 
+3.5 Problems
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Shared scene of the first floor and the second floor. Lead to negative match.
+* Too few distinctable features within the plants. Lead to negative match.
+
 
 4. TODOs
 ------------------------
