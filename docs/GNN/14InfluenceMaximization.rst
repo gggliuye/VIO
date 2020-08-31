@@ -73,3 +73,36 @@ Then run influence maximization using these estimates.
 
 15. Outbreak Detection
 =========================
+
+`More <https://snap-stanford.github.io/cs224w-notes/network-methods/outbreak-detection>`_ 
+
+15.1 Introduction
+-------------------
+
+Example : **Detecting Contamination/Information Outbreak** to detect the cascades as fast/effective as possible.
+
+**General Problem** : given a dynamic process spreading over a network we want to select a set of nodes to detect the process effectively.
+
+**Problem Setup** : Given: a graph G(V,E) and data on how outbreaks spread over this G (for each outbreak i , we knew
+this time T(u,i) when the outbreak i contaminates node u). Goal: select a subset of nodes S that maximize the expected
+reward:
+
+.. math::
+  \begin{align}
+  maximize_{S\subset U} \ & f(S) = \sum_{i}p(i)\cdot f_{i}(S)\\
+  subject \ to \ & cost(S) \le B
+  \end{align}
+
+Where:
+
+* p(i) : the probability of outbreak i occuring.
+* :math:`f_{i}(S)` : rewarding (~ detecting time; ~ detected propagations; ~ number of infected people) for detecting outbreak i using "sensor" S.
+* B : total budget (time, money, etc.) of placing "sensors" .
+
+Reform the probelm as penalty reduction to prove the problem as submodular.
+
+15.2 CELF
+----------------------
+
+CELF: Algorithm for Optimziating Submodular Functions Under Cost Constraints. `Leskovec er al. 2007 <https://www.cs.cmu.edu/~jure/pubs/detect-kdd07.pdf>`_ .
+Find the best along : **unit cost greedy** and **benefit-cost greedy**.
