@@ -10,6 +10,24 @@ And `link of snap documentation <http://snap.stanford.edu/snappy/doc/reference/i
 
 `HWs <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs>`_
 
+Next
+-----------
+Same Prof.
+
+* CS246: Mining Massive Datasets (Winter 2020) : Data Mining & Machine Learning for Big Data.
+* CS341: Project in Data Mining (Spring 2020)
+
+Other Courses:
+
+* CS229: Machine Learning
+* CS230: Deep Learning
+* MSE231: Computational Social Science
+* MSE334: The Structure of Social Data
+* CS276: Information Retrieval and Web Search
+* CS245: Database System Principles
+* CS347: Transaction Processing & Databases
+
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
