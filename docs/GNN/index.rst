@@ -10,8 +10,8 @@ And `link of snap documentation <http://snap.stanford.edu/snappy/doc/reference/i
 
 `HWs <https://github.com/gggliuye/VIO/blob/master/MachineLearningWithGraph/HWs>`_
 
-Next
------------
+**Next**
+
 Same Prof.
 
 * CS246: Mining Massive Datasets (Winter 2020) : Data Mining & Machine Learning for Big Data.

@@ -142,16 +142,40 @@ into the same board within a time interval (1 hour) ; Negative pair: A random pa
 
 19.2 Heterogeneous GNN (Decagon)
 ---------------------------
-*Model and predict side effects of drug pairs*
+*Model and predict side effects of drug pairs* `http://snap.stanford.edu/decagon/ <http://snap.stanford.edu/decagon/>`_
 
 **Polypharmacy** : use multiple drugs for a disease. *High risk of side effects due to interactions* . Difficult to identify manually.
 Idea: Computationally screen/predict polypharmacy side effects.
 
+.. image:: images/polypharmacy-graph.png
+  :align: center
+  :width: 80%
+
 **Heterogeneous (multimodal) graphs** : graphs with different node types and/or edge types.
 Goal: Given a partially observed graph, predict labeled edges between drug nodes.
+**Polypharmacy heterogenous graph** : constructs a large two-layer multimodal graph of protein-protein interactions, drug-protein interactions,
+and drug-drug interactions (i.e. side effects).
+
+* There is a wide range in how frequently certain side effects occur in drug combinations. (more than 53% of the side effects occur in less than 3% of the drug combinations)
+* Polypharmacy side effects do not appear independently of one another in co-prescribed drug paris, suggesting that joint modeling over multiple side effects can aid in the prediction task.
+
+**Decagon** :
 
 * *heterogenous graph -> node embeddings* : Compute GNN messages from each edge type, then aggregate across different edge types.
+
+.. math::
+  h_{i}^{(k+1)} = \phi(\sum_{r}\sum_{j\in N_{i, r}}c_{r}^{ij}W_{r}^{k}h_{j}^{(k)} + c_{r}^{i}h_{i}^{k})
+
 * *Node embeddings of query drug pairs -> predicted edges* : Use pair of computed node embeddings to make edge predictions.
+
+.. math::
+  g(v_{i},r,v_{j}) = \begin{cases}
+  z_{i}^{T}D_{r}RD_{r}z_{j}& if\ v_{i}\and\ v_{j}\ are \ drugs \\
+  z_{i}^{T}M_{r}z_{j} & otherwise (both\ proteins,\ or\ one\ protein\ one\ drug)
+  \end{cases}
+
+Where, :math:`D_{r}` modeling the importance of each dimension in the node embedding towards the side effect r (tensor factorization).
+And R models the interaction.
 
 .. image:: images/Decagon.PNG
   :align: center
