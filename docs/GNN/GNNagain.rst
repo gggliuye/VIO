@@ -170,7 +170,7 @@ and drug-drug interactions (i.e. side effects).
 
 .. math::
   g(v_{i},r,v_{j}) = \begin{cases}
-  z_{i}^{T}D_{r}RD_{r}z_{j}& if\ v_{i}\and\ v_{j}\ are \ drugs \\
+  z_{i}^{T}D_{r}RD_{r}z_{j}& if\ v_{i}\ and\ v_{j}\ are \ drugs \\
   z_{i}^{T}M_{r}z_{j} & otherwise (both\ proteins,\ or\ one\ protein\ one\ drug)
   \end{cases}
 
