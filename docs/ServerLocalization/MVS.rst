@@ -40,6 +40,16 @@ The result is just not satisfying.
 .. image:: resonstructions/test_cspn.png
   :align: center
 
+1.4 Sparse-to-Dense
+~~~~~~~~~~~~~~~~~~~~~~~~
+We test the pretrained model of `sparse-to-dense <https://arxiv.org/pdf/1709.07492.pdf>`_ , `github project <https://github.com/fangchangma/sparse-to-dense.pytorch>`_ .
+Our results could be seen `here <https://gitee.com/gggliuye/VIO/blob/master/Depth%20Completion/Depth_completion_sparse_to_dense.ipynb>`_ .
+The result is just not satisfying.
+
+.. image:: resonstructions/test_sparse_to_dense.png
+  :align: center
+  :width: 80%
+
 2. Colmap MVS
 ------------------------
 
