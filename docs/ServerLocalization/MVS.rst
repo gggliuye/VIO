@@ -9,7 +9,10 @@ We want our image reconstruction to produce a model with similar quality.
 1. Deep Learning
 ----------------------
 
-`Depth Completion <https://paperswithcode.com/task/depth-completion>`_
+* Deep learning MVS method.
+* `Depth Completion <https://paperswithcode.com/task/depth-completion>`_
+
+The Deep Learning methods are just not stable enough. And training in every datasets is too expensive.
 
 1.1 DeepMVS
 ~~~~~~~~~~~~~~~~~~~~
@@ -64,6 +67,7 @@ It has about 11,000,000 faces before simplification, and 200,000 after simplific
 
 .. image:: resonstructions/colmap_poisson.png
   :align: center
+  :width: 80%
 
 Problems :
 
