@@ -6,13 +6,16 @@ with about 1,000,000 faces. with reasonable quality.
 
 We want our image reconstruction to produce a model with similar quality.
 
-1. DL MVS
+1. Deep Learning
 ----------------------
 
 1.1 DeepMVS
 ~~~~~~~~~~~~~~~~~~~~
 
 We tried DeepMVS in our scene.
+
+.. image:: resonstructions/test_deepmvs.png
+  :align: center
 
 Problems:
 
@@ -27,6 +30,15 @@ Problem:
 * The offical NetMVS shows great results, while we found its test data is far too simple. We test it in our own scene, it produces a terrible result. (see `my report jupyter notebook <https://gitee.com/gggliuye/VIO/blob/master/MVSNet/MVSNet_Test.ipynb>`_ )
 * The algorithm (we use a `pytorch implementation version <https://github.com/xy-guo/MVSNet_pytorch>`_ ) costs too much GPU memory. Its officical results are built with D=256 (see the explanation of the parameter from the project), while in our 8G GTX1080 GPU, we could only add 10 source images, with D set to 80. Which may explain the poor result.
 
+1.3 CSPN
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+We test the pretrained model of `CSPN <https://openaccess.thecvf.com/content_ECCV_2018/papers/Xinjing_Cheng_Depth_Estimation_via_ECCV_2018_paper.pdf>`_ , `github project <https://github.com/XinJCheng/CSPN/tree/master/cspn_pytorch>`_ .
+Our results could be seen `here <https://gitee.com/gggliuye/VIO/blob/master/Depth%20Completion/Depth_completion_cspn.ipynb>`_ .
+The result is just not satisfying.
+
+.. image:: resonstructions/test_cspn.png
+  :align: center
 
 2. Colmap MVS
 ------------------------
