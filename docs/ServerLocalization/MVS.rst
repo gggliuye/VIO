@@ -1,12 +1,31 @@
 Dense Reconstruction
 ===============================
 
-
-1. Using Lidar Scan
-----------------------
-
 As shown in the Chapter of "Super Panorama", we get a model for total three floors of the "winter garden" scene
 with about 1,000,000 faces. with reasonable quality.
+
+We want our image reconstruction to produce a model with similar quality.
+
+1. DL MVS
+----------------------
+
+1.1 DeepMVS
+~~~~~~~~~~~~~~~~~~~~
+
+We tried DeepMVS in our scene.
+
+Problems:
+
+* It only capture the relative relationship, not the real distance. (see more in `my report <https://gitee.com/gggliuye/VIO/tree/master/DeepMVS>`_ )
+* It can only have good result in some scene, while cannot be applied to general cases. It greatly limit its application, as it costs a lot to train in a new scene (main the cost to make the dataset).
+
+1.2 NetMVS
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Problem:
+
+* The offical NetMVS shows great results, while we found its test data is far too simple. We test it in our own scene, it produces a terrible result. (see `my report jupyter notebook <https://gitee.com/gggliuye/VIO/blob/master/MVSNet/MVSNet_Test.ipynb>`_ )
+* The algorithm (we use a `pytorch implementation version <https://github.com/xy-guo/MVSNet_pytorch>`_ ) costs too much GPU memory. Its officical results are built with D=256 (see the explanation of the parameter from the project), while in our 8G GTX1080 GPU, we could only add 10 source images, with D set to 80. Which may explain the poor result.
 
 
 2. Colmap MVS
