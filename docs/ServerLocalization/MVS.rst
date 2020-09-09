@@ -9,6 +9,8 @@ We want our image reconstruction to produce a model with similar quality.
 1. Deep Learning
 ----------------------
 
+`Depth Completion <https://paperswithcode.com/task/depth-completion>`_
+
 1.1 DeepMVS
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -58,7 +60,7 @@ The result is just not satisfying.
 * Simplify the model using Meshlab Quadric Edge Collapse Decimation.
 
 We have a quiet satisfying result in our garden scene (one layer garden part, built with about 1200 images).
-It has about 11,000,000 faces before simplification.
+It has about 11,000,000 faces before simplification, and 200,000 after simplification.
 
 .. image:: resonstructions/colmap_poisson.png
   :align: center
