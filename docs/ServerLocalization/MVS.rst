@@ -5,6 +5,8 @@ As shown in the Chapter of "Super Panorama", we get a model for total three floo
 with about 1,000,000 faces. with reasonable quality.
 
 We want our image reconstruction to produce a model with similar quality.
+We offers two test datasets : `Small indoor scene <https://pan.baidu.com/s/1B3Ar_lXJjYyUNtLQro1NSg>` with code "cuxz".
+and `Indoor Garden scene <https://pan.baidu.com/s/1aLhItQQ4DRrwEe-cITI9cQ>` with code 4em9.
 
 1. Deep Learning
 ----------------------
