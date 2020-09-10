@@ -8,6 +8,12 @@ We want our image reconstruction to produce a model with similar quality.
 We offers two test datasets : `Small indoor scene <https://pan.baidu.com/s/1B3Ar_lXJjYyUNtLQro1NSg>`_ with code "cuxz".
 and `Indoor Garden scene <https://pan.baidu.com/s/1aLhItQQ4DRrwEe-cITI9cQ>`_ with code 4em9.
 
+The main problem of the original Colmap dense reconstruction results are :
+
+* Reflection of the smooth floor or windows. ==> Deep learning image segmentaion of the floor, followed by a depth could post-processing step.
+* Great amount of noise of texture areas, and very unsatisfying edges. ==> Total Variation resonstruction to preserve sharp edges.
+* We also tested a few deep learning reconstruction methods, while they are not satisfying.
+
 1. Deep Learning
 ----------------------
 
@@ -78,11 +84,11 @@ Problems :
 * The reflection of the ground, and some textureless areas, will lead to poor reconstruction. **Using Deep Learning image segmentation**
 
 
-3. L1 Total Variance
+3. Sharp Edge : Total Variation
 --------------------------
 
 To try to **fill the depth estimation** .
-We try to apply the L1 Total variance reconstruction (see more detail in `my convex optimization document <https://cvx-learning.readthedocs.io/en/latest/>`_ )
+We try to apply the L1 Total Variation reconstruction (see more detail in `my convex optimization document <https://cvx-learning.readthedocs.io/en/latest/>`_ )
 to refine the depth result of Colmap patch match MVS. (see the example show in `jupyter notebook <https://github.com/gggliuye/SuperPanoama/blob/master/PanoMapping/Mapping_test.ipynb>`_ )
 
 .. image:: resonstructions/tv_test.jpg
@@ -91,10 +97,10 @@ to refine the depth result of Colmap patch match MVS. (see the example show in `
 Problems:
 
 * Too slow. **Use ADMM or other faster algorithms**
-* Still errors, **Using Deep Learning image segmentation labels**
+* Still noisy, **Using Deep Learning image segmentation labels**
 
 
-4. Image Segmentation
+4. Floor Repair : Image Segmentation
 ------------------------
 
 We using the `Pytorch Encoding Library <https://hangzhang.org/PyTorch-Encoding/model_zoo/segmentation.html>`_ .
@@ -105,5 +111,5 @@ Our result for `Indoor Garden Scene <https://pan.baidu.com/s/1Snslv7AQj24abJQzYx
 .. raw:: html
 
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe src="//player.bilibili.com/player.html?aid=669503256&bvid=BV1Ha4y1E7Ac&cid=233909622&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+        <iframe src="//player.bilibili.com/player.html?aid=669503256&bvid=BV1Ha4y1E7Ac&cid=233909622&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
     </div>
