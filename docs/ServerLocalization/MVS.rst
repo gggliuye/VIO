@@ -5,8 +5,8 @@ As shown in the Chapter of "Super Panorama", we get a model for total three floo
 with about 1,000,000 faces. with reasonable quality.
 
 We want our image reconstruction to produce a model with similar quality.
-We offers two test datasets : `Small indoor scene <https://pan.baidu.com/s/1B3Ar_lXJjYyUNtLQro1NSg>` with code "cuxz".
-and `Indoor Garden scene <https://pan.baidu.com/s/1aLhItQQ4DRrwEe-cITI9cQ>` with code 4em9.
+We offers two test datasets : `Small indoor scene <https://pan.baidu.com/s/1B3Ar_lXJjYyUNtLQro1NSg>`_ with code "cuxz".
+and `Indoor Garden scene <https://pan.baidu.com/s/1aLhItQQ4DRrwEe-cITI9cQ>`_ with code 4em9.
 
 1. Deep Learning
 ----------------------
@@ -100,3 +100,10 @@ Problems:
 We using the `Pytorch Encoding Library <https://hangzhang.org/PyTorch-Encoding/model_zoo/segmentation.html>`_ .
 And it offers image segmentation models for two datasets (ADE20K Dataset: for indoor scene, and Pascal Context Dataset for outdoor scene).
 We use the best result in its dashtable: resnet+deeplab models. And we found the ADE20K Dataset pretrained models are very suitable for our task.
+Our result for `Indoor Garden Scene <https://pan.baidu.com/s/1Snslv7AQj24abJQzYxFaUA>`_ with code ipju.
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="//player.bilibili.com/player.html?aid=669503256&bvid=BV1Ha4y1E7Ac&cid=233909622&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+    </div>
