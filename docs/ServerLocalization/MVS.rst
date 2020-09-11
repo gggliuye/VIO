@@ -14,56 +14,7 @@ The main problem of the original Colmap dense reconstruction results are :
 * Great amount of noise of texture areas, and very unsatisfying edges. ==> Total Variation resonstruction to preserve sharp edges.
 * We also tested a few deep learning reconstruction methods, while they are not satisfying.
 
-1. Deep Learning
-----------------------
-
-* Deep learning MVS method.
-* `Depth Completion <https://paperswithcode.com/task/depth-completion>`_
-
-The Deep Learning methods are just not stable enough. And training in every datasets is too expensive.
-
-1.1 DeepMVS
-~~~~~~~~~~~~~~~~~~~~
-
-We tried DeepMVS in our scene.
-
-.. image:: resonstructions/test_deepmvs.png
-  :align: center
-
-Problems:
-
-* It only capture the relative relationship, not the real distance. (see more in `my report <https://gitee.com/gggliuye/VIO/tree/master/DeepMVS>`_ )
-* It can only have good result in some scene, while cannot be applied to general cases. It greatly limit its application, as it costs a lot to train in a new scene (main the cost to make the dataset).
-
-1.2 NetMVS
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Problem:
-
-* The offical NetMVS shows great results, while we found its test data is far too simple. We test it in our own scene, it produces a terrible result. (see `my report jupyter notebook <https://gitee.com/gggliuye/VIO/blob/master/MVSNet/MVSNet_Test.ipynb>`_ )
-* The algorithm (we use a `pytorch implementation version <https://github.com/xy-guo/MVSNet_pytorch>`_ ) costs too much GPU memory. Its officical results are built with D=256 (see the explanation of the parameter from the project), while in our 8G GTX1080 GPU, we could only add 10 source images, with D set to 80. Which may explain the poor result.
-
-1.3 CSPN
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-We test the pretrained model of `CSPN <https://openaccess.thecvf.com/content_ECCV_2018/papers/Xinjing_Cheng_Depth_Estimation_via_ECCV_2018_paper.pdf>`_ , `github project <https://github.com/XinJCheng/CSPN/tree/master/cspn_pytorch>`_ .
-Our results could be seen `here <https://gitee.com/gggliuye/VIO/blob/master/Depth%20Completion/Depth_completion_cspn.ipynb>`_ .
-The result is just not satisfying.
-
-.. image:: resonstructions/test_cspn.png
-  :align: center
-
-1.4 Sparse-to-Dense
-~~~~~~~~~~~~~~~~~~~~~~~~
-We test the pretrained model of `sparse-to-dense <https://arxiv.org/pdf/1709.07492.pdf>`_ , `github project <https://github.com/fangchangma/sparse-to-dense.pytorch>`_ .
-Our results could be seen `here <https://gitee.com/gggliuye/VIO/blob/master/Depth%20Completion/Depth_completion_sparse_to_dense.ipynb>`_ .
-The result is just not satisfying.
-
-.. image:: resonstructions/test_sparse_to_dense.png
-  :align: center
-  :width: 80%
-
-2. Colmap MVS
+1. Colmap MVS
 ------------------------
 
 * Using the colmap MVS results (using Patch Match algorithm).
@@ -84,8 +35,93 @@ Problems :
 * The reflection of the ground, and some textureless areas, will lead to poor reconstruction. **Using Deep Learning image segmentation**
 
 
-3. Sharp Edge : Total Variation
---------------------------
+2. Deep Learning
+----------------------
+
+* Deep learning MVS method.
+* `Depth Completion <https://paperswithcode.com/task/depth-completion>`_
+
+The Deep Learning methods are just not stable enough. And training in every datasets is too expensive.
+
+2.1 DeepMVS
+~~~~~~~~~~~~~~~~~~~~
+
+We tried DeepMVS in our scene.
+
+.. image:: resonstructions/test_deepmvs.png
+  :align: center
+
+Problems:
+
+* It only capture the relative relationship, not the real distance. (see more in `my report <https://gitee.com/gggliuye/VIO/tree/master/DeepMVS>`_ )
+* It can only have good result in some scene, while cannot be applied to general cases. It greatly limit its application, as it costs a lot to train in a new scene (main the cost to make the dataset).
+
+2.2 NetMVS
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Problem:
+
+* The offical NetMVS shows great results, while we found its test data is far too simple. We test it in our own scene, it produces a terrible result. (see `my report jupyter notebook <https://gitee.com/gggliuye/VIO/blob/master/MVSNet/MVSNet_Test.ipynb>`_ )
+* The algorithm (we use a `pytorch implementation version <https://github.com/xy-guo/MVSNet_pytorch>`_ ) costs too much GPU memory. Its officical results are built with D=256 (see the explanation of the parameter from the project), while in our 8G GTX1080 GPU, we could only add 10 source images, with D set to 80. Which may explain the poor result.
+
+2.3 CSPN
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+We test the pretrained model of `CSPN <https://openaccess.thecvf.com/content_ECCV_2018/papers/Xinjing_Cheng_Depth_Estimation_via_ECCV_2018_paper.pdf>`_ , `github project <https://github.com/XinJCheng/CSPN/tree/master/cspn_pytorch>`_ .
+Our results could be seen `here <https://gitee.com/gggliuye/VIO/blob/master/Depth%20Completion/Depth_completion_cspn.ipynb>`_ .
+The result is just not satisfying.
+
+.. image:: resonstructions/test_cspn.png
+  :align: center
+
+2.4 Sparse-to-Dense
+~~~~~~~~~~~~~~~~~~~~~~~~
+We test the pretrained model of `sparse-to-dense <https://arxiv.org/pdf/1709.07492.pdf>`_ , `github project <https://github.com/fangchangma/sparse-to-dense.pytorch>`_ .
+Our results could be seen `here <https://gitee.com/gggliuye/VIO/blob/master/Depth%20Completion/Depth_completion_sparse_to_dense.ipynb>`_ .
+The result is just not satisfying.
+
+.. image:: resonstructions/test_sparse_to_dense.png
+  :align: center
+  :width: 80%
+
+2.5 DeMoN
+~~~~~~~~~~~~~~~~~~
+
+`DeMoN: Depth and Motion Network <https://github.com/lmb-freiburg/demon>`_ 
+
+
+3. Our process
+------------------------
+
+Step 1. Semantic segmentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We using the `Pytorch Encoding Library <https://hangzhang.org/PyTorch-Encoding/model_zoo/segmentation.html>`_ .
+And it offers image segmentation models for two datasets (ADE20K Dataset: for indoor scene, and Pascal Context Dataset for outdoor scene).
+We use the best result in its dashtable: resnet+deeplab models. And we found the ADE20K Dataset pretrained models are very suitable for our task.
+Our result for `Indoor Garden Scene <https://pan.baidu.com/s/1Snslv7AQj24abJQzYxFaUA>`_ with code ipju.
+
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="//player.bilibili.com/player.html?aid=669503256&bvid=BV1Ha4y1E7Ac&cid=233909622&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
+    </div>
+
+Step 2. Floor repair
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The floor repair process :
+
+* Extraction the floor point cloud using the semantic segmentation results.
+* RANSAC Plane estimation based on these clouds.
+* Filter the points far from the plane.
+* Filling the area with the estimated plane model.
+
+.. image:: resonstructions/floor_repair.png
+  :align: center
+
+Step 3. TV Reconstruction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To try to **fill the depth estimation** .
 We try to apply the L1 Total Variation reconstruction (see more detail in `my convex optimization document <https://cvx-learning.readthedocs.io/en/latest/>`_ )
@@ -100,16 +136,22 @@ Problems:
 * Still noisy, **Using Deep Learning image segmentation labels**
 
 
-4. Floor Repair : Image Segmentation
-------------------------
+Step 4. TSDF Reconstruction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We using the `Pytorch Encoding Library <https://hangzhang.org/PyTorch-Encoding/model_zoo/segmentation.html>`_ .
-And it offers image segmentation models for two datasets (ADE20K Dataset: for indoor scene, and Pascal Context Dataset for outdoor scene).
-We use the best result in its dashtable: resnet+deeplab models. And we found the ADE20K Dataset pretrained models are very suitable for our task.
-Our result for `Indoor Garden Scene <https://pan.baidu.com/s/1Snslv7AQj24abJQzYxFaUA>`_ with code ipju.
+We use a TSDF reconstruction to make our mesh model.
 
-.. raw:: html
 
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
-        <iframe src="//player.bilibili.com/player.html?aid=669503256&bvid=BV1Ha4y1E7Ac&cid=233909622&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
-    </div>
+Step 5. Post-process
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Post process on the TSDF mesh result.
+
+* remove isolated pieces (wrt Face number) : 25
+* cut the undesired parts
+* Simplification: Quadric edge collapse decimation : 0.1 reduction, planar simplification
+
+Finally we got a model with 118,403 faces.
+
+.. image:: resonstructions/show.png
+  :align: center
