@@ -87,7 +87,7 @@ The result is just not satisfying.
 2.5 DeMoN
 ~~~~~~~~~~~~~~~~~~
 
-`DeMoN: Depth and Motion Network <https://github.com/lmb-freiburg/demon>`_ 
+`DeMoN: Depth and Motion Network <https://github.com/lmb-freiburg/demon>`_
 
 
 3. Our process
@@ -129,6 +129,7 @@ to refine the depth result of Colmap patch match MVS. (see the example show in `
 
 .. image:: resonstructions/tv_test.jpg
   :align: center
+  :width: 60%
 
 Problems:
 
@@ -151,7 +152,7 @@ Post process on the TSDF mesh result.
 * cut the undesired parts
 * Simplification: Quadric edge collapse decimation : 0.1 reduction, planar simplification
 
-Finally we got a model with 118,403 faces.
+Finally we got a model with 118,403 faces. The result could be found in `Baidu Yun 28gp <https://pan.baidu.com/s/13GZHFTyHT2gI5WsJttjgrg>`_ .
 
 .. image:: resonstructions/show.png
   :align: center
