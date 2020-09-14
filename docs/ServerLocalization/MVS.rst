@@ -89,6 +89,11 @@ The result is just not satisfying.
 
 `DeMoN: Depth and Motion Network <https://github.com/lmb-freiburg/demon>`_
 
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="//player.bilibili.com/player.html?aid=457051159&bvid=BV125411b7Ww&cid=235161102&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
+    </div>
 
 3. Our process
 ------------------------
@@ -136,6 +141,11 @@ Problems:
 * Too slow. **Use ADMM or other faster algorithms**
 * Still noisy, **Using Deep Learning image segmentation labels**
 
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="//player.bilibili.com/player.html?aid=287072892&bvid=BV1of4y1S7Bx&cid=235161821&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
+    </div>
 
 Step 4. TSDF Reconstruction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -152,7 +162,7 @@ Post process on the TSDF mesh result.
 * cut the undesired parts
 * Simplification: Quadric edge collapse decimation : 0.1 reduction, planar simplification
 
-Finally we got a model with 118,403 faces. The result could be found in `Baidu Yun 28gp <https://pan.baidu.com/s/13GZHFTyHT2gI5WsJttjgrg>`_ .
+Finally we got a model with 118,403 faces. The results could be found in `Baidu Yun 28gp <https://pan.baidu.com/s/13GZHFTyHT2gI5WsJttjgrg>`_ .
 
 .. image:: resonstructions/show.png
   :align: center
