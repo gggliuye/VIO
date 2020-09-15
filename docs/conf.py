@@ -74,7 +74,7 @@ pygments_style = None
 
 # -- Options for HTML output -------------------------------------------------
 
-html_logo = "images/logo.PNG"
+html_logo = "images/ip-paris.jpg"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -107,7 +107,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'UTOPA-ARdoc'
+htmlhelp_basename = 'My-ARdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -134,7 +134,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'UTOPA-AR.tex', u'SLAM-AR Documentation',
+    (master_doc, 'My-AR.tex', u'SLAM-AR Documentation',
      u'LIUYE', 'manual'),
 ]
 
@@ -144,7 +144,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'utopa-ar', u'UTOPA-AR Documentation',
+    (master_doc, 'my-ar', u'My-AR Documentation',
      [author], 1)
 ]
 
@@ -155,8 +155,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'UTOPA-AR', u'UTOPA-AR Documentation',
-     author, 'UTOPA-AR', 'One line description of project.',
+    (master_doc, 'My-AR', u'My-AR Documentation',
+     author, 'My-AR', 'One line description of project.',
      'Miscellaneous'),
 ]
 
