@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'UTOPA-AR'
+project = u'MY-AR'
 copyright = u'2019, LIUYE'
 author = u'LIUYE'
 
