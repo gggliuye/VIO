@@ -138,8 +138,8 @@ to refine the depth result of Colmap patch match MVS. (see the example show in `
 
 Problems:
 
-* Too slow. **Use other faster algorithms.** 
-* Still need refinement, **Using Deep Learning image segmentation labels.**
+* Too slow. **Use other faster algorithms.**
+* Still need refinement. Tried using Deep Learning image segmentation labels, but didn't end up well `example <https://github.com/gggliuye/VIO/blob/master/docs/ServerLocalization/resonstructions/tv_191_use_label.jpg>`_ .
 
 .. raw:: html
 
