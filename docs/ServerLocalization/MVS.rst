@@ -129,7 +129,7 @@ Step 3. TV Reconstruction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To try to **fill the depth estimation** .
-We try to apply the L1 Total Variation reconstruction (see more detail in `my convex optimization document <https://cvx-learning.readthedocs.io/en/latest/>`_ )
+We try to apply the Total Variation L2 reconstruction (using ADMM algorithm, see more detail in `my convex optimization document <https://cvx-learning.readthedocs.io/en/latest/>`_ )
 to refine the depth result of Colmap patch match MVS. (see the example show in `jupyter notebook <https://github.com/gggliuye/SuperPanoama/blob/master/PanoMapping/Mapping_test.ipynb>`_ )
 
 .. image:: resonstructions/tv_test.jpg
@@ -138,8 +138,8 @@ to refine the depth result of Colmap patch match MVS. (see the example show in `
 
 Problems:
 
-* Too slow. **Use ADMM or other faster algorithms**
-* Still noisy, **Using Deep Learning image segmentation labels**
+* Too slow. **Use other faster algorithms.** 
+* Still need refinement, **Using Deep Learning image segmentation labels.**
 
 .. raw:: html
 
