@@ -77,7 +77,7 @@ The result is just not satisfying.
 2.4 Sparse-to-Dense
 ~~~~~~~~~~~~~~~~~~~~~~~~
 We test the pretrained model of `sparse-to-dense <https://arxiv.org/pdf/1709.07492.pdf>`_ , `github project <https://github.com/fangchangma/sparse-to-dense.pytorch>`_ .
-Our results could be seen `here <https://gitee.com/gggliuye/VIO/blob/master/Depth%20Completion/Depth_completion_sparse_to_dense.ipynb>`_ .
+Our results could be seen `here <https://gitee.com/ggglSummaryWriteriuye/VIO/blob/master/Depth%20Completion/Depth_completion_sparse_to_dense.ipynb>`_ .
 The result is just not satisfying.
 
 .. image:: resonstructions/test_sparse_to_dense.png
@@ -89,11 +89,26 @@ The result is just not satisfying.
 
 `DeMoN: Depth and Motion Network <https://github.com/lmb-freiburg/demon>`_
 
+2.6 Video
+~~~~~~~~~~~~~~~~~~~~~
+
 .. raw:: html
 
     <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
         <iframe src="//player.bilibili.com/player.html?aid=457051159&bvid=BV125411b7Ww&cid=235161102&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"> </iframe>
     </div>
+
+2.7 Hybrid-method
+~~~~~~~~~~~~~~~~~~~~~
+
+`Consistent Video Depth Estimation <https://roxanneluo.github.io/Consistent-Video-Depth-Estimation/>`_ use a various deeplearning method to achieve relative good result.
+
+* Step 1. Colmap : sparse reconstruction.
+* Step 2. FlowNet2 : for estimating a flow-displacement consistence evulation.
+* Step 3. Fine-Tune (Training) Monodepth2 : use the optical flow displacement consistence (obtained in Step 2.) and geometry consistence (using 3D SFM pyhsics model, obtained in Step 1).
+* Step 4. Scale calibration of the monodepth2 depth and colmap depth.
+
+
 
 3. Our process
 ------------------------
