@@ -1,4 +1,4 @@
-Machine Learning with Graphs
+ML with Graphs
 ==============================
 
 This page includes CS224W Stanford `note page <https://snap-stanford.github.io/cs224w-notes/>`_.
