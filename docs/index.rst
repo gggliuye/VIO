@@ -6,6 +6,16 @@
 Welcome to My-AR's documentation!
 ===================================
 
+My SLAM related notes (one drive), mainly from `Deep Blue <https://www.shenlanxueyuan.com/>`_ courses:
+
+* `Visual inertial SLAM <https://1drv.ms/u/s!AlcTaQw_X72KhE9bsiXSZVtZoOkI?e=j21AhG>`_
+* `Lidar SLAM <https://1drv.ms/u/s!AlcTaQw_X72KhEeDWvEo1rUyGLRx?e=7PwGYG>`_
+* `Point cloud Processing <https://1drv.ms/u/s!AlcTaQw_X72KiGhjQgSxHq52ASH0?e=g4Yehp>`_
+* `State Estiamte for Robotics <https://1drv.ms/u/s!AlcTaQw_X72KiFg7y8eHRLYxKrsd?e=wvlxC6>`_
+* `SLAM Code Review <https://1drv.ms/u/s!AlcTaQw_X72KhEy4GseRWUtJp0ex?e=13h0Vw>`_
+* `PGM <https://1drv.ms/u/s!AlcTaQw_X72KhEkOxIeOlO4QcdK8?e=2VWa4v>`_
+* `MIT Self-Driving Classes <https://1drv.ms/u/s!AlcTaQw_X72KhEuoFbDbF4laEwUs?e=9fdKvS>`_
+
 The following pages contain :
 
 * SLAM related learning notes (mainly from `Deep Blue <https://www.shenlanxueyuan.com/>`_ VIO courses).
