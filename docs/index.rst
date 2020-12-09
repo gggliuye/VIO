@@ -15,7 +15,7 @@ My SLAM related notes (one drive and google drive), (some are from `Deep Blue <h
 
 **SLAM**:
 
-* `Visual inertial SLAM <https://1drv.ms/u/s!AlcTaQw_X72KhE9bsiXSZVtZoOkI?e=j21AhG>`_
+* `Visual inertial SLAM <https://1drv.ms/u/s!AlcTaQw_X72KhE9bsiXSZVtZoOkI?e=j21AhG>`_ , `VINS note <https://1drv.ms/f/s!AlcTaQw_X72KlgohBxHr8uwZ9_RR>`_ , `My VINS <https://github.com/gggliuye/VINS_BASTIAN>`_
 * `Lidar SLAM <https://1drv.ms/u/s!AlcTaQw_X72KhEeDWvEo1rUyGLRx?e=7PwGYG>`_
 * `Point cloud Processing <https://1drv.ms/u/s!AlcTaQw_X72KiGhjQgSxHq52ASH0?e=g4Yehp>`_
 * `State Estiamte for Robotics <https://1drv.ms/u/s!AlcTaQw_X72KiFg7y8eHRLYxKrsd?e=wvlxC6>`_
