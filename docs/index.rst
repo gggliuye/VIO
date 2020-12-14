@@ -19,7 +19,7 @@ My SLAM related notes (one drive and google drive), (some are from `Deep Blue <h
 * `Lidar SLAM <https://1drv.ms/u/s!AlcTaQw_X72KhEeDWvEo1rUyGLRx?e=7PwGYG>`_
 * `Point cloud Processing <https://1drv.ms/u/s!AlcTaQw_X72KiGhjQgSxHq52ASH0?e=g4Yehp>`_
 * `State Estiamte for Robotics <https://1drv.ms/u/s!AlcTaQw_X72KiFg7y8eHRLYxKrsd?e=wvlxC6>`_
-* `SLAM Code Review <https://1drv.ms/u/s!AlcTaQw_X72KhEy4GseRWUtJp0ex?e=13h0Vw>`_
+* `SLAM Code Review <https://1drv.ms/u/s!AlcTaQw_X72KhEy4GseRWUtJp0ex?e=13h0Vw>`_, `SLAM Code Review HWS <https://drive.google.com/drive/folders/1tvrtbjEaW4Yecur-FeY1ro1myV0Httej?usp=sharing>`_
 * `MIT Self-Driving Classes <https://1drv.ms/u/s!AlcTaQw_X72KhEuoFbDbF4laEwUs?e=9fdKvS>`_
 
 The following pages contain :
