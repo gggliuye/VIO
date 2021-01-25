@@ -97,3 +97,35 @@ Jacobians of velocity :
 
 .. math::
   \frac{\partial r_{v} }{\partial v_{j}^{w}} = -I_{3\times 3}
+
+
+Covariance
+--------------
+
+Covariance of residual position :
+
+.. math::
+  r_{p} = K_{p} + \frac{1}{2}\delta t^{2}\mathrm{Exp}(r_{w, b_{i}})(-b_{a}-n_{a})
+
+.. math::
+  \Sigma_{r_{p}} = \frac{1}{2}\delta t^{2}\mathrm{Exp}(r_{w, b_{i}})(\Sigma_{b_{a}} + \Sigma_{n_{a}})
+
+Covariance of residual rotation :
+
+.. math::
+  \begin{align}
+  r_{q} &= \mathrm{Log}(\mathrm{Exp}(-r_{w,b_{j}}) \mathrm{Exp}(r_{w,b_{i}}) \mathrm{Exp}((K_{r} - b_{g} - n_{g})\delta t) ) \\
+  &\approx \mathrm{Log}(\mathrm{Exp}(\bar{\phi})\mathrm{Exp}(J_{r}(\hat{w}\delta t)(-b_{g}-n_{g})\delta t ) \\
+  &\approx \bar{\phi} + J_{r}^{-1}(\bar{\phi})J_{r}(\hat{w}\delta t)(-b_{g}-n_{g})\delta t \\
+  \end{align}
+
+.. math::
+  \Sigma_{r_{q}} = J_{r}^{-1}(\bar{\phi})J_{r}(\hat{w}\delta t)\delta t(\Sigma_{b_{a}} + \Sigma_{n_{a}})
+
+Covariance of residual velocity :
+
+.. math::
+  r_{v} = K + \mathrm{Exp}(r_{w, b_{i}})\delta t (-b_{a}-n_{a})
+
+.. math::
+  \Sigma_{r_{v}} = \mathrm{Exp}(r_{w, b_{i}})\delta t(\Sigma_{b_{a}} + \Sigma_{n_{a}})
