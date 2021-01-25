@@ -8,7 +8,7 @@ Lie group and Lie algebra
  `Group Theory <https://en.wikipedia.org/wiki/Group_theory>`_
 
 A group is a set, G, together with an operation • (called the group law of G) that combines any two elements a and b to form another element, denoted a • b or ab. To qualify as a group, the set and operation, (G, •), must satisfy four requirements known as the group axioms:
- 
+
 **Closure** :
 For all a, b in G, the result of the operation, a • b, is also in G.
 
@@ -29,7 +29,7 @@ The reason of introducing Group Theory, I thinks is to make the normalize the op
 
 
 
-Calibration Camera (IMU LIDAR)
+Calibration
 ---------------------------------
 
 Camera
@@ -37,9 +37,9 @@ Camera
 
 Camera calibration is extremely important for SLAM system. Matlab and `OpenCV <https://docs.opencv.org/2.4/doc/tutorials/calib3d/camera_calibration/camera_calibration.html>`_ image calibration tool boxes are the most used tools (they basicly use the same algorithm,  however different in realize method. For example, they use different non-linear optimization methods).
 
-Pin-hole model is most used camera in an AR application. 
+Pin-hole model is most used camera in an AR application.
 Calibrate a pinhole camera is to estimate the parameters of a lens and image sensor,
-which will be used to correct for lens distortion, measure the size of an object in world units, or determine the location of the camera in the scene.There are mainly two parts in camera calibration. Firstly, to project the 3D world to the camera sensor plane (world space to virutal image space), secondly transform the image from the real world unit to pixel level (virtual image space to pixel space). 
+which will be used to correct for lens distortion, measure the size of an object in world units, or determine the location of the camera in the scene.There are mainly two parts in camera calibration. Firstly, to project the 3D world to the camera sensor plane (world space to virutal image space), secondly transform the image from the real world unit to pixel level (virtual image space to pixel space).
 
 .. math::
    Z\begin{bmatrix} x\\y\\1\end{bmatrix}
@@ -47,7 +47,7 @@ which will be used to correct for lens distortion, measure the size of an object
    f_{x} & 0 & 0\\0 & f_{y} & 0 \\ 0 & 0 & 1
    \end{bmatrix}
    \begin{bmatrix} X\\Y\\Z\end{bmatrix}
-   
+
 .. math::
     \begin{bmatrix} x_{pixel}\\y_{pixel}\\1\end{bmatrix}
     =\begin{bmatrix}
@@ -69,7 +69,7 @@ which will be used to correct for lens distortion, measure the size of an object
     \end{bmatrix} \begin{bmatrix} X\\Y\\Z\end{bmatrix}
     = \kappa \begin{bmatrix} X\\Y\\Z\end{bmatrix}
 
-In this function, fx, fy, cx, and cy are the intrinix parameter of a camera (sometime we can treat fx and fy as the same, noted as f). 
+In this function, fx, fy, cx, and cy are the intrinix parameter of a camera (sometime we can treat fx and fy as the same, noted as f).
 In summary, the whole process has four steps : world frame -> camera frame -> homo-frame -> pixel frame.
 
 In real case, there exists distortion (e.g. for large FOV camreas, fish eye cameras). There are many types of distortion.
@@ -77,7 +77,7 @@ In general case, the distortion is represented as follows:
 
 .. math::
     x_{distorted} = x(1 + k_{1}r^{2} + k_{2}r^{4} + k_{3}r^{6}  )
-    
+
     x_{distorted} = x + ( 2p_{1}xy + p_{2}(r^{2}+2x^{2}) )
 
 **Stereo Camera** calibration (passive).  **RGB-D** camera (active) ToF(time of flight), structure light.
@@ -114,12 +114,9 @@ Besides, there are **scale** error and **misalignment** for an Accelerometer , w
     =\begin{bmatrix}
        s_{xx} & m_{xy} & m_{xz}\\ m_{yx} & s_{yy} & m_{yz} \\ m_{zx} & m_{zy} & m_{zz}
     \end{bmatrix}
-    \begin{bmatrix} a_{x}\\a_{y}\\a_{z}\end{bmatrix} 
-    + \begin{bmatrix} b_{ax}\\b_{ay}\\b_{az}\end{bmatrix} 
+    \begin{bmatrix} a_{x}\\a_{y}\\a_{z}\end{bmatrix}
+    + \begin{bmatrix} b_{ax}\\b_{ay}\\b_{az}\end{bmatrix}
 
-LIDAR
-~~~~~~~~~~~~~~~~~~~~~~~~~
-(to do)
 
 
 Photometric calibration
@@ -128,20 +125,12 @@ Photometric calibration
 gamma correction
 ~~~~~~~~~~~~~~~~~~~~~
 
-It is dur to the camera eletronic senor has a different sense of color compare to human eyes. Which result to different photometric distribution. This process is usually done for a better visual expriences. 
+It is dur to the camera eletronic senor has a different sense of color compare to human eyes. Which result to different photometric distribution. This process is usually done for a better visual expriences.
 
 `Code Example <https://github.com/gggliuye/VIO/blob/master/pretreatment/ImagePerprocessing.cc>`_
 
 .. math::
     I_{i}^{\gamma} = ( I_{i} / 255) ^{\gamma} * 255
-
-Example of indoor scene:
-
-.. image:: images/bc_images.png
-   :width: 100%
-
-.. image:: images/bc_hists.png
-   :width: 100%
 
 Example of outdoor scene:
 
@@ -179,7 +168,7 @@ The pixel intensities are therefore being mapped by the camera response function
 .. math::
     \mathbf{O}(x) = f (\mathbf{I}(x))
 
-We can use the empiric model of response (EMoR) with principle component analysis (PCA) to model the CRF. 
+We can use the empiric model of response (EMoR) with principle component analysis (PCA) to model the CRF.
 Using the mean response :math:`f_{0}(x)` and basis functions :math:`h_{k}(x)` to combine to form the overall response function.
 It is shown that the first 4 basis functions are sufficien to represent the empiric space of response well.
 
@@ -196,10 +185,10 @@ The photometric calibration has only slight influence on feature point extractio
 
 We can formulate the residual of the system:
 
-.. math:: 
+.. math::
     E = \sum_{p in P} \sum_{i \in F_{p}} w_{i}^{p} \|  \mathbf{O}_{i}^{p} -  f (t_{i} \mathbf{V}(x_{i}^{p}) \mathbf{L}(x_{i}^{p}))  \|_{h}
 
-Huber norm is used by the author for higher robustness (as the effect of outlier will be less remarkable). And it is solved by LM damped method. 
+Huber norm is used by the author for higher robustness (as the effect of outlier will be less remarkable). And it is solved by LM damped method.
 
 This system has one dimension of zero space, as if :math:`\hat{f}(x) = f(x^{1/ \gamma})` ,  :math:`\hat{\mathbf{V}}(x) = \mathbf{V}(x)^{\gamma}` , :math:`\hat{t}_{i} = t_{i}^{\gamma}` , :math:`\hat{\mathbf{L}}(x^{p}) = \mathbf{L}(x^{p})^{\gamma})` :
 
@@ -209,14 +198,14 @@ This system has one dimension of zero space, as if :math:`\hat{f}(x) = f(x^{1/ \
 Online calibration
 ~~~~~~~~~~~~~~~~~~~~~
 
-* For better real time performance, the optimzation of exposure time (various for images) and vignetting (stable for given camera) are sperated. 
-* The system is realized by first optimze the exposure time by the linear optimization problem. 
+* For better real time performance, the optimzation of exposure time (various for images) and vignetting (stable for given camera) are sperated.
+* The system is realized by first optimze the exposure time by the linear optimization problem.
 
 .. math::
     E = \sum_{i = 1}^{M} \sum_{p \in P_{i}} w_{i}^{p} \|  \frac{ f^{-1} (\mathbf{O}_{i}^{p})} {\mathbf{V}(x_{i}^{p})} -  t_{i}  \mathbf{L}(x_{i}^{p})  \|_{2}
 
 * Then optimization the whole system in the backend.
-* This has been shown reliable results in DSO (Direct Sparse Odometry), it remarkablely boost the result and its processing time is really small. 
+* This has been shown reliable results in DSO (Direct Sparse Odometry), it remarkablely boost the result and its processing time is really small.
 
 Image Blurry
 ------------------
@@ -231,10 +220,10 @@ There are several types of cameras: global shutter cameras, rolling shutter came
 .. image:: images/cameracompare.png
     :width: 80%
     :align: center
-    
-**Rolling shutter** cameras will generally cause jerry effect, to reduce the effect, we can model the motion of the camera, and find the correct synchronization of pixels, for an example in Spline Fusion [#]_ . 
 
-**Event cameras** are used more and more now adays, they are used to measure not the intensity of a ray, but rather detect the change of received light intensity. They are more robust to fast move, light condition, those cameras are mostly used in Drones now. And there emerges many SLAM algorithms based on event cameras. For example " Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization [#]_ ", an example video can be seen `here <https://www.youtube.com/watch?v=F3OFzsaPtvI>`_ .  
+**Rolling shutter** cameras will generally cause jerry effect, to reduce the effect, we can model the motion of the camera, and find the correct synchronization of pixels, for an example in Spline Fusion [#]_ .
+
+**Event cameras** are used more and more now adays, they are used to measure not the intensity of a ray, but rather detect the change of received light intensity. They are more robust to fast move, light condition, those cameras are mostly used in Drones now. And there emerges many SLAM algorithms based on event cameras. For example " Real-time Visual-Inertial Odometry for Event Cameras using Keyframe-based Nonlinear Optimization [#]_ ", an example video can be seen `here <https://www.youtube.com/watch?v=F3OFzsaPtvI>`_ .
 
 For our cases, most phone cameras and AR glasses cameras are **Global shutter cameras** . For global shutter cameras, the most signification problem is image blur, which are mostly two types : **Defocus Blur** and **Motion Blur** .
 
@@ -247,7 +236,7 @@ For our cases, most phone cameras and AR glasses cameras are **Global shutter ca
    :width: 80%
    :align: center
 
-**Data set** ： To analysis the motion blurry and the algorithms made to solve it, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image) 
+**Data set** ： To analysis the motion blurry and the algorithms made to solve it, we made our own data set of 140 images (of size 640 times 480) with 70 blurred images and 70 non blur images. Two example images are shown above. (left: non blur image , right : motion blurred image)
 
 
 
@@ -255,7 +244,7 @@ For our cases, most phone cameras and AR glasses cameras are **Global shutter ca
 Point Spread Function (PSF)
 ~~~~~~~~~~~~~~~~~~~~~
 
-Point Spread Function (PSF) describes the response of an imaging system to a point source or point object. A more general term for the PSF is a system's impulse response, the PSF being the impulse response of a focused optical system. 
+Point Spread Function (PSF) describes the response of an imaging system to a point source or point object. A more general term for the PSF is a system's impulse response, the PSF being the impulse response of a focused optical system.
 
 .. math::
     Image(Object_{1} + Object_{2}) = Image(Object_{1}) + Image(Object_{2})
@@ -264,14 +253,14 @@ Point Spread Function (PSF) describes the response of an imaging system to a poi
 It operators like an convoluton operator, and the blur of an image can be represented by an PSF operation of an image.
 
 .. math::
-    T(x_{0}, y_{0}) = \int \int O(u,v)PSF(x_{i}/M-u, y_{i}/M -v )du dv 
+    T(x_{0}, y_{0}) = \int \int O(u,v)PSF(x_{i}/M-u, y_{i}/M -v )du dv
 
-The PSF functions have a lot of type, different PSF will produce different image effect. But we will not discuss here, more theory can be seen in `wiki <https://en.wikipedia.org/wiki/Point_spread_function>`_ . 
+The PSF functions have a lot of type, different PSF will produce different image effect. But we will not discuss here, more theory can be seen in `wiki <https://en.wikipedia.org/wiki/Point_spread_function>`_ .
 
 
 Laplacian
 ~~~~~~~~~~~~~~~~~~~~~~
-The most simple method to measure burry degree is the **laplacian** , which is a differential operator given by the divergence of the gradient of a function on Euclidean space (in a word: 2nd derivative of an image). In computer vision, it is usually simplified by an matrix convolution operator: 
+The most simple method to measure burry degree is the **laplacian** , which is a differential operator given by the divergence of the gradient of a function on Euclidean space (in a word: 2nd derivative of an image). In computer vision, it is usually simplified by an matrix convolution operator:
 
 .. math::
     kernel = \begin{bmatrix}
@@ -288,13 +277,13 @@ Having the 2nd derivative of the image, we can calcualte the variance of this 2n
 .. image:: images/laplacianThreshold.png
    :align: center
 
-We tried the laplacian variance threshold to classify blur and non blur images. The best performance is got when the threshold is set as 11, and the result precision is 77.8%. 
+We tried the laplacian variance threshold to classify blur and non blur images. The best performance is got when the threshold is set as 11, and the result precision is 77.8%.
 
 Singular feature
 ~~~~~~~~~~~~~~~~~~~~
 
 We can express an image by its singular value decomposition (SVD) :
-  
+
 .. math::
     I = U \Lambda V^{T}
 
@@ -308,7 +297,7 @@ Suppose we have an image I, which is convoluted with a Point Spread Function (PS
 .. math::
     I * H = \sum_{i=1}^{n} \lambda_{i} ( \mathbf{ u_{i} v_{i}^{T} } ) * H
 
-where the convolution operator tends to increase the scale-space of the eigen-images and accordingly causes a loss of high frequence details. Those small singular values that match to small scale space eigen-images correspond to larger scale-space eigen-images after convultion. As a result, the image details are weakened and those large scale-sapce eigen-images get higher weights. 
+where the convolution operator tends to increase the scale-space of the eigen-images and accordingly causes a loss of high frequence details. Those small singular values that match to small scale space eigen-images correspond to larger scale-space eigen-images after convultion. As a result, the image details are weakened and those large scale-sapce eigen-images get higher weights.
 
 Our problem can be seen as a classification problem : input an image, we should tell whether it is blurred or it is non blur.
 As a result of the upper analysis, a measure of degree of burry can be proposed based on the weights of the first few most significant eigen-images :
@@ -340,7 +329,7 @@ Alpha channel modeling has been successfully applied on image deblurring and sup
 Image Deblur
 ----------------------------------
 * Seulement Wiener filter is not suitable for our cases as we have no knowledge about the motion kernel (unless we estimate it in the front end of the system).
-* image blind-deconvolution_  for image deblur, etc. 
+* image blind-deconvolution_  for image deblur, etc.
 
 .. _blind-deconvolution: https://nl.mathworks.com/help/images/ref/deconvblind.html
 
@@ -357,4 +346,3 @@ Reference
 .. [#] Su B, Lu S, Tan C L. Blurred image region detection and classification[C]//Proceedings of the 19th ACM international conference on Multimedia. ACM, 2011: 1397-1400.
 
 .. [#] Dai S, Wu Y. Motion from blur[C]//2008 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2008: 1-8.
-

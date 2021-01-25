@@ -25,7 +25,7 @@ My SLAM related notes (one drive and google drive), (some are from `Deep Blue <h
 The following pages contain :
 
 * SLAM related learning notes (mainly from `Deep Blue <https://www.shenlanxueyuan.com/>`_ VIO courses).
-* Single-image based server localization system. 
+* Single-image based server localization system.
 * Some notes about Machine Learning with graphs.
 
 .. toctree::
@@ -33,6 +33,7 @@ The following pages contain :
    :caption: Contents:
 
    SLAM/index
+   CostFunctions/index
    ServerLocalization/index
    CapellaLocalization/Main
    Unity/index
