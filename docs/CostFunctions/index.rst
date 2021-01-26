@@ -23,3 +23,4 @@ Useful equations :
 
    RelativePose
    IMU
+   VisualMapPoint

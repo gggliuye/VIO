@@ -11,6 +11,19 @@ we will have a optimized starting state and ending state, and interval time not 
 .. math::
   a_{measurement} = q_{w, b}(a_{real}-g)+b+n
 
+The parameterization block of the following derivative is :
+
+.. math::
+  \begin{align}
+  &t_{update} = t + \delta t \\
+  &q_{update} = q \otimes \delta q
+  \end{align}
+
+If you want to use the following parameterization, you need to rewrite the following jacobians w.r.t. translations.
+
+.. math::
+  \xi_{updated} = \mathrm{Log}(\mathrm{Exp}(\xi)\mathrm{Exp}(\delta\xi))
+
 Residual
 ----------------
 
@@ -129,3 +142,7 @@ Covariance of residual velocity :
 
 .. math::
   \Sigma_{r_{v}} = \mathrm{Exp}(r_{w, b_{i}})\delta t(\Sigma_{b_{a}} + \Sigma_{n_{a}})
+
+In real application, as the delta time may be extremely small (as imu is a high frequence device).
+The problem may not converge basing on the upper covariance. In that case, we could assign a prior covariance
+for assuring convergence.
