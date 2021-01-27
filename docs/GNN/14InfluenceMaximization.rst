@@ -8,7 +8,7 @@ to adopt and endorse the product, and then spread the product in the social netw
 -> find the most influential set of nodes.
 
 14.1 Linear Threshold Model
-------------------------
+------------------------------
 
 Each node influenced linearly by its neighbors. And get activated if supress its threshold.
 
@@ -24,7 +24,7 @@ Each node influenced linearly by its neighbors. And get activated if supress its
   \sum_{w\in N(v)\ active} b_{v,w} \ge \theta_{v}
 
 14.2 Independent Cascade Model
----------------------------
+-------------------------------------
 
 If node v is active, it gets **one** chance to make w active, with probability :math:`p_{vw}`.
 
@@ -33,7 +33,7 @@ If node v is active, it gets **one** chance to make w active, with probability :
 
 
 14.3 Influential Maximization (of ICM)
-------------------------------
+-----------------------------------------
 
 **Most influential Set of size k** , (k is a user-defined parameter) is a set S
 containing k nodes that if activated, produces the largest expected cascade size f(S).
@@ -111,7 +111,7 @@ Find the best along : **unit cost greedy** and **benefit-cost greedy**.
 ==========================
 
 16.1 Denfication and Diameter
--------------------------
+----------------------------------
 
 **Edges w.r.t. Nodes** : The growth of number of edges w.r.t. the number of nodes.
 
@@ -145,7 +145,7 @@ For a directed graph have forward/backward burning probabilities.
 If we fix the backward probability r and vary forward burning prob. p.
 Notice a sharp transition between sparse and clique-like graphs.
 
-.. image:: images/forestfiremodel_phase.png
+.. image:: images/forestfiremodel_phase.PNG
   :align: center
   :width: 40%
 
@@ -171,7 +171,7 @@ from y to x until time t.
   c_{close}(x,t) = \frac{1}{\sum_{y}d(y,x\mid t)}
 
 **Temporal PageRank** by applying random walk on temporal paths with P the probability of a temporal path. And As :math:`t\to \infty`,
-the temporal PageRank converges to the static PageRank [1]_ .
+the temporal PageRank converges to the static PageRank [4]_ .
 
 .. math::
   P[(u,x,t_{2}) \mid (v,u,t_{1})] = \beta^{\mid\Gamma_{u} \mid}
@@ -195,18 +195,18 @@ the temporal PageRank converges to the static PageRank [1]_ .
 * h* is the personalization vector.
 * h' is the walk probability vector :math:`h'(u) = \frac{\mid (u,v,t)\in E:\forall v\ in V \mid}{\mid E\mid}`
 
-.. [1] As :math:`t\to\infty`, :math:`\beta^{\mid\Gamma_{u} \mid}` becomes the uniform distribution. Which will be a regular PageRank.
+.. [4] As :math:`t\to\infty`, :math:`\beta^{\mid\Gamma_{u} \mid}` becomes the uniform distribution. Which will be a regular PageRank.
 
 
 17. Reasoning over Knowledge Graphs
-=========================
+======================================
 
 **Knowledge in graph form** : Capture entities (nodes), types (node lables), and relationships (edges).
 
 **Datasets** : FreeBase, Wikidata, Dbpedia, YAGO, NELL, etc. **Massive** : millions of nodes, and edges and **Incomplete** : many true edges are missing
 
 17.1 Link prediction
--------------------
+---------------------------
 
 **TransE** (see `TransE <https://vio.readthedocs.io/zh_CN/latest/GNN/7GraphRepresentation.html?highlight=transe#transe>`_ )
 use TransE to predict links.

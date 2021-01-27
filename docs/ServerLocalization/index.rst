@@ -10,9 +10,8 @@ This page includes all about image localization in a prebuilt scene (that will m
 
    UnitySc/CVPRlocalization
    Methods
-   UnitySc/unityShadowCreator
+   CapellaLocalization/Main
    ArCoreServer/main
    CloudMatch
-   CloudMatchChinese
    LocalMap
    MVS

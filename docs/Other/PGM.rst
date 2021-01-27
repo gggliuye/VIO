@@ -75,7 +75,7 @@ Graph Weight
 
 
 Grid Graph Implementation
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The C++ implementation `Github page <https://github.com/gggliuye/graph_based_image_segmentation>`_ can be found.
 
@@ -177,7 +177,7 @@ Here shows many result, KD tree graph shows more global property, we can find th
 
 3. Graph Cut
 ------------------------
-Another task for image segmentation is to seperate background and object pixels. The most common utils for this task is graph cut (maxflow/mincut). Here I used maxflow from `IST Austria <http://pub.ist.ac.at/~vnk/software.html>`_ a implentation of [4]_ .
+Another task for image segmentation is to seperate background and object pixels. The most common utils for this task is graph cut (maxflow/mincut). Here I used maxflow from `IST Austria <http://pub.ist.ac.at/~vnk/software.html>`_ a implentation of [3]_ .
 
 Graph Cut is to build a graph model of the input image, assign each pixel with a label indicates whehter it belongs to a object or the background. All the pixels in the image are corresponding to the nodes, and the edge is defined based on pixel differences. After built the graph model, the labels will be solved based on **min cut** algorithm. Mincut is too cut the graph into two seperate parts (source and sink), by cutting in edge with relatively small weight (Energy). Mincut is equal to find a cut, which minimize the free energy.
 
@@ -227,6 +227,4 @@ Reference
 
 .. [2] Felzenszwalb P F, Huttenlocher D P. Efficient graph-based image segmentation[J]. International journal of computer vision, 2004, 59(2): 167-181.
 
-.. [3] Kim T, Nowozin S, Kohli P, et al. Variable grouping for energy minimization[C]//CVPR 2011. IEEE, 2011: 1913-1920.
-
-.. [4] Boykov Y, Kolmogorov V. An experimental comparison of min-cut/max-flow algorithms for energy minimization in vision[J]. IEEE Transactions on Pattern Analysis & Machine Intelligence, 2004 (9): 1124-1137.
+.. [3] Boykov Y, Kolmogorov V. An experimental comparison of min-cut/max-flow algorithms for energy minimization in vision[J]. IEEE Transactions on Pattern Analysis & Machine Intelligence, 2004 (9): 1124-1137.

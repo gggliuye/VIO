@@ -35,8 +35,6 @@ The following pages contain :
    SLAM/index
    CostFunctions/index
    ServerLocalization/index
-   CapellaLocalization/Main
-   Unity/index
    Other/index
    GNN/index
 

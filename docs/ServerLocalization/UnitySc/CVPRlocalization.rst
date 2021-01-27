@@ -150,12 +150,7 @@ Here is the MVS fusion result built with `colmap <https://colmap.github.io/>`_ ,
 CVPR
 ----------------------
 
-**EN:**
 The objective of this `CVPR competition <https://www.visuallocalization.net/>`_ is localization in different environment changes (winter/spring, rain/snow/sunday, day/night, etc). The core of these algorithms is their robustness against these environment change. The main warpon is "Deep learning", for example EHTZ use its own HF-net [1]_ to extract features, and CAS uses `Deeplabv3 <https://github.com/rishizek/tensorflow-deeplab-v3>`_ (an open source deep learning architecture ) to extract semantic feature as a criterion for outlier rejection [2]_.
-
-
-**CH：**
-这个竞赛解决的核心问题是针对变化环境的鲁棒性处理(定位的精度并不是它的核心问题)。所以算法的核心在与：使用深度学习工具，构造出鲁棒性更好更加robust的系统。为了这个目的，苏黎世大学的方案是用深度学习提取特征，中国科学院的方式的把深度学习的语义信息用来排除外点。值得一提的是，他们在SFM建模都使用了colmap的开源框架，苏黎世自己创建了深度学习模型，中科院则是运用了开源框架deeplab。
 
 .. image:: bannerCVPR.png
    :align: center
@@ -183,10 +178,8 @@ The global descriptor is predicted by NetVLAD layer on top of the last feature m
 
 1st CAS
 ~~~~~~~~~~~~~~~~~~~~
-**EN:** From China Academy of Sciences.
+From China Academy of Sciences.
 The following image shows the system pipeline. They used Colmap [3]_ for offline SfM reconstruction, DeeplabV3 [4]_ to offer semantic segmentation, and NetVLAD [5]_ to offer image match.  `paper page <https://arxiv.org/abs/1904.03803>`_
-
-**CH:** 下图是整个系统的流程图解析，SfM离线建图的部分使用了Colmap，语义分割使用了Deeplabv3，图像匹配使用了NetVLAD。总的来说，排除外点的想法具有原创性。
 
 .. image:: CAS.png
    :align: center
@@ -194,15 +187,8 @@ The following image shows the system pipeline. They used Colmap [3]_ for offline
 
 **Contribute：**
 
-**EN：**
-
 * a new localization pipeline : use semantic infomation as outlier rejection criterion.
 * do not need any additional restrictions (e.g. camera height, grivaty)
-
-**CH：**
-
-* 一个新的定位模式框架：使用语义信息提供新的排除外点的标准。
-* 不需要一些额外信息（比如相机的高度和重力方向）。
 
 **personal view**: lack of originality.
 

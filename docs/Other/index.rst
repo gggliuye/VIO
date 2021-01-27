@@ -1,4 +1,4 @@
-Others
+Other Projects
 ==============================
 
 This page includes all about SLAM.
