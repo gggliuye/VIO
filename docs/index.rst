@@ -36,6 +36,7 @@ The following pages contain :
    CostFunctions/index
    ServerLocalization/index
    Other/index
+   PaperRead/index
    GNN/index
 
 
