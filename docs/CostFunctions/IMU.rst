@@ -121,7 +121,10 @@ Covariance of residual position :
   r_{p} = K_{p} + \frac{1}{2}\delta t^{2}\mathrm{Exp}(r_{w, b_{i}})(-b_{a}-n_{a})
 
 .. math::
-  \Sigma_{r_{p}} = \frac{1}{2}\delta t^{2}\mathrm{Exp}(r_{w, b_{i}})(\Sigma_{b_{a}} + \Sigma_{n_{a}})
+  A = \frac{1}{2}\delta t^{2}\mathrm{Exp}(r_{w, b_{i}})
+
+.. math::
+  \Sigma_{r_{p}} = A(\Sigma_{b_{a}} + \Sigma_{n_{a}})A^{T}
 
 Covariance of residual rotation :
 
@@ -133,7 +136,10 @@ Covariance of residual rotation :
   \end{align}
 
 .. math::
-  \Sigma_{r_{q}} = J_{r}^{-1}(\bar{\phi})J_{r}(\hat{w}\delta t)\delta t(\Sigma_{b_{a}} + \Sigma_{n_{a}})
+  A = J_{r}^{-1}(\bar{\phi})J_{r}(\hat{w}\delta t)\delta t
+
+.. math::
+  \Sigma_{r_{q}} = A(\Sigma_{b_{a}} + \Sigma_{n_{a}})A^{T}
 
 Covariance of residual velocity :
 
@@ -141,8 +147,7 @@ Covariance of residual velocity :
   r_{v} = K + \mathrm{Exp}(r_{w, b_{i}})\delta t (-b_{a}-n_{a})
 
 .. math::
-  \Sigma_{r_{v}} = \mathrm{Exp}(r_{w, b_{i}})\delta t(\Sigma_{b_{a}} + \Sigma_{n_{a}})
+  A = \mathrm{Exp}(r_{w, b_{i}})\delta t
 
-In real application, as the delta time may be extremely small (as imu is a high frequence device).
-The problem may not converge basing on the upper covariance. In that case, we could assign a prior covariance
-for assuring convergence.
+.. math::
+  \Sigma_{r_{v}} = A(\Sigma_{b_{a}} + \Sigma_{n_{a}})A^{T}
