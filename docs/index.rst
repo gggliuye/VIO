@@ -26,7 +26,6 @@ The following pages contain :
 
 * SLAM related learning notes (mainly from `Deep Blue <https://www.shenlanxueyuan.com/>`_ VIO courses).
 * Single-image based server localization system.
-* Some notes about Machine Learning with graphs.
 
 .. toctree::
    :maxdepth: 3
