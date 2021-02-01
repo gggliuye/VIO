@@ -10,6 +10,21 @@ Visual Mapping
 * `SuperPoint 2017 <https://arxiv.org/abs/1712.07629>`_, `SuperGlue <https://arxiv.org/abs/1911.11763>`_ with `colmap 2016 <https://colmap.github.io/>`_ for building map.
 * `Hierarchical Localization 2019 <https://arxiv.org/abs/1812.03506>`_ for localization. (Roughly speaking, using `NetVLAD 2016 <https://arxiv.org/abs/1511.07247>`_ match submap with a global descriptor, then match with reference image).
 
+|chrown| `Online Invariance Selection for Local Feature Descriptors <https://github.com/rpautrat/LISRD>`_
+Mainly for image retrieval.
+A light-weight meta descriptor approach to automatically select the best invariance of the local descriptors given the context.
+Learning the best invariance for local descriptors.
+
+|chrown0| `Online Visual Place Recognition via Saliency Re-identification <https://arxiv.org/pdf/2007.14549.pdf>`_.
+`github project <https://github.com/wh200720041/SRLCD>`_ .
+
+* Perform both saliency detection and retrieval in frequency domain (2D Fourier transformation).
+* Saliency map : IFFT of the difference w.r.t. average filtered log spectral. Kernel cross-correlator (KCC) to match.
+* No offline trainning needed. Low cost, higher recall rate than DBoW2 (as shown in the paper).
+
+|chrown0| `Learning Feature Descriptors using Camera Pose Supervision <https://github.com/qianqianwang68/caps>`_,
+use camera pose (re-projected distance to epipolar line) error as loss function to train NN.
+
 |chrown0|  `Kapture: Robust Image Retrieval-based Visual Localization using Kapture <https://arxiv.org/pdf/2007.13867.pdf>`_
 data-driven features. Instead of manually describing how keypoints or image descriptions should look like, a
 large amount of data is used to train an algorithm to make this decision by itself.
@@ -47,6 +62,10 @@ Ensemble methods for image retrieval process.
 |thumbs|  `ToDayGAN <https://arxiv.org/abs/1809.09767>`_. Use GAN to transform night image to bright day, then use the
 transformed image for image retrieval task.
 
+|unhappy| `Efficient adaptive non-maximal suppression algorithms for homogeneous spatial keypoint distribution <https://github.com/BAILOOL/ANMS-Codes>`_
+
+* ANMS(Adaptive non-maximal suppression) based on Tree Data Structure (TDS).
+* Suppression via Square Covering (SSC)
 
 .. |chrown| image:: images/chrown.png
     :width: 3%

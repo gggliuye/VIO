@@ -4,7 +4,10 @@ Lidar Mapping
 2020
 -----------------
 |chrown0| `LIO-SAM <https://github.com/TixiaoShan/LIO-SAM>`_ Tightly-coupled Lidar Inertial Odometry via
-Smoothing and Mapping. In short, add imu pre-integration to LOAM.
+Smoothing and Mapping. In short, add imu pre-integration and sliding window to LOAM.
+
+|thumbs| `OverlapNet: Loop Closing for LiDAR-based SLAM <http://www.roboticsproceedings.org/rss16/p009.pdf>`.
+Top-down 2d view of lidar scan (with other info) for predict overlap rate and yaw.
 
 2018
 -----------
