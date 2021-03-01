@@ -16,6 +16,12 @@ Top-down 2d view of lidar scan (with other info) for predict overlap rate and ya
 Lightweight and Ground-Optimized Lidar Odometry and Mapping on Variable Terrain.
 See `details and some comparisons <https://vio.readthedocs.io/zh_CN/latest/Other/lidarSLAM.html>`_.
 
+2012
+--------------
+|chrown| `OctoMap <http://www.arminhornung.de/Research/pub/hornung13auro.pdf>`_ `github project <http://octomap.github.io/>`_.
+Probabilistic representation, Modeling of unmapped areas, Efficiency (octree).
+
+
 .. |chrown| image:: images/chrown.png
     :width: 3%
 
