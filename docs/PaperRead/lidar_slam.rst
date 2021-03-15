@@ -6,7 +6,7 @@ Lidar Mapping
 |chrown0| `LIO-SAM <https://github.com/TixiaoShan/LIO-SAM>`_ Tightly-coupled Lidar Inertial Odometry via
 Smoothing and Mapping. In short, add imu pre-integration and sliding window to LOAM.
 
-|thumbs| `OverlapNet: Loop Closing for LiDAR-based SLAM <http://www.roboticsproceedings.org/rss16/p009.pdf>`.
+|thumbs| `OverlapNet: Loop Closing for LiDAR-based SLAM <http://www.roboticsproceedings.org/rss16/p009.pdf>`_.
 Top-down 2d view of lidar scan (with other info) for predict overlap rate and yaw.
 
 2018
@@ -16,10 +16,28 @@ Top-down 2d view of lidar scan (with other info) for predict overlap rate and ya
 Lightweight and Ground-Optimized Lidar Odometry and Mapping on Variable Terrain.
 See `details and some comparisons <https://vio.readthedocs.io/zh_CN/latest/Other/lidarSLAM.html>`_.
 
+2017
+----------
+
+|unhappy| `On the performance of metrics to predict quality in point cloud representations <https://core.ac.uk/download/pdf/148032116.pdf>`_.
+Using absolute category rating (ACR) and able to perceive distortions.
+
+|unhappy| `On Subjective and Objective Quality Evaluation of Point Cloud Geometry <https://ieeexplore.ieee.org/document/7965681>`_.
+Point cloud quality metric using DSIS (double-stimulus impairement scale) methodology. Showing that current state-of-the-art objective 
+metrics (point-to-point, point-to-plane or point-to-mesh) do not predict well visual quality, especially under typical distortions such as compression.
+
+|thumbs| `2D SLAM Quality Evaluation Methods <https://arxiv.org/pdf/1708.02354.pdf>`_.
+The proportion of occupied and free cells (check wall blurry). The amount of corners and enclosed areas in a map.
+
 2012
 --------------
 |chrown| `OctoMap <http://www.arminhornung.de/Research/pub/hornung13auro.pdf>`_ `github project <http://octomap.github.io/>`_.
 Probabilistic representation, Modeling of unmapped areas, Efficiency (octree).
+
+2009
+--------------
+|thumbs| `On Measuring the Accuracy of SLAM Algorithms <http://www2.informatik.uni-freiburg.de/~stachnis/pdf/kuemmerle09auro.pdf>`_.
+(RPE vs APE) A metric that operates only on relative geometric relations between poses along the trajectory of the robot.
 
 
 .. |chrown| image:: images/chrown.png
