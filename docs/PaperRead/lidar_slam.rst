@@ -1,6 +1,16 @@
 Lidar Mapping
 ====================
 
+2021
+----------------------
+|thumbs| `MULLS: Versatile LiDAR SLAM via Multi-metric Linear Least Square <https://github.com/YuePanEdward/MULLS>`_.
+
+* Lidar only slam (it doesn't addition information (e.g. imu) for undistortion.)
+* Use many kind of features (ground, facade, pillar, beam, etc) to make the system versatile. (and doesn't depends on additional info for cloud, e.g ring).
+* Registration to a local submap. solve the new ICP problem based on TEASER (applying truncated least square estimation
+with semi-definite relaxation).
+* Process a loop closure and a pose graph optimization.
+
 2020
 -----------------
 |chrown0| `LIO-SAM <https://github.com/TixiaoShan/LIO-SAM>`_ Tightly-coupled Lidar Inertial Odometry via
