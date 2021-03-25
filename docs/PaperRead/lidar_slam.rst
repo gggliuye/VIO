@@ -7,8 +7,7 @@ Lidar Mapping
 
 * Lidar only slam (it doesn't addition information (e.g. imu) for undistortion.)
 * Use many kind of features (ground, facade, pillar, beam, etc) to make the system versatile. (and doesn't depends on additional info for cloud, e.g ring).
-* Registration to a local submap. solve the new ICP problem based on TEASER (applying truncated least square estimation
-with semi-definite relaxation).
+* Registration to a local submap. solve the new ICP problem based on TEASER (applying truncated least square estimation with semi-definite relaxation).
 * Process a loop closure and a pose graph optimization.
 
 2020
