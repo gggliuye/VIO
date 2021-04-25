@@ -24,6 +24,15 @@ Localize stereo camera in pre-built lidar map.
 DL match rgb image and depth image (from lidar cloud)
 
 
+|unhappy| `Lidar-Monocular Visual Odometry using Point and Line Features <https://cg.cs.tsinghua.edu.cn/people/~mtj/publications/ICRA2020-PL-LOAM.pdf>`_
+(loosely coupled)
+
+* image -> point feature (ORB), line feature (LSD) -> project lidar to estimat depth -> odometry -> local BA current pose and landmarks.
+* ICP relative pose factors.
+* Global BA  using ICP factors, ORB factors, LSD factors.
+
+|unhappy| `LIC-Fusion 2.0: LiDAR-Inertial-Camera Odometry with Sliding-Window Plane-Feature Tracking <https://arxiv.org/abs/2008.07196>`_ Tracking planes in the sliding window.
+
 2019
 ------------
 
@@ -34,6 +43,11 @@ Finally PnP-RANSAC for pose estimation.
 
 2018
 -----------
+
+|thumbs| `LIMO: Lidar-Monocular Visual Odometry <https://arxiv.org/abs/1807.07524>`_
+
+* Depth estiamtion : project lidar into image -> estimate local plane (select local range, foreground segmentation) -> check the depth.
+* Visual Odometry, global BA.
 
 2017
 ---------------
