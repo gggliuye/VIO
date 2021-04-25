@@ -18,6 +18,8 @@ Smoothing and Mapping. In short, add imu pre-integration and sliding window to L
 |thumbs| `OverlapNet: Loop Closing for LiDAR-based SLAM <http://www.roboticsproceedings.org/rss16/p009.pdf>`_.
 Top-down 2d view of lidar scan (with other info) for predict overlap rate and yaw.
 
+|unhappy| `ISC (Intensity Scan Context) <https://arxiv.org/abs/2003.05656>`_ Coding Intensity and Geometry Relations for Loop Closure Detection. Encode lidar frame using geometry and intensity info (project intensity into ring distributed subspaces). 
+
 2018
 -----------
 
