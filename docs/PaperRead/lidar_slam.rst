@@ -10,6 +10,11 @@ Lidar Mapping
 * Registration to a local submap. solve the new ICP problem based on TEASER (applying truncated least square estimation with semi-definite relaxation).
 * Process a loop closure and a pose graph optimization.
 
+|chrown0| `BALM: Bundle adjustment for lidar mapping <https://github.com/hku-mars/BALM>`_ . But the main results shown for Livox Device (denser, small FOV).
+
+* Adaptive voxelization to match both plane and edge features without a segmentation.
+* Reduce to pose only BA.
+
 2020
 -----------------
 |chrown0| `LIO-SAM <https://github.com/TixiaoShan/LIO-SAM>`_ Tightly-coupled Lidar Inertial Odometry via
