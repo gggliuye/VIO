@@ -26,9 +26,6 @@ And more generally :
 |thumbs| `A Closed-form Estimate of 3D ICP Covariance 2015 <https://sites.google.com/site/icpcovariance/>`_.
 Based on the upper paper, and solve for point-to-point case.
 
-.. math::
-  G\Sigma_{sensor}G^{T}
-
 |thumbs| `On the Covariance of ICP-based Scan-matching Techniques 2016 <https://arxiv.org/abs/1410.7632>`_.
 Analysis the upper hessien based method. Find that the upper method fit for point-to-plane icp, but not for point-to-point icp.
 
