@@ -33,3 +33,4 @@ In personal view :
    lidar_slam
    visual_slam
    multi_sensor
+   subjects
