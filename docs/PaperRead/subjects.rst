@@ -12,16 +12,15 @@ ICP covariance
 * sensor noise.
 
 |chrown|  `An accurate closed-form estimate of ICP's covariance 2007 <https://ieeexplore.ieee.org/document/4209579>`_.
-Use hessien matrix as the estimation of the covariance:
+Use hessien matrix as the estimation of the covariance (but this method in some cases greatly over-estimates thte true covariance):
 
 .. math::
-  cov(\hat{x}) \approx 2\frac{residual}{#matches-3} [\frac{\partial^{2}}{\partial x^{2}}residual]^{-1}
+  cov(\hat{x}) \approx 2\frac{residual}{K-3} [\frac{\partial^{2}}{\partial x^{2}}residual]^{-1}
 
-And more generally : 
+This paper develop the following closed-form method : 
 
 .. math::
-  cov(x) \approx (\frac{\partial r^{2}}{\partial x^{2}})^{-1} (\frac{\partial r^{2}}{\partial z\partial x) cov(z) 
-  (\frac{\partial r^{2}}{\partial z\partial x)^{T} (\frac{\partial r^{2}}{\partial x^{2}})^{-1}
+  cov(x) \approx (\frac{\partial r^{2}}{\partial x^{2}})^{-1} (\frac{\partial r^{2}}{\partial z\partial x) cov(z) (\frac{\partial r^{2}}{\partial z\partial x)^{T} (\frac{\partial r^{2}}{\partial x^{2}})^{-1}
 
 |thumbs| `A Closed-form Estimate of 3D ICP Covariance 2015 <https://sites.google.com/site/icpcovariance/>`_.
 Based on the upper paper, and solve for point-to-point case.
