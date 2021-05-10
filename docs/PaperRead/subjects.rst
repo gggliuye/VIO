@@ -11,7 +11,7 @@ ICP covariance
 * miss match.
 * sensor noise.
 
-|chrown|  `An accurate closed-form estimate of ICP's covariance 2007 <https://ieeexplore.ieee.org/document/4209579>`_.
+|thumbs|  `An accurate closed-form estimate of ICP's covariance 2007 <https://ieeexplore.ieee.org/document/4209579>`_.
 Use hessien matrix as the estimation of the covariance (but this method in some cases greatly over-estimates thte true covariance):
 
 .. math::
@@ -22,8 +22,20 @@ This paper develop the following closed-form method :
 .. math::
   cov(x) \approx [\frac{\partial^{2}}{\partial x^{2}}J]^{-1} [\frac{\partial^{2}}{\partial z\partial x}J]^{T} cov(z) [\frac{\partial^{2}}{\partial z\partial x}J] [\frac{\partial^{2}}{\partial x^{2}}J]^{-1}
 
-|thumbs| `A Closed-form Estimate of 3D ICP Covariance 2015 <https://sites.google.com/site/icpcovariance/>`_.
+|unhappy| `A Closed-form Estimate of 3D ICP Covariance 2015 <https://sites.google.com/site/icpcovariance/>`_.
 Based on the upper paper, and solve for point-to-point case.
+
+While the equation in the paper has problem, e.g. for the point to point ICP.
+
+.. math::
+  Loss = \sum_{i} \|Rp_{i} + t- q_{i} \|^{2}
+
+As the upper equation has the assumuption that the covariance of each point error is identity. Then no covariance term of the points are in the equation, so we shouldn't have the covariance of the points in the final result. If we want the result to have covariance terms, we should have:
+
+.. math::
+  Loss = \sum_{i} (Rp_{i} + t- q_{i})^{T}\Sigma_{i}(Rp_{i} + t- q_{i})
+
+And Sigma i depends both on the two points, only then could we apply the equation of the very first paper.
 
 |thumbs| `On the Covariance of ICP-based Scan-matching Techniques 2016 <https://arxiv.org/abs/1410.7632>`_.
 Analysis the upper hessien based method. Find that the upper method fit for point-to-plane icp, but not for point-to-point icp.
