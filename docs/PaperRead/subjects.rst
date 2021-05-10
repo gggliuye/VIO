@@ -20,7 +20,7 @@ Use hessien matrix as the estimation of the covariance (but this method in some 
 This paper develop the following closed-form method : 
 
 .. math::
-  cov(x) \approx (\frac{\partial r^{2}}{\partial x^{2}})^{-1} (\frac{\partial r^{2}}{\partial z\partial x) cov(z) (\frac{\partial r^{2}}{\partial z\partial x)^{T} (\frac{\partial r^{2}}{\partial x^{2}})^{-1}
+  cov(x) \approx [\frac{\partial^{2}}{\partial x^{2}}J]^{-1} [\frac{\partial^{2}}{\partial z\partial x}J]^{T} cov(z) [\frac{\partial^{2}}{\partial z\partial x}J] [\frac{\partial^{2}}{\partial x^{2}}J]^{-1}
 
 |thumbs| `A Closed-form Estimate of 3D ICP Covariance 2015 <https://sites.google.com/site/icpcovariance/>`_.
 Based on the upper paper, and solve for point-to-point case.
@@ -31,6 +31,20 @@ Analysis the upper hessien based method. Find that the upper method fit for poin
 
 |thumbs| `A New Approach to 3D ICP Covariance Estimation 2019 <https://arxiv.org/abs/1909.05722>`_.
 Add an additional term for the covariance from the initial pose estimation.
+
+
+Point cloud generation
+---------------
+
+* (local method) 3d grid (TSDF, ESDF) + matching cube. (binary classification problem for octree vertices)
+* (global method) point cloud + possion reconstruction.
+* Delaunnay triangulation
+* Deep learning method
+
+ |chrown0| `(ONet) Occupancy networks: Learning 3d reconstruction in function space <https://arxiv.org/abs/1812.03828>`_
+
+|thumbs| `SSRNet: Scalable 3D Surface Reconstruction Network <https://arxiv.org/pdf/1911.07401.pdf>`_
+
 
 .. |chrown| image:: images/chrown.png
     :width: 3%
