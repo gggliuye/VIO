@@ -34,17 +34,28 @@ Add an additional term for the covariance from the initial pose estimation.
 
 
 Point cloud generation
----------------
+-----------------------------
 
 * (local method) 3d grid (TSDF, ESDF) + matching cube. (binary classification problem for octree vertices)
 * (global method) point cloud + possion reconstruction.
 * Delaunnay triangulation
 * Deep learning method
 
- |chrown0| `(ONet) Occupancy networks: Learning 3d reconstruction in function space <https://arxiv.org/abs/1812.03828>`_
+
+|chrown0| `(ONet) Occupancy networks: Learning 3d reconstruction in function space <https://arxiv.org/abs/1812.03828>`_
 
 |thumbs| `SSRNet: Scalable 3D Surface Reconstruction Network <https://arxiv.org/pdf/1911.07401.pdf>`_
 
+Line feature match
+------------------------
+
+|chrown0| `structure-from-motion using lines representation triangulation and bundle adjustment 2005 <https://hal.archives-ouvertes.fr/hal-00092589/document>`_
+Plucker representation of the line (by two points or two planes: the direction of the line, and the moment). The paper proposed a 
+**Orthonormal Representation** of lines, takes only 4 dof (three SO(3) and one SO(2)). 
+
+|chrown0| `impact of landmark parameterization on monocular ekf-slam with points and lines 2010 <https://www.researchgate.net/publication/41182046_Impact_of_Landmark_Parametrization_on_Monocular_EKF-SLAM_with_Points_and_Lines>`_ Project lines into camera image space.
+
+|chrown0| `PL-SLAM: a Stereo SLAM System through the Combination of Points and Line Segments 2017 <https://arxiv.org/abs/1705.09479>`_. Using the orthonormal representation of lines, and 3d point representation of points, to process visual slam (basicly ORBSLAM2 structure). And the first paper to derivative the line jacobians with detail.
 
 .. |chrown| image:: images/chrown.png
     :width: 3%
