@@ -15,6 +15,9 @@ Lidar Mapping
 * Adaptive voxelization to match both plane and edge features without a segmentation.
 * Reduce to pose only BA.
 
+|chrown0| `LiTAMIN2: Ultra Light LiDAR-based SLAM using Geometric Approximation applied with KL-Divergence <https://arxiv.org/abs/2103.00784>`_.
+Using a covariance based ICP error, combined with a covariance shape error term (from KL divergence), which allow matching with very large voxel size, then making the registration extremely fast.
+
 2020
 -----------------
 |chrown0| `LIO-SAM <https://github.com/TixiaoShan/LIO-SAM>`_ Tightly-coupled Lidar Inertial Odometry via
