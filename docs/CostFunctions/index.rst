@@ -21,6 +21,7 @@ Useful equations :
    :maxdepth: 3
    :caption: Contents:
 
+   Cvx
    RelativePose
    IMU
    VisualMapPoint
