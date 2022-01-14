@@ -13,5 +13,5 @@ This page includes all about SLAM.
    Tracking/TrackingIntroduction
    deepblue/LM
    deepblue/VIO
+   deepblue/tmp
    MarkerTracker/MarkerTracker
-   Gloopclosure/paper

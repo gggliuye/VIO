@@ -4,5 +4,5 @@
 sphinx build :
 
 ```
-sphinx-build -b html ./VIO/docs ./VIO_doc
+sphinx-build -b html ./docs ./VIO_doc
 ```

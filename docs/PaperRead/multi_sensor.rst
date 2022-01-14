@@ -1,5 +1,23 @@
 Multi-Sensor Mapping
-==================
+========================
+
+2021
+------------
+
+|thumbs| `R3LIVE: A Robust, Real-time, RGB-colored, LiDAR-Inertial-Visual tightly-coupled state Estimation and mapping package <https://github.com/hku-mars/r3live>`_
+FAST-LIO2 + VIO.
+
+.. image:: images/r3live.png
+    :width: 50%
+    :align: center
+
+|thumbs| `LVI-SAM: Tightly-coupled Lidar-Visual-Inertial Odometry via Smoothing and Mapping <https://github.com/TixiaoShan/LVI-SAM>`_
+(looks similar to V-LOAM + IMU) optimization with the following factors (with two system) :
+
+* IMU preintegration. (sys-cam. & sys-lidar.)
+* visual measurements without depth. (sys-cam.)
+* visual measurements with depth (here comes lidar measurement). (sys-cam.)
+* lidar odometry factor. (sys-lidar.)
 
 2020
 ---------------

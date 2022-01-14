@@ -1,5 +1,5 @@
 Visual Localization
-===================
+====================
 
 
 SFM
@@ -135,7 +135,7 @@ For **Sparse Reconstruction** the data can be saved as "txt" or "bin" files.
 
 
 MVS(Multiple View Stereovision)
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Its objective is to build a denser map, using multiply view geometry. Made for dense reconstrcution from images only, which will not be helpful for our localization propose.
 
