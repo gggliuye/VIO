@@ -18,6 +18,24 @@ Lidar Mapping
 |chrown0| `LiTAMIN2: Ultra Light LiDAR-based SLAM using Geometric Approximation applied with KL-Divergence <https://arxiv.org/abs/2103.00784>`_.
 Using a covariance based ICP error, combined with a covariance shape error term (from KL divergence), which allow matching with very large voxel size, then making the registration extremely fast.
 
+|thumbs| `Range Image-based LiDAR Localization for Autonomous Vehicles <https://github.com/PRBonn/range-mcl>`_.
+
+* Passion reconstruction get mesh. (small in memory)
+* Monte Carlo localization of lidar map. (particle filter with rendered range image)
+
+|unhappy| `LiLi-OM (LIvox LiDAR-Inertial Odometry and Mapping) <https://github.com/KIT-ISAS/lili-om>`_
+
+* tightly-coupled idar-IMU hierarchical lide-window optimization.
+* factors : imu-preint, lidar plane/edge pairs, prior/marginalization terms.
+* conventional LiDARs : LOAM feature; solid-state LiDAR : use covariance.
+
+|chrown0| `FAST-LIO (Fast LiDAR-Inertial Odometry) <https://github.com/hku-mars/FAST_LIO>`_ keyword : **FAST**
+
+* EKF for imu, used to lidar undistortion.
+* ikd-Tree (`incremental kdtree <https://github.com/hku-mars/ikd-Tree>`_) for lidar match.
+
+
+
 2020
 -----------------
 |chrown0| `LIO-SAM <https://github.com/TixiaoShan/LIO-SAM>`_ Tightly-coupled Lidar Inertial Odometry via
@@ -26,7 +44,13 @@ Smoothing and Mapping. In short, add imu pre-integration and sliding window to L
 |thumbs| `OverlapNet: Loop Closing for LiDAR-based SLAM <http://www.roboticsproceedings.org/rss16/p009.pdf>`_.
 Top-down 2d view of lidar scan (with other info) for predict overlap rate and yaw.
 
-|unhappy| `ISC (Intensity Scan Context) <https://arxiv.org/abs/2003.05656>`_ Coding Intensity and Geometry Relations for Loop Closure Detection. Encode lidar frame using geometry and intensity info (project intensity into ring distributed subspaces). 
+|chrown| `ISC (Intensity Scan Context) <https://arxiv.org/abs/2003.05656>`_ Coding Intensity and Geometry Relations for Loop Closure Detection.
+Encode lidar frame using geometry and intensity info (project intensity into ring distributed subspaces).
+Simple algorithm, and perform wonderfully in real data.
+
+.. image:: images/isc_test.png
+    :width: 50%
+    :align: center
 
 2018
 -----------
@@ -42,7 +66,7 @@ See `details and some comparisons <https://vio.readthedocs.io/zh_CN/latest/Other
 Using absolute category rating (ACR) and able to perceive distortions.
 
 |unhappy| `On Subjective and Objective Quality Evaluation of Point Cloud Geometry <https://ieeexplore.ieee.org/document/7965681>`_.
-Point cloud quality metric using DSIS (double-stimulus impairement scale) methodology. Showing that current state-of-the-art objective 
+Point cloud quality metric using DSIS (double-stimulus impairement scale) methodology. Showing that current state-of-the-art objective
 metrics (point-to-point, point-to-plane or point-to-mesh) do not predict well visual quality, especially under typical distortions such as compression.
 
 |thumbs| `2D SLAM Quality Evaluation Methods <https://arxiv.org/pdf/1708.02354.pdf>`_.

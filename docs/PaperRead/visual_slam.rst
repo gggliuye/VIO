@@ -1,6 +1,19 @@
 Visual Mapping
 ===================
 
+2021
+--------------
+
+|chrown0| `GVINS: Tightly Coupled GNSS-Visual-Inertial Fusion for Smooth and Consistent State Estimation <https://github.com/HKUST-Aerial-Robotics/GVINS>`_
+It offers a complete model of GPS measurement. Makes fusion with GPS very solid.
+
+|unhappy| `DSP-SLAM: Object Oriented SLAM with Deep Shape Priors <https://jingwenwang95.github.io/dsp-slam/>`_
+ORBSLAM2 + object tracking
+
+|chrown0| `V-SLAM: Unconstrained Line-based SLAM Using Vanishing Points for Structural Mapping <https://arxiv.org/abs/2112.13515>`_
+Plucher coordinate line only has normal residual term, cannot fix degeneracy cases (line on epipolar plane).
+This paper introduces a new residual based on vanishing point measurements.
+
 2020
 --------------------
 
@@ -9,6 +22,10 @@ Visual Mapping
 
 * `SuperPoint 2017 <https://arxiv.org/abs/1712.07629>`_, `SuperGlue <https://arxiv.org/abs/1911.11763>`_ with `colmap 2016 <https://colmap.github.io/>`_ for building map.
 * `Hierarchical Localization 2019 <https://arxiv.org/abs/1812.03506>`_ for localization. (Roughly speaking, using `NetVLAD 2016 <https://arxiv.org/abs/1511.07247>`_ match submap with a global descriptor, then match with reference image).
+
+.. image:: images/hloc.png
+    :width: 80%
+    :align: center
 
 |chrown| `Online Invariance Selection for Local Feature Descriptors <https://github.com/rpautrat/LISRD>`_
 Mainly for image retrieval.
