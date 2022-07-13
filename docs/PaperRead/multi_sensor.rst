@@ -14,10 +14,17 @@ FAST-LIO2 + VIO.
 |thumbs| `LVI-SAM: Tightly-coupled Lidar-Visual-Inertial Odometry via Smoothing and Mapping <https://github.com/TixiaoShan/LVI-SAM>`_
 (looks similar to V-LOAM + IMU) optimization with the following factors (with two system) :
 
-* IMU preintegration. (sys-cam. & sys-lidar.)
-* visual measurements without depth. (sys-cam.)
-* visual measurements with depth (here comes lidar measurement). (sys-cam.)
-* lidar odometry factor. (sys-lidar.)
+* Use lidar information in VINS (difference compared to VINS)
+    * use lidar odometry pose for vins initialization
+    * project lidar cloud to get vio feature depth neighbor pts model a plane,
+    * feature depth in vins is anchored by the first observation. so here depth
+      from lidar also valid only for first observation.
+    * in marginalization if the marginalized pt has lidar depth, move its flags to the next.
+    * set depth constant if has lidar depth.
+
+* Use vision in VIO-SAM (difference compared to VIO-SAM)
+    * use visual loop detection result as lidar loop candidate (to further process ICP).
+    * use VINS pose as initial pose for lidar registration.
 
 2020
 ---------------
@@ -73,6 +80,17 @@ Finally PnP-RANSAC for pose estimation.
 |question| `DSAC Differentiable RANSAC <https://github.com/cvlab-dresden/DSAC>`_. replace non-differentiable parts of
 RANSAC algorithm with approximated differentiable parts (by soft argmax and probabilistic selection).
 Then make a deep learning DSAC. (As I understand, RANSAC is mathematically proved, I don't understand how its accuracy can be improved).
+
+Lidar Image
+---------------
+
+we normally have two types of systems :
+
+* lidar based : camera pose as initial estimation and as constrain. I personal perfer this one, since our system is generally lidar based.
+  * project lidar to camera, and form a vio odometry system. It wastes lots of calculation, I don't think it is necessary to maintain two slam system.
+  * project camera information to lidar pts, to form lidar pts constrain. This seems more reasonable to me.
+* camera based : lidar project to camera to offer depth
+
 
 .. |chrown| image:: images/chrown.png
     :width: 3%

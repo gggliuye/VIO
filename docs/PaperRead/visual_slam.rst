@@ -1,6 +1,18 @@
 Visual Mapping
 ===================
 
+2022
+------------------
+
+|thumbs| `DM-VIO: Delayed Marginalization Visual-Inertial Odometry <https://arxiv.org/abs/2201.04114>`_ DSO-IMUS
+
+* Multi-stage IMU initializer. Dynamic photometric weight (decrease weight for overall bad image)
+* Delayed marginalization (marginalization cannot be undone, but it can be delayed)
+
+
+|thumbs| `Long-term Visual Map Sparsification with Heterogeneous GNN <https://arxiv.org/abs/2203.15182>`_ use GNN to substitute the ILP method.
+compare with the result using `Keep it brief <https://ieeexplore.ieee.org/document/7353722/>`_ for map summarization.
+
 2021
 --------------
 
@@ -73,6 +85,9 @@ It may help when we are lack of real training images, while mostly it won't happ
 |unhappy| `Multi-Process Fusion <https://github.com/StephenHausler/Multi-Process-Fusion>`_ .
 Ensemble methods for image retrieval process.
 
+|chrown| `Large-scale, real-time visual-inertial localization revisited <https://arxiv.org/abs/1907.00338>`_
+review of different methods, finally use `Keep it brief <https://ieeexplore.ieee.org/document/7353722/>`_ for map summarization.
+
 2018
 -----------
 
@@ -83,6 +98,21 @@ transformed image for image retrieval task.
 
 * ANMS(Adaptive non-maximal suppression) based on Tree Data Structure (TDS).
 * Suppression via Square Covering (SSC)
+
+2015
+----------------
+
+|chrown| |chrown| `Keep it brief: Scalable creation of compressed localization maps <https://ieeexplore.ieee.org/document/7353722/>`_
+use ILP (integral linear programming) to solve the summerization problem. (worth try)
+
+.. image:: images/vision_ilp.png
+    :width: 50%
+    :align: center
+
+* use `google ortools <https://developers.google.com/optimization>`_ to solve the ILP problem.
+* use `SNAP <http://snap.stanford.edu/proj/snap-www/>`_ to analysis the vision map graph.
+* tried this method in our benchmarks (keep 10% the map points, mean image observations drop from 1300 to 200), the localization result dropped within 10%.
+
 
 .. |chrown| image:: images/chrown.png
     :width: 3%
